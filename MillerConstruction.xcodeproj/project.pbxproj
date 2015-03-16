@@ -17,6 +17,7 @@
 		2623395B1AB61E41001976B8 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 2623395A1AB61E41001976B8 /* User.m */; };
 		2623395E1AB620BD001976B8 /* DatabaseConnector.m in Sources */ = {isa = PBXBuildFile; fileRef = 2623395D1AB620BD001976B8 /* DatabaseConnector.m */; };
 		2688B8FA1AB67D1E0052DEDE /* MainMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2688B8F91AB67D1E0052DEDE /* MainMenuViewController.m */; };
+		2688B9001AB67E780052DEDE /* UserTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2688B8FF1AB67E780052DEDE /* UserTest.m */; };
 		26BE55061AB66DEE00566014 /* MysqlCommitException.m in Sources */ = {isa = PBXBuildFile; fileRef = 26BE54A71AB66DEE00566014 /* MysqlCommitException.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		26BE55071AB66DEE00566014 /* MysqlException.m in Sources */ = {isa = PBXBuildFile; fileRef = 26BE54A91AB66DEE00566014 /* MysqlException.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		26BE55081AB66DEE00566014 /* MysqlRollbackException.m in Sources */ = {isa = PBXBuildFile; fileRef = 26BE54AB1AB66DEE00566014 /* MysqlRollbackException.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -61,6 +62,7 @@
 		2623395D1AB620BD001976B8 /* DatabaseConnector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DatabaseConnector.m; sourceTree = "<group>"; };
 		2688B8F81AB67D1E0052DEDE /* MainMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenuViewController.h; sourceTree = "<group>"; };
 		2688B8F91AB67D1E0052DEDE /* MainMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMenuViewController.m; sourceTree = "<group>"; };
+		2688B8FF1AB67E780052DEDE /* UserTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserTest.m; sourceTree = "<group>"; };
 		26BE54A61AB66DEE00566014 /* MysqlCommitException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MysqlCommitException.h; sourceTree = "<group>"; };
 		26BE54A71AB66DEE00566014 /* MysqlCommitException.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MysqlCommitException.m; sourceTree = "<group>"; };
 		26BE54A81AB66DEE00566014 /* MysqlException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MysqlException.h; sourceTree = "<group>"; };
@@ -221,6 +223,7 @@
 			isa = PBXGroup;
 			children = (
 				2623394F1AB61CBF001976B8 /* MillerConstructionTests.m */,
+				2688B8FF1AB67E780052DEDE /* UserTest.m */,
 				2623394D1AB61CBF001976B8 /* Supporting Files */,
 			);
 			path = MillerConstructionTests;
@@ -519,6 +522,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2688B9001AB67E780052DEDE /* UserTest.m in Sources */,
 				262339501AB61CBF001976B8 /* MillerConstructionTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

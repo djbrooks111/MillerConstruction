@@ -30,6 +30,7 @@
 -(id)init {
     if (self = [super init]) {
         // Configure init
+        [self connectToDatabase];
     }
     return self;
 }
@@ -75,7 +76,8 @@
     } else {
         NSString *passwordCommand = [NSString stringWithFormat:@"SELECT password FROM user WHERE name = \"%@\"", [user username]];
         MysqlFetch *passwordFetch = [MysqlFetch fetchWithCommand:passwordCommand onConnection:self.databaseConnection];
-        NSString *userPassword = [passwordFetch.results firstObject];
+        NSString *userPassword = [[passwordFetch.results firstObject] objectForKey:@"password"];
+        NSLog(@"userPassword: %@", userPassword);
         if (![user isPasswordEqual:userPassword]) {
             // Not equal
             return IncorrectPassword;

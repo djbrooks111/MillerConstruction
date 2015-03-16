@@ -23,7 +23,8 @@
 -(id)initWithUsername:(NSString *)username andPassword:(NSString *)password {
     if (self = [super init]) {
         [self setUsername:username];
-        [self setPassword:[self hashPassword:password]];
+        [self setPassword:password];
+        [self hashPassword];
     }
     return self;
 }
@@ -40,21 +41,18 @@
 
 /**
  *  Takes a plain text password and encrypts it using a SHA256 hash
- *
- *  @param plainText User's password in plain text
- *
- *  @return User's password hashed
  */
--(NSString *)hashPassword:(NSString *)plainText {
-    NSData *plainTextData = [plainText dataUsingEncoding:NSASCIIStringEncoding];
+-(void)hashPassword {
+    NSData *plainTextData = [self.password dataUsingEncoding:NSASCIIStringEncoding];
     NSMutableData *hashData = [NSMutableData dataWithLength:CC_SHA256_DIGEST_LENGTH];
     CC_SHA256([plainTextData bytes], (CC_LONG)[plainTextData length], [hashData mutableBytes]);
     NSString *hash = [hashData description];
     hash = [hash stringByReplacingOccurrencesOfString:@" " withString:@""];
     hash = [hash stringByReplacingOccurrencesOfString:@"<" withString:@""];
     hash = [hash stringByReplacingOccurrencesOfString:@">" withString:@""];
+    NSLog(@"%@ is %@", self.password, hash);
     
-    return hash;
+    [self setPassword:hash];
 }
 
 /**
@@ -65,6 +63,7 @@
  *  @return true if the passwords match, false otherwise
  */
 -(BOOL)isPasswordEqual:(NSString *)otherPassword {
+    NSLog(@"%@ and %@", self.password, otherPassword);
     if ([self.password isEqualToString:otherPassword]) {
         // Same passwords, allow user
         return true;
