@@ -44,11 +44,9 @@
 }
 
 -(void)testWrongUsername {
-    [self measureBlock:^{
-        User *user = [[User alloc] initWithUsername:@"wrong" andPassword:@"wrong"];
-        UserLoginType result = [user login];
-        XCTAssertEqual(WrongUsername, result, @"User's login should return WrongUsername");
-    }];
+    User *user = [[User alloc] initWithUsername:@"wrong" andPassword:@"wrong"];
+    UserLoginType result = [user login];
+    XCTAssertEqual(WrongUsername, result, @"User's login should return WrongUsername");
 }
 
 @end

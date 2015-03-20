@@ -43,20 +43,17 @@
     switch (loginResult) {
         case SuccessfulLogin:
             //TODO: Put Segue with ID = goToMainMenu
-            //TODO: [self performSegueWithIdentifier:@"goToMainMenu" sender:self];
-            NSLog(@"SuccessfulLogin");
+            [self performSegueWithIdentifier:@"goToMainMenu" sender:self];
             break;
         case IncorrectPassword:
-            //alert = [[UIAlertView alloc] initWithTitle:@"Incorrect Password" message:@"The password you entered is incorrect. Please try again." delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil, nil];
-            //[alert show];
-            NSLog(@"IncorrectPassword");
+            alert = [[UIAlertView alloc] initWithTitle:@"Incorrect Password" message:@"The password you entered is incorrect. Please try again." delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil, nil];
+            [alert show];
             [self.passwordTextField setText:@""];
             break;
         case WrongUsername:
             //TODO: Change TECHNOLOGY SUPPORT in the alert message
-            //alert = [[UIAlertView alloc] initWithTitle:@"Username Not Recognized" message:@"The username you entered was not recognized. The username might not be registered. Please contact TECHNOLOGY SUPPORT." delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil, nil];
-            //[alert show];
-            NSLog(@"WrongUsername");
+            alert = [[UIAlertView alloc] initWithTitle:@"Username Not Recognized" message:@"The username you entered was not recognized. The username might not be registered. Please contact TECHNOLOGY SUPPORT." delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil, nil];
+            [alert show];
             [self.passwordTextField setText:@""];
             break;
             
