@@ -13,9 +13,9 @@
 		2623393F1AB61CBF001976B8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2623393D1AB61CBF001976B8 /* Main.storyboard */; };
 		262339411AB61CBF001976B8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 262339401AB61CBF001976B8 /* Images.xcassets */; };
 		262339441AB61CBF001976B8 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 262339421AB61CBF001976B8 /* LaunchScreen.xib */; };
-		262339501AB61CBF001976B8 /* MillerConstructionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2623394F1AB61CBF001976B8 /* MillerConstructionTests.m */; };
 		2623395B1AB61E41001976B8 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 2623395A1AB61E41001976B8 /* User.m */; };
 		2623395E1AB620BD001976B8 /* DatabaseConnector.m in Sources */ = {isa = PBXBuildFile; fileRef = 2623395D1AB620BD001976B8 /* DatabaseConnector.m */; };
+		265C19931ABC8905007BCEF6 /* CreateNewProjectTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 265C19921ABC8905007BCEF6 /* CreateNewProjectTableViewController.m */; };
 		266AE5EC1ABC64EE0073E80A /* MainMenuViewControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 266AE5EB1ABC64EE0073E80A /* MainMenuViewControllerTest.m */; };
 		26773F691ABC61800075C1E7 /* LoginViewControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 26773F681ABC61800075C1E7 /* LoginViewControllerTest.m */; };
 		2688B8FA1AB67D1E0052DEDE /* MainMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2688B8F91AB67D1E0052DEDE /* MainMenuViewController.m */; };
@@ -57,11 +57,12 @@
 		262339431AB61CBF001976B8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		262339491AB61CBF001976B8 /* MillerConstructionTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MillerConstructionTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2623394E1AB61CBF001976B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2623394F1AB61CBF001976B8 /* MillerConstructionTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MillerConstructionTests.m; sourceTree = "<group>"; };
 		262339591AB61E41001976B8 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		2623395A1AB61E41001976B8 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		2623395C1AB620BD001976B8 /* DatabaseConnector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DatabaseConnector.h; sourceTree = "<group>"; };
 		2623395D1AB620BD001976B8 /* DatabaseConnector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DatabaseConnector.m; sourceTree = "<group>"; };
+		265C19911ABC8905007BCEF6 /* CreateNewProjectTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateNewProjectTableViewController.h; sourceTree = "<group>"; };
+		265C19921ABC8905007BCEF6 /* CreateNewProjectTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateNewProjectTableViewController.m; sourceTree = "<group>"; };
 		266AE5EB1ABC64EE0073E80A /* MainMenuViewControllerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMenuViewControllerTest.m; sourceTree = "<group>"; };
 		26773F681ABC61800075C1E7 /* LoginViewControllerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewControllerTest.m; sourceTree = "<group>"; };
 		2688B8F81AB67D1E0052DEDE /* MainMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenuViewController.h; sourceTree = "<group>"; };
@@ -226,7 +227,6 @@
 		2623394C1AB61CBF001976B8 /* MillerConstructionTests */ = {
 			isa = PBXGroup;
 			children = (
-				2623394F1AB61CBF001976B8 /* MillerConstructionTests.m */,
 				26773F681ABC61800075C1E7 /* LoginViewControllerTest.m */,
 				266AE5EB1ABC64EE0073E80A /* MainMenuViewControllerTest.m */,
 				2688B8FF1AB67E780052DEDE /* UserTest.m */,
@@ -250,6 +250,8 @@
 				2623393B1AB61CBF001976B8 /* LoginViewController.m */,
 				2688B8F81AB67D1E0052DEDE /* MainMenuViewController.h */,
 				2688B8F91AB67D1E0052DEDE /* MainMenuViewController.m */,
+				265C19911ABC8905007BCEF6 /* CreateNewProjectTableViewController.h */,
+				265C19921ABC8905007BCEF6 /* CreateNewProjectTableViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -417,6 +419,7 @@
 				485DBC3546E808AB139FAB6E /* Find unused imports */,
 				2613C95C1ABB36A000682181 /* Increase Build Number */,
 				2613C95D1ABB394C00682181 /* Code Coverage */,
+				OBJCLEANCUSTOMRUNSCRIPTT /* Objective-Clean Run Script */,
 			);
 			buildRules = (
 			);
@@ -545,6 +548,20 @@
 			shellPath = /bin/sh;
 			shellScript = "/bin/sh \"/Users/DJB/Library/Application Support/Developer/Shared/Xcode/Plug-ins/xcfui.xcplugin/Contents/Resources/fui_script.sh\" \"/Users/DJB/Dropbox/Development/Senior Project/MillerConstruction\"";
 		};
+		OBJCLEANCUSTOMRUNSCRIPTT /* Objective-Clean Run Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Objective-Clean Run Script";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/bash;
+			shellScript = "if [[ -z ${SKIP_OBJCLEAN} || ${SKIP_OBJCLEAN} != 1 ]]; then\nif [[ -d \"${LOCAL_APPS_DIR}/Objective-Clean.app\" ]]; then \n\"${LOCAL_APPS_DIR}\"/Objective-Clean.app/Contents/Resources/ObjClean.app/Contents/MacOS/ObjClean \"${SRCROOT}\"?!/Users/DJB/Dropbox/Development/SeniorProject/MillerConstruction/MillerConstruction/iPhoneMySQL \nelse\necho \"warning: You have to install and set up Objective-Clean to use its features!\" \nfi\nfi";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -566,6 +583,7 @@
 				26BE550C1AB66DEE00566014 /* MysqlFetch.m in Sources */,
 				2623395B1AB61E41001976B8 /* User.m in Sources */,
 				2623393C1AB61CBF001976B8 /* LoginViewController.m in Sources */,
+				265C19931ABC8905007BCEF6 /* CreateNewProjectTableViewController.m in Sources */,
 				262339391AB61CBF001976B8 /* AppDelegate.m in Sources */,
 				262339361AB61CBF001976B8 /* main.m in Sources */,
 				26BE55111AB66DEE00566014 /* NSString_MysqlEscape.m in Sources */,
@@ -578,7 +596,6 @@
 			files = (
 				266AE5EC1ABC64EE0073E80A /* MainMenuViewControllerTest.m in Sources */,
 				2688B9001AB67E780052DEDE /* UserTest.m in Sources */,
-				262339501AB61CBF001976B8 /* MillerConstructionTests.m in Sources */,
 				26773F691ABC61800075C1E7 /* LoginViewControllerTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

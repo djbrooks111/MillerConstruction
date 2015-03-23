@@ -12,7 +12,7 @@
 @interface MysqlException : NSException {
 
 }
-+ (void)raiseConnection:(MysqlConnection *)aConnection withFormat:(NSString *)format,...  __attribute__ ((noreturn));;
++(void)raiseConnection:(MysqlConnection *)aConnection withFormat:(NSString *)format, ...  __attribute__ ((noreturn));;
 
 @end
 

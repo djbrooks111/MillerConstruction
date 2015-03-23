@@ -16,17 +16,18 @@
 
 #pragma mark - UIViewController Methods
 
-- (void)viewDidLoad {
+-(void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
+    // Setting tags of the buttons to identify them
     [self.createNewProjectButton setTag:CreateNewProjectTag];
     [self.viewExistingProjectButton setTag:ViewExistingProjectTag];
     [self.generateReportButton setTag:GenerateReportTag];
     [self.viewTriggersButton setTag:ViewTriggersTag];
 }
 
-- (void)didReceiveMemoryWarning {
+-(void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }

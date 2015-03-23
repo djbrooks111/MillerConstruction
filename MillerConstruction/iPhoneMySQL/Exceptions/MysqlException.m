@@ -9,13 +9,13 @@
 #import "MysqlException.h"
 #import "MysqlConnection.h"
 
-
 @implementation MysqlException
-+ (void)raiseConnection:(MysqlConnection *)aConnection withFormat:(NSString *)format,...;
+
++(void)raiseConnection:(MysqlConnection *)aConnection withFormat:(NSString *)format, ...;
 {
   NSDictionary *userInfo = nil;
   if (aConnection) {
-    userInfo=[NSDictionary dictionaryWithObject:aConnection forKey:@"MysqlConnection"];
+    userInfo = [NSDictionary dictionaryWithObject:aConnection forKey:@"MysqlConnection"];
   }
   
   va_list arguments;

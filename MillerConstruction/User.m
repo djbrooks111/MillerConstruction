@@ -26,6 +26,7 @@
         [self setPassword:password];
         [self hashPassword];
     }
+    
     return self;
 }
 
@@ -36,6 +37,7 @@
  */
 -(UserLoginType)login {
     DatabaseConnector *database = [DatabaseConnector sharedDatabaseConnector];
+    
     return [database loginUserToDatabase:self];
 }
 

@@ -19,11 +19,12 @@
 #pragma mark - Singleton Methods
 
 +(id)sharedDatabaseConnector {
-    static DatabaseConnector *sharedDatabaseConnector = nil;
+    static DatabaseConnector * sharedDatabaseConnector = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         sharedDatabaseConnector = [[self alloc] init];
     });
+    
     return sharedDatabaseConnector;
 }
 
@@ -32,6 +33,7 @@
         // Configure init
         [self connectToDatabase];
     }
+    
     return self;
 }
 
@@ -48,12 +50,13 @@
     }
     
     self.databaseConnection = [MysqlConnection connectToHost:DB_HOST user:DB_USERNAME password:DB_PASSWORD schema:DB_SCHEMA flags:MYSQL_DEFAULT_CONNECTION_FLAGS];
-    
     if (self.databaseConnection == nil) {
         NSLog(@"Failed to connect to the database");
+        
         return false;
     } else {
         NSLog(@"Connected to the database");
+        
         return true;
     }
 }

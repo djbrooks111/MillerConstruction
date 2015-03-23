@@ -18,14 +18,14 @@
     LoginViewController *viewController;
 }
 
-- (void)setUp {
+-(void)setUp {
     [super setUp];
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     viewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
     [viewController view];
 }
 
-- (void)tearDown {
+-(void)tearDown {
     // Put teardown code here. This method is called after the invocation of each test method in the class.
     [super tearDown];
 }
