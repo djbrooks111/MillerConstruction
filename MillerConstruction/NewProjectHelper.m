@@ -9,6 +9,7 @@
 #import "NewProjectHelper.h"
 #import "DatabaseConnector.h"
 #import "ProjectTypes.h"
+#import "Warehouse.h"
 
 @implementation NewProjectHelper {
     DatabaseConnector *database;
@@ -20,13 +21,25 @@
         database = [DatabaseConnector sharedDatabaseConnector];
         [self initializeWarehouseArrays];
         [self initializeProjectClassificationArray];
+        [self initializeProjectAttributesNamesArray];
+        [self initializeProjectAttributesKeysArray];
     }
     
     return self;
 }
 
 -(void)initializeWarehouseArrays {
-    
+    NSArray *resultArray = [database fetchWarehouses];
+    NSMutableArray *unsortedArray = [[NSMutableArray alloc] init];
+    for (NSDictionary *warehouseRow in resultArray) {
+        NSNumber *warehouseRowID = [warehouseRow objectForKey:@"id"];
+        NSString *warehouseState = [warehouseRow objectForKey:@"state"];
+        NSNumber *warehouseID = [warehouseRow objectForKey:@"warehouseID"];
+        NSString *warehouseCity = [warehouseRow objectForKey:@"name"];
+        [unsortedArray addObject:[[Warehouse alloc] initWithRowID:warehouseRowID andState:warehouseState andWarehouseID:warehouseID andCity:warehouseCity]];
+    }
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"city" ascending:YES];
+    self.warehouseArray = [unsortedArray sortedArrayUsingDescriptors:@[sortDescriptor]];
 }
 
 -(void)initializeProjectClassificationArray {

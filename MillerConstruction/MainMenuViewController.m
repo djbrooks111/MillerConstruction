@@ -44,7 +44,6 @@
     switch (buttonTag) {
         case CreateNewProjectTag:
             // Create New Project
-            //TODO: Put Segue with ID = goToCreateNewProject
             [self performSegueWithIdentifier:@"goToCreateNewProject" sender:self];
             break;
             

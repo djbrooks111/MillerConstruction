@@ -10,10 +10,13 @@
 
 @interface Warehouse : NSObject
 
-@property (nonatomic, retain) NSString *name;
-@property (nonatomic, readwrite) int value;
+@property (nonatomic, retain) NSNumber *rowID;
+@property (nonatomic, retain) NSString *state;
+@property (nonatomic, retain) NSNumber *warehouseID;
+@property (nonatomic, retain) NSString *city;
+@property (nonatomic, retain) NSString *fullName;
 
--(id)initWithName:(NSString *)name andValue:(int)value;
+-(id)initWithRowID:(NSNumber *)rowID andState:(NSString *)state andWarehouseID:(NSNumber *)warehouseID andCity:(NSString *)city;
 -(BOOL)isWarehouseNameEqual:(NSString *)otherName;
 
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "CreateNewProjectTableViewController.h"
+#import "ActionSheetStringPicker.h"
 #import "NewProjectHelper.h"
 #import "NewProjectTableViewCell.h"
 #import "DatabaseConnector.h"
@@ -25,6 +26,8 @@
     
     newProjectHelper = [[NewProjectHelper alloc] init];
     projectAttributesNames = [newProjectHelper projectAttributesNames];
+    
+    self.navigationItem.title = @"Create New Project";
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -68,8 +71,27 @@
     // Configure the cell...
     cell.label.text = [projectAttributesNames objectAtIndex:indexPath.row];
     cell.textField.text = @"";
+    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+    if (indexPath.row == 1) {
+        // Warehouse
+        NSLog(@"added Target");
+        [cell.textField addTarget:self action:@selector(warehouseTextFieldActive:) forControlEvents:UIControlEventAllTouchEvents];
+    }
     
     return cell;
+}
+
+#pragma mark - UITextField methods
+
+-(void)warehouseTextFieldActive:(UITextField *)textField {
+    NSLog(@"Called method");
+    [ActionSheetStringPicker showPickerWithTitle:@"Set Warehouse" rows:[newProjectHelper warehouseNamesArray] initialSelection:0 target:self successAction:@selector(warehousePicked:element:) cancelAction:nil origin:textField];
+}
+
+-(void)warehousePicked:(NSNumber *)selectedIndex element:(id)sender {
+    UITextField *textField = (UITextField *)sender;
+    NSArray *warehouseNamesArray = [newProjectHelper warehouseNamesArray];
+    [textField setText:[warehouseNamesArray objectAtIndex:[selectedIndex integerValue]]];
 }
 
 #pragma mark - Save method
@@ -85,6 +107,7 @@
     }
     
     DatabaseConnector *database = [DatabaseConnector sharedDatabaseConnector];
+    NSArray *keys = [newProjectHelper projectAttributesKeys];
     BOOL result = [database addNewProject:projectInformation andKeys:keys];
     if (result == true) {
         // Success

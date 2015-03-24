@@ -97,9 +97,15 @@
 -(NSArray *)fetchProjectTypes {
     NSString *projectTypesCommand = @"SELECT * FROM projectitem";
     MysqlFetch *getProjectTypes = [MysqlFetch fetchWithCommand:projectTypesCommand onConnection:self.databaseConnection];
-    NSLog(@"%@", [getProjectTypes results]);
     
     return [getProjectTypes results];
+}
+
+-(NSArray *)fetchWarehouses {
+    NSString *warehouseCommand = @"SELECT warehouse.id, warehouse.state, warehouse.warehouseID, city.name FROM warehouse, city WHERE warehouse.city_id = city.id";
+    MysqlFetch *getWarehouses = [MysqlFetch fetchWithCommand:warehouseCommand onConnection:self.databaseConnection];
+    
+    return [getWarehouses results];
 }
 
 -(BOOL)addNewProject:(NSArray *)projectInformation andKeys:(NSArray *)keys {
@@ -107,8 +113,8 @@
     for (int i = 0; i < [projectInformation count]; i++) {
         NSString *value = [projectInformation objectAtIndex:i];
         NSString *valueKey = [keys objectAtIndex:i];
-        if ([value isEqualToString:@""]) {
-            // Do nothing, does not involve the projec table
+        if ([valueKey isEqualToString:@""]) {
+            // Do nothing, does not involve the project table
         } else {
             NSDictionary *subDictionary = [NSDictionary dictionaryWithObject:value forKey:valueKey];
             [insertDictionary addEntriesFromDictionary:subDictionary];
@@ -145,11 +151,44 @@
             if (affectedRows > 0) {
                 // Success, add other data to tables;
                 [insertDictionary removeAllObjects];
-                NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:
-                                            [projectInformation objectAtIndex:14], @"asBuilts",
-                                            [projectInformation objectAtIndex:15], @"punchList",
-                                            nil];
+                NSDictionary *salvageDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
+                                                   [projectInformation objectAtIndex:25], @"date",
+                                                   [projectInformation objectAtIndex:26], @"value",
+                                                   nil];
+                [insertCommand setTable:@"salvagevalue"];
+                [insertCommand setRowData:salvageDictionary];
+                [insertCommand execute];
+                NSNumber *salvageRowID = [insertCommand rowid];
+                affectedRows = [insertCommand affectedRows];
+                if (affectedRows > 0) {
+                    NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:
+                                                [projectInformation objectAtIndex:14], @"asBuilts",
+                                                [projectInformation objectAtIndex:15], @"punchList",
+                                                [projectInformation objectAtIndex:16], @"alarmHvacForm",
+                                                [projectInformation objectAtIndex:17], @"verisaeShutdownReport",
+                                                [projectInformation objectAtIndex:18], @"closeoutNotes",
+                                                [projectInformation objectAtIndex:22], @"airGas",
+                                                [projectInformation objectAtIndex:24], @"permitsClosed",
+                                                salvageRowID, @"salvageValue_id",
+                                                nil];
+                    [insertCommand setTable:@"closeoutdetails"];
+                    [insertCommand setRowData:dictionary];
+                    [insertCommand execute];
+                    affectedRows = [insertCommand affectedRows];
+                    if (affectedRows > 0) {
+                        // Finally return success
+                        return true;
+                    } else {
+                        return false;
+                    }
+                } else {
+                    return false;
+                }
+            } else {
+                return false;
             }
+        } else {
+            return false;
         }
     } else {
         // Failure

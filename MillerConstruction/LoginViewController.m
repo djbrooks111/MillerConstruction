@@ -30,6 +30,8 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - JGProgressHUD
+
 -(JGProgressHUD *)prototypeHUD {
     JGProgressHUD *HUD = [[JGProgressHUD alloc] initWithStyle:JGProgressHUDStyleDark];
     HUD.interactionType = JGProgressHUDInteractionTypeBlockAllTouches;
@@ -84,8 +86,10 @@
     }
 }
 
+/**
+ *  Extracted method to go to the Main Menu
+ */
 -(void)goToMainMenu {
-    //TODO: Put Segue with ID = goToMainMenu
     [self performSegueWithIdentifier:@"goToMainMenu" sender:self];
 }
 

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CreateNewProjectTableViewController : UITableViewController
+@interface CreateNewProjectTableViewController : UITableViewController <UITextFieldDelegate>
 
 @property (nonatomic, retain) IBOutlet UIButton *saveButton;
 

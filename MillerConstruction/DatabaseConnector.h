@@ -20,6 +20,7 @@
 -(UserLoginType)loginUserToDatabase:(User *)user;
 
 -(NSArray *)fetchProjectTypes;
+-(NSArray *)fetchWarehouses;
 
 -(BOOL)addNewProject:(NSArray *)projectInformation andKeys:(NSArray *)keys;
 

@@ -13,15 +13,20 @@
 /**
  *  Custom initializer
  *
- *  @param name  Warehouse's name
- *  @param value Warehouse's value
+ *  @param rowID       Warehouse's rowID
+ *  @param state       Warehouse's state
+ *  @param warehouseID Warehouse's warehouseID
+ *  @param city        Warehouse's city
  *
  *  @return Initialized Warehouse
  */
--(id)initWithName:(NSString *)name andValue:(int)value {
+-(id)initWithRowID:(NSNumber *)rowID andState:(NSString *)state andWarehouseID:(NSNumber *)warehouseID andCity:(NSString *)city {
     if (self = [super init]) {
-        [self setName:name];
-        [self setValue:value];
+        [self setRowID:rowID];
+        [self setState:state];
+        [self setWarehouseID:warehouseID];
+        [self setCity:city];
+        [self setFullName:[NSString stringWithFormat:@"%@, %@ -- #%@", self.city, self.state, self.warehouseID]];
     }
     
     return self;
@@ -35,7 +40,7 @@
  *  @return true if the names match, false otherwise
  */
 -(BOOL)isWarehouseNameEqual:(NSString *)otherName {
-    if ([self.name isEqualToString:otherName]) {
+    if ([self.fullName isEqualToString:otherName]) {
         // Same name
         return true;
     } else {
