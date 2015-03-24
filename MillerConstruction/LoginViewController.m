@@ -75,12 +75,12 @@
         [HUD dismissAfterDelay:1.5];
         if (loginResult == IncorrectPassword) {
             alert = [[UIAlertView alloc] initWithTitle:@"Incorrect Password" message:@"The password you entered is incorrect. Please try again." delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil, nil];
-            [alert show];
+            [alert performSelector:@selector(show) withObject:nil afterDelay:2];
             [self.passwordTextField setText:@""];
         } else {
             //TODO: Change TECHNOLOGY SUPPORT in the alert message
             alert = [[UIAlertView alloc] initWithTitle:@"Username Not Recognized" message:@"The username you entered was not recognized. The username might not be registered. Please contact TECHNOLOGY SUPPORT." delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil, nil];
-            [alert show];
+            [alert performSelector:@selector(show) withObject:nil afterDelay:2];
             [self.passwordTextField setText:@""];
         }
     }
