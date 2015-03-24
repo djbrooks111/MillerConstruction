@@ -52,7 +52,6 @@
     hash = [hash stringByReplacingOccurrencesOfString:@" " withString:@""];
     hash = [hash stringByReplacingOccurrencesOfString:@"<" withString:@""];
     hash = [hash stringByReplacingOccurrencesOfString:@">" withString:@""];
-    NSLog(@"%@ is %@", self.password, hash);
     
     [self setPassword:hash];
 }
@@ -65,7 +64,6 @@
  *  @return true if the passwords match, false otherwise
  */
 -(BOOL)isPasswordEqual:(NSString *)otherPassword {
-    NSLog(@"%@ and %@", self.password, otherPassword);
     if ([self.password isEqualToString:otherPassword]) {
         // Same passwords, allow user
         return true;

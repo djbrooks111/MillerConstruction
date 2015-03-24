@@ -7,15 +7,24 @@
 //
 
 #import "CreateNewProjectTableViewController.h"
+#import "NewProjectHelper.h"
+#import "NewProjectTableViewCell.h"
+#import "DatabaseConnector.h"
 
 @interface CreateNewProjectTableViewController ()
 
 @end
 
-@implementation CreateNewProjectTableViewController
+@implementation CreateNewProjectTableViewController {
+    NewProjectHelper *newProjectHelper;
+    NSArray *projectAttributesNames;
+}
 
 -(void)viewDidLoad {
     [super viewDidLoad];
+    
+    newProjectHelper = [[NewProjectHelper alloc] init];
+    projectAttributesNames = [newProjectHelper projectAttributesNames];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -32,23 +41,56 @@
 #pragma mark - Table view data source
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 0;
+    // Section 1 - Required, Section 2 - Optional
+    return 2;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 0;
+    if (section == 0) {
+        return 10;
+    } else {
+        return 24;
+    }
+}
+
+-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    if (section == 0) {
+        return @"Required Information:";
+    } else {
+        return @"Optional Information:";
+    }
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+    NewProjectTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     
     // Configure the cell...
+    cell.label.text = [projectAttributesNames objectAtIndex:indexPath.row];
+    cell.textField.text = @"";
     
     return cell;
+}
+
+#pragma mark - Save method
+
+-(void)save:(UIButton *)sender {
+    NSMutableArray *projectInformation = [[NSMutableArray alloc] init];
+    for (int i = 0; i < [self.tableView numberOfSections]; i++) {
+        NSIndexPath *index = [NSIndexPath indexPathWithIndex:i];
+        NewProjectTableViewCell *cell = (NewProjectTableViewCell *)[self.tableView cellForRowAtIndexPath:index];
+        NSString *labelText = [cell.label text];
+        NSLog(@"%@", labelText);
+        [projectInformation addObject:labelText];
+    }
+    
+    DatabaseConnector *database = [DatabaseConnector sharedDatabaseConnector];
+    BOOL result = [database addNewProject:projectInformation andKeys:keys];
+    if (result == true) {
+        // Success
+    } else {
+        // Failure
+    }
 }
 
 /*

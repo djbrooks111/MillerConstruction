@@ -16,6 +16,11 @@
 
 +(id)sharedDatabaseConnector;
 -(BOOL)connectToDatabase;
+
 -(UserLoginType)loginUserToDatabase:(User *)user;
+
+-(NSArray *)fetchProjectTypes;
+
+-(BOOL)addNewProject:(NSArray *)projectInformation andKeys:(NSArray *)keys;
 
 @end

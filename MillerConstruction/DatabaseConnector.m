@@ -8,6 +8,7 @@
 
 #import "DatabaseConnector.h"
 #import "MysqlFetch.h"
+#import "MysqlInsert.h"
 
 #define DB_HOST @"50.253.23.2"
 #define DB_USERNAME @"appconnection"
@@ -88,6 +89,71 @@
             // Correct password, allow access
             return SuccessfulLogin;
         }
+    }
+}
+
+#pragma mark - Database New Project Methods
+
+-(NSArray *)fetchProjectTypes {
+    NSString *projectTypesCommand = @"SELECT * FROM projectitem";
+    MysqlFetch *getProjectTypes = [MysqlFetch fetchWithCommand:projectTypesCommand onConnection:self.databaseConnection];
+    NSLog(@"%@", [getProjectTypes results]);
+    
+    return [getProjectTypes results];
+}
+
+-(BOOL)addNewProject:(NSArray *)projectInformation andKeys:(NSArray *)keys {
+    NSMutableDictionary *insertDictionary = [[NSMutableDictionary alloc] init];
+    for (int i = 0; i < [projectInformation count]; i++) {
+        NSString *value = [projectInformation objectAtIndex:i];
+        NSString *valueKey = [keys objectAtIndex:i];
+        if ([value isEqualToString:@""]) {
+            // Do nothing, does not involve the projec table
+        } else {
+            NSDictionary *subDictionary = [NSDictionary dictionaryWithObject:value forKey:valueKey];
+            [insertDictionary addEntriesFromDictionary:subDictionary];
+        }
+    }
+    MysqlInsert *insertCommand = [MysqlInsert insertWithConnection:self.databaseConnection];
+    [insertCommand setTable:@"project"];
+    [insertCommand setRowData:[insertDictionary copy]];
+    [insertCommand execute];
+    NSNumber *rowid = [insertCommand rowid];
+    NSNumber *affectedRows = [insertCommand affectedRows];
+    NSLog(@"Auto Increment rowid: %@", rowid);
+    NSLog(@"AffectedRows: %@", affectedRows);
+    if (affectedRows > 0) {
+        // Success, add other data to tables
+        NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:
+                                    [projectInformation objectAtIndex:4], @"id",
+                                    rowid, @"project_id",
+                                    nil];
+        [insertCommand setTable:@"project_managers"];
+        [insertCommand setRowData:dictionary];
+        [insertCommand execute];
+        affectedRows = [insertCommand affectedRows];
+        if (affectedRows > 0) {
+            // Success, add other data to tables
+            NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:
+                                        [projectInformation objectAtIndex:5], @"id",
+                                        rowid, @"project_id",
+                                        nil];
+            [insertCommand setTable:@"project_supervisors"];
+            [insertCommand setRowData:dictionary];
+            [insertCommand execute];
+            affectedRows = [insertCommand affectedRows];
+            if (affectedRows > 0) {
+                // Success, add other data to tables;
+                [insertDictionary removeAllObjects];
+                NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:
+                                            [projectInformation objectAtIndex:14], @"asBuilts",
+                                            [projectInformation objectAtIndex:15], @"punchList",
+                                            nil];
+            }
+        }
+    } else {
+        // Failure
+        return false;
     }
 }
 

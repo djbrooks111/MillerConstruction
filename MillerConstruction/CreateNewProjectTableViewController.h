@@ -10,4 +10,8 @@
 
 @interface CreateNewProjectTableViewController : UITableViewController
 
+@property (nonatomic, retain) IBOutlet UIButton *saveButton;
+
+-(IBAction)save:(UIButton *)sender;
+
 @end

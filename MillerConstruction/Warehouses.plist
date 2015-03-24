@@ -1,0 +1,501 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Names</key>
+	<dict>
+		<key>New item</key>
+		<string>Alpharetta, GEORGIA -- #743</string>
+		<key>New item - 2</key>
+		<string>Altamonte Springs, FLORIDA -- #183</string>
+		<key>New item - 3</key>
+		<string>Apex, NORTH_CAROLINA -- #-1</string>
+		<key>New item - 4</key>
+		<string>Arundel Mills, MARYLAND -- #325</string>
+		<key>New item - 5</key>
+		<string>Augusta, GEORGIA -- #1102</string>
+		<key>New item - 6</key>
+		<string>Avon, MASSACHUSETTS -- #303</string>
+		<key>New item - 7</key>
+		<string>Baton Rouge, LOUISIANA -- #1172</string>
+		<key>New item - 8</key>
+		<string>Beltsville, MARYLAND -- #214</string>
+		<key>New item - 9</key>
+		<string>Boca Raton, FLORIDA -- #345</string>
+		<key>New item - 10</key>
+		<string>Brandon, FLORIDA -- #358</string>
+		<key>New item - 11</key>
+		<string>Brandywine, MARYLAND -- #1039</string>
+		<key>New item - 12</key>
+		<string>Brandford, CONNECTICUT -- #-1</string>
+		<key>New item - 13</key>
+		<string>Brentwood, TENNESSEE -- #386</string>
+		<key>New item - 14</key>
+		<string>Brick, NEW_JERSEY -- #739</string>
+		<key>New item - 15</key>
+		<string>Bridgewater, NEW_JERSEY -- #322</string>
+		<key>New item - 16</key>
+		<string>Brookfield, CONNECTICUT -- #304</string>
+		<key>New item - 17</key>
+		<string>Brookhaven, GEORGIA -- #1084</string>
+		<key>New item - 18</key>
+		<string>Brooklyn, NEW_YORK -- #318</string>
+		<key>New item - 19</key>
+		<string>Bucks County, PENNSYLVANIA -- #1103</string>
+		<key>New item - 20</key>
+		<string>Caguas, PUERTO_RICO -- #365</string>
+		<key>New item - 21</key>
+		<string>Carolina, PUERTO_RICO -- #335</string>
+		<key>New item - 22</key>
+		<string>Chantilly, VIRGINIA -- #334</string>
+		<key>New item - 23</key>
+		<string>Charleston, SOUTH_CAROLINA -- #360</string>
+		<key>New item - 24</key>
+		<string>Charlotte, NORTH_CAROLINA -- #359</string>
+		<key>New item - 25</key>
+		<string>Charlottesville, VIRGINA -- #-1</string>
+		<key>New item - 26</key>
+		<string>Cherry Hill, NEW_JERSEY -- #1</string>
+		<key>New item - 27</key>
+		<string>Chesterfield, VIRGINIA -- #1089</string>
+		<key>New item - 28</key>
+		<string>Christiana, DELAWARE -- #246</string>
+		<key>New item - 29</key>
+		<string>Clearwater, FLORIDA -- #336</string>
+		<key>New item - 30</key>
+		<string>Clifton, NEW_JERSEY -- #306</string>
+		<key>New item - 31</key>
+		<string>Colchester, VERMONT -- #314</string>
+		<key>New item - 32</key>
+		<string>Columbia, MARYLAND -- #1000</string>
+		<key>New item - 33</key>
+		<string>Columbia, SOUTH_CAROLINA -- #1</string>
+		<key>New item - 34</key>
+		<string>Commack, NEW_YORK -- #240</string>
+		<key>New item - 35</key>
+		<string>Concordville, PENNSYLVANIA -- #1114</string>
+		<key>New item - 36</key>
+		<string>Cranberry, PENNSYLVANIA -- #328</string>
+		<key>New item - 37</key>
+		<string>Cumberland Mall, GEORGIA -- #631</string>
+		<key>New item - 38</key>
+		<string>Cumming, GEORGIA -- #1175</string>
+		<key>New item - 39</key>
+		<string>Danvers, MASSACHUSETTS -- #301</string>
+		<key>New item - 40</key>
+		<string>Davie, FLORIDA -- #91</string>
+		<key>New item - 41</key>
+		<string>Dedham, MASSACHUSETTE -- #319</string>
+		<key>New item - 42</key>
+		<string>Durham, NORTH_CAROLINA -- #249</string>
+		<key>New item - 43</key>
+		<string>E. Jacksonville, FLORIDA -- #357</string>
+		<key>New item - 44</key>
+		<string>East Bayamon, PUERTO_RICE -- #363</string>
+		<key>New item - 45</key>
+		<string>East Hanover, NEW_JERSEY -- #244</string>
+		<key>New item - 46</key>
+		<string>East Lyme, CONNECTICUT -- #1</string>
+		<key>New item - 47</key>
+		<string>Edison, NEW_JERSEY -- #323</string>
+		<key>New item - 48</key>
+		<string>Enfield, CONNECTICUT -- #780</string>
+		<key>New item - 49</key>
+		<string>Estero, FLORIDA -- #621</string>
+		<key>New item - 50</key>
+		<string>Everett, MASSACHUSETTS -- #333</string>
+		<key>New item - 51</key>
+		<string>Fairfax, VIRGINIA -- #204</string>
+		<key>New item - 52</key>
+		<string>Farragut, TENNESSEE -- #1116</string>
+		<key>New item - 53</key>
+		<string>Flemington, UNKNOWN -- #-1</string>
+		<key>New item - 54</key>
+		<string>Frederick, MARYLAND -- #330</string>
+		<key>New item - 55</key>
+		<string>Fredericksburg, VIRGINIA -- #340</string>
+		<key>New item - 56</key>
+		<string>Ft. Myers, FLORIDA -- #351</string>
+		<key>New item - 57</key>
+		<string>Ft. Oglethorpe, GEORGIA -- #1083</string>
+		<key>New item - 58</key>
+		<string>Gaithersburg, MARYLAND -- #213</string>
+		<key>New item - 59</key>
+		<string>Glen Burnie, MARYLAND -- #203</string>
+		<key>New item - 60</key>
+		<string>Greensboro, NORTH_CAROLINA -- #339</string>
+		<key>New item - 61</key>
+		<string>Greenville, SOUTH_CAROLINA -- #1005</string>
+		<key>New item - 62</key>
+		<string>Gwinnett, GEORGIA -- #187</string>
+		<key>New item - 63</key>
+		<string>Hackensack, NEW_JERSEY -- #231</string>
+		<key>New item - 64</key>
+		<string>Harrisburg, PENNSYLVANIA -- #327</string>
+		<key>New item - 65</key>
+		<string>Harrisonburg, VIRGINIA -- #238</string>
+		<key>New item - 66</key>
+		<string>Hazlet, NEW_JERSEY -- #222</string>
+		<key>New item - 67</key>
+		<string>Holbrook, NEW_YORK -- #230</string>
+		<key>New item - 68</key>
+		<string>Hoover, ALABAMA -- #362</string>
+		<key>New item - 69</key>
+		<string>Huntsville, ALABAMA -- #356</string>
+		<key>New item - 70</key>
+		<string>Kendall, FLORIDA -- #1023</string>
+		<key>New item - 71</key>
+		<string>King of Prussia, PENNSYLVANIA -- @245</string>
+		<key>New item - 72</key>
+		<string>Lake in the Hills, ILLINOIS -- #774</string>
+		<key>New item - 73</key>
+		<string>Lancaster, PENNSYLVANIA -- #317</string>
+		<key>New item - 74</key>
+		<string>Lantana, FLORIDA -- #180</string>
+		<key>New item - 75</key>
+		<string>Lawrence, NEW_YORK -- #310</string>
+		<key>New item - 76</key>
+		<string>Lawrence Township, NEW_JERSEY -- #-1</string>
+		<key>New item - 77</key>
+		<string>Leesburg, VIRGINIA -- #337</string>
+		<key>New item - 78</key>
+		<string>Livonia, MICHIGAN -- #390</string>
+		<key>New item - 79</key>
+		<string>Lower Macungie, PENNSYLVANIA -- #1</string>
+		<key>New item - 80</key>
+		<string>Madison Heights, MICHIGAN -- #391</string>
+		<key>New item - 81</key>
+		<string>Mall of Georgia, GEORGIA -- #366</string>
+		<key>New item - 82</key>
+		<string>Manassas, VIRGINIA -- #225</string>
+		<key>New item - 83</key>
+		<string>Manhattan, NEW_YORK -- #1062</string>
+		<key>New item - 84</key>
+		<string>Marlboro, NEW_JERSEY -- #1093</string>
+		<key>New item - 85</key>
+		<string>Matthews, NORTH_CAROLINA -- #367</string>
+		<key>New item - 86</key>
+		<string>Melville, NEW_YORK -- #237</string>
+		<key>New item - 87</key>
+		<string>Miami, FLORIDA -- #92</string>
+		<key>New item - 88</key>
+		<string>Miami (Mall of Americas), FLORIDA -- #-1</string>
+		<key>New item - 89</key>
+		<string>Miami Lakes, FLORIDA -- #181</string>
+		<key>New item - 90</key>
+		<string>Milford, CONNECTICUT -- #312</string>
+		<key>New item - 91</key>
+		<string>Milford-Walmart, DELAWARE -- #1794</string>
+		<key>New item - 92</key>
+		<string>Mobile, ALABAMA -- #-1</string>
+		<key>New item - 93</key>
+		<string>Monroe Township, PENNSYLVANIA</string>
+		<key>New item - 94</key>
+		<string>Montgomery, ALABAMA -- #1009</string>
+		<key>New item - 95</key>
+		<string>Montgomeryville, PENNSYLVANIA -- #248</string>
+		<key>New item - 96</key>
+		<string>Mt. Laurel, NEW_JERSEY -- #749</string>
+		<key>New item - 97</key>
+		<string>Mt. Vernon, VIRGINIA -- #1115</string>
+		<key>New item - 98</key>
+		<string>Myrtle Beach, SOUTH_CAROLINA -- #338</string>
+		<key>New item - 99</key>
+		<string>N. Miami, FLORIDA -- #182</string>
+		<key>New item - 100</key>
+		<string>Nanuet, NEW_YORK -- #305</string>
+		<key>New item - 101</key>
+		<string>Naples, FLORIDA -- #354</string>
+		<key>New item - 102</key>
+		<string>Nashua, NEW_HAMPSHIRE -- #307</string>
+		<key>New item - 103</key>
+		<string>NE Memphis, TENNESSEE -- #352</string>
+		<key>New item - 104</key>
+		<string>Nesconset, NEW_YORK -- #206</string>
+		<key>New item - 105</key>
+		<string>New Britain, CONNECTICUT -- #-1</string>
+		<key>New item - 106</key>
+		<string>New Rochelle, NEW_YORK -- #241</string>
+		<key>New item - 107</key>
+		<string>Newington, VIRGINIA -- #227</string>
+		<key>New item - 108</key>
+		<string>Newport News, VIRGINIA -- #247</string>
+		<key>New item - 109</key>
+		<string>Niles, ILLINOIS -- #383</string>
+		<key>New item - 110</key>
+		<string>Norfolk, VIRGINIA -- #202</string>
+		<key>New item - 111</key>
+		<string>North Tampa, FLORIDA -- #1</string>
+		<key>New item - 112</key>
+		<string>Norwalk, CONNECTICUT -- #324</string>
+		<key>New item - 113</key>
+		<string>Ocean Township, NEW_JERSEY -- #329</string>
+		<key>New item - 114</key>
+		<string>Oceanside, NEW_YORK -- #-1</string>
+		<key>New item - 115</key>
+		<string>Palm Beach, FLORIDA -- #93</string>
+		<key>New item - 116</key>
+		<string>Patterson, NEW_YORK -- #-1</string>
+		<key>New item - 117</key>
+		<string>Pembroke Pines, FLORIDA -- #742</string>
+		<key>New item - 118</key>
+		<string>Pentagon, VIRGINIA -- #233</string>
+		<key>New item - 119</key>
+		<string>Perimeter, GEORGIA -- #188</string>
+		<key>New item - 120</key>
+		<string>Pompano, FLORIDA -- #88</string>
+		<key>New item - 121</key>
+		<string>Port Chester, NEW_YORK -- #326</string>
+		<key>New item - 122</key>
+		<string>Potomac Milles, VIRGINIA -- #626</string>
+		<key>New item - 123</key>
+		<string>Queens, NEW_YORK -- #243</string>
+		<key>New item - 124</key>
+		<string>Raleigh, NORTH_CAROLINA -- #645</string>
+		<key>New item - 125</key>
+		<string>Rego Park, NEW_YORK -- #1070</string>
+		<key>New item - 126</key>
+		<string>Robinson, PENNSYLVANIA -- #332</string>
+		<key>New item - 127</key>
+		<string>Rochester, NEW_YORK -- #-1</string>
+		<key>New item - 128</key>
+		<string>Roseville, MICHIGAN -- #394</string>
+		<key>New item - 129</key>
+		<string>Royal Palm, FLORIDA -- #623</string>
+		<key>New item - 130</key>
+		<string>S. Orlando, FLORIDA 00 #184</string>
+		<key>New item - 131</key>
+		<string>Sarasota, FLORIDA -- #1123</string>
+		<key>New item - 132</key>
+		<string>SE Memphis, TENNESSEE -- #353</string>
+		<key>New item - 133</key>
+		<string>Spartanburg, SOUTH_CAROLINA -- #1008</string>
+		<key>New item - 134</key>
+		<string>Staten Island, NEW_YORK -- #316</string>
+		<key>New item - 135</key>
+		<string>Sterling, VIRGINIA -- #218</string>
+		<key>New item - 136</key>
+		<string>Syracuse, NEW_YORK -- #-1</string>
+		<key>New item - 137</key>
+		<string>Tallahassee, FLORIDA -- #1026</string>
+		<key>New item - 138</key>
+		<string>Teterboro, NEW_JERSEY -- #-1</string>
+		<key>New item - 139</key>
+		<string>Town Center, GEORGIA -- #189</string>
+		<key>New item - 140</key>
+		<string>Union, NEW_JERSEY -- #320</string>
+		<key>New item - 141</key>
+		<string>Virginia Beach, VIRGINIA -- #-1</string>
+		<key>New item - 142</key>
+		<string>W. Homestead, PENNSYLVANIA -- #649</string>
+		<key>New item - 143</key>
+		<string>Waltham, MASSACHUSETTS -- #308</string>
+		<key>New item - 144</key>
+		<string>Washington, DISTRICT_OF_COLUMBIA -- #1120</string>
+		<key>New item - 145</key>
+		<string>Washington DC Government Facility, UNKNOWN -- #-1</string>
+		<key>New item - 146</key>
+		<string>Waterbury, CONNECTICUT -- #313</string>
+		<key>New item - 147</key>
+		<string>Wayne, NEW_JERSEY -- #221</string>
+		<key>New item - 148</key>
+		<string>Wayne, NEW_JERSEY -- #1177</string>
+		<key>New item - 149</key>
+		<string>West Bayamon, PUERTO_RICO -- #364</string>
+		<key>New item - 150</key>
+		<string>West Henrico, VIRGINIA -- #205</string>
+		<key>New item - 151</key>
+		<string>West Nashville, TENNESSEE -- #630</string>
+		<key>New item - 152</key>
+		<string>West Springfield, MASSACHUSETTS -- #302</string>
+		<key>New item - 153</key>
+		<string>Westbury, NEW_YORK -- #226</string>
+		<key>New item - 154</key>
+		<string>Wharton, NEW_JERSEY -- #315</string>
+		<key>New item - 155</key>
+		<string>Wheaton, MARYLAND -- #1124</string>
+		<key>New item - 156</key>
+		<string>White Marsh, MARYLAND -- #208</string>
+		<key>New item - 157</key>
+		<string>Wilmington, NORTH_CAROLINA -- #635</string>
+		<key>New item - 158</key>
+		<string>Winchester, VIRGINIA -- #239</string>
+		<key>New item - 159</key>
+		<string>Winston-Salem, NORTH_CAROLINA -- #361</string>
+		<key>New item - 160</key>
+		<string>Winter Park, FLORIDA -- #185</string>
+		<key>New item - 161</key>
+		<string>Woodmore, MARYLAND -- #1078</string>
+		<key>New item - 162</key>
+		<string>Yonkers, NEW_YORK -- #321</string>
+		<key>New item - 163</key>
+		<string>Yorktown, NEW_YORK -- #-1</string>
+	</dict>
+	<key>Values</key>
+	<array>
+		<integer>84</integer>
+		<integer>101</integer>
+		<integer>96</integer>
+		<integer>17</integer>
+		<integer>163</integer>
+		<integer>69</integer>
+		<integer>132</integer>
+		<integer>3</integer>
+		<integer>102</integer>
+		<integer>127</integer>
+		<integer>140</integer>
+		<integer>58</integer>
+		<integer>103</integer>
+		<integer>71</integer>
+		<integer>115</integer>
+		<integer>155</integer>
+		<integer>144</integer>
+		<integer>12</integer>
+		<integer>139</integer>
+		<integer>77</integer>
+		<integer>78</integer>
+		<integer>143</integer>
+		<integer>104</integer>
+		<integer>88</integer>
+		<integer>59</integer>
+		<integer>158</integer>
+		<integer>18</integer>
+		<integer>150</integer>
+		<integer>135</integer>
+		<integer>56</integer>
+		<integer>138</integer>
+		<integer>19</integer>
+		<integer>156</integer>
+		<integer>39</integer>
+		<integer>148</integer>
+		<integer>7</integer>
+		<integer>82</integer>
+		<integer>133</integer>
+		<integer>42</integer>
+		<integer>122</integer>
+		<integer>120</integer>
+		<integer>89</integer>
+		<integer>105</integer>
+		<integer>79</integer>
+		<integer>28</integer>
+		<integer>160</integer>
+		<integer>26</integer>
+		<integer>74</integer>
+		<integer>124</integer>
+		<integer>38</integer>
+		<integer>10</integer>
+		<integer>126</integer>
+		<integer>60</integer>
+		<integer>118</integer>
+		<integer>50</integer>
+		<integer>161</integer>
+		<integer>123</integer>
+		<integer>35</integer>
+		<integer>117</integer>
+		<integer>106</integer>
+		<integer>136</integer>
+		<integer>87</integer>
+		<integer>142</integer>
+		<integer>20</integer>
+		<integer>32</integer>
+		<integer>40</integer>
+		<integer>34</integer>
+		<integer>145</integer>
+		<integer>107</integer>
+		<integer>100</integer>
+		<integer>30</integer>
+		<integer>147</integer>
+		<integer>70</integer>
+		<integer>167</integer>
+		<integer>13</integer>
+		<integer>61</integer>
+		<integer>75</integer>
+		<integer>112</integer>
+		<integer>159</integer>
+		<integer>154</integer>
+		<integer>166</integer>
+		<integer>9</integer>
+		<integer>146</integer>
+		<integer>51</integer>
+		<integer>90</integer>
+		<integer>47</integer>
+		<integer>135</integer>
+		<integer>97</integer>
+		<integer>86</integer>
+		<integer>33</integer>
+		<integer>149</integer>
+		<integer>98</integer>
+		<integer>27</integer>
+		<integer>165</integer>
+		<integer>21</integer>
+		<integer>22</integer>
+		<integer>141</integer>
+		<integer>94</integer>
+		<integer>99</integer>
+		<integer>116</integer>
+		<integer>92</integer>
+		<integer>114</integer>
+		<integer>108</integer>
+		<integer>14</integer>
+		<integer>62</integer>
+		<integer>31</integer>
+		<integer>24</integer>
+		<integer>44</integer>
+		<integer>1</integer>
+		<integer>8</integer>
+		<integer>157</integer>
+		<integer>41</integer>
+		<integer>23</integer>
+		<integer>63</integer>
+		<integer>95</integer>
+		<integer>64</integer>
+		<integer>109</integer>
+		<integer>5</integer>
+		<integer>110</integer>
+		<integer>128</integer>
+		<integer>54</integer>
+		<integer>53</integer>
+		<integer>25</integer>
+		<integer>137</integer>
+		<integer>164</integer>
+		<integer>76</integer>
+		<integer>65</integer>
+		<integer>113</integer>
+		<integer>91</integer>
+		<integer>130</integer>
+		<integer>85</integer>
+		<integer>111</integer>
+		<integer>134</integer>
+		<integer>2</integer>
+		<integer>11</integer>
+		<integer>119</integer>
+		<integer>129</integer>
+		<integer>66</integer>
+		<integer>83</integer>
+		<integer>15</integer>
+		<integer>67</integer>
+		<integer>43</integer>
+		<integer>6</integer>
+		<integer>29</integer>
+		<integer>36</integer>
+		<integer>48</integer>
+		<integer>152</integer>
+		<integer>153</integer>
+		<integer>80</integer>
+		<integer>72</integer>
+		<integer>168</integer>
+		<integer>37</integer>
+		<integer>16</integer>
+		<integer>4</integer>
+		<integer>151</integer>
+		<integer>45</integer>
+		<integer>162</integer>
+		<integer>49</integer>
+		<integer>93</integer>
+		<integer>131</integer>
+		<integer>52</integer>
+		<integer>73</integer>
+		<integer>68</integer>
+	</array>
+</dict>
+</plist>

@@ -20,6 +20,24 @@
 		26773F691ABC61800075C1E7 /* LoginViewControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 26773F681ABC61800075C1E7 /* LoginViewControllerTest.m */; };
 		2688B8FA1AB67D1E0052DEDE /* MainMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2688B8F91AB67D1E0052DEDE /* MainMenuViewController.m */; };
 		2688B9001AB67E780052DEDE /* UserTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2688B8FF1AB67E780052DEDE /* UserTest.m */; };
+		26892C0B1AC0FEA300783172 /* JGProgressHUD Resources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 26892BF61AC0FEA300783172 /* JGProgressHUD Resources.bundle */; };
+		26892C0C1AC0FEA300783172 /* JGProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 26892BF81AC0FEA300783172 /* JGProgressHUD.m */; };
+		26892C0D1AC0FEA300783172 /* JGProgressHUDAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 26892BFA1AC0FEA300783172 /* JGProgressHUDAnimation.m */; };
+		26892C0E1AC0FEA300783172 /* JGProgressHUDErrorIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26892BFC1AC0FEA300783172 /* JGProgressHUDErrorIndicatorView.m */; };
+		26892C0F1AC0FEA300783172 /* JGProgressHUDFadeAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 26892BFE1AC0FEA300783172 /* JGProgressHUDFadeAnimation.m */; };
+		26892C101AC0FEA300783172 /* JGProgressHUDFadeZoomAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 26892C001AC0FEA300783172 /* JGProgressHUDFadeZoomAnimation.m */; };
+		26892C111AC0FEA300783172 /* JGProgressHUDIndeterminateIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26892C021AC0FEA300783172 /* JGProgressHUDIndeterminateIndicatorView.m */; };
+		26892C121AC0FEA300783172 /* JGProgressHUDIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26892C041AC0FEA300783172 /* JGProgressHUDIndicatorView.m */; };
+		26892C131AC0FEA300783172 /* JGProgressHUDPieIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26892C061AC0FEA300783172 /* JGProgressHUDPieIndicatorView.m */; };
+		26892C141AC0FEA300783172 /* JGProgressHUDRingIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26892C081AC0FEA300783172 /* JGProgressHUDRingIndicatorView.m */; };
+		26892C151AC0FEA300783172 /* JGProgressHUDSuccessIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26892C0A1AC0FEA300783172 /* JGProgressHUDSuccessIndicatorView.m */; };
+		26892C1D1AC10EBF00783172 /* NewProjectTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 26892C1B1AC10EBF00783172 /* NewProjectTableViewCell.m */; };
+		26892C1E1AC10EBF00783172 /* NewProjectTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26892C1C1AC10EBF00783172 /* NewProjectTableViewCell.xib */; };
+		2698D6211AC05B0600323046 /* NewProjectHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2698D6201AC05B0600323046 /* NewProjectHelper.m */; };
+		2698D6241AC05C7900323046 /* Warehouse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2698D6231AC05C7900323046 /* Warehouse.m */; };
+		2698D6261AC05F6100323046 /* Warehouses.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2698D6251AC05F6100323046 /* Warehouses.plist */; };
+		2698D62C1AC097D200323046 /* DatabaseConnectionTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2698D62B1AC097D200323046 /* DatabaseConnectionTest.m */; };
+		2698D62F1AC09ED600323046 /* ProjectTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = 2698D62E1AC09ED600323046 /* ProjectTypes.m */; };
 		26BE55061AB66DEE00566014 /* MysqlCommitException.m in Sources */ = {isa = PBXBuildFile; fileRef = 26BE54A71AB66DEE00566014 /* MysqlCommitException.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		26BE55071AB66DEE00566014 /* MysqlException.m in Sources */ = {isa = PBXBuildFile; fileRef = 26BE54A91AB66DEE00566014 /* MysqlException.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		26BE55081AB66DEE00566014 /* MysqlRollbackException.m in Sources */ = {isa = PBXBuildFile; fileRef = 26BE54AB1AB66DEE00566014 /* MysqlRollbackException.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -68,6 +86,38 @@
 		2688B8F81AB67D1E0052DEDE /* MainMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenuViewController.h; sourceTree = "<group>"; };
 		2688B8F91AB67D1E0052DEDE /* MainMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMenuViewController.m; sourceTree = "<group>"; };
 		2688B8FF1AB67E780052DEDE /* UserTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserTest.m; sourceTree = "<group>"; };
+		26892BF61AC0FEA300783172 /* JGProgressHUD Resources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = "JGProgressHUD Resources.bundle"; sourceTree = "<group>"; };
+		26892BF71AC0FEA300783172 /* JGProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JGProgressHUD.h; sourceTree = "<group>"; };
+		26892BF81AC0FEA300783172 /* JGProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JGProgressHUD.m; sourceTree = "<group>"; };
+		26892BF91AC0FEA300783172 /* JGProgressHUDAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JGProgressHUDAnimation.h; sourceTree = "<group>"; };
+		26892BFA1AC0FEA300783172 /* JGProgressHUDAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JGProgressHUDAnimation.m; sourceTree = "<group>"; };
+		26892BFB1AC0FEA300783172 /* JGProgressHUDErrorIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JGProgressHUDErrorIndicatorView.h; sourceTree = "<group>"; };
+		26892BFC1AC0FEA300783172 /* JGProgressHUDErrorIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JGProgressHUDErrorIndicatorView.m; sourceTree = "<group>"; };
+		26892BFD1AC0FEA300783172 /* JGProgressHUDFadeAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JGProgressHUDFadeAnimation.h; sourceTree = "<group>"; };
+		26892BFE1AC0FEA300783172 /* JGProgressHUDFadeAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JGProgressHUDFadeAnimation.m; sourceTree = "<group>"; };
+		26892BFF1AC0FEA300783172 /* JGProgressHUDFadeZoomAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JGProgressHUDFadeZoomAnimation.h; sourceTree = "<group>"; };
+		26892C001AC0FEA300783172 /* JGProgressHUDFadeZoomAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JGProgressHUDFadeZoomAnimation.m; sourceTree = "<group>"; };
+		26892C011AC0FEA300783172 /* JGProgressHUDIndeterminateIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JGProgressHUDIndeterminateIndicatorView.h; sourceTree = "<group>"; };
+		26892C021AC0FEA300783172 /* JGProgressHUDIndeterminateIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JGProgressHUDIndeterminateIndicatorView.m; sourceTree = "<group>"; };
+		26892C031AC0FEA300783172 /* JGProgressHUDIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JGProgressHUDIndicatorView.h; sourceTree = "<group>"; };
+		26892C041AC0FEA300783172 /* JGProgressHUDIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JGProgressHUDIndicatorView.m; sourceTree = "<group>"; };
+		26892C051AC0FEA300783172 /* JGProgressHUDPieIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JGProgressHUDPieIndicatorView.h; sourceTree = "<group>"; };
+		26892C061AC0FEA300783172 /* JGProgressHUDPieIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JGProgressHUDPieIndicatorView.m; sourceTree = "<group>"; };
+		26892C071AC0FEA300783172 /* JGProgressHUDRingIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JGProgressHUDRingIndicatorView.h; sourceTree = "<group>"; };
+		26892C081AC0FEA300783172 /* JGProgressHUDRingIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JGProgressHUDRingIndicatorView.m; sourceTree = "<group>"; };
+		26892C091AC0FEA300783172 /* JGProgressHUDSuccessIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JGProgressHUDSuccessIndicatorView.h; sourceTree = "<group>"; };
+		26892C0A1AC0FEA300783172 /* JGProgressHUDSuccessIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JGProgressHUDSuccessIndicatorView.m; sourceTree = "<group>"; };
+		26892C1A1AC10EBF00783172 /* NewProjectTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewProjectTableViewCell.h; sourceTree = "<group>"; };
+		26892C1B1AC10EBF00783172 /* NewProjectTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewProjectTableViewCell.m; sourceTree = "<group>"; };
+		26892C1C1AC10EBF00783172 /* NewProjectTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewProjectTableViewCell.xib; sourceTree = "<group>"; };
+		2698D61F1AC05B0600323046 /* NewProjectHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewProjectHelper.h; sourceTree = "<group>"; };
+		2698D6201AC05B0600323046 /* NewProjectHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewProjectHelper.m; sourceTree = "<group>"; };
+		2698D6221AC05C7900323046 /* Warehouse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Warehouse.h; sourceTree = "<group>"; };
+		2698D6231AC05C7900323046 /* Warehouse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Warehouse.m; sourceTree = "<group>"; };
+		2698D6251AC05F6100323046 /* Warehouses.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Warehouses.plist; sourceTree = "<group>"; };
+		2698D62B1AC097D200323046 /* DatabaseConnectionTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DatabaseConnectionTest.m; sourceTree = "<group>"; };
+		2698D62D1AC09ED600323046 /* ProjectTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectTypes.h; sourceTree = "<group>"; };
+		2698D62E1AC09ED600323046 /* ProjectTypes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectTypes.m; sourceTree = "<group>"; };
 		26BE54A61AB66DEE00566014 /* MysqlCommitException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MysqlCommitException.h; sourceTree = "<group>"; };
 		26BE54A71AB66DEE00566014 /* MysqlCommitException.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MysqlCommitException.m; sourceTree = "<group>"; };
 		26BE54A81AB66DEE00566014 /* MysqlException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MysqlException.h; sourceTree = "<group>"; };
@@ -210,6 +260,7 @@
 				262339401AB61CBF001976B8 /* Images.xcassets */,
 				262339421AB61CBF001976B8 /* LaunchScreen.xib */,
 				26BE54A41AB66DEE00566014 /* iPhoneMySQL */,
+				26892BF51AC0FEA300783172 /* JGProgressHUD */,
 				262339331AB61CBF001976B8 /* Supporting Files */,
 			);
 			path = MillerConstruction;
@@ -230,6 +281,7 @@
 				26773F681ABC61800075C1E7 /* LoginViewControllerTest.m */,
 				266AE5EB1ABC64EE0073E80A /* MainMenuViewControllerTest.m */,
 				2688B8FF1AB67E780052DEDE /* UserTest.m */,
+				2698D62B1AC097D200323046 /* DatabaseConnectionTest.m */,
 				2623394D1AB61CBF001976B8 /* Supporting Files */,
 			);
 			path = MillerConstructionTests;
@@ -263,8 +315,46 @@
 				2623395A1AB61E41001976B8 /* User.m */,
 				2623395C1AB620BD001976B8 /* DatabaseConnector.h */,
 				2623395D1AB620BD001976B8 /* DatabaseConnector.m */,
+				2698D61F1AC05B0600323046 /* NewProjectHelper.h */,
+				2698D6201AC05B0600323046 /* NewProjectHelper.m */,
+				2698D6221AC05C7900323046 /* Warehouse.h */,
+				2698D6231AC05C7900323046 /* Warehouse.m */,
+				2698D6251AC05F6100323046 /* Warehouses.plist */,
+				2698D62D1AC09ED600323046 /* ProjectTypes.h */,
+				2698D62E1AC09ED600323046 /* ProjectTypes.m */,
+				26892C1A1AC10EBF00783172 /* NewProjectTableViewCell.h */,
+				26892C1B1AC10EBF00783172 /* NewProjectTableViewCell.m */,
+				26892C1C1AC10EBF00783172 /* NewProjectTableViewCell.xib */,
 			);
 			name = Models;
+			sourceTree = "<group>";
+		};
+		26892BF51AC0FEA300783172 /* JGProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				26892BF61AC0FEA300783172 /* JGProgressHUD Resources.bundle */,
+				26892BF71AC0FEA300783172 /* JGProgressHUD.h */,
+				26892BF81AC0FEA300783172 /* JGProgressHUD.m */,
+				26892BF91AC0FEA300783172 /* JGProgressHUDAnimation.h */,
+				26892BFA1AC0FEA300783172 /* JGProgressHUDAnimation.m */,
+				26892BFB1AC0FEA300783172 /* JGProgressHUDErrorIndicatorView.h */,
+				26892BFC1AC0FEA300783172 /* JGProgressHUDErrorIndicatorView.m */,
+				26892BFD1AC0FEA300783172 /* JGProgressHUDFadeAnimation.h */,
+				26892BFE1AC0FEA300783172 /* JGProgressHUDFadeAnimation.m */,
+				26892BFF1AC0FEA300783172 /* JGProgressHUDFadeZoomAnimation.h */,
+				26892C001AC0FEA300783172 /* JGProgressHUDFadeZoomAnimation.m */,
+				26892C011AC0FEA300783172 /* JGProgressHUDIndeterminateIndicatorView.h */,
+				26892C021AC0FEA300783172 /* JGProgressHUDIndeterminateIndicatorView.m */,
+				26892C031AC0FEA300783172 /* JGProgressHUDIndicatorView.h */,
+				26892C041AC0FEA300783172 /* JGProgressHUDIndicatorView.m */,
+				26892C051AC0FEA300783172 /* JGProgressHUDPieIndicatorView.h */,
+				26892C061AC0FEA300783172 /* JGProgressHUDPieIndicatorView.m */,
+				26892C071AC0FEA300783172 /* JGProgressHUDRingIndicatorView.h */,
+				26892C081AC0FEA300783172 /* JGProgressHUDRingIndicatorView.m */,
+				26892C091AC0FEA300783172 /* JGProgressHUDSuccessIndicatorView.h */,
+				26892C0A1AC0FEA300783172 /* JGProgressHUDSuccessIndicatorView.m */,
+			);
+			path = JGProgressHUD;
 			sourceTree = "<group>";
 		};
 		26BE54A41AB66DEE00566014 /* iPhoneMySQL */ = {
@@ -490,6 +580,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2698D6261AC05F6100323046 /* Warehouses.plist in Resources */,
+				26892C0B1AC0FEA300783172 /* JGProgressHUD Resources.bundle in Resources */,
+				26892C1E1AC10EBF00783172 /* NewProjectTableViewCell.xib in Resources */,
 				2623393F1AB61CBF001976B8 /* Main.storyboard in Resources */,
 				262339441AB61CBF001976B8 /* LaunchScreen.xib in Resources */,
 				262339411AB61CBF001976B8 /* Images.xcassets in Resources */,
@@ -570,23 +663,37 @@
 			buildActionMask = 2147483647;
 			files = (
 				26BE55071AB66DEE00566014 /* MysqlException.m in Sources */,
+				26892C0C1AC0FEA300783172 /* JGProgressHUD.m in Sources */,
+				26892C101AC0FEA300783172 /* JGProgressHUDFadeZoomAnimation.m in Sources */,
 				2623395E1AB620BD001976B8 /* DatabaseConnector.m in Sources */,
 				26BE550F1AB66DEE00566014 /* MysqlLiteral.m in Sources */,
 				26BE550A1AB66DEE00566014 /* MysqlConnection.m in Sources */,
 				26BE550B1AB66DEE00566014 /* MysqlDelete.m in Sources */,
 				26BE550D1AB66DEE00566014 /* MysqlFetchField.m in Sources */,
 				26BE55081AB66DEE00566014 /* MysqlRollbackException.m in Sources */,
+				26892C0F1AC0FEA300783172 /* JGProgressHUDFadeAnimation.m in Sources */,
+				26892C131AC0FEA300783172 /* JGProgressHUDPieIndicatorView.m in Sources */,
+				2698D62F1AC09ED600323046 /* ProjectTypes.m in Sources */,
 				26BE55101AB66DEE00566014 /* MysqlUpdate.m in Sources */,
+				2698D6211AC05B0600323046 /* NewProjectHelper.m in Sources */,
 				26BE55061AB66DEE00566014 /* MysqlCommitException.m in Sources */,
 				2688B8FA1AB67D1E0052DEDE /* MainMenuViewController.m in Sources */,
 				26BE550E1AB66DEE00566014 /* MysqlInsert.m in Sources */,
+				26892C0D1AC0FEA300783172 /* JGProgressHUDAnimation.m in Sources */,
+				26892C111AC0FEA300783172 /* JGProgressHUDIndeterminateIndicatorView.m in Sources */,
+				26892C121AC0FEA300783172 /* JGProgressHUDIndicatorView.m in Sources */,
 				26BE550C1AB66DEE00566014 /* MysqlFetch.m in Sources */,
+				2698D6241AC05C7900323046 /* Warehouse.m in Sources */,
+				26892C141AC0FEA300783172 /* JGProgressHUDRingIndicatorView.m in Sources */,
 				2623395B1AB61E41001976B8 /* User.m in Sources */,
+				26892C1D1AC10EBF00783172 /* NewProjectTableViewCell.m in Sources */,
 				2623393C1AB61CBF001976B8 /* LoginViewController.m in Sources */,
 				265C19931ABC8905007BCEF6 /* CreateNewProjectTableViewController.m in Sources */,
 				262339391AB61CBF001976B8 /* AppDelegate.m in Sources */,
 				262339361AB61CBF001976B8 /* main.m in Sources */,
 				26BE55111AB66DEE00566014 /* NSString_MysqlEscape.m in Sources */,
+				26892C0E1AC0FEA300783172 /* JGProgressHUDErrorIndicatorView.m in Sources */,
+				26892C151AC0FEA300783172 /* JGProgressHUDSuccessIndicatorView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -594,6 +701,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2698D62C1AC097D200323046 /* DatabaseConnectionTest.m in Sources */,
 				266AE5EC1ABC64EE0073E80A /* MainMenuViewControllerTest.m in Sources */,
 				2688B9001AB67E780052DEDE /* UserTest.m in Sources */,
 				26773F691ABC61800075C1E7 /* LoginViewControllerTest.m in Sources */,
