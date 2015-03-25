@@ -156,6 +156,18 @@
 }
 
 /**
+ *  Fetches the different project classifications from the database
+ *
+ *  @return NSArray * of the project classifications
+ */
+-(NSArray *)fetchProjectClassifications {
+    NSString *projectClassificationCommand = @"SELECT id, name FROM projectclass";
+    MysqlFetch *getProjectClassifications = [self fetchWithCommand:projectClassificationCommand];
+    
+    return [getProjectClassifications results];
+}
+
+/**
  *  Inserts a new project into the database
  *
  *  @param projectInformation The information associated with the project

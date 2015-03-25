@@ -10,6 +10,7 @@
 #import "DatabaseConnector.h"
 #import "ProjectTypes.h"
 #import "Warehouse.h"
+#import "ProjectClassification.h"
 
 @implementation NewProjectHelper {
     DatabaseConnector *database;
@@ -28,6 +29,9 @@
     return self;
 }
 
+/**
+ *  Retreives all the warehouses from the database
+ */
 -(void)initializeWarehouseArrays {
     NSArray *resultArray = [database fetchWarehouses];
     NSMutableArray *unsortedArray = [[NSMutableArray alloc] init];
@@ -36,14 +40,16 @@
         NSString *warehouseState = [warehouseRow objectForKey:@"warehouse.state"];
         NSNumber *warehouseID = [warehouseRow objectForKey:@"warehouse.warehouseID"];
         NSString *warehouseCity = [warehouseRow objectForKey:@"city.name"];
-        Warehouse *newWarehouse = [[Warehouse alloc] initWithRowID:warehouseRowID andState:warehouseState andWarehouseID:warehouseID andCity:warehouseCity];
-        [unsortedArray addObject:newWarehouse];
+        [unsortedArray addObject:[[Warehouse alloc] initWithRowID:warehouseRowID andState:warehouseState andWarehouseID:warehouseID andCity:warehouseCity]];
     }
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"city" ascending:YES];
     self.warehouseArray = [unsortedArray sortedArrayUsingDescriptors:@[sortDescriptor]];
     [self initializeWarehouseNamesArray];
 }
 
+/**
+ *  Extracts the warehouse names from the warehouse array
+ */
 -(void)initializeWarehouseNamesArray {
     NSMutableArray *namesArray = [[NSMutableArray alloc] init];
     for (Warehouse *warehouse in self.warehouseArray) {
@@ -53,8 +59,31 @@
     self.warehouseNamesArray = [namesArray copy];
 }
 
+/**
+ *  Retreives all the project classifications from the database
+ */
 -(void)initializeProjectClassificationArray {
-    self.projectClassificationArray = [NSArray arrayWithObjects:@"PO", @"AIA", @"Facility", @"HVAC", nil];
+    NSArray *resultArray = [database fetchProjectClassifications];
+    NSMutableArray *unsortedArray = [[NSMutableArray alloc] init];
+    for (NSDictionary *projectClassificationRow in resultArray) {
+        NSNumber *projectClassificationRowID = [projectClassificationRow objectForKey:@"id"];
+        NSString *projectClassificationName = [projectClassificationRow objectForKey:@"name"];
+        [unsortedArray addObject:[[ProjectClassification alloc] initWithRowID:projectClassificationRowID andName:projectClassificationName]];
+    }
+    NSSortDescriptor *sortDescripter = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
+    self.projectClassificationArray = [unsortedArray sortedArrayUsingDescriptors:@[sortDescripter]];
+}
+
+/**
+ *  Extracts all the project classification names from the project classification array
+ */
+-(void)initializeProjectClassificationNamesArray {
+    NSMutableArray *namesArray = [[NSMutableArray alloc] init];
+    for (ProjectClassification *projectClassification in self.projectClassificationArray) {
+        NSString *projectClassificationName = [projectClassification name];
+        [namesArray addObject:projectClassificationName];
+    }
+    self.projectAttributesNames = [namesArray copy];
 }
 
 -(void)initializeProjectArray {

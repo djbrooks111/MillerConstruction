@@ -13,6 +13,7 @@
 @property (nonatomic, retain) NSArray *warehouseArray;
 @property (nonatomic, retain) NSArray *warehouseNamesArray;
 @property (nonatomic, retain) NSArray *projectClassificationArray;
+@property (nonatomic, retain) NSArray *projectClassificationNameArray;
 @property (nonatomic, retain) NSArray *projectArray;
 
 @property (nonatomic, retain) NSArray *projectAttributesNames;

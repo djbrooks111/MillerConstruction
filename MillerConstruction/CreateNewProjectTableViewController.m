@@ -80,10 +80,32 @@
     cell.label.text = [usedArray objectAtIndex:indexPath.row];
     cell.textField.text = @"";
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-    if (indexPath.row == 1) {
-        // Warehouse
-        NSLog(@"added Target");
-        [cell.textField addTarget:nil action:@selector(warehouseTextFieldActive:) forControlEvents:UIControlEventEditingDidBegin];
+    if (indexPath.section == 0) {
+        if (indexPath.row == 1) {
+            // Warehouse
+            [cell.textField addTarget:nil action:@selector(warehouseTextFieldActive:) forControlEvents:UIControlEventEditingDidBegin];
+        } else if (indexPath.row == 2) {
+            // Project Classification
+            [cell.textField addTarget:nil action:@selector(projectClassificationTextFieldActive:) forControlEvents:UIControlEventEditingDidBegin];
+        } else if (indexPath.row == 3) {
+            // Project
+            [cell.textField addTarget:nil action:@selector(projectTextFieldActive:) forControlEvents:UIControlEventEditingDidBegin];
+        } else if (indexPath.row == 4) {
+            // Project Manager
+            [cell.textField addTarget:nil action:@selector(projectManagerTextFieldActive:) forControlEvents:UIControlEventEditingDidBegin];
+        } else if (indexPath.row == 5) {
+            // Project Supervisor
+            [cell.textField addTarget:nil action:@selector(projectSupervisorTextFieldActive:) forControlEvents:UIControlEventEditingDidBegin];
+        } else if (indexPath.row == 6) {
+            // Project Stage
+            [cell.textField addTarget:nil action:@selector(projectStageTextFieldActive:) forControlEvents:UIControlEventEditingDidBegin];
+        } else if (indexPath.row == 7) {
+            // Project Status
+            [cell.textField addTarget:nil action:@selector(projectStatusTextFieldActive:) forControlEvents:UIControlEventEditingDidBegin];
+        } else if (indexPath.row == 8) {
+            // Project Type
+            [cell.textField addTarget:nil action:@selector(projectTypeTextFieldActive:) forControlEvents:UIControlEventEditingDidBegin];
+        }
     }
     
     return cell;
@@ -97,7 +119,6 @@
  *  @param textField The Warehouse UITextField
  */
 -(void)warehouseTextFieldActive:(UITextField *)textField {
-    NSLog(@"Called method");
     [ActionSheetStringPicker showPickerWithTitle:@"Set Warehouse" rows:[newProjectHelper warehouseNamesArray] initialSelection:0 target:self successAction:@selector(warehousePicked:element:) cancelAction:nil origin:textField];
 }
 
@@ -105,12 +126,91 @@
  *  Callback method from the ActionSheetStringPicker
  *
  *  @param selectedIndex The selected index of the Warehouse
- *  @param sender        The object that called this method
+ *  @param sender        The Warehouse UITextField
  */
--(void)warehousePicked:(NSNumber *)selectedIndex element:(id)sender {
-    UITextField *textField = (UITextField *)sender;
+-(void)warehousePicked:(NSNumber *)selectedIndex element:(UITextField *)sender {
     NSArray *warehouseNamesArray = [newProjectHelper warehouseNamesArray];
-    [textField setText:[warehouseNamesArray objectAtIndex:[selectedIndex integerValue]]];
+    [sender setText:[warehouseNamesArray objectAtIndex:[selectedIndex integerValue]]];
+}
+
+/**
+ *  Displays an ActionSheetStringPicker when the Project Classification UITextField is clicked
+ *
+ *  @param textField The Project Classification UITextField
+ */
+-(void)projectClassificationTextFieldActive:(UITextField *)textField {
+    [ActionSheetStringPicker showPickerWithTitle:@"Set Project Classification" rows:[newProjectHelper projectClassificationNameArray] initialSelection:0 target:self successAction:@selector(projectClassificationPicked:element:) cancelAction:nil origin:textField];
+}
+
+/**
+ *  Callback method from the ActionSheetStringPicker
+ *
+ *  @param selectedIndex The selected index of the Project Classification
+ *  @param sender        The Project Classification UITextField
+ */
+-(void)projectClassificationPicked:(NSNumber *)selectedIndex element:(UITextField *)sender {
+    NSArray *projectClassificationNameArray = [newProjectHelper projectClassificationNameArray];
+    [sender setText:[projectClassificationNameArray objectAtIndex:[selectedIndex integerValue]]];
+}
+
+/**
+ *  Displays an ActionSheetStringPicker when the Project UITextField is clicked
+ *
+ *  @param textField The Project UITextField
+ */
+-(void)projectTextFieldActive:(UITextField *)textField {
+    [ActionSheetStringPicker showPickerWithTitle:@"Set Project" rows:[newProjectHelper projectNameArray] initialSelection:0 target:self successAction:@selector(projectPicked:element:) cancelAction:nil origin:textField];
+}
+
+/**
+ *  Callback method from the ActionSheetStringPicker
+ *
+ *  @param selectedIndex The selected index of the Project
+ *  @param sender        The Project UITextField
+ */
+-(void)projectPicked:(NSNumber *)selectedIndex element:(UITextField *)sender {
+    NSArray *projectNameArray = [newProjectHelper projectNameArray];
+    [sender setText:[projectNameArray objectAtIndex:[selectedIndex integerValue]]];
+}
+
+/**
+ *  Displays an ActionSheetStringPicker when the Project Manager UITextField is clicked
+ *
+ *  @param textField The Project Manager UITextField
+ */
+-(void)projectManagerTextFieldActive:(UITextField *)textField {
+    [ActionSheetStringPicker showPickerWithTitle:@"Set Project Manager" rows:[newProjectHelper projectManagerNameArray] initialSelection:0 target:self successAction:@selector(projectManagerPicked:element:) cancelAction:nil origin:textField];
+}
+
+/**
+ *  Callback method from the ActionSheetStringPicker
+ *
+ *  @param selectedIndex The selected index of the Project Manager
+ *  @param sender        The Project Manager UITextField
+ */
+-(void)projectManagerPicker:(NSNumber *)selectedIndex element:(UITextField *)sender {
+    NSArray *projectManagerNameArray = [newProjectHelper projectManagerNameArray];
+    [sender setText:[projectManagerNameArray objectAtIndex:[selectedIndex integerValue]]];
+}
+
+/**
+ *  Displays an ActionSheetStringPicker when the Project Supervisor UITextField is clicked
+ *
+ *  @param textField The Project Supervisor UITextField
+ */
+-(void)projectSupervisorTextFieldActive:(UITextField *)textField {
+    [ActionSheetStringPicker showPickerWithTitle:@"Set Project Supervisor" rows:[newProjectHelper projectSupervisorNameArray] initialSelection:0 target:self successAction:@selector(projectSupervisorPicked:element:) cancelAction:nil origin:textField];
+}
+
+/**
+ *  Callback method from the ActionSheetStringPicker
+ *
+ *  @param selectedIndex The selected index of the Project Supervisor
+ *  @param sender        The Project Supervisor UITextField
+ */
+-(void)projectSupervisorPicked:(NSNumber *)selectedIndex element:(UITextField *)sender {
+    NSArray *projectSupervisorNameArray = [newProjectHelper projectSupervisorNameArray];
+    [sender setText:[projectSupervisorNameArray objectAtIndex:[selectedIndex integerValue]]];
 }
 
 #pragma mark - Save method

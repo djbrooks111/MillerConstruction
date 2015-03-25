@@ -21,6 +21,7 @@
 
 -(NSArray *)fetchProjectTypes;
 -(NSArray *)fetchWarehouses;
+-(NSArray *)fetchProjectClassifications;
 
 -(BOOL)addNewProject:(NSArray *)projectInformation andKeys:(NSArray *)keys;
 
