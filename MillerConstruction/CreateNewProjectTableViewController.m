@@ -53,7 +53,7 @@
     if (section == 0) {
         return 10;
     } else {
-        return 24;
+        return 23;
     }
 }
 
@@ -69,13 +69,21 @@
     NewProjectTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     
     // Configure the cell...
-    cell.label.text = [projectAttributesNames objectAtIndex:indexPath.row];
+    NSArray *requiredInformation = [projectAttributesNames subarrayWithRange:NSMakeRange(0, 10)];
+    NSArray *optionalInformation = [projectAttributesNames subarrayWithRange:NSMakeRange(10, 23)];
+    NSArray *usedArray;
+    if (indexPath.section == 0) {
+        usedArray = requiredInformation;
+    } else {
+        usedArray = optionalInformation;
+    }
+    cell.label.text = [usedArray objectAtIndex:indexPath.row];
     cell.textField.text = @"";
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     if (indexPath.row == 1) {
         // Warehouse
         NSLog(@"added Target");
-        [cell.textField addTarget:self action:@selector(warehouseTextFieldActive:) forControlEvents:UIControlEventAllTouchEvents];
+        [cell.textField addTarget:nil action:@selector(warehouseTextFieldActive:) forControlEvents:UIControlEventEditingDidBegin];
     }
     
     return cell;
@@ -83,11 +91,22 @@
 
 #pragma mark - UITextField methods
 
+/**
+ *  Displays an ActionSheetStringPicker when the Warehouse UITextField is clicked
+ *
+ *  @param textField The Warehouse UITextField
+ */
 -(void)warehouseTextFieldActive:(UITextField *)textField {
     NSLog(@"Called method");
     [ActionSheetStringPicker showPickerWithTitle:@"Set Warehouse" rows:[newProjectHelper warehouseNamesArray] initialSelection:0 target:self successAction:@selector(warehousePicked:element:) cancelAction:nil origin:textField];
 }
 
+/**
+ *  Callback method from the ActionSheetStringPicker
+ *
+ *  @param selectedIndex The selected index of the Warehouse
+ *  @param sender        The object that called this method
+ */
 -(void)warehousePicked:(NSNumber *)selectedIndex element:(id)sender {
     UITextField *textField = (UITextField *)sender;
     NSArray *warehouseNamesArray = [newProjectHelper warehouseNamesArray];

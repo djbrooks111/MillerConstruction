@@ -32,6 +32,11 @@
 
 #pragma mark - JGProgressHUD
 
+/**
+ *  Creates a new JGProgressHUD
+ *
+ *  @return The new JGProgressHUD
+ */
 -(JGProgressHUD *)prototypeHUD {
     JGProgressHUD *HUD = [[JGProgressHUD alloc] initWithStyle:JGProgressHUDStyleDark];
     HUD.interactionType = JGProgressHUDInteractionTypeBlockAllTouches;

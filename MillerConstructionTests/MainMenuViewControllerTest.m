@@ -86,4 +86,28 @@
     XCTAssertTrue([actions containsObject:@"mainMenuButtonsPressed:"], @"viewTriggersButton should have the mainMenuButtonsPressed method connected");
 }
 
+-(void)testSegueToCreateNewProject {
+    [UIApplication sharedApplication].keyWindow.rootViewController = viewController;
+    [viewController performSegueWithIdentifier:@"goToCreateNewProject" sender:nil];
+    XCTAssertNotNil(viewController.presentedViewController, @"Create New Project should be presented");
+}
+
+-(void)testSegueToViewExistingProject {
+    [UIApplication sharedApplication].keyWindow.rootViewController = viewController;
+    [viewController performSegueWithIdentifier:@"goToViewExistingProject" sender:nil];
+    XCTAssertNotNil(viewController.presentedViewController, @"View Existing Project should be presented");
+}
+
+-(void)testSegueToGenerateReport {
+    [UIApplication  sharedApplication].keyWindow.rootViewController = viewController;
+    [viewController performSegueWithIdentifier:@"goToGenerateReport" sender:nil];
+    XCTAssertNotNil(viewController.presentedViewController, @"Generate Report should be presented");
+}
+
+-(void)testSegueToViewTriggers {
+    [UIApplication sharedApplication].keyWindow.rootViewController = viewController;
+    [viewController performSegueWithIdentifier:@"goToViewTriggers" sender:nil];
+    XCTAssertNotNil(viewController.presentedViewController, @"View Triggers should be presented");
+}
+
 @end

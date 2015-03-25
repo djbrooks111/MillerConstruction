@@ -51,4 +51,10 @@
     XCTAssertTrue([actions containsObject:@"login:"], @"loginButton should have the login method connected");
 }
 
+-(void)testSegueToMainMenu {
+    [UIApplication sharedApplication].keyWindow.rootViewController = viewController;
+    [viewController performSegueWithIdentifier:@"goToMainMenu" sender:nil];
+    XCTAssertNotNil(viewController.presentedViewController, @"Main Menu should be presented");
+}
+
 @end

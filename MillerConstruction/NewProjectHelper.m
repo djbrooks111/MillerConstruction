@@ -32,14 +32,25 @@
     NSArray *resultArray = [database fetchWarehouses];
     NSMutableArray *unsortedArray = [[NSMutableArray alloc] init];
     for (NSDictionary *warehouseRow in resultArray) {
-        NSNumber *warehouseRowID = [warehouseRow objectForKey:@"id"];
-        NSString *warehouseState = [warehouseRow objectForKey:@"state"];
-        NSNumber *warehouseID = [warehouseRow objectForKey:@"warehouseID"];
-        NSString *warehouseCity = [warehouseRow objectForKey:@"name"];
-        [unsortedArray addObject:[[Warehouse alloc] initWithRowID:warehouseRowID andState:warehouseState andWarehouseID:warehouseID andCity:warehouseCity]];
+        NSNumber *warehouseRowID = [warehouseRow objectForKey:@"warehouse.id"];
+        NSString *warehouseState = [warehouseRow objectForKey:@"warehouse.state"];
+        NSNumber *warehouseID = [warehouseRow objectForKey:@"warehouse.warehouseID"];
+        NSString *warehouseCity = [warehouseRow objectForKey:@"city.name"];
+        Warehouse *newWarehouse = [[Warehouse alloc] initWithRowID:warehouseRowID andState:warehouseState andWarehouseID:warehouseID andCity:warehouseCity];
+        [unsortedArray addObject:newWarehouse];
     }
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"city" ascending:YES];
     self.warehouseArray = [unsortedArray sortedArrayUsingDescriptors:@[sortDescriptor]];
+    [self initializeWarehouseNamesArray];
+}
+
+-(void)initializeWarehouseNamesArray {
+    NSMutableArray *namesArray = [[NSMutableArray alloc] init];
+    for (Warehouse *warehouse in self.warehouseArray) {
+        NSString *warehouseFullName = [warehouse fullName];
+        [namesArray addObject:warehouseFullName];
+    }
+    self.warehouseNamesArray = [namesArray copy];
 }
 
 -(void)initializeProjectClassificationArray {
@@ -80,7 +91,7 @@
                                     @"Verisae Report Date:",
                                     @"Closeout Notes Date:",
                                     @"Scheduled Start Date:",
-                                    @"Schedules Turnover:",
+                                    @"Scheduled Turnover:",
                                     @"Actual Turnover:",
                                     @"Air Gas:",
                                     @"Permit Application:",

@@ -24,9 +24,13 @@
     if (self = [super init]) {
         [self setRowID:rowID];
         [self setState:state];
+        if ([warehouseID longValue] == 4294967295) {
+            warehouseID = [NSNumber numberWithInteger:-1];
+        }
         [self setWarehouseID:warehouseID];
         [self setCity:city];
-        [self setFullName:[NSString stringWithFormat:@"%@, %@ -- #%@", self.city, self.state, self.warehouseID]];
+        [self setFullName:[[NSString alloc] initWithFormat:@"%@, %@ -- #%@", city, state, warehouseID]];
+        //[self setFullName:[NSString stringWithFormat:@"%@, %@ -- #%@", city, state, warehouseID]];
     }
     
     return self;
