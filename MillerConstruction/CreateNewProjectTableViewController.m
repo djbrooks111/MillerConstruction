@@ -188,7 +188,7 @@
  *  @param selectedIndex The selected index of the Project Manager
  *  @param sender        The Project Manager UITextField
  */
--(void)projectManagerPicker:(NSNumber *)selectedIndex element:(UITextField *)sender {
+-(void)projectManagerPicked:(NSNumber *)selectedIndex element:(UITextField *)sender {
     NSArray *projectManagerNameArray = [newProjectHelper projectManagerNameArray];
     [sender setText:[projectManagerNameArray objectAtIndex:[selectedIndex integerValue]]];
 }
@@ -211,6 +211,66 @@
 -(void)projectSupervisorPicked:(NSNumber *)selectedIndex element:(UITextField *)sender {
     NSArray *projectSupervisorNameArray = [newProjectHelper projectSupervisorNameArray];
     [sender setText:[projectSupervisorNameArray objectAtIndex:[selectedIndex integerValue]]];
+}
+
+/**
+ *  Displays an ActionSheetStringPicker when the Project Stage UITextField is clicked
+ *
+ *  @param textField The Project Stage UITextField
+ */
+-(void)projectStageTextFieldActive:(UITextField *)textField {
+    [ActionSheetStringPicker showPickerWithTitle:@"Set Project Stage" rows:[newProjectHelper projectStageNameArray] initialSelection:0 target:self successAction:@selector(projectStagePicked:element:) cancelAction:nil origin:textField];
+}
+
+/**
+ *  Callback method from the ActionSheetStringPicker
+ *
+ *  @param selectedIndex The selected index of the Project Stage
+ *  @param sender        The Project Stage UITextField
+ */
+-(void)projectStagePicked:(NSNumber *)selectedIndex element:(UITextField *)sender {
+    NSArray *projectStageNameArray = [newProjectHelper projectStageNameArray];
+    [sender setText:[projectStageNameArray objectAtIndex:[selectedIndex integerValue]]];
+}
+
+/**
+ *  Displays an ActionSheetStringPicker when the Project Status UITextField is clicked
+ *
+ *  @param textField The Project Status UITextField
+ */
+-(void)projectStatusTextFieldActive:(UITextField *)textField {
+    [ActionSheetStringPicker showPickerWithTitle:@"Set Project Status" rows:[newProjectHelper projectStatusNameArray] initialSelection:0 target:self successAction:@selector(projectStatusPicked:element:) cancelAction:nil origin:textField];
+}
+
+/**
+ *  Callback method from the ActionSheetStringPicker
+ *
+ *  @param selectedIndex The selected index of the Project Status
+ *  @param sender        The Project Status UITextField
+ */
+-(void)projectStatusPicked:(NSNumber *)selectedIndex element:(UITextField *)sender {
+    NSArray *projectStatusNameArray = [newProjectHelper projectStatusNameArray];
+    [sender setText:[projectStatusNameArray objectAtIndex:[selectedIndex integerValue]]];
+}
+
+/**
+ *  Displays an ActionSheetStringPicker when the Project Type UITextField is clicked
+ *
+ *  @param textField The Project Type UITextField
+ */
+-(void)projectTypeTextFieldActive:(UITextField *)textField {
+    [ActionSheetStringPicker showPickerWithTitle:@"Set Project Type" rows:[newProjectHelper projectTypeNameArray] initialSelection:0 target:self successAction:@selector(projectTypePicked:element:) cancelAction:nil origin:textField];
+}
+
+/**
+ *  Callback method from the ActionSheetStringPicker
+ *
+ *  @param selectedIndex The selected index of the Project Type
+ *  @param sender        The Project Type UITextField
+ */
+-(void)projectTypePicked:(NSNumber *)selectedIndex element:(UITextField *)sender {
+    NSArray *projectTypeNameArray = [newProjectHelper projectTypeNameArray];
+    [sender setText:[projectTypeNameArray objectAtIndex:[selectedIndex integerValue]]];
 }
 
 #pragma mark - Save method
