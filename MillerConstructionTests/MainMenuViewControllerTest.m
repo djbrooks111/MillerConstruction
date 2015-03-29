@@ -30,6 +30,10 @@
     [super tearDown];
 }
 
+-(void)textImplementation {
+    XCTAssertEqualObjects(NSStringFromClass([[MainMenuViewController new] class]), NSStringFromClass([MainMenuViewController class]));
+}
+
 -(void)testViewControllerViewExists {
     XCTAssertNotNil([viewController view], @"MainMenuViewController should contain a view");
 }

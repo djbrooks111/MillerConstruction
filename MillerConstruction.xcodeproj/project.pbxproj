@@ -11,6 +11,8 @@
 		26126B6D1AC8840800AB70B3 /* ProjectStage.m in Sources */ = {isa = PBXBuildFile; fileRef = 26126B6C1AC8840800AB70B3 /* ProjectStage.m */; };
 		26126B701AC887F600AB70B3 /* ProjectStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 26126B6F1AC887F600AB70B3 /* ProjectStatus.m */; };
 		26126B731AC8887700AB70B3 /* ProjectType.m in Sources */ = {isa = PBXBuildFile; fileRef = 26126B721AC8887700AB70B3 /* ProjectType.m */; };
+		26126B751AC899E500AB70B3 /* NewProjectHelperTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 26126B741AC899E500AB70B3 /* NewProjectHelperTest.m */; };
+		26126B771AC89C8000AB70B3 /* WarehouseTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 26126B761AC89C8000AB70B3 /* WarehouseTest.m */; };
 		262339361AB61CBF001976B8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 262339351AB61CBF001976B8 /* main.m */; };
 		262339391AB61CBF001976B8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 262339381AB61CBF001976B8 /* AppDelegate.m */; };
 		2623393C1AB61CBF001976B8 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2623393B1AB61CBF001976B8 /* LoginViewController.m */; };
@@ -83,6 +85,8 @@
 		26126B6F1AC887F600AB70B3 /* ProjectStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectStatus.m; sourceTree = "<group>"; };
 		26126B711AC8887700AB70B3 /* ProjectType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectType.h; sourceTree = "<group>"; };
 		26126B721AC8887700AB70B3 /* ProjectType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectType.m; sourceTree = "<group>"; };
+		26126B741AC899E500AB70B3 /* NewProjectHelperTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewProjectHelperTest.m; sourceTree = "<group>"; };
+		26126B761AC89C8000AB70B3 /* WarehouseTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WarehouseTest.m; sourceTree = "<group>"; };
 		262339301AB61CBF001976B8 /* MillerConstruction.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MillerConstruction.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		262339341AB61CBF001976B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		262339351AB61CBF001976B8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -322,6 +326,8 @@
 				266AE5EB1ABC64EE0073E80A /* MainMenuViewControllerTest.m */,
 				2688B8FF1AB67E780052DEDE /* UserTest.m */,
 				2698D62B1AC097D200323046 /* DatabaseConnectionTest.m */,
+				26126B741AC899E500AB70B3 /* NewProjectHelperTest.m */,
+				26126B761AC89C8000AB70B3 /* WarehouseTest.m */,
 				2623394D1AB61CBF001976B8 /* Supporting Files */,
 			);
 			path = MillerConstructionTests;
@@ -788,6 +794,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				2698D62C1AC097D200323046 /* DatabaseConnectionTest.m in Sources */,
+				26126B771AC89C8000AB70B3 /* WarehouseTest.m in Sources */,
+				26126B751AC899E500AB70B3 /* NewProjectHelperTest.m in Sources */,
 				266AE5EC1ABC64EE0073E80A /* MainMenuViewControllerTest.m in Sources */,
 				2688B9001AB67E780052DEDE /* UserTest.m in Sources */,
 				26773F691ABC61800075C1E7 /* LoginViewControllerTest.m in Sources */,

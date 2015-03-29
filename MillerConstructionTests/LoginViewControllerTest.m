@@ -30,6 +30,10 @@
     [super tearDown];
 }
 
+-(void)testImplementation {
+    XCTAssertEqualObjects(NSStringFromClass([[LoginViewController new] class]), NSStringFromClass([LoginViewController class]));
+}
+
 -(void)testViewControllerViewExists {
     XCTAssertNotNil([viewController view], @"LoginViewController should contain a view");
 }

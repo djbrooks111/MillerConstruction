@@ -32,6 +32,10 @@
     [super tearDown];
 }
 
+-(void)testImplementation {
+    XCTAssertEqualObjects(NSStringFromClass([[User new] class]), NSStringFromClass([User class]));
+}
+
 -(void)testUserCreation {
     User *user = [[User alloc] initWithUsername:TEST_USERNAME andPassword:TEST_PASSWORD];
     XCTAssertEqualObjects(TEST_USERNAME, [user username], @"User's username should be TestUsername");

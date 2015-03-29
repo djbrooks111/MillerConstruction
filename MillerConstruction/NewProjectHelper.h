@@ -37,4 +37,15 @@
 @property (nonatomic, retain) NSArray *projectAttributesNames;
 @property (nonatomic, retain) NSArray *projectAttributesKeys;
 
+-(void)initializeProjectAttributesNamesArray;
+-(void)initializeProjectAttributesKeysArray;
+-(void)initializeWarehouseArrays;
+-(void)initializeProjectClassificationArray;
+-(void)initializeProjectArray;
+-(void)initializeProjectManagerArray;
+-(void)initializeProjectSupervisorArray;
+-(void)initializeProjectStageArray;
+-(void)initializeProjectStatusArray;
+-(void)initializeProjectTypeArray;
+
 @end

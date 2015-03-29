@@ -372,7 +372,16 @@
                             <outlet property="delegate" destination="Ltg-eh-2c2" id="5v6-yy-2zv"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Create New Project" id="jgV-8A-zwS"/>
+                    <navigationItem key="navigationItem" title="Create New Project" id="jgV-8A-zwS">
+                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="save" id="rEY-gk-2RX">
+                            <connections>
+                                <action selector="save:" destination="Ltg-eh-2c2" id="FE0-cV-LzW"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="saveButton" destination="rEY-gk-2RX" id="ife-Ig-bWj"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="woM-xt-aHp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

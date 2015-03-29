@@ -10,7 +10,7 @@
 
 @interface CreateNewProjectTableViewController : UITableViewController <UITextFieldDelegate>
 
-@property (nonatomic, retain) IBOutlet UIButton *saveButton;
+@property (nonatomic, retain) IBOutlet UIBarButtonItem *saveButton;
 
 -(IBAction)save:(UIButton *)sender;
 

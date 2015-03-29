@@ -30,6 +30,10 @@
     [super tearDown];
 }
 
+-(void)testImplementation {
+    XCTAssertEqualObjects(NSStringFromClass([[DatabaseConnector new] class]), NSStringFromClass([DatabaseConnector class]));
+}
+
 -(void)testFetchProjectItem {
     NSArray *resultArray = [database fetchProjectItem];
     NSMutableArray *unsortedArray = [[NSMutableArray alloc] init];
