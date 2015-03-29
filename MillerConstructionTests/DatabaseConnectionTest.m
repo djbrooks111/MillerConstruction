@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
 #import "DatabaseConnector.h"
-#import "ProjectTypes.h"
+#import "ProjectItem.h"
 
 @interface DatabaseConnectionTest : XCTestCase
 
@@ -30,13 +30,13 @@
     [super tearDown];
 }
 
--(void)testFetchProjectTypes {
-    NSArray *resultArray = [database fetchProjectTypes];
+-(void)testFetchProjectItem {
+    NSArray *resultArray = [database fetchProjectItem];
     NSMutableArray *unsortedArray = [[NSMutableArray alloc] init];
     for (NSDictionary *projectTypeRow in resultArray) {
         NSNumber *projectTypeNumber = [projectTypeRow objectForKey:@"id"];
         NSString *projectTypeName = [projectTypeRow objectForKey:@"name"];
-        [unsortedArray addObject:[[ProjectTypes alloc] initWithName:projectTypeName andNumber:[projectTypeNumber intValue]]];
+        [unsortedArray addObject:[[ProjectItem alloc] initWithRowID:projectTypeNumber andName:projectTypeName]];
     }
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
     NSArray *sortedArray = [unsortedArray sortedArrayUsingDescriptors:@[sortDescriptor]];

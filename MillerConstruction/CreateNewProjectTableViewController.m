@@ -8,9 +8,12 @@
 
 #import "CreateNewProjectTableViewController.h"
 #import "ActionSheetStringPicker.h"
+#import "ActionSheetDatePicker.h"
 #import "NewProjectHelper.h"
 #import "NewProjectTableViewCell.h"
 #import "DatabaseConnector.h"
+#import "JGProgressHUD.h"
+#import "JGProgressHUDSuccessIndicatorView.h"
 
 @interface CreateNewProjectTableViewController ()
 
@@ -19,15 +22,25 @@
 @implementation CreateNewProjectTableViewController {
     NewProjectHelper *newProjectHelper;
     NSArray *projectAttributesNames;
+    NSArray *requiredInformation;
+    NSArray *optionalInformation;
 }
 
 -(void)viewDidLoad {
     [super viewDidLoad];
     
+    self.navigationItem.title = @"Create New Project";
+    
+    //JGProgressHUD *HUD = self.prototypeHUD;
+    //HUD.textLabel.text = @"Loading information...";
+    //[HUD showInView:self.view];
+    
     newProjectHelper = [[NewProjectHelper alloc] init];
     projectAttributesNames = [newProjectHelper projectAttributesNames];
+    requiredInformation = [projectAttributesNames subarrayWithRange:NSMakeRange(0, 10)];
+    optionalInformation = [projectAttributesNames subarrayWithRange:NSMakeRange(10, 23)];
     
-    self.navigationItem.title = @"Create New Project";
+    //[HUD dismissAfterDelay:1.5];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -39,6 +52,25 @@
 -(void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - JGProgressHUD
+
+/**
+ *  Creates a new JGProgressHUD
+ *
+ *  @return The new JGProgressHUD
+ */
+-(JGProgressHUD *)prototypeHUD {
+    JGProgressHUD *HUD = [[JGProgressHUD alloc] initWithStyle:JGProgressHUDStyleDark];
+    HUD.interactionType = JGProgressHUDInteractionTypeBlockAllTouches;
+    HUD.backgroundColor = [UIColor colorWithWhite:0.0f alpha:0.4f];
+    HUD.HUDView.layer.shadowColor = [UIColor blackColor].CGColor;
+    HUD.HUDView.layer.shadowOffset = CGSizeZero;
+    HUD.HUDView.layer.shadowOpacity = 0.4f;
+    HUD.HUDView.layer.shadowRadius = 8.0f;
+    
+    return HUD;
 }
 
 #pragma mark - Table view data source
@@ -69,8 +101,6 @@
     NewProjectTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     
     // Configure the cell...
-    NSArray *requiredInformation = [projectAttributesNames subarrayWithRange:NSMakeRange(0, 10)];
-    NSArray *optionalInformation = [projectAttributesNames subarrayWithRange:NSMakeRange(10, 23)];
     NSArray *usedArray;
     if (indexPath.section == 0) {
         usedArray = requiredInformation;
@@ -81,6 +111,8 @@
     cell.textField.text = @"";
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     if (indexPath.section == 0) {
+        // Section 0 - Required Information
+        [cell.textField removeTarget:nil action:NULL forControlEvents:UIControlEventEditingDidBegin];
         if (indexPath.row == 1) {
             // Warehouse
             [cell.textField addTarget:nil action:@selector(warehouseTextFieldActive:) forControlEvents:UIControlEventEditingDidBegin];
@@ -106,6 +138,18 @@
             // Project Type
             [cell.textField addTarget:nil action:@selector(projectTypeTextFieldActive:) forControlEvents:UIControlEventEditingDidBegin];
         }
+    } else if (indexPath.section == 1) {
+        // Section 1 - Optional Information
+        if (indexPath.row <= 15) {
+            [cell.textField removeTarget:nil action:NULL forControlEvents:UIControlEventEditingDidBegin];
+            [cell.textField addTarget:nil action:@selector(dateTextFieldActive:) forControlEvents:UIControlEventEditingDidBegin];
+        }
+        /*
+        if ([cell.label.text containsString:@"Date"] || [cell.label.text containsString:@"Turnover"] || [cell.label.text containsString:@"Air"] || [cell.label.text containsString:@"Permit"]) {
+            // Date needed for UITextField
+            [cell.textField addTarget:nil action:@selector(dateTextFieldActive:) forControlEvents:UIControlEventEditingDidBegin];
+        }
+         */
     }
     
     return cell;
@@ -273,11 +317,40 @@
     [sender setText:[projectTypeNameArray objectAtIndex:[selectedIndex integerValue]]];
 }
 
+/**
+ *  Displays an ActionSheetDatePicker when any UITextField is clicked that needs to show a date
+ *
+ *  @param textField The UITextField that was clicked
+ */
+-(void)dateTextFieldActive:(UITextField *)textField {
+    NSDate *now = [NSDate date];
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDateComponents *components = [calendar components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond) fromDate:now];
+    [components setHour:0];
+    [components setMinute:0];
+    [components setSecond:0];
+    NSDate *morningStart = [calendar dateFromComponents:components];
+    [ActionSheetDatePicker showPickerWithTitle:@"Set Date" datePickerMode:UIDatePickerModeDate selectedDate:morningStart target:self action:@selector(datePicked:element:) origin:textField cancelAction:nil];
+}
+
+/**
+ *  Callback method from the ActionSheetDatePicker
+ *
+ *  @param selectedDate The selected date of the picker
+ *  @param sender       The UITextField that was clicked
+ */
+-(void)datePicked:(NSDate *)selectedDate element:(UITextField *)sender {
+    [sender setText:[selectedDate description]];
+}
+
 #pragma mark - Save method
 
 -(void)save:(UIButton *)sender {
     NSMutableArray *projectInformation = [[NSMutableArray alloc] init];
     for (int i = 0; i < [self.tableView numberOfSections]; i++) {
+        for (int x = 0; x < [self.tableView numberOfRowsInSection:i]; x++) {
+            //
+        }
         NSIndexPath *index = [NSIndexPath indexPathWithIndex:i];
         NewProjectTableViewCell *cell = (NewProjectTableViewCell *)[self.tableView cellForRowAtIndexPath:index];
         NSString *labelText = [cell.label text];

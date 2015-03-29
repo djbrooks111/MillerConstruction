@@ -48,9 +48,6 @@
  *  @return true if the connection was successful, false otherwise
  */
 -(BOOL)connectToDatabase {
-    if (self.databaseConnection != nil) {
-        return true;
-    }
     //TODO: SET SCHEMA BACK TO PRODUCTION
     self.databaseConnection = [MysqlConnection connectToHost:DB_HOST user:DB_USERNAME password:DB_PASSWORD schema:DB_TEST_SCHEMA flags:MYSQL_DEFAULT_CONNECTION_FLAGS];
     if (self.databaseConnection == nil) {
@@ -132,11 +129,11 @@
 #pragma mark - Database New Project Methods
 
 /**
- *  Fetches the different project types from the database
+ *  Fetches the different project items from the database
  *
- *  @return NSArray * of the project types
+ *  @return NSArray * of the project itmes
  */
--(NSArray *)fetchProjectTypes {
+-(NSArray *)fetchProjectItem {
     NSString *projectTypesCommand = @"SELECT * FROM projectitem";
     MysqlFetch *getProjectTypes = [self fetchWithCommand:projectTypesCommand];
     
@@ -161,10 +158,58 @@
  *  @return NSArray * of the project classifications
  */
 -(NSArray *)fetchProjectClassifications {
-    NSString *projectClassificationCommand = @"SELECT id, name FROM projectclass";
+    NSString *projectClassificationCommand = @"SELECT * FROM projectclass";
     MysqlFetch *getProjectClassifications = [self fetchWithCommand:projectClassificationCommand];
     
     return [getProjectClassifications results];
+}
+
+/**
+ *  Fetches the different people from the database
+ *
+ *  @return NSArray * of the people
+ */
+-(NSArray *)fetchProjectPeople {
+    NSString *projectPeopleCommand = @"SELECT * FROM person";
+    MysqlFetch *getProjectPeople = [self fetchWithCommand:projectPeopleCommand];
+    
+    return [getProjectPeople results];
+}
+
+/**
+ *  Fetches the different project stages from the database
+ *
+ *  @return NSArray * of the project stages
+ */
+-(NSArray *)fetchProjectStage {
+    NSString *projectStageCommand = @"SELECT * FROM projectstage";
+    MysqlFetch *getProjectStage = [self fetchWithCommand:projectStageCommand];
+    
+    return [getProjectStage results];
+}
+
+/**
+ *  Fetches the different project status from the database
+ *
+ *  @return NSArray * of the project status
+ */
+-(NSArray *)fetchProjectStatus {
+    NSString *projectStatusCommand = @"SELECT * FROM projectstatus";
+    MysqlFetch *getProjectStatus = [self fetchWithCommand:projectStatusCommand];
+    
+    return [getProjectStatus results];
+}
+
+/**
+ *  Fetches the different project types from the database
+ *
+ *  @return NSArray * of the project types
+ */
+-(NSArray *)fetchProjectType {
+    NSString *projectTypeCommand = @"SELECT * FROM projecttype";
+    MysqlFetch *getProjectType = [self fetchWithCommand:projectTypeCommand];
+    
+    return [getProjectType results];
 }
 
 /**

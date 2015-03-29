@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		26126B6A1AC8807400AB70B3 /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 26126B691AC8807400AB70B3 /* Person.m */; };
+		26126B6D1AC8840800AB70B3 /* ProjectStage.m in Sources */ = {isa = PBXBuildFile; fileRef = 26126B6C1AC8840800AB70B3 /* ProjectStage.m */; };
+		26126B701AC887F600AB70B3 /* ProjectStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 26126B6F1AC887F600AB70B3 /* ProjectStatus.m */; };
+		26126B731AC8887700AB70B3 /* ProjectType.m in Sources */ = {isa = PBXBuildFile; fileRef = 26126B721AC8887700AB70B3 /* ProjectType.m */; };
 		262339361AB61CBF001976B8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 262339351AB61CBF001976B8 /* main.m */; };
 		262339391AB61CBF001976B8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 262339381AB61CBF001976B8 /* AppDelegate.m */; };
 		2623393C1AB61CBF001976B8 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2623393B1AB61CBF001976B8 /* LoginViewController.m */; };
@@ -71,6 +75,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		26126B681AC8807400AB70B3 /* Person.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Person.h; sourceTree = "<group>"; };
+		26126B691AC8807400AB70B3 /* Person.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Person.m; sourceTree = "<group>"; };
+		26126B6B1AC8840800AB70B3 /* ProjectStage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectStage.h; sourceTree = "<group>"; };
+		26126B6C1AC8840800AB70B3 /* ProjectStage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectStage.m; sourceTree = "<group>"; };
+		26126B6E1AC887F600AB70B3 /* ProjectStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectStatus.h; sourceTree = "<group>"; };
+		26126B6F1AC887F600AB70B3 /* ProjectStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectStatus.m; sourceTree = "<group>"; };
+		26126B711AC8887700AB70B3 /* ProjectType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectType.h; sourceTree = "<group>"; };
+		26126B721AC8887700AB70B3 /* ProjectType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectType.m; sourceTree = "<group>"; };
 		262339301AB61CBF001976B8 /* MillerConstruction.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MillerConstruction.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		262339341AB61CBF001976B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		262339351AB61CBF001976B8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -354,6 +366,14 @@
 				26FDE10D1AC2F881008710D7 /* ProjectClassification.m */,
 				26FDE1121AC2FD6A008710D7 /* ProjectItem.h */,
 				26FDE1131AC2FD6A008710D7 /* ProjectItem.m */,
+				26126B681AC8807400AB70B3 /* Person.h */,
+				26126B691AC8807400AB70B3 /* Person.m */,
+				26126B6B1AC8840800AB70B3 /* ProjectStage.h */,
+				26126B6C1AC8840800AB70B3 /* ProjectStage.m */,
+				26126B6E1AC887F600AB70B3 /* ProjectStatus.h */,
+				26126B6F1AC887F600AB70B3 /* ProjectStatus.m */,
+				26126B711AC8887700AB70B3 /* ProjectType.h */,
+				26126B721AC8887700AB70B3 /* ProjectType.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -715,6 +735,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				26126B6D1AC8840800AB70B3 /* ProjectStage.m in Sources */,
 				26892C331AC1AB9D00783172 /* ActionSheetCustomPicker.m in Sources */,
 				26892C321AC1AB9D00783172 /* AbstractActionSheetPicker.m in Sources */,
 				26BE55071AB66DEE00566014 /* MysqlException.m in Sources */,
@@ -735,6 +756,7 @@
 				26BE55061AB66DEE00566014 /* MysqlCommitException.m in Sources */,
 				26892C351AC1AB9D00783172 /* ActionSheetDistancePicker.m in Sources */,
 				2688B8FA1AB67D1E0052DEDE /* MainMenuViewController.m in Sources */,
+				26126B701AC887F600AB70B3 /* ProjectStatus.m in Sources */,
 				26BE550E1AB66DEE00566014 /* MysqlInsert.m in Sources */,
 				26892C0D1AC0FEA300783172 /* JGProgressHUDAnimation.m in Sources */,
 				26892C111AC0FEA300783172 /* JGProgressHUDIndeterminateIndicatorView.m in Sources */,
@@ -745,11 +767,13 @@
 				2623395B1AB61E41001976B8 /* User.m in Sources */,
 				26892C1D1AC10EBF00783172 /* NewProjectTableViewCell.m in Sources */,
 				26892C381AC1AB9D00783172 /* DistancePickerView.m in Sources */,
+				26126B6A1AC8807400AB70B3 /* Person.m in Sources */,
 				2623393C1AB61CBF001976B8 /* LoginViewController.m in Sources */,
 				265C19931ABC8905007BCEF6 /* CreateNewProjectTableViewController.m in Sources */,
 				26892C371AC1AB9D00783172 /* ActionSheetStringPicker.m in Sources */,
 				262339391AB61CBF001976B8 /* AppDelegate.m in Sources */,
 				26892C391AC1AB9D00783172 /* SWActionSheet.m in Sources */,
+				26126B731AC8887700AB70B3 /* ProjectType.m in Sources */,
 				262339361AB61CBF001976B8 /* main.m in Sources */,
 				26BE55111AB66DEE00566014 /* NSString_MysqlEscape.m in Sources */,
 				26FDE1141AC2FD6A008710D7 /* ProjectItem.m in Sources */,

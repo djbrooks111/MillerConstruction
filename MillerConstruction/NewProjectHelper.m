@@ -8,9 +8,13 @@
 
 #import "NewProjectHelper.h"
 #import "DatabaseConnector.h"
-#import "ProjectTypes.h"
+#import "ProjectItem.h"
 #import "Warehouse.h"
 #import "ProjectClassification.h"
+#import "Person.h"
+#import "ProjectStage.h"
+#import "ProjectStatus.h"
+#import "ProjectType.h"
 
 @implementation NewProjectHelper {
     DatabaseConnector *database;
@@ -20,10 +24,17 @@
     if (self = [super init]) {
         // Configure init
         database = [DatabaseConnector sharedDatabaseConnector];
-        [self initializeWarehouseArrays];
-        [self initializeProjectClassificationArray];
         [self initializeProjectAttributesNamesArray];
         [self initializeProjectAttributesKeysArray];
+        [self initializeWarehouseArrays];
+        [self initializeProjectClassificationArray];
+        [self initializeProjectArray];
+        [self initializeProjectManagerArray];
+        sleep(1);
+        [self initializeProjectSupervisorArray];
+        [self initializeProjectStageArray];
+        [self initializeProjectStatusArray];
+        [self initializeProjectTypeArray];
     }
     
     return self;
@@ -72,6 +83,7 @@
     }
     NSSortDescriptor *sortDescripter = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
     self.projectClassificationArray = [unsortedArray sortedArrayUsingDescriptors:@[sortDescripter]];
+    [self initializeProjectClassificationNamesArray];
 }
 
 /**
@@ -83,19 +95,175 @@
         NSString *projectClassificationName = [projectClassification name];
         [namesArray addObject:projectClassificationName];
     }
-    self.projectAttributesNames = [namesArray copy];
+    self.projectClassificationNameArray = [namesArray copy];
 }
 
+/**
+ *  Retreives all the project items from the database
+ */
 -(void)initializeProjectArray {
-    NSArray *resultArray = [database fetchProjectTypes];
+    NSArray *resultArray = [database fetchProjectItem];
     NSMutableArray *unsortedArray = [[NSMutableArray alloc] init];
     for (NSDictionary *projectTypeRow in resultArray) {
         NSNumber *projectTypeNumber = [projectTypeRow objectForKey:@"id"];
         NSString *projectTypeName = [projectTypeRow objectForKey:@"name"];
-        [unsortedArray addObject:[[ProjectTypes alloc] initWithName:projectTypeName andNumber:[projectTypeNumber intValue]]];
+        [unsortedArray addObject:[[ProjectItem alloc] initWithRowID:projectTypeNumber andName:projectTypeName]];
     }
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
     self.projectArray = [unsortedArray sortedArrayUsingDescriptors:@[sortDescriptor]];
+    [self initializeProjectNameArray];
+}
+
+/**
+ *  Extracts all the project item names from the project item array
+ */
+-(void)initializeProjectNameArray {
+    NSMutableArray *namesArray = [[NSMutableArray alloc] init];
+    for (ProjectItem *projectItem in self.projectArray) {
+        NSString *projectName = [projectItem name];
+        [namesArray addObject:projectName];
+    }
+    self.projectNameArray = [namesArray copy];
+}
+
+/**
+ *  Retreives all the project managers from the database
+ */
+-(void)initializeProjectManagerArray {
+    NSArray *resultArray = [database fetchProjectPeople];
+    NSMutableArray *unsortedArray = [[NSMutableArray alloc] init];
+    for (NSDictionary *projectPersonRow in resultArray) {
+        NSNumber *projectPersonNumber = [projectPersonRow objectForKey:@"id"];
+        NSString *projectPersonName = [projectPersonRow objectForKey:@"name"];
+        [unsortedArray addObject:[[Person alloc] initWithName:projectPersonName andIDNumber:projectPersonNumber]];
+    }
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
+    self.projectManagerArray = [unsortedArray sortedArrayUsingDescriptors:@[sortDescriptor]];
+    [self initializeProjectManagerNameArray];
+}
+
+/**
+ *  Extracts all the project manager names from the project manager array
+ */
+-(void)initializeProjectManagerNameArray {
+    NSMutableArray *namesArray = [[NSMutableArray alloc] init];
+    for (Person *person in self.projectManagerArray) {
+        NSString *personName = [person name];
+        [namesArray addObject:personName];
+    }
+    self.projectManagerNameArray = [namesArray copy];
+}
+
+/**
+ *  Retreives all the project supervisors from the database
+ */
+-(void)initializeProjectSupervisorArray {
+    NSArray *resultArray = [database fetchProjectPeople];
+    NSMutableArray *unsortedArray = [[NSMutableArray alloc] init];
+    for (NSDictionary *projectPersonRow in resultArray) {
+        NSNumber *projectPersonNumber = [projectPersonRow objectForKey:@"id"];
+        NSString *projectPersonName = [projectPersonRow objectForKey:@"name"];
+        [unsortedArray addObject:[[Person alloc] initWithName:projectPersonName andIDNumber:projectPersonNumber]];
+    }
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
+    self.projectSupervisorArray = [unsortedArray sortedArrayUsingDescriptors:@[sortDescriptor]];
+    [self initializeProjectSupervisorNameArray];
+}
+
+/**
+ *  Extracts all the project supervisor names from the project supervisor array
+ */
+-(void)initializeProjectSupervisorNameArray {
+    NSMutableArray *namesArray = [[NSMutableArray alloc] init];
+    for (Person *person in self.projectSupervisorArray) {
+        NSString *personName = [person name];
+        [namesArray addObject:personName];
+    }
+    self.projectSupervisorNameArray = [namesArray copy];
+}
+
+/**
+ *  Retreives all the project stages from the database
+ */
+-(void)initializeProjectStageArray {
+    NSArray *resultArray = [database fetchProjectStage];
+    NSMutableArray *unsortedArray = [[NSMutableArray alloc] init];
+    for (NSDictionary *projectStageRow in resultArray) {
+        NSNumber *projectStageNumber = [projectStageRow objectForKey:@"id"];
+        NSString *projectStageName = [projectStageRow objectForKey:@"name"];
+        [unsortedArray addObject:[[ProjectStage alloc] initWithRowID:projectStageNumber andName:projectStageName]];
+    }
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
+    self.projectStageArray = [unsortedArray sortedArrayUsingDescriptors:@[sortDescriptor]];
+    [self initializeProjectStageNameArray];
+}
+
+/**
+ *  Extracts all the project stage names from the project stage array
+ */
+-(void)initializeProjectStageNameArray {
+    NSMutableArray *namesArray = [[NSMutableArray alloc] init];
+    for (ProjectStage *stage in self.projectStageArray) {
+        NSString *stageName = [stage name];
+        [namesArray addObject:stageName];
+    }
+    self.projectStageNameArray = [namesArray copy];
+}
+
+/**
+ *  Retreives all the project status from the database
+ */
+-(void)initializeProjectStatusArray {
+    NSArray *resultArray = [database fetchProjectStatus];
+    NSMutableArray *unsortedArray = [[NSMutableArray alloc] init];
+    for (NSDictionary *projectStatusRow in resultArray) {
+        NSNumber *projectStatusNumber = [projectStatusRow objectForKey:@"id"];
+        NSString *projectStatusName = [projectStatusRow objectForKey:@"name"];
+        [unsortedArray addObject:[[ProjectStatus alloc] initWithRowID:projectStatusNumber andName:projectStatusName]];
+    }
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
+    self.projectStatusArray = [unsortedArray sortedArrayUsingDescriptors:@[sortDescriptor]];
+    [self initializeProjectStatusNameArray];
+}
+
+/**
+ *  Extracts all the project status names from the project status array
+ */
+-(void)initializeProjectStatusNameArray {
+    NSMutableArray *namesArray = [[NSMutableArray alloc] init];
+    for (ProjectStatus *status in self.projectStatusArray) {
+        NSString *statusName = [status name];
+        [namesArray addObject:statusName];
+    }
+    self.projectStatusNameArray = [namesArray copy];
+}
+
+/**
+ *  Retreives all the project types from the database
+ */
+-(void)initializeProjectTypeArray {
+    NSArray *resultArray = [database fetchProjectType];
+    NSMutableArray *unsortedArray = [[NSMutableArray alloc] init];
+    for (NSDictionary *projectTypeRow in resultArray) {
+        NSNumber *projectTypeNumber = [projectTypeRow objectForKey:@"id"];
+        NSString *projectTypeName = [projectTypeRow objectForKey:@"name"];
+        [unsortedArray addObject:[[ProjectType alloc] initWithRowID:projectTypeNumber andName:projectTypeName]];
+    }
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
+    self.projectTypeArray = [unsortedArray sortedArrayUsingDescriptors:@[sortDescriptor]];
+    [self initializeProjectTypeNameArray];
+}
+
+/**
+ *  Extracts all the project type names from the project type array
+ */
+-(void)initializeProjectTypeNameArray {
+    NSMutableArray *namesArray = [[NSMutableArray alloc] init];
+    for (ProjectType *type in self.projectTypeArray) {
+        NSString *typeName = [type name];
+        [namesArray addObject:typeName];
+    }
+    self.projectTypeNameArray = [namesArray copy];
 }
 
 -(void)initializeProjectAttributesNamesArray {

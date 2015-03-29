@@ -19,9 +19,13 @@
 
 -(UserLoginType)loginUserToDatabase:(User *)user;
 
--(NSArray *)fetchProjectTypes;
+-(NSArray *)fetchProjectItem;
 -(NSArray *)fetchWarehouses;
 -(NSArray *)fetchProjectClassifications;
+-(NSArray *)fetchProjectPeople;
+-(NSArray *)fetchProjectStage;
+-(NSArray *)fetchProjectStatus;
+-(NSArray *)fetchProjectType;
 
 -(BOOL)addNewProject:(NSArray *)projectInformation andKeys:(NSArray *)keys;
 

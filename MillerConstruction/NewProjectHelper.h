@@ -12,9 +12,27 @@
 
 @property (nonatomic, retain) NSArray *warehouseArray;
 @property (nonatomic, retain) NSArray *warehouseNamesArray;
+
 @property (nonatomic, retain) NSArray *projectClassificationArray;
 @property (nonatomic, retain) NSArray *projectClassificationNameArray;
+
 @property (nonatomic, retain) NSArray *projectArray;
+@property (nonatomic, retain) NSArray *projectNameArray;
+
+@property (nonatomic, retain) NSArray *projectManagerArray;
+@property (nonatomic, retain) NSArray *projectManagerNameArray;
+
+@property (nonatomic, retain) NSArray *projectSupervisorArray;
+@property (nonatomic, retain) NSArray *projectSupervisorNameArray;
+
+@property (nonatomic, retain) NSArray *projectStageArray;
+@property (nonatomic, retain) NSArray *projectStageNameArray;
+
+@property (nonatomic, retain) NSArray *projectStatusArray;
+@property (nonatomic, retain) NSArray *projectStatusNameArray;
+
+@property (nonatomic, retain) NSArray *projectTypeArray;
+@property (nonatomic, retain) NSArray *projectTypeNameArray;
 
 @property (nonatomic, retain) NSArray *projectAttributesNames;
 @property (nonatomic, retain) NSArray *projectAttributesKeys;
