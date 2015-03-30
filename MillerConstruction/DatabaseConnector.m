@@ -71,9 +71,9 @@
  *  @return MysqlFetch * that contains the results of the fetch
  */
 -(MysqlFetch *)fetchWithCommand:(NSString *)command {
-    [self connectToDatabase];
+    //[self connectToDatabase];
     MysqlFetch *fetch = [MysqlFetch fetchWithCommand:command onConnection:self.databaseConnection];
-    self.databaseConnection = nil;
+    //self.databaseConnection = nil;
     
     return fetch;
 }
@@ -87,12 +87,12 @@
  *  @return MysqlInsert * that contains the results of the insert
  */
 -(MysqlInsert *)insertIntoTable:(NSString *)table withData:(NSDictionary *)data {
-    [self connectToDatabase];
+    //[self connectToDatabase];
     MysqlInsert *insert = [MysqlInsert insertWithConnection:self.databaseConnection];
     [insert setTable:table];
     [insert setRowData:data];
     [insert execute];
-    self.databaseConnection = nil;
+    //self.databaseConnection = nil;
     
     return insert;
 }
@@ -107,15 +107,19 @@
  *  @return UserLoginType of login result
  */
 -(UserLoginType)loginUserToDatabase:(User *)user {
+    [self connectToDatabase];
     NSString *usernameCommand = [NSString stringWithFormat:@"SELECT id FROM user WHERE name = \"%@\"", [user username]];
     MysqlFetch *checkUserInDatabase = [self fetchWithCommand:usernameCommand];
     if ([checkUserInDatabase.results count] == 0) {
         // User not in database
+        self.databaseConnection = nil;
+        
         return WrongUsername;
     } else {
         NSString *passwordCommand = [NSString stringWithFormat:@"SELECT password FROM user WHERE name = \"%@\"", [user username]];
         MysqlFetch *passwordFetch = [self fetchWithCommand:passwordCommand];
         NSString *userPassword = [[passwordFetch.results firstObject] objectForKey:@"password"];
+        self.databaseConnection = nil;
         if (![user isPasswordEqual:userPassword]) {
             // Not equal
             return IncorrectPassword;

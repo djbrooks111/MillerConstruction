@@ -14,6 +14,12 @@
 #import "DatabaseConnector.h"
 #import "JGProgressHUD.h"
 #import "JGProgressHUDSuccessIndicatorView.h"
+#import "Warehouse.h"
+#import "ProjectClassification.h"
+#import "ProjectItem.h"
+#import "Person.h"
+#import "ProjectStage.h"
+#import "ProjectType.h"
 
 @interface CreateNewProjectTableViewController ()
 
@@ -345,17 +351,60 @@
 
 #pragma mark - Save method
 
+/**
+ *  Saves the information entered into the UITextFields
+ *
+ *  @param sender The button that called this method
+ */
 -(void)save:(UIButton *)sender {
+    if ([self isRequiredInformationFilled]) {
+        // All Good
+    } else {
+        // Notify User
+    }
     NSMutableArray *projectInformation = [[NSMutableArray alloc] init];
-    for (int i = 0; i < [self.tableView numberOfSections]; i++) {
-        for (int x = 0; x < [self.tableView numberOfRowsInSection:i]; x++) {
-            //
+    for (int section = 0; section < [self.tableView numberOfSections]; section++) {
+        for (int row = 0; row < [self.tableView numberOfRowsInSection:section]; row++) {
+            NSIndexPath *index = [NSIndexPath indexPathForRow:row inSection:section];
+            NewProjectTableViewCell *cell = (NewProjectTableViewCell *)[self.tableView cellForRowAtIndexPath:index];
+            if (section == 0) {
+                if (row == 0) {
+                    // MCS Project #
+                    NSNumber *projectNumber = [NSNumber numberWithInteger:[[cell.textField text] integerValue]];
+                    NSLog(@"MCS Project#: %@", projectNumber);
+                    [projectInformation addObject:projectNumber];
+                } else if (row == 1) {
+                    // Warehouse
+                    [projectInformation addObject:[newProjectHelper rowIDOfWarehouseFromFullName:[cell.textField text]]];
+                } else if (row == 2) {
+                    // Project Classification
+                    [projectInformation addObject:[newProjectHelper rowIDOfProjectClassificationFromName:[cell.textField text]]];
+                } else if (row == 3) {
+                    // Project
+                    [projectInformation addObject:[newProjectHelper rowIDOfProjectItemFromName:[cell.textField text]]];
+                } else if (row == 4) {
+                    // Project Manager
+                    [projectInformation addObject:[newProjectHelper rowIDOfProjectManagerFromName:[cell.textField text]]];
+                } else if (row == 5) {
+                    // Project Supervisor
+                    [projectInformation addObject:[newProjectHelper rowIDOfProjectSupervisorFromName:[cell.textField text]]];
+                } else if (row == 6) {
+                    // Project Stage
+                    [projectInformation addObject:[newProjectHelper rowIDOfProjectStageFromName:[cell.textField text]]];
+                } else if (row == 7) {
+                    // Project Status
+                    [projectInformation addObject:[newProjectHelper rowIDOfProjectStatusFromName:[cell.textField text]]];
+                } else if (row == 8) {
+                    // Project Type
+                    [projectInformation addObject:[newProjectHelper rowIDOfProjectTypeFromName:[cell.textField text]]];
+                } else if (row == 9) {
+                    // Project Scope
+                    [projectInformation addObject:[cell.textField text]];
+                }
+            } else if (section == 1) {
+                
+            }
         }
-        NSIndexPath *index = [NSIndexPath indexPathWithIndex:i];
-        NewProjectTableViewCell *cell = (NewProjectTableViewCell *)[self.tableView cellForRowAtIndexPath:index];
-        NSString *labelText = [cell.label text];
-        NSLog(@"%@", labelText);
-        [projectInformation addObject:labelText];
     }
     
     DatabaseConnector *database = [DatabaseConnector sharedDatabaseConnector];
@@ -366,6 +415,24 @@
     } else {
         // Failure
     }
+}
+
+/**
+ *  Checks that all Required UITextFields have been filled out
+ *
+ *  @return true if all Required UITextFields have been filled out, false otherwise
+ */
+-(BOOL)isRequiredInformationFilled {
+    for (int i = 0; i < [self.tableView numberOfRowsInSection:0]; i++) {
+        NSIndexPath *index = [NSIndexPath indexPathForRow:i inSection:0];
+        NewProjectTableViewCell *cell = (NewProjectTableViewCell *)[self.tableView cellForRowAtIndexPath:index];
+        if ([[cell.textField text] isEqualToString:@""]) {
+            
+            return false;
+        }
+    }
+    
+    return true;
 }
 
 /*

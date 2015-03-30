@@ -48,4 +48,13 @@
 -(void)initializeProjectStatusArray;
 -(void)initializeProjectTypeArray;
 
+-(NSNumber *)rowIDOfWarehouseFromFullName:(NSString *)fullName;
+-(NSNumber *)rowIDOfProjectClassificationFromName:(NSString *)name;
+-(NSNumber *)rowIDOfProjectItemFromName:(NSString *)name;
+-(NSNumber *)rowIDOfProjectManagerFromName:(NSString *)name;
+-(NSNumber *)rowIDOfProjectSupervisorFromName:(NSString *)name;
+-(NSNumber *)rowIDOfProjectStageFromName:(NSString *)name;
+-(NSNumber *)rowIDOfProjectStatusFromName:(NSString *)name;
+-(NSNumber *)rowIDOfProjectTypeFromName:(NSString *)name;
+
 @end

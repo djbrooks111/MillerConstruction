@@ -24,21 +24,25 @@
     if (self = [super init]) {
         // Configure init
         database = [DatabaseConnector sharedDatabaseConnector];
+        [database connectToDatabase];
         [self initializeProjectAttributesNamesArray];
         [self initializeProjectAttributesKeysArray];
         [self initializeWarehouseArrays];
         [self initializeProjectClassificationArray];
         [self initializeProjectArray];
         [self initializeProjectManagerArray];
-        sleep(1);
+        //sleep(1);
         [self initializeProjectSupervisorArray];
         [self initializeProjectStageArray];
         [self initializeProjectStatusArray];
         [self initializeProjectTypeArray];
+        database.databaseConnection = nil;
     }
     
     return self;
 }
+
+#pragma mark - Initializing methods
 
 /**
  *  Retreives all the warehouses from the database
@@ -338,6 +342,168 @@
                                    @"zachUpdates",
                                    @"cost",
                                    @"customerNumber"];
+}
+
+#pragma mark - Saving methods
+
+/**
+ *  Searches the Warehouse array for the name
+ *
+ *  @param fullName The full name of the Warehouse
+ *
+ *  @return The rowID of the Warehouse
+ */
+-(NSNumber *)rowIDOfWarehouseFromFullName:(NSString *)fullName {
+    for (int i = 0; i < [self.warehouseArray count]; i++) {
+        Warehouse *warehouse = [self.warehouseArray objectAtIndex:i];
+        if ([[warehouse fullName] isEqualToString:fullName]) {
+            NSLog(@"Warehouse: %@", [warehouse rowID]);
+            
+            return [warehouse rowID];
+        }
+    }
+    
+    return nil;
+}
+
+/**
+ *  Searches the Project Classification array for the name
+ *
+ *  @param name The name of the Project Classification
+ *
+ *  @return The rowID of the Project Classification
+ */
+-(NSNumber *)rowIDOfProjectClassificationFromName:(NSString *)name {
+    for (int i = 0; i < [self.projectClassificationArray count]; i++) {
+        ProjectClassification *projectClassification = [self.projectClassificationArray objectAtIndex:i];
+        if ([[projectClassification name] isEqualToString:name]) {
+            NSLog(@"Project Classification: %@", [projectClassification rowID]);
+            
+            return [projectClassification rowID];
+        }
+    }
+    
+    return nil;
+}
+
+/**
+ *  Searches the Project Item array for the name
+ *
+ *  @param name The name of the Project Item
+ *
+ *  @return The rowID of the Project Item
+ */
+-(NSNumber *)rowIDOfProjectItemFromName:(NSString *)name {
+    for (int i = 0; i < [self.projectArray count]; i++) {
+        ProjectItem *projectItem = [self.projectArray objectAtIndex:i];
+        if ([[projectItem name] isEqualToString:name]) {
+            NSLog(@"Project Item: %@", [projectItem rowID]);
+            
+            return [projectItem rowID];
+        }
+    }
+    
+    return nil;
+}
+
+/**
+ *  Searches the Project Manager array for the name
+ *
+ *  @param name The name of the Project Manager
+ *
+ *  @return The rowID of the Project Manager
+ */
+-(NSNumber *)rowIDOfProjectManagerFromName:(NSString *)name {
+    for (int i = 0; i < [self.projectManagerArray count]; i++) {
+        Person *person = [self.projectManagerArray objectAtIndex:i];
+        if ([[person name] isEqualToString:name]) {
+            NSLog(@"Manager: %@", [person idNumber]);
+            
+            return [person idNumber];
+        }
+    }
+    
+    return nil;
+}
+
+/**
+ *  Searches the Project Supervisor array for the name
+ *
+ *  @param name The name of the Project Supervisor
+ *
+ *  @return The rowID of the Project Supervisor
+ */
+-(NSNumber *)rowIDOfProjectSupervisorFromName:(NSString *)name {
+    for (int i = 0; i < [self.projectSupervisorArray count]; i++) {
+        Person *person = [self.projectSupervisorArray objectAtIndex:i];
+        if ([[person name] isEqualToString:name]) {
+            NSLog(@"Supervisor: %@", [person idNumber]);
+            
+            return [person idNumber];
+        }
+    }
+    
+    return nil;
+}
+
+/**
+ *  Searches the Project Stage array for the name
+ *
+ *  @param name The name of the Project Stage
+ *
+ *  @return The rowID of the Project Stage
+ */
+-(NSNumber *)rowIDOfProjectStageFromName:(NSString *)name {
+    for (int i = 0; i < [self.projectStageArray count]; i++) {
+        ProjectStage *stage = [self.projectStageArray objectAtIndex:i];
+        if ([[stage name] isEqualToString:name]) {
+            NSLog(@"Project Stage: %@", [stage rowID]);
+            
+            return [stage rowID];
+        }
+    }
+    
+    return nil;
+}
+
+/**
+ *  Searches the Project Status array for the name
+ *
+ *  @param name The name of the Project Status
+ *
+ *  @return The rowID of the Project Status
+ */
+-(NSNumber *)rowIDOfProjectStatusFromName:(NSString *)name {
+    for (int i = 0; i < [self.projectStatusArray count]; i++) {
+        ProjectStatus *status = [self.projectStatusArray objectAtIndex:i];
+        if ([[status name] isEqualToString:name]) {
+            NSLog(@"Project Status: %@", [status rowID]);
+            
+            return [status rowID];
+        }
+    }
+    
+    return nil;
+}
+
+/**
+ *  Searches the Project Type array for the name
+ *
+ *  @param name The name of the Project Type
+ *
+ *  @return The rowID of the Project Type
+ */
+-(NSNumber *)rowIDOfProjectTypeFromName:(NSString *)name {
+    for (int i = 0; i < [self.projectTypeArray count]; i++) {
+        ProjectType *type = [self.projectTypeArray objectAtIndex:i];
+        if ([[type name] isEqualToString:name]) {
+            NSLog(@"Project Type: %@", [type rowID]);
+            
+            return [type rowID];
+        }
+    }
+    
+    return nil;
 }
 
 @end

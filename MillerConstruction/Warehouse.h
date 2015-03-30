@@ -17,6 +17,5 @@
 @property (nonatomic, retain) NSString *fullName;
 
 -(id)initWithRowID:(NSNumber *)rowID andState:(NSString *)state andWarehouseID:(NSNumber *)warehouseID andCity:(NSString *)city;
--(BOOL)isWarehouseNameEqual:(NSString *)otherName;
 
 @end

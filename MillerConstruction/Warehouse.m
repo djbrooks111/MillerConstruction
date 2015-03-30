@@ -24,7 +24,7 @@
     if (self = [super init]) {
         [self setRowID:rowID];
         [self setState:state];
-        if ([warehouseID longValue] == 4294967295) {
+        if ([warehouseID longValue] == (long)4294967295) {
             warehouseID = [NSNumber numberWithInteger:-1];
         }
         [self setWarehouseID:warehouseID];
@@ -34,23 +34,6 @@
     }
     
     return self;
-}
-
-/**
- *  Checks if the provided name is equal to this Warehouse's name
- *
- *  @param otherName Name of other Warehouse to be checked
- *
- *  @return true if the names match, false otherwise
- */
--(BOOL)isWarehouseNameEqual:(NSString *)otherName {
-    if ([self.fullName isEqualToString:otherName]) {
-        // Same name
-        return true;
-    } else {
-        // Different name
-        return false;
-    }
 }
 
 @end
