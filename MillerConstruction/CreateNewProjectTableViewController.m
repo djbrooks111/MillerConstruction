@@ -169,6 +169,7 @@
  *  @param textField The Warehouse UITextField
  */
 -(void)warehouseTextFieldActive:(UITextField *)textField {
+    [textField resignFirstResponder];
     [ActionSheetStringPicker showPickerWithTitle:@"Set Warehouse" rows:[newProjectHelper warehouseNamesArray] initialSelection:0 target:self successAction:@selector(warehousePicked:element:) cancelAction:nil origin:textField];
 }
 

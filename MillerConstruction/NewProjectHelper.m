@@ -31,12 +31,20 @@
         [self initializeProjectClassificationArray];
         [self initializeProjectArray];
         [self initializeProjectManagerArray];
-        //sleep(1);
         [self initializeProjectSupervisorArray];
         [self initializeProjectStageArray];
         [self initializeProjectStatusArray];
         [self initializeProjectTypeArray];
         database.databaseConnection = nil;
+    }
+    
+    return self;
+}
+
+-(id)initForTesting {
+    if (self = [super init]) {
+        // init used for testing
+        database = [DatabaseConnector sharedDatabaseConnector];
     }
     
     return self;

@@ -57,4 +57,7 @@
 -(NSNumber *)rowIDOfProjectStatusFromName:(NSString *)name;
 -(NSNumber *)rowIDOfProjectTypeFromName:(NSString *)name;
 
+// Init used for testing only
+-(id)initForTesting;
+
 @end
