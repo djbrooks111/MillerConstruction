@@ -3,18 +3,20 @@
 //  mysql_connector
 //
 //  Created by Karl Kraft on 10/22/09.
-//  Copyright 2009-2010 Karl Kraft. All rights reserved.
+//  Copyright 2009-2014 Karl Kraft. All rights reserved.
 //
 
 #import "MysqlFetchField.h"
 
 @implementation MysqlFetchField
-
-@synthesize name,fieldType,width,primaryKey;
-
--(void)dealloc;
 {
-  [name release];
-  [super dealloc];
+  NSString *name;
+  enum enum_field_types fieldType;
+  NSUInteger width;
+  NSUInteger decimals;
+  BOOL primaryKey;
 }
+
+@synthesize name,fieldType,width,primaryKey,decimals;
+
 @end

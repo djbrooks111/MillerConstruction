@@ -3,52 +3,57 @@
 //  mysql_connector
 //
 //  Created by Karl Kraft on 6/12/08.
-//  Copyright 2008-2010 Karl Kraft. All rights reserved.
+//  Copyright 2008-2014 Karl Kraft. All rights reserved.
 //
 
 #import "MysqlUpdate.h"
 #import "MysqlConnection.h"
 #import "MysqlLiteral.h"
 #import "MysqlException.h"
-#import "NSString_MysqlEscape.h"
-#import "GC_MYSQL_BIND.h"
+#import "NSString+MysqlEscape.h"
 
 @implementation MysqlUpdate
+{
+  MysqlConnection *connection;
+  NSString *table;
+  NSDictionary *rowData;
+  NSDictionary *qualifier;
+  NSNumber *affectedRows;
+}
 
 @synthesize table,rowData,qualifier,affectedRows;
 
-+ (MysqlUpdate *)updateWithConnection:(MysqlConnection *)aConnection;
++ (MysqlUpdate *)updateWithConnection:(MysqlConnection *)aConnection
 {
   if (!aConnection) {
     [MysqlException raiseConnection:nil withFormat:@"Connection is nil"];
   }
   
   MysqlUpdate *newObject=[[self alloc] init];
-  newObject->connection = [aConnection retain];
   newObject->rowData=nil;
   newObject->qualifier=nil;
-  return [newObject autorelease];
+  newObject->connection = aConnection;
+  return newObject;
 }
 
 
 
-- (void)execute;
+- (void)execute
 {
+  if (!table) {
+    [MysqlException raiseConnection:nil withFormat:@"table must be specified to perform an update"];
+  }
   NSMutableString *cmd = [NSMutableString stringWithFormat:@"UPDATE %@ set ",table];
   NSMutableString *columnPairs=[NSMutableString string];
 
   
   NSArray *keys = [rowData allKeys];
-#ifndef __OBJC_GC__
-  GC_MYSQL_BIND *binding=calloc(sizeof(GC_MYSQL_BIND),[keys count]);
-#else
-  GC_MYSQL_BIND *binding=NSAllocateCollectable(sizeof(GC_MYSQL_BIND)*[keys count], NSScannedOption);
-#endif
+  MYSQL_BIND *binding=calloc(sizeof(MYSQL_BIND),[keys count]);
 
   for (NSUInteger x=0; x < [keys count];x++) {
-    NSString *key= [keys objectAtIndex:x];
+    NSString *key= keys[x];
     NSString *escapeKey= [key mysqlEscapeInConnection:connection];
-    NSObject *object = [rowData objectForKey:key];
+    NSObject *object = rowData[key];
     [columnPairs appendFormat:@", %@=?",escapeKey];
 
     if ([object isKindOfClass:[NSString class]]) {
@@ -72,11 +77,7 @@
       binding[x].buffer = (void *)ch;
       binding[x].buffer_length= strlen(ch);        
     } else if ([object isKindOfClass:[NSNull class]]) {
-#ifndef __OBJC_GC__
       my_bool *aBool = calloc(1,sizeof(my_bool));
-#else
-      my_bool *aBool = NSAllocateCollectable(sizeof(my_bool), NSScannedOption);
-#endif
       *aBool=1;
       binding[x].is_null= aBool;
     } else {
@@ -95,7 +96,7 @@
   NSMutableString *qualifierString=[NSMutableString string];
   
   for (NSString *key in [qualifier allKeys]) {
-    NSObject *value = [qualifier objectForKey:key];
+    NSObject *value = qualifier[key];
     NSString *escapeKey= [key mysqlEscapeInConnection:connection];
     if ([value isKindOfClass:[NSString class]]) {
       [qualifierString appendFormat:@"AND %@='%@' ",escapeKey,[(NSString *)value mysqlEscapeInConnection:connection]];
@@ -137,33 +138,21 @@
     }
     
     unsigned long long rowCount = mysql_affected_rows(connection.connection);
-    affectedRows = [[NSNumber numberWithUnsignedLongLong:rowCount] retain];
-    
+    affectedRows = @(rowCount);
     if (mysql_stmt_close(myStatement)) {
       [MysqlException raiseConnection:connection withFormat:@" mysql_stmt_close failed %s", mysql_stmt_error(myStatement)];
     }
   }
-#ifndef __OBJC_GC__
   for (NSUInteger x=0; x < [keys count];x++) {
-    NSString *key= [keys objectAtIndex:x];
-    NSObject *object = [rowData objectForKey:key];
+    NSString *key= keys[x];
+    NSObject *object = rowData[key];
     if ([object isKindOfClass:[NSNull class]]) {
       free(binding[x].is_null);
     }
   }
   free(binding);
-#endif
 
 }
 
-- (void)dealloc;
-{
-  [connection release];
-  [table release];
-  [rowData release];
-  [qualifier release];
-  [affectedRows release];
-  [super dealloc];
-}
 
 @end

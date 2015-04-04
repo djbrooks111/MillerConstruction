@@ -3,19 +3,13 @@
 //  mysql_connector
 //
 //  Created by Karl Kraft on 4/25/07.
-//  Copyright 2007-2010 Karl Kraft. All rights reserved.
+//  Copyright 2007-2014 Karl Kraft. All rights reserved.
 //
 
-#import "mysql.h"
 #import <UIKit/UIKit.h>
-
 @class MysqlConnection;
 
-@interface MysqlFetch : NSObject {
-  NSArray *fieldNames;
-  NSArray *fields;
-  NSArray *results;
-}
+@interface MysqlFetch : NSObject
 
 @property(readonly) NSArray *fieldNames;
 @property(readonly) NSArray *fields;

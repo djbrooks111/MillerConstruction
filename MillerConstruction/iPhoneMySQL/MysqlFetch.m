@@ -3,7 +3,7 @@
 //  mysql_connector
 //
 //  Created by Karl Kraft on 4/25/07.
-//  Copyright 2007-2010 Karl Kraft. All rights reserved.
+//  Copyright 2007-2014 Karl Kraft. All rights reserved.
 //
 
 
@@ -12,17 +12,18 @@
 
 #import "MysqlConnection.h"
 #import "MysqlException.h"
-#import "mysql.h"
-#import "GC_MYSQL_BIND.h"
 
 
-#ifndef __OBJC_GC__
 #define BLOB_DEFAULT_SIZE 10000
-#else
-#define BLOB_DEFAULT_SIZE 1000000
-#endif
 
 @implementation MysqlFetch
+{
+  NSArray *fieldNames;
+  NSArray *fields;
+  NSArray *results;
+}
+
+
 @synthesize fieldNames;
 @synthesize fields;
 @synthesize results;
@@ -30,12 +31,12 @@
 
 
 
-+ (MysqlFetch *)fetchWithCommand:(NSString *)s onConnection:(MysqlConnection *)connection;
++ (MysqlFetch *)fetchWithCommand:(NSString *)s onConnection:(MysqlConnection *)connection
 {
   return [self fetchWithCommand:s onConnection:connection extendedNames:NO];
 }
 
-+ (MysqlFetch *)fetchWithCommand:(NSString *)s onConnection:(MysqlConnection *)connection extendedNames:(BOOL)useExtendedNames;
++ (MysqlFetch *)fetchWithCommand:(NSString *)s onConnection:(MysqlConnection *)connection extendedNames:(BOOL)useExtendedNames
 {
   NSDate *start = [NSDate date];
   MysqlFetch *mf =[[MysqlFetch alloc] init];
@@ -43,7 +44,7 @@
   if (!connection) {
     [MysqlException raiseConnection:nil
                          withFormat:@"connection is nil"];
-    
+    return nil;
   }
   @synchronized(connection) {
     MysqlLog(@"%@",s);
@@ -51,8 +52,9 @@
     // parse the statement
     
     MYSQL_STMT *myStatement = mysql_stmt_init(connection.connection);
-    
-    if (mysql_stmt_prepare(myStatement, [s UTF8String],[s length])) {
+    const char *utf8EncodedString = [s UTF8String];
+
+    if (mysql_stmt_prepare(myStatement, utf8EncodedString,strlen(utf8EncodedString))) {
       [MysqlException raiseConnection:connection
                            withFormat:@"Could not perform mysql_stmt_bind_result() Error #%d:%s"
        ,mysql_errno(connection.connection),
@@ -61,12 +63,24 @@
     
     // build out and connect the bindings
     
-#ifndef __OBJC_GC__
-    GC_MYSQL_BIND *bindings=calloc(myStatement->field_count,sizeof(GC_MYSQL_BIND));
-#else
-    GC_MYSQL_BIND *bindings=NSAllocateCollectable(sizeof(GC_MYSQL_BIND)*myStatement->field_count,1);
-#endif
+    MYSQL_BIND *bindings=calloc(myStatement->field_count,sizeof(MYSQL_BIND));
     
+    // Notes on how MySQL numeric datatypes are handled in the code following: 
+    //
+    // INTEGER datatype handled by MYSQL_TYPE_LONG
+    // INT datatype handled by MYSQL_TYPE_LONG
+    // BIGINT datatype handled by MYSQL_TYPE_LONGLONG
+    // TINYINT datatype handled by MYSQL_TYPE_TINY
+    // REAL datatype handled by MYSQL_TYPE_DOUBLE
+    // DOUBLE datatype handled by MYSQL_TYPE_DOUBLE
+    // FLOAT datatype handled by MYSQL_TYPE_FLOAT
+    // DECIMAL datatype handled by MYSQL_TYPE_NEWDECIMAL
+    // NUMERIC datatype handled by MYSQL_TYPE_NEWDECIMAL (note: NUMERIC is implemented as DECIMAL by MySQL)
+    //
+    // SMALLINT datatype not handled currently - exception will occur if used
+    // MEDIUMINT datatype not handled currently - exception will occur if used
+    // BIT datatype not handled currently - exception will occur if used 
+    // Note: CHAR datatype isn't considered numeric and is handled by MYSQL_TYPE_STRING
     
     NSMutableArray *fieldNameCollector = [NSMutableArray array];
     NSMutableArray *fieldCollector = [NSMutableArray array];
@@ -76,174 +90,159 @@
                                                 length:myStatement->fields[x].table_length 
                                               encoding:NSUTF8StringEncoding];
       [sourceTables addObject:table];
-      [table release];
-      NSString *fieldName=[[NSString alloc]  initWithBytes:myStatement->fields[x].name length:myStatement->fields[x].name_length encoding:NSUTF8StringEncoding];
+
+      NSString *fieldName;
+      if (useExtendedNames || [sourceTables count]>1){
+        NSString *fieldKeyName=[[NSString alloc]  initWithBytes:myStatement->fields[x].name 
+                                                         length:myStatement->fields[x].name_length 
+                                                       encoding:NSUTF8StringEncoding];
+        fieldName=[NSString stringWithFormat:@"%@.%@",table,fieldKeyName];
+      } else {
+        fieldName= [[NSString alloc]  initWithBytes:myStatement->fields[x].name 
+                                             length:myStatement->fields[x].name_length 
+                                           encoding:NSUTF8StringEncoding];
+      }
       [fieldNameCollector addObject:fieldName];
-      [fieldName release];
+
+      
       MysqlFetchField *field = [[MysqlFetchField alloc] init];
       [fieldCollector addObject:field];
       field.name=fieldName;
       field.width=myStatement->fields[x].length;
+      field.decimals=myStatement->fields[x].decimals;
       field.fieldType=myStatement->fields[x].type;
       if (IS_PRI_KEY(myStatement->fields[x].flags)) field.primaryKey=YES;
-      [field release];
       switch(myStatement->fields[x].type) {
         case MYSQL_TYPE_LONGLONG:
           bindings[x].buffer_type = myStatement->fields[x].type; 
           bindings[x].buffer_length=sizeof(long long);
-#ifndef __OBJC_GC__
           bindings[x].buffer = calloc(1,bindings[x].buffer_length);
           bindings[x].length= calloc(1,sizeof(unsigned long));
           bindings[x].error= calloc(1,sizeof(my_bool));
           bindings[x].is_null= calloc(1,sizeof(my_bool));
-#else
-          bindings[x].buffer = NSAllocateCollectable(bindings[x].buffer_length,0);
-          bindings[x].length= NSAllocateCollectable(sizeof(unsigned long),0);
-          bindings[x].error= NSAllocateCollectable(sizeof(my_bool),0);
-          bindings[x].is_null= NSAllocateCollectable(sizeof(my_bool),0);
-#endif
           break;
         case MYSQL_TYPE_LONG:
           bindings[x].buffer_type = myStatement->fields[x].type; 
           bindings[x].buffer_length=sizeof(long);
-#ifndef __OBJC_GC__
           bindings[x].buffer = calloc(1,bindings[x].buffer_length);
           bindings[x].length= calloc(1,sizeof(unsigned long));
           bindings[x].error= calloc(1,sizeof(my_bool));
           bindings[x].is_null= calloc(1,sizeof(my_bool));
-#else
-          bindings[x].buffer = NSAllocateCollectable(bindings[x].buffer_length,0);
-          bindings[x].length= NSAllocateCollectable(sizeof(unsigned long),0);
-          bindings[x].error= NSAllocateCollectable(sizeof(my_bool),0);
-          bindings[x].is_null= NSAllocateCollectable(sizeof(my_bool),0);
-#endif
           break;
         case MYSQL_TYPE_STRING:
         case MYSQL_TYPE_VAR_STRING:
           bindings[x].buffer_type = myStatement->fields[x].type; 
           bindings[x].buffer_length=myStatement->fields[x].length;
-#ifndef __OBJC_GC__
           bindings[x].buffer = calloc(1,bindings[x].buffer_length);
           bindings[x].length= calloc(1,sizeof(unsigned long));
           bindings[x].error= calloc(1,sizeof(my_bool));
           bindings[x].is_null= calloc(1,sizeof(my_bool));
-#else
-          bindings[x].buffer = NSAllocateCollectable(bindings[x].buffer_length,0);
-          bindings[x].length= NSAllocateCollectable(sizeof(unsigned long),0);
-          bindings[x].error= NSAllocateCollectable(sizeof(my_bool),0);
-          bindings[x].is_null= NSAllocateCollectable(sizeof(my_bool),0);
-#endif
           break;
+        case MYSQL_TYPE_TINY_BLOB:
+        case MYSQL_TYPE_MEDIUM_BLOB:
+        case MYSQL_TYPE_LONG_BLOB:
         case MYSQL_TYPE_BLOB:
           bindings[x].buffer_type = myStatement->fields[x].type; 
           bindings[x].buffer_length=BLOB_DEFAULT_SIZE;
-#ifndef __OBJC_GC__
           bindings[x].buffer = calloc(1,bindings[x].buffer_length);
           bindings[x].length= calloc(1,sizeof(unsigned long));
           bindings[x].error= calloc(1,sizeof(my_bool));
           bindings[x].is_null= calloc(1,sizeof(my_bool));
-#else
-          bindings[x].buffer = NSAllocateCollectable(bindings[x].buffer_length,0);
-          bindings[x].length= NSAllocateCollectable(sizeof(unsigned long),0);
-          bindings[x].error= NSAllocateCollectable(sizeof(my_bool),0);
-          bindings[x].is_null= NSAllocateCollectable(sizeof(my_bool),0);
-#endif
           break;
         case MYSQL_TYPE_TINY:
           bindings[x].buffer_type = myStatement->fields[x].type; 
           bindings[x].buffer_length=1;
-#ifndef __OBJC_GC__
           bindings[x].buffer = calloc(1,bindings[x].buffer_length);
           bindings[x].length= calloc(1,sizeof(unsigned long));
           bindings[x].error= calloc(1,sizeof(my_bool));
           bindings[x].is_null= calloc(1,sizeof(my_bool));
-#else
-          bindings[x].buffer = NSAllocateCollectable(bindings[x].buffer_length,0);
-          bindings[x].length= NSAllocateCollectable(sizeof(unsigned long),0);
-          bindings[x].error= NSAllocateCollectable(sizeof(my_bool),0);
-          bindings[x].is_null= NSAllocateCollectable(sizeof(my_bool),0);
-#endif
           break;
         case MYSQL_TYPE_NEWDECIMAL:
           bindings[x].buffer_type = MYSQL_TYPE_STRING; 
           bindings[x].buffer_length=myStatement->fields[x].length;
-#ifndef __OBJC_GC__
           bindings[x].buffer = calloc(1,bindings[x].buffer_length);
           bindings[x].length= calloc(1,sizeof(unsigned long));
           bindings[x].error= calloc(1,sizeof(my_bool));
           bindings[x].is_null= calloc(1,sizeof(my_bool));
-#else
-          bindings[x].buffer = NSAllocateCollectable(bindings[x].buffer_length,0);
-          bindings[x].length= NSAllocateCollectable(sizeof(unsigned long),0);
-          bindings[x].error= NSAllocateCollectable(sizeof(my_bool),0);
-          bindings[x].is_null= NSAllocateCollectable(sizeof(my_bool),0);
-#endif
           break;
         case MYSQL_TYPE_TIMESTAMP:
           bindings[x].buffer_type = MYSQL_TYPE_STRING; 
           bindings[x].buffer_length=myStatement->fields[x].length;
-#ifndef __OBJC_GC__
           bindings[x].buffer = calloc(1,bindings[x].buffer_length);
           bindings[x].length= calloc(1,sizeof(unsigned long));
           bindings[x].error= calloc(1,sizeof(my_bool));
           bindings[x].is_null= calloc(1,sizeof(my_bool));
-#else
-          bindings[x].buffer = NSAllocateCollectable(bindings[x].buffer_length+1,0);
-          bindings[x].length= NSAllocateCollectable(sizeof(unsigned long),0);
-          bindings[x].error= NSAllocateCollectable(sizeof(my_bool),0);
-          bindings[x].is_null= NSAllocateCollectable(sizeof(my_bool),0);
-#endif
           break;
         case MYSQL_TYPE_FLOAT:
           bindings[x].buffer_type = MYSQL_TYPE_FLOAT;
           bindings[x].buffer_length=myStatement->fields[x].length;
-#ifndef __OBJC_GC__
           bindings[x].buffer = calloc(1,bindings[x].buffer_length);
           bindings[x].length= calloc(1,sizeof(unsigned long));
           bindings[x].error= calloc(1,sizeof(my_bool));
           bindings[x].is_null= calloc(1,sizeof(my_bool));
-#else
-          bindings[x].buffer = NSAllocateCollectable(bindings[x].buffer_length+1,0);
-          bindings[x].length= NSAllocateCollectable(sizeof(unsigned long),0);
-          bindings[x].error= NSAllocateCollectable(sizeof(my_bool),0);
-          bindings[x].is_null= NSAllocateCollectable(sizeof(my_bool),0);
-#endif
           break;
         case MYSQL_TYPE_DOUBLE:
           bindings[x].buffer_type = MYSQL_TYPE_DOUBLE;
           bindings[x].buffer_length=myStatement->fields[x].length;
-#ifndef __OBJC_GC__
           bindings[x].buffer = calloc(1,bindings[x].buffer_length);
           bindings[x].length= calloc(1,sizeof(unsigned long));
           bindings[x].error= calloc(1,sizeof(my_bool));
           bindings[x].is_null= calloc(1,sizeof(my_bool));
-#else
-          bindings[x].buffer = NSAllocateCollectable(bindings[x].buffer_length+1,0);
-          bindings[x].length= NSAllocateCollectable(sizeof(unsigned long),0);
-          bindings[x].error= NSAllocateCollectable(sizeof(my_bool),0);
-          bindings[x].is_null= NSAllocateCollectable(sizeof(my_bool),0);
-#endif
           break;
         case MYSQL_TYPE_DATETIME:
           bindings[x].buffer_type = MYSQL_TYPE_DATETIME;
           bindings[x].buffer_length=sizeof(MYSQL_TIME);
-#ifndef __OBJC_GC__
           bindings[x].buffer = calloc(1,bindings[x].buffer_length);
           bindings[x].length= calloc(1,sizeof(unsigned long));
           bindings[x].error= calloc(1,sizeof(my_bool));
           bindings[x].is_null= calloc(1,sizeof(my_bool));
-#else
-          bindings[x].buffer = NSAllocateCollectable(bindings[x].buffer_length+1,0);
-          bindings[x].length= NSAllocateCollectable(sizeof(unsigned long),0);
-          bindings[x].error= NSAllocateCollectable(sizeof(my_bool),0);
-          bindings[x].is_null= NSAllocateCollectable(sizeof(my_bool),0);
-#endif
           break;
-          
-        default:
+
+        case MYSQL_TYPE_DATE:
+          bindings[x].buffer_type = MYSQL_TYPE_DATETIME;
+          bindings[x].buffer_length=sizeof(MYSQL_TIME);
+          bindings[x].buffer = calloc(1,bindings[x].buffer_length);
+          bindings[x].length= calloc(1,sizeof(unsigned long));
+          bindings[x].error= calloc(1,sizeof(my_bool));
+          bindings[x].is_null= calloc(1,sizeof(my_bool));
+          break;
+        case MYSQL_TYPE_DECIMAL :
           [MysqlException raise:@"No Binding" format:@"No binding support for field type %d",myStatement->fields[x].type];
-          break;
-      } 
+        case MYSQL_TYPE_SHORT :
+          [MysqlException raise:@"No Binding" format:@"No binding support for field type %d",myStatement->fields[x].type];
+        case MYSQL_TYPE_NULL :
+          [MysqlException raise:@"No Binding" format:@"No binding support for field type %d",myStatement->fields[x].type];
+        case MYSQL_TYPE_INT24 :
+          [MysqlException raise:@"No Binding" format:@"No binding support for field type %d",myStatement->fields[x].type];
+        case MYSQL_TYPE_TIME :
+          [MysqlException raise:@"No Binding" format:@"No binding support for field type %d",myStatement->fields[x].type];
+        case MYSQL_TYPE_YEAR :
+          [MysqlException raise:@"No Binding" format:@"No binding support for field type %d",myStatement->fields[x].type];
+        case MYSQL_TYPE_NEWDATE :
+          [MysqlException raise:@"No Binding" format:@"No binding support for field type %d",myStatement->fields[x].type];
+        case MYSQL_TYPE_VARCHAR :
+          [MysqlException raise:@"No Binding" format:@"No binding support for field type %d",myStatement->fields[x].type];
+        case MYSQL_TYPE_BIT :
+          [MysqlException raise:@"No Binding" format:@"No binding support for field type %d",myStatement->fields[x].type];
+        case MYSQL_TYPE_ENUM :
+          [MysqlException raise:@"No Binding" format:@"No binding support for field type %d",myStatement->fields[x].type];
+        case MYSQL_TYPE_SET :
+          [MysqlException raise:@"No Binding" format:@"No binding support for field type %d",myStatement->fields[x].type];
+        case MYSQL_TYPE_GEOMETRY :
+          [MysqlException raise:@"No Binding" format:@"No binding support for field type %d",myStatement->fields[x].type];
+#ifndef __linux__
+        case MAX_NO_FIELD_TYPES :
+          [MysqlException raise:@"No Binding" format:@"No binding support for field type %d",myStatement->fields[x].type];
+#endif
+#ifdef __linux__
+        case MYSQL_TYPE_TIMESTAMP2 :
+          [MysqlException raise:@"No Binding" format:@"No binding support for field type %d",myStatement->fields[x].type];
+        case MYSQL_TYPE_DATETIME2 :
+          [MysqlException raise:@"No Binding" format:@"No binding support for field type %d",myStatement->fields[x].type];
+        case MYSQL_TYPE_TIME2 :
+          [MysqlException raise:@"No Binding" format:@"No binding support for field type %d",myStatement->fields[x].type];
+#endif
+      }
     }
     mf->fieldNames = [fieldNameCollector copy];
     mf->fields=[fieldCollector copy];
@@ -284,26 +283,9 @@
       [localResults addObject:dict];
       for (unsigned int x=0; x < myStatement->field_count;x++) {
         MYSQL_FIELD stmtFieldName = myStatement->fields[x];
-        NSString *key;
-        if (useExtendedNames || [sourceTables count]>1){
-          NSString *table=[[NSString alloc]  initWithBytes:myStatement->fields[x].table
-                                                    length:myStatement->fields[x].table_length 
-                                                  encoding:NSUTF8StringEncoding];
-          NSString *fieldKeyName=[[NSString alloc]  initWithBytes:myStatement->fields[x].name 
-                                                           length:myStatement->fields[x].name_length 
-                                                         encoding:NSUTF8StringEncoding];
-          key=[NSString stringWithFormat:@"%@.%@",table,fieldKeyName];
-          [key retain];
-          [table release];
-          [fieldKeyName release];
-        } else {
-          key= [[NSString alloc]  initWithBytes:myStatement->fields[x].name 
-                                         length:myStatement->fields[x].name_length 
-                                       encoding:NSUTF8StringEncoding];
-        }
-        [key autorelease];
+        NSString *key=mf->fieldNames[x];
         if (*bindings[x].is_null==1) {
-          [dict setObject:[NSNull null] forKey:key];
+          dict[key] = [NSNull null];
         } else {
           
           switch (stmtFieldName.type) {
@@ -315,24 +297,18 @@
                 void *previousBuffer=bindings[x].buffer;
                 unsigned long previousBufferSize=bindings[x].buffer_length;
                 bindings[x].buffer_length=*(bindings[x].length);
-#ifndef __OBJC_GC__
                 bindings[x].buffer=malloc(bindings[x].buffer_length);
-#else
-                bindings[x].buffer=NSAllocateCollectable(bindings[x].buffer_length,0);
-#endif
                 
                 mysql_stmt_fetch_column(myStatement, (MYSQL_BIND *)&(bindings[x]), x , 0);
                 
                 NSData *theData = [NSData dataWithBytes:bindings[x].buffer length:*(bindings[x].length)];
-                [dict setObject:theData forKey:key];
-#ifndef __OBJC_GC__
+                dict[key] = theData;
                 free(bindings[x].buffer);
-#endif
                 bindings[x].buffer_length=previousBufferSize;
                 bindings[x].buffer=previousBuffer;
               } else {
                 NSData *theData = [NSData dataWithBytes:bindings[x].buffer length:*(bindings[x].length)];
-                [dict setObject:theData forKey:key];
+                dict[key] = theData;
               }
               break;
               
@@ -342,33 +318,28 @@
               NSString *theString = [[NSString alloc] initWithBytes:bindings[x].buffer
                                                              length:*(bindings[x].length) 
                                                            encoding:NSUTF8StringEncoding];
-              [dict setObject:theString
-                       forKey:key];
-              [theString release];
+              dict[key] = theString;
             } break;
               
             case MYSQL_TYPE_LONGLONG:{
-              long long *aValue = (long long *)bindings[x].buffer;
-              [dict setObject:[NSNumber numberWithLongLong:*aValue] forKey:key];
+              SInt64 *aValue = (SInt64 *)bindings[x].buffer;
+              dict[key] = @(*aValue);
             } break;
               
             case MYSQL_TYPE_LONG: {
-              long *aValue = (long *)bindings[x].buffer;
-              [dict setObject:[NSNumber numberWithLong:*aValue] forKey:key];
+              SInt32 *aValue = (SInt32 *)bindings[x].buffer;
+              dict[key] = @((long)*aValue);
             } break;          
               
             case MYSQL_TYPE_TINY: {
               char *aValue = (char *)bindings[x].buffer;
-              [dict setObject:[NSNumber numberWithChar:*aValue] forKey:key];
+              dict[key] = @(*aValue);
             } break;
               
             case MYSQL_TYPE_NEWDECIMAL:  {
               NSString *f=[[NSString alloc] initWithBytes:bindings[x].buffer length:*(bindings[x].length) encoding:NSUTF8StringEncoding];
               NSDecimalNumber *d=[[NSDecimalNumber alloc] initWithString:f];
-              [f release];
-              [dict setObject:d
-                       forKey:key];
-              [d release];
+              dict[key] = d;
             } break;
               
               
@@ -377,22 +348,19 @@
               NSDateFormatter *sqlFmt = [[NSDateFormatter alloc] init];
               [sqlFmt setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
               NSDate *date = [sqlFmt dateFromString:f];
-              [f release];
-              [sqlFmt release];
-              [dict setObject:date
-                       forKey:key];
+              dict[key] = date;
             } break;
               
             case MYSQL_TYPE_FLOAT:
             {
               float *aValue = (float *)bindings[x].buffer;
-              [dict setObject:[NSNumber numberWithFloat:*aValue] forKey:key];
+              dict[key] = @(*aValue);
             } break;  
               
             case MYSQL_TYPE_DOUBLE:
             {
               double *aValue = (double *)bindings[x].buffer;
-              [dict setObject:[NSNumber numberWithDouble:*aValue] forKey:key];
+              dict[key] = @(*aValue);
             } break;  
               
             case MYSQL_TYPE_DATETIME:
@@ -407,27 +375,56 @@
               [comps setSecond:aValue->second];
               NSDate *date = [[NSCalendar currentCalendar] dateFromComponents:comps];
               if (date) {
-                [dict setObject:date forKey:key];
+                dict[key] = date;
               }
-              [comps release];
             } break;  
-              
-            case MYSQL_TYPE_VARCHAR:
-            case MYSQL_TYPE_DECIMAL:
-            case MYSQL_TYPE_SHORT:
-            case MYSQL_TYPE_NULL:
-            case MYSQL_TYPE_INT24:
+
             case MYSQL_TYPE_DATE:
-            case MYSQL_TYPE_TIME:
-            case MYSQL_TYPE_YEAR:
-            case MYSQL_TYPE_NEWDATE:
-            case MYSQL_TYPE_BIT:
-            case MYSQL_TYPE_ENUM:
-            case MYSQL_TYPE_SET:
-            case MYSQL_TYPE_GEOMETRY:
-            default:
-              [MysqlException raise:@"No Binding" format:@"fetch does not support mysql type %d for key ",bindings[x].buffer_type];
-              break;
+            {
+              MYSQL_TIME *aValue = (MYSQL_TIME *)bindings[x].buffer;
+              NSDateComponents *comps=[[NSDateComponents alloc] init];
+              [comps setYear:aValue->year];
+              [comps setMonth:aValue->month];
+              [comps setDay:aValue->day];
+              dict[key] = comps;
+            } break;  
+            case MYSQL_TYPE_DECIMAL :
+              [MysqlException raise:@"No Binding" format:@"No binding support for field type %d",myStatement->fields[x].type];
+            case MYSQL_TYPE_SHORT :
+              [MysqlException raise:@"No Binding" format:@"No binding support for field type %d",myStatement->fields[x].type];
+            case MYSQL_TYPE_NULL :
+              [MysqlException raise:@"No Binding" format:@"No binding support for field type %d",myStatement->fields[x].type];
+            case MYSQL_TYPE_INT24 :
+              [MysqlException raise:@"No Binding" format:@"No binding support for field type %d",myStatement->fields[x].type];
+            case MYSQL_TYPE_TIME :
+              [MysqlException raise:@"No Binding" format:@"No binding support for field type %d",myStatement->fields[x].type];
+            case MYSQL_TYPE_YEAR :
+              [MysqlException raise:@"No Binding" format:@"No binding support for field type %d",myStatement->fields[x].type];
+            case MYSQL_TYPE_NEWDATE :
+              [MysqlException raise:@"No Binding" format:@"No binding support for field type %d",myStatement->fields[x].type];
+            case MYSQL_TYPE_VARCHAR :
+              [MysqlException raise:@"No Binding" format:@"No binding support for field type %d",myStatement->fields[x].type];
+            case MYSQL_TYPE_BIT :
+              [MysqlException raise:@"No Binding" format:@"No binding support for field type %d",myStatement->fields[x].type];
+            case MYSQL_TYPE_ENUM :
+              [MysqlException raise:@"No Binding" format:@"No binding support for field type %d",myStatement->fields[x].type];
+            case MYSQL_TYPE_SET :
+              [MysqlException raise:@"No Binding" format:@"No binding support for field type %d",myStatement->fields[x].type];
+            case MYSQL_TYPE_GEOMETRY :
+              [MysqlException raise:@"No Binding" format:@"No binding support for field type %d",myStatement->fields[x].type];
+#ifndef __linux__
+            case MAX_NO_FIELD_TYPES :
+              [MysqlException raise:@"No Binding" format:@"No binding support for field type %d",myStatement->fields[x].type];
+#endif
+
+#ifdef __linux__
+            case MYSQL_TYPE_TIMESTAMP2 :
+              [MysqlException raise:@"No Binding" format:@"No binding support for field type %d",myStatement->fields[x].type];
+            case MYSQL_TYPE_DATETIME2 :
+              [MysqlException raise:@"No Binding" format:@"No binding support for field type %d",myStatement->fields[x].type];
+            case MYSQL_TYPE_TIME2 :
+              [MysqlException raise:@"No Binding" format:@"No binding support for field type %d",myStatement->fields[x].type];
+#endif
           }
         }
         
@@ -435,10 +432,8 @@
       
     }    
 
-    mysql_stmt_close(myStatement);  
     mf->results = [localResults copy];
 
-#ifndef __OBJC_GC__
     for (NSUInteger x=0; x < myStatement->field_count;x++) {
       free(bindings[x].buffer);
       free(bindings[x].length);
@@ -446,8 +441,8 @@
       free(bindings[x].is_null);
     }
     free(bindings);
-#endif
-    
+    mysql_stmt_close(myStatement);  
+
   }
   
   if ([[NSDate date]timeIntervalSinceDate:start] > 1.0) {
@@ -456,15 +451,7 @@
   }
   
 
-  return [mf autorelease];
+  return mf;
 }
 
-
-- (void)dealloc;
-{
-  [fieldNames release];
-  [fields release];
-  [results release];
-  [super dealloc];
-}
 @end

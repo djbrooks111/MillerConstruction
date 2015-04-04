@@ -7,8 +7,10 @@
 //
 
 #import "DatabaseConnector.h"
-#import "MysqlFetch.h"
-#import "MysqlInsert.h"
+#import "iPhoneMySQL/MysqlServer.h"
+#import "iPhoneMySQL/MysqlFetch.h"
+#import "iPhoneMySQL/MysqlInsert.h"
+#import "iPhoneMySQL/MysqlUpdate.h"
 
 #define DB_HOST @"50.253.23.2"
 #define DB_USERNAME @"appconnection"
@@ -49,7 +51,8 @@
  */
 -(BOOL)connectToDatabase {
     //TODO: SET SCHEMA BACK TO PRODUCTION
-    self.databaseConnection = [MysqlConnection connectToHost:DB_HOST user:DB_USERNAME password:DB_PASSWORD schema:DB_TEST_SCHEMA flags:MYSQL_DEFAULT_CONNECTION_FLAGS];
+    MysqlServer *server = [[MysqlServer alloc] initWithHost:DB_HOST andUser:DB_USERNAME andPassword:DB_PASSWORD andSchema:DB_TEST_SCHEMA];
+    self.databaseConnection = [MysqlConnection connectToServer:server];
     if (self.databaseConnection == nil) {
         NSLog(@"Failed to connect to the database");
         
@@ -225,6 +228,8 @@
  *  @return true if successful insertion, false otherwise
  */
 -(BOOL)addNewProject:(NSArray *)projectInformation andKeys:(NSArray *)keys {
+    NSLog(@"projectInformation: %@", projectInformation);
+    NSLog(@"keys: %@", keys);
     NSMutableDictionary *insertDictionary = [[NSMutableDictionary alloc] init];
     for (int i = 0; i < [projectInformation count]; i++) {
         NSString *value = [projectInformation objectAtIndex:i];
@@ -237,27 +242,28 @@
         }
     }
     MysqlInsert *insertCommand = [self insertIntoTable:@"project" withData:[insertDictionary copy]];
-    NSNumber *rowid = [insertCommand rowid];
+    NSNumber *projectRowID = [insertCommand rowid];
     NSNumber *affectedRows = [insertCommand affectedRows];
-    NSLog(@"Auto Increment rowid: %@", rowid);
-    NSLog(@"AffectedRows: %@", affectedRows);
     if (affectedRows > 0) {
+        NSLog(@"Success project table");
         // Success, add other data to tables
         NSDictionary *managerDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
                                     [projectInformation objectAtIndex:4], @"id",
-                                    rowid, @"project_id",
+                                    projectRowID, @"project_id",
                                     nil];
         insertCommand = [self insertIntoTable:@"project_managers" withData:managerDictionary];
         affectedRows = [insertCommand affectedRows];
         if (affectedRows > 0) {
+            NSLog(@"Success manager table");
             // Success, add other data to tables
             NSDictionary *supervisorsDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
                                         [projectInformation objectAtIndex:5], @"id",
-                                        rowid, @"project_id",
+                                        projectRowID, @"project_id",
                                         nil];
             insertCommand = [self insertIntoTable:@"project_supervisors" withData:supervisorsDictionary];
             affectedRows = [insertCommand affectedRows];
             if (affectedRows > 0) {
+                NSLog(@"Success supervisor table");
                 // Success, add other data to tables;
                 [insertDictionary removeAllObjects];
                 NSDictionary *salvageDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -268,6 +274,7 @@
                 NSNumber *salvageRowID = [insertCommand rowid];
                 affectedRows = [insertCommand affectedRows];
                 if (affectedRows > 0) {
+                    NSLog(@"Success salvagevalue table");
                     NSDictionary *closeoutDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
                                                 [projectInformation objectAtIndex:14], @"asBuilts",
                                                 [projectInformation objectAtIndex:15], @"punchList",
@@ -279,28 +286,55 @@
                                                 salvageRowID, @"salvageValue_id",
                                                 nil];
                     insertCommand = [self insertIntoTable:@"closeoutdetails" withData:closeoutDictionary];
+                    NSNumber *closeoutdetailsRowID = [insertCommand rowid];
                     affectedRows = [insertCommand affectedRows];
                     if (affectedRows > 0) {
-                        // Finally return success
-                        return true;
+                        NSLog(@"Success closeout table");
+                        MysqlUpdate *update = [MysqlUpdate updateWithConnection:self.databaseConnection];
+                        [update setTable:@"project"];
+                        [update setQualifier:[NSDictionary dictionaryWithObject:projectRowID forKey:@"id"]];
+                        [update setRowData:[NSDictionary dictionaryWithObject:closeoutdetailsRowID forKey:@"closeoutDetails_id"]];
+                        [update execute];
+                        affectedRows = [update affectedRows];
+                        if (affectedRows > 0) {
+                            // Final success
+                            NSLog(@"Success save!");
+                            
+                            return true;
+                        } else {
+                            // Final failure
+                            NSLog(@"Failed project update!");
+                            
+                            return false;
+                        }
                     } else {
                         // Closeout Failure
+                        NSLog(@"Failed closeout");
+                        
                         return false;
                     }
                 } else {
                     // Salvage Failure
+                    NSLog(@"Failed salvage");
+                    
                     return false;
                 }
             } else {
                 // Supervisors Failure
+                NSLog(@"Failed supervisors");
+                
                 return false;
             }
         } else {
             // Managers Failure
+            NSLog(@"Failed managers");
+            
             return false;
         }
     } else {
         // Project Failure
+        NSLog(@"Failed project");
+        
         return false;
     }
 }

@@ -3,20 +3,14 @@
 //  mysql_connector
 //
 //  Created by Karl Kraft on 6/12/08.
-//  Copyright 2008-2010 Karl Kraft. All rights reserved.
+//  Copyright 2008-2014 Karl Kraft. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import <UIKit/UIKit.h> 
 @class MysqlConnection;
 
 
-@interface MysqlUpdate : NSObject {
-  MysqlConnection *connection;
-  NSString *table;
-  NSDictionary *rowData;
-  NSDictionary *qualifier;
-  NSNumber *affectedRows;
-}
+@interface MysqlUpdate : NSObject
 
 @property(retain) NSString *table;
 @property(retain) NSDictionary  *rowData;

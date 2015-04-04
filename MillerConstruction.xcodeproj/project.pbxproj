@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2610A0F81ACF8CF0005D3902 /* MysqlServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2610A0F51ACF8CF0005D3902 /* MysqlServer.m */; };
+		2610A0F91ACF8CF0005D3902 /* NSString+MysqlEscape.m in Sources */ = {isa = PBXBuildFile; fileRef = 2610A0F71ACF8CF0005D3902 /* NSString+MysqlEscape.m */; };
 		26126B6A1AC8807400AB70B3 /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 26126B691AC8807400AB70B3 /* Person.m */; };
 		26126B6D1AC8840800AB70B3 /* ProjectStage.m in Sources */ = {isa = PBXBuildFile; fileRef = 26126B6C1AC8840800AB70B3 /* ProjectStage.m */; };
 		26126B701AC887F600AB70B3 /* ProjectStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 26126B6F1AC887F600AB70B3 /* ProjectStatus.m */; };
@@ -61,7 +63,6 @@
 		26BE550E1AB66DEE00566014 /* MysqlInsert.m in Sources */ = {isa = PBXBuildFile; fileRef = 26BE54FF1AB66DEE00566014 /* MysqlInsert.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc -w"; }; };
 		26BE550F1AB66DEE00566014 /* MysqlLiteral.m in Sources */ = {isa = PBXBuildFile; fileRef = 26BE55011AB66DEE00566014 /* MysqlLiteral.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		26BE55101AB66DEE00566014 /* MysqlUpdate.m in Sources */ = {isa = PBXBuildFile; fileRef = 26BE55031AB66DEE00566014 /* MysqlUpdate.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		26BE55111AB66DEE00566014 /* NSString_MysqlEscape.m in Sources */ = {isa = PBXBuildFile; fileRef = 26BE55051AB66DEE00566014 /* NSString_MysqlEscape.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		26FDE10E1AC2F881008710D7 /* ProjectClassification.m in Sources */ = {isa = PBXBuildFile; fileRef = 26FDE10D1AC2F881008710D7 /* ProjectClassification.m */; };
 		26FDE1141AC2FD6A008710D7 /* ProjectItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 26FDE1131AC2FD6A008710D7 /* ProjectItem.m */; };
 /* End PBXBuildFile section */
@@ -77,6 +78,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2610A0F41ACF8CF0005D3902 /* MysqlServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MysqlServer.h; sourceTree = "<group>"; };
+		2610A0F51ACF8CF0005D3902 /* MysqlServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MysqlServer.m; sourceTree = "<group>"; };
+		2610A0F61ACF8CF0005D3902 /* NSString+MysqlEscape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MysqlEscape.h"; sourceTree = "<group>"; };
+		2610A0F71ACF8CF0005D3902 /* NSString+MysqlEscape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MysqlEscape.m"; sourceTree = "<group>"; };
 		26126B681AC8807400AB70B3 /* Person.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Person.h; sourceTree = "<group>"; };
 		26126B691AC8807400AB70B3 /* Person.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Person.m; sourceTree = "<group>"; };
 		26126B6B1AC8840800AB70B3 /* ProjectStage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectStage.h; sourceTree = "<group>"; };
@@ -247,8 +252,6 @@
 		26BE55011AB66DEE00566014 /* MysqlLiteral.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MysqlLiteral.m; sourceTree = "<group>"; };
 		26BE55021AB66DEE00566014 /* MysqlUpdate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MysqlUpdate.h; sourceTree = "<group>"; };
 		26BE55031AB66DEE00566014 /* MysqlUpdate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MysqlUpdate.m; sourceTree = "<group>"; };
-		26BE55041AB66DEE00566014 /* NSString_MysqlEscape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSString_MysqlEscape.h; sourceTree = "<group>"; };
-		26BE55051AB66DEE00566014 /* NSString_MysqlEscape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSString_MysqlEscape.m; sourceTree = "<group>"; };
 		26FDE10C1AC2F881008710D7 /* ProjectClassification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectClassification.h; sourceTree = "<group>"; };
 		26FDE10D1AC2F881008710D7 /* ProjectClassification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectClassification.m; sourceTree = "<group>"; };
 		26FDE1121AC2FD6A008710D7 /* ProjectItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectItem.h; sourceTree = "<group>"; };
@@ -458,8 +461,10 @@
 				26BE55011AB66DEE00566014 /* MysqlLiteral.m */,
 				26BE55021AB66DEE00566014 /* MysqlUpdate.h */,
 				26BE55031AB66DEE00566014 /* MysqlUpdate.m */,
-				26BE55041AB66DEE00566014 /* NSString_MysqlEscape.h */,
-				26BE55051AB66DEE00566014 /* NSString_MysqlEscape.m */,
+				2610A0F41ACF8CF0005D3902 /* MysqlServer.h */,
+				2610A0F51ACF8CF0005D3902 /* MysqlServer.m */,
+				2610A0F61ACF8CF0005D3902 /* NSString+MysqlEscape.h */,
+				2610A0F71ACF8CF0005D3902 /* NSString+MysqlEscape.m */,
 			);
 			path = iPhoneMySQL;
 			sourceTree = "<group>";
@@ -768,10 +773,12 @@
 				26892C111AC0FEA300783172 /* JGProgressHUDIndeterminateIndicatorView.m in Sources */,
 				26892C121AC0FEA300783172 /* JGProgressHUDIndicatorView.m in Sources */,
 				26BE550C1AB66DEE00566014 /* MysqlFetch.m in Sources */,
+				2610A0F91ACF8CF0005D3902 /* NSString+MysqlEscape.m in Sources */,
 				2698D6241AC05C7900323046 /* Warehouse.m in Sources */,
 				26892C141AC0FEA300783172 /* JGProgressHUDRingIndicatorView.m in Sources */,
 				2623395B1AB61E41001976B8 /* User.m in Sources */,
 				26892C1D1AC10EBF00783172 /* NewProjectTableViewCell.m in Sources */,
+				2610A0F81ACF8CF0005D3902 /* MysqlServer.m in Sources */,
 				26892C381AC1AB9D00783172 /* DistancePickerView.m in Sources */,
 				26126B6A1AC8807400AB70B3 /* Person.m in Sources */,
 				2623393C1AB61CBF001976B8 /* LoginViewController.m in Sources */,
@@ -781,7 +788,6 @@
 				26892C391AC1AB9D00783172 /* SWActionSheet.m in Sources */,
 				26126B731AC8887700AB70B3 /* ProjectType.m in Sources */,
 				262339361AB61CBF001976B8 /* main.m in Sources */,
-				26BE55111AB66DEE00566014 /* NSString_MysqlEscape.m in Sources */,
 				26FDE1141AC2FD6A008710D7 /* ProjectItem.m in Sources */,
 				26892C0E1AC0FEA300783172 /* JGProgressHUDErrorIndicatorView.m in Sources */,
 				26FDE10E1AC2F881008710D7 /* ProjectClassification.m in Sources */,
@@ -839,6 +845,7 @@
 				ARCHS = (
 					armv7s,
 					armv7,
+					i386,
 				);
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -875,7 +882,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
-				VALID_ARCHS = "armv7 armv7s";
+				VALID_ARCHS = "armv7 armv7s i386";
 			};
 			name = Debug;
 		};
@@ -886,6 +893,7 @@
 				ARCHS = (
 					armv7s,
 					armv7,
+					i386,
 				);
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -916,7 +924,7 @@
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 				VALIDATE_PRODUCT = YES;
-				VALID_ARCHS = "armv7 armv7s";
+				VALID_ARCHS = "armv7 armv7s i386";
 			};
 			name = Release;
 		};
@@ -926,6 +934,7 @@
 				ARCHS = (
 					armv7s,
 					armv7,
+					i386,
 				);
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
@@ -940,7 +949,7 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				VALID_ARCHS = "armv7 armv7s";
+				VALID_ARCHS = "armv7 armv7s i386";
 			};
 			name = Debug;
 		};
@@ -950,6 +959,7 @@
 				ARCHS = (
 					armv7s,
 					armv7,
+					i386,
 				);
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				GCC_GENERATE_TEST_COVERAGE_FILES = NO;
@@ -964,7 +974,7 @@
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				VALID_ARCHS = "armv7 armv7s";
+				VALID_ARCHS = "armv7 armv7s i386";
 			};
 			name = Release;
 		};

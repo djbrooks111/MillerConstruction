@@ -3,28 +3,27 @@
 //  mysql_connector
 //
 //  Created by Karl Kraft on 5/21/08.
-//  Copyright 2008-2010 Karl Kraft. All rights reserved.
+//  Copyright 2008-2014 Karl Kraft. All rights reserved.
 //
 
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wpadded"
+
 #import "mysql.h"
+#pragma clang diagnostic pop
+
 #import <UIKit/UIKit.h>
+@class MysqlServer;
 
-@interface MysqlConnection : NSObject {
- MYSQL _connection;
-}
+@interface MysqlConnection : NSObject
 
-@property(readonly,getter=getConnection) MYSQL *connection;
+@property(readonly) MYSQL *connection;
+@property(readonly) BOOL transactionsEnabled;
+@property(readonly)MysqlServer *server;
 
-+ (MysqlConnection *)connectToHost:(NSString *)host
-                              user:(NSString *)user
-                          password:(NSString *)password
-                            schema:(NSString *)schema
-                             flags:(unsigned long)flags;
-
-
-+ (MysqlConnection *)connectWithDictionary:(NSDictionary *)aDict;
-
++ (MysqlConnection *)connectToServers:(NSArray *)arrayOfServers;
++ (MysqlConnection *)connectToServer:(MysqlServer *)server;
 
 - (void)enableTransactions;
 - (void)disableTransactions;
@@ -33,11 +32,14 @@
 
 - (void)enableStrictSql;
 
+- (void)enableTriggers;
+- (void)disableTriggers;
+
 - (void)startIdle;
+
 @end
 
 
 
-#define MYSQL_DEFAULT_CONNECTION_FLAGS CLIENT_FOUND_ROWS
 
 

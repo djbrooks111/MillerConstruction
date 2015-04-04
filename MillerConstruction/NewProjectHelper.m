@@ -59,9 +59,9 @@
     NSArray *resultArray = [database fetchWarehouses];
     NSMutableArray *unsortedArray = [[NSMutableArray alloc] init];
     for (NSDictionary *warehouseRow in resultArray) {
-        NSNumber *warehouseRowID = [warehouseRow objectForKey:@"warehouse.id"];
-        NSString *warehouseState = [warehouseRow objectForKey:@"warehouse.state"];
-        NSNumber *warehouseID = [warehouseRow objectForKey:@"warehouse.warehouseID"];
+        NSNumber *warehouseRowID = [warehouseRow objectForKey:@"id"];
+        NSString *warehouseState = [warehouseRow objectForKey:@"state"];
+        NSNumber *warehouseID = [warehouseRow objectForKey:@"warehouseID"];
         NSString *warehouseCity = [warehouseRow objectForKey:@"city.name"];
         [unsortedArray addObject:[[Warehouse alloc] initWithRowID:warehouseRowID andState:warehouseState andWarehouseID:warehouseID andCity:warehouseCity]];
     }
@@ -337,7 +337,7 @@
                                    @"",
                                    @"",
                                    @"scheduledStartDate",
-                                   @"SchedulesTurnover",
+                                   @"scheduledTurnover",
                                    @"actualTurnover",
                                    @"",
                                    @"permitApplication",
