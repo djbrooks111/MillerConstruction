@@ -283,6 +283,7 @@
                         <outlet property="viewExistingProjectButton" destination="0eN-Su-9cs" id="wDa-Wy-WB9"/>
                         <outlet property="viewTriggersButton" destination="BU8-CF-8yT" id="hWc-E0-OfP"/>
                         <segue destination="Ltg-eh-2c2" kind="show" identifier="goToCreateNewProject" id="Cl5-SG-hFm"/>
+                        <segue destination="WQL-LW-fY5" kind="show" identifier="goToViewExistingProject" id="ZEc-oV-U7o"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JoY-O2-dUI" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -386,6 +387,129 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="woM-xt-aHp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1058" y="1194"/>
+        </scene>
+        <!--View Existing Project View Controller-->
+        <scene sceneID="JNz-6A-pFE">
+            <objects>
+                <viewController id="WQL-LW-fY5" customClass="ViewExistingProjectViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="6OU-58-smq"/>
+                        <viewControllerLayoutGuide type="bottom" id="NmD-In-b13"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Awg-5Z-4Mk">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4jw-es-5DD">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rdA-RK-Bt2">
+                                        <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                        <state key="normal" title="Search For Project">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="searchForProject:" destination="WQL-LW-fY5" eventType="touchUpInside" id="8nY-YR-aN6"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M2c-Yz-se6">
+                                        <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                        <state key="normal" title="Select Warehouse">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="selectWarehouse:" destination="WQL-LW-fY5" eventType="touchUpInside" id="Cnc-DS-FpP"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rbw-PH-Ygo">
+                                        <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                        <state key="normal" title="Select Project Stage">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="selectProjectStage:" destination="WQL-LW-fY5" eventType="touchUpInside" id="f4i-YV-Kdd"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="rbw-PH-Ygo" firstAttribute="bottom" secondItem="4jw-es-5DD" secondAttribute="bottom" multiplier="0.4" id="AL2-Vj-KR3"/>
+                                    <constraint firstAttribute="centerX" secondItem="rdA-RK-Bt2" secondAttribute="centerX" id="AbC-mK-iuR"/>
+                                    <constraint firstAttribute="centerX" secondItem="M2c-Yz-se6" secondAttribute="centerX" id="MCs-3T-9Gz"/>
+                                    <constraint firstAttribute="centerX" secondItem="rbw-PH-Ygo" secondAttribute="centerX" id="kWo-Ok-bjG"/>
+                                    <constraint firstItem="M2c-Yz-se6" firstAttribute="bottom" secondItem="4jw-es-5DD" secondAttribute="bottom" multiplier="0.2" id="uwD-Ws-P6z"/>
+                                    <constraint firstItem="rdA-RK-Bt2" firstAttribute="bottom" secondItem="4jw-es-5DD" secondAttribute="bottom" multiplier="0.75" id="w8b-2n-gYx"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="subviews">
+                                        <exclude reference="rdA-RK-Bt2"/>
+                                        <exclude reference="M2c-Yz-se6"/>
+                                        <exclude reference="rbw-PH-Ygo"/>
+                                    </mask>
+                                    <mask key="constraints">
+                                        <exclude reference="MCs-3T-9Gz"/>
+                                        <exclude reference="uwD-Ws-P6z"/>
+                                        <exclude reference="AL2-Vj-KR3"/>
+                                        <exclude reference="kWo-Ok-bjG"/>
+                                        <exclude reference="AbC-mK-iuR"/>
+                                        <exclude reference="w8b-2n-gYx"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular">
+                                    <mask key="subviews">
+                                        <include reference="rdA-RK-Bt2"/>
+                                        <include reference="M2c-Yz-se6"/>
+                                        <include reference="rbw-PH-Ygo"/>
+                                    </mask>
+                                    <mask key="constraints">
+                                        <include reference="MCs-3T-9Gz"/>
+                                        <include reference="uwD-Ws-P6z"/>
+                                        <include reference="AL2-Vj-KR3"/>
+                                        <include reference="kWo-Ok-bjG"/>
+                                        <include reference="AbC-mK-iuR"/>
+                                        <include reference="w8b-2n-gYx"/>
+                                    </mask>
+                                </variation>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="4jw-es-5DD" secondAttribute="centerX" id="esA-iE-13d"/>
+                            <constraint firstItem="4jw-es-5DD" firstAttribute="height" secondItem="Awg-5Z-4Mk" secondAttribute="height" multiplier="0.5" id="oJ9-xJ-Txy"/>
+                            <constraint firstAttribute="width" secondItem="4jw-es-5DD" secondAttribute="width" id="pqm-6i-fDC"/>
+                            <constraint firstItem="4jw-es-5DD" firstAttribute="top" secondItem="6OU-58-smq" secondAttribute="bottom" id="tm5-lu-aLJ"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="4jw-es-5DD"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="esA-iE-13d"/>
+                                <exclude reference="oJ9-xJ-Txy"/>
+                                <exclude reference="pqm-6i-fDC"/>
+                                <exclude reference="tm5-lu-aLJ"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular">
+                            <mask key="subviews">
+                                <include reference="4jw-es-5DD"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="esA-iE-13d"/>
+                                <include reference="oJ9-xJ-Txy"/>
+                                <include reference="pqm-6i-fDC"/>
+                                <include reference="tm5-lu-aLJ"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <connections>
+                        <outlet property="projectStageButton" destination="rbw-PH-Ygo" id="QZV-Og-Uzr"/>
+                        <outlet property="searchButton" destination="rdA-RK-Bt2" id="GaI-66-GeS"/>
+                        <outlet property="warehouseButton" destination="M2c-Yz-se6" id="qNQ-KD-D3t"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Pkl-LI-iOO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1812" y="1194"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="rR4-oW-aLM">

@@ -30,7 +30,7 @@
     [super tearDown];
 }
 
--(void)textImplementation {
+-(void)testImplementation {
     XCTAssertEqualObjects(NSStringFromClass([[MainMenuViewController new] class]), NSStringFromClass([MainMenuViewController class]));
 }
 

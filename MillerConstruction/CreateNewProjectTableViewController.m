@@ -14,6 +14,7 @@
 #import "DatabaseConnector.h"
 #import "JGProgressHUD.h"
 #import "JGProgressHUDSuccessIndicatorView.h"
+#import "JGProgressHUD/JGProgressHUDErrorIndicatorView.h"
 #import "Warehouse.h"
 #import "ProjectClassification.h"
 #import "ProjectItem.h"
@@ -39,12 +40,21 @@
 -(void)viewDidLoad {
     [super viewDidLoad];
     
+    // Uncomment the following line to preserve selection between presentations.
+    // self.clearsSelectionOnViewWillAppear = NO;
+    
+    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
     self.navigationItem.title = @"Create New Project";
     
-    //JGProgressHUD *HUD = self.prototypeHUD;
-    //HUD.textLabel.text = @"Loading information...";
-    //[HUD showInView:self.view];
-    
+    JGProgressHUD *HUD = self.prototypeHUD;
+    HUD.textLabel.text = @"Loading data...";
+    [HUD showInView:self.view];
     newProjectHelper = [[NewProjectHelper alloc] init];
     projectAttributesNames = [newProjectHelper projectAttributesNames];
     requiredInformation = [projectAttributesNames subarrayWithRange:NSMakeRange(0, 10)];
@@ -60,13 +70,9 @@
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
     [self.view addGestureRecognizer:tapGesture];
     
-    //[HUD dismissAfterDelay:1.5];
+    [HUD dismissAfterDelay:1.5];
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    [self.tableView reloadData];
 }
 
 -(void)didReceiveMemoryWarning {
@@ -438,78 +444,35 @@
 -(void)save:(UIButton *)sender {
     if ([self isRequiredInformationFilled]) {
         // All Good
+        JGProgressHUD *HUD = self.prototypeHUD;
+        HUD.textLabel.text = @"Saving project...";
+        [HUD showInView:self.view];
+        DatabaseConnector *database = [DatabaseConnector sharedDatabaseConnector];
+        [database connectToDatabase];
+        NSArray *keys = [newProjectHelper projectAttributesKeys];
+        BOOL result = [database addNewProject:cellArray andKeys:keys];
+        database.databaseConnection = nil;
+        if (result == true) {
+            // Success
+            NSLog(@"Successful save!");
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                HUD.indicatorView = [[JGProgressHUDSuccessIndicatorView alloc] init];
+                HUD.textLabel.text = @"Success!";
+            });
+            [HUD dismissAfterDelay:1.5];
+        } else {
+            // Failure
+            NSLog(@"Failed to save!");
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                HUD.indicatorView = [[JGProgressHUDErrorIndicatorView alloc] init];
+                HUD.textLabel.text = @"Failed to save, please try again!";
+            });
+            [HUD dismissAfterDelay:1.5];
+        }
     } else {
         // Notify User
-    }
-    /*
-    NSMutableArray *projectInformation = [[NSMutableArray alloc] init];
-    for (int section = 0; section < [self.tableView numberOfSections]; section++) {
-        for (int row = 0; row < [self.tableView numberOfRowsInSection:section]; row++) {
-            NSIndexPath *index = [NSIndexPath indexPathForRow:row inSection:section];
-            NewProjectTableViewCell *cell = (NewProjectTableViewCell *)[self.tableView cellForRowAtIndexPath:index];
-            if (section == 0) {
-                if (row == 0) {
-                    // MCS Project #
-                    NSNumber *projectNumber = [NSNumber numberWithInteger:[[cell.textField text] integerValue]];
-                    [projectInformation addObject:projectNumber];
-                } else if (row == 1) {
-                    // Warehouse
-                    [projectInformation addObject:[newProjectHelper rowIDOfWarehouseFromFullName:[cell.textField text]]];
-                } else if (row == 2) {
-                    // Project Classification
-                    [projectInformation addObject:[newProjectHelper rowIDOfProjectClassificationFromName:[cell.textField text]]];
-                } else if (row == 3) {
-                    // Project
-                    [projectInformation addObject:[newProjectHelper rowIDOfProjectItemFromName:[cell.textField text]]];
-                } else if (row == 4) {
-                    // Project Manager
-                    [projectInformation addObject:[newProjectHelper rowIDOfProjectManagerFromName:[cell.textField text]]];
-                } else if (row == 5) {
-                    // Project Supervisor
-                    [projectInformation addObject:[newProjectHelper rowIDOfProjectSupervisorFromName:[cell.textField text]]];
-                } else if (row == 6) {
-                    // Project Stage
-                    [projectInformation addObject:[newProjectHelper rowIDOfProjectStageFromName:[cell.textField text]]];
-                } else if (row == 7) {
-                    // Project Status
-                    [projectInformation addObject:[newProjectHelper rowIDOfProjectStatusFromName:[cell.textField text]]];
-                } else if (row == 8) {
-                    // Project Type
-                    [projectInformation addObject:[newProjectHelper rowIDOfProjectTypeFromName:[cell.textField text]]];
-                } else if (row == 9) {
-                    // Project Scope
-                    [projectInformation addObject:[cell.textField text]];
-                }
-            } else if (section == 1) {
-                if (row <= 15) {
-                    // Dates
-                    NSLog(@"text at row %d: %@", row, [cell.textField text]);
-                    if ([[cell.textField text] isEqualToString:@""] || [[cell.textField text] isEqual:[NSNull null]]) {
-                        [projectInformation addObject:[NSNull null]];
-                    } else {
-                        NSLog(@"not null row %d: %@", row, [cell.textField text]);
-                        [projectInformation addObject:[self dateFromString:[cell.textField text]]];
-                    }
-                } else {
-                    // Other text
-                    [projectInformation addObject:[cell.textField text]];
-                }
-            }
-        }
-    }
-     */
-    
-    DatabaseConnector *database = [DatabaseConnector sharedDatabaseConnector];
-    [database connectToDatabase];
-    NSArray *keys = [newProjectHelper projectAttributesKeys];
-    BOOL result = [database addNewProject:cellArray andKeys:keys];
-    database.databaseConnection = nil;
-    if (result == true) {
-        // Success
-        NSLog(@"Successful save!");
-    } else {
-        // Failure
-        NSLog(@"Failed to save!");
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Required Information" message:@"You must fill out all the Required Information at a minimum" delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil, nil];
+        [alert show];
     }
 }
 

@@ -63,6 +63,9 @@
 		26BE550E1AB66DEE00566014 /* MysqlInsert.m in Sources */ = {isa = PBXBuildFile; fileRef = 26BE54FF1AB66DEE00566014 /* MysqlInsert.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc -w"; }; };
 		26BE550F1AB66DEE00566014 /* MysqlLiteral.m in Sources */ = {isa = PBXBuildFile; fileRef = 26BE55011AB66DEE00566014 /* MysqlLiteral.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		26BE55101AB66DEE00566014 /* MysqlUpdate.m in Sources */ = {isa = PBXBuildFile; fileRef = 26BE55031AB66DEE00566014 /* MysqlUpdate.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		26CC73441AD3860300516B31 /* ViewExistingProjectTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26CC73431AD3860300516B31 /* ViewExistingProjectTableViewController.m */; };
+		26CC73471AD3867600516B31 /* ViewExistingProjectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26CC73461AD3867600516B31 /* ViewExistingProjectViewController.m */; };
+		26CC734A1AD388E900516B31 /* ViewExistingProjectSearchHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 26CC73491AD388E900516B31 /* ViewExistingProjectSearchHelper.m */; };
 		26FDE10E1AC2F881008710D7 /* ProjectClassification.m in Sources */ = {isa = PBXBuildFile; fileRef = 26FDE10D1AC2F881008710D7 /* ProjectClassification.m */; };
 		26FDE1141AC2FD6A008710D7 /* ProjectItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 26FDE1131AC2FD6A008710D7 /* ProjectItem.m */; };
 /* End PBXBuildFile section */
@@ -252,6 +255,12 @@
 		26BE55011AB66DEE00566014 /* MysqlLiteral.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MysqlLiteral.m; sourceTree = "<group>"; };
 		26BE55021AB66DEE00566014 /* MysqlUpdate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MysqlUpdate.h; sourceTree = "<group>"; };
 		26BE55031AB66DEE00566014 /* MysqlUpdate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MysqlUpdate.m; sourceTree = "<group>"; };
+		26CC73421AD3860300516B31 /* ViewExistingProjectTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewExistingProjectTableViewController.h; sourceTree = "<group>"; };
+		26CC73431AD3860300516B31 /* ViewExistingProjectTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewExistingProjectTableViewController.m; sourceTree = "<group>"; };
+		26CC73451AD3867600516B31 /* ViewExistingProjectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewExistingProjectViewController.h; sourceTree = "<group>"; };
+		26CC73461AD3867600516B31 /* ViewExistingProjectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewExistingProjectViewController.m; sourceTree = "<group>"; };
+		26CC73481AD388E900516B31 /* ViewExistingProjectSearchHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewExistingProjectSearchHelper.h; sourceTree = "<group>"; };
+		26CC73491AD388E900516B31 /* ViewExistingProjectSearchHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewExistingProjectSearchHelper.m; sourceTree = "<group>"; };
 		26FDE10C1AC2F881008710D7 /* ProjectClassification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectClassification.h; sourceTree = "<group>"; };
 		26FDE10D1AC2F881008710D7 /* ProjectClassification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectClassification.m; sourceTree = "<group>"; };
 		26FDE1121AC2FD6A008710D7 /* ProjectItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectItem.h; sourceTree = "<group>"; };
@@ -353,6 +362,10 @@
 				2688B8F91AB67D1E0052DEDE /* MainMenuViewController.m */,
 				265C19911ABC8905007BCEF6 /* CreateNewProjectTableViewController.h */,
 				265C19921ABC8905007BCEF6 /* CreateNewProjectTableViewController.m */,
+				26CC73421AD3860300516B31 /* ViewExistingProjectTableViewController.h */,
+				26CC73431AD3860300516B31 /* ViewExistingProjectTableViewController.m */,
+				26CC73451AD3867600516B31 /* ViewExistingProjectViewController.h */,
+				26CC73461AD3867600516B31 /* ViewExistingProjectViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -383,6 +396,8 @@
 				26126B6F1AC887F600AB70B3 /* ProjectStatus.m */,
 				26126B711AC8887700AB70B3 /* ProjectType.h */,
 				26126B721AC8887700AB70B3 /* ProjectType.m */,
+				26CC73481AD388E900516B31 /* ViewExistingProjectSearchHelper.h */,
+				26CC73491AD388E900516B31 /* ViewExistingProjectSearchHelper.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -755,6 +770,8 @@
 				2623395E1AB620BD001976B8 /* DatabaseConnector.m in Sources */,
 				26892C341AC1AB9D00783172 /* ActionSheetDatePicker.m in Sources */,
 				26BE550F1AB66DEE00566014 /* MysqlLiteral.m in Sources */,
+				26CC73441AD3860300516B31 /* ViewExistingProjectTableViewController.m in Sources */,
+				26CC73471AD3867600516B31 /* ViewExistingProjectViewController.m in Sources */,
 				26BE550A1AB66DEE00566014 /* MysqlConnection.m in Sources */,
 				26BE550B1AB66DEE00566014 /* MysqlDelete.m in Sources */,
 				26BE550D1AB66DEE00566014 /* MysqlFetchField.m in Sources */,
@@ -775,6 +792,7 @@
 				26BE550C1AB66DEE00566014 /* MysqlFetch.m in Sources */,
 				2610A0F91ACF8CF0005D3902 /* NSString+MysqlEscape.m in Sources */,
 				2698D6241AC05C7900323046 /* Warehouse.m in Sources */,
+				26CC734A1AD388E900516B31 /* ViewExistingProjectSearchHelper.m in Sources */,
 				26892C141AC0FEA300783172 /* JGProgressHUDRingIndicatorView.m in Sources */,
 				2623395B1AB61E41001976B8 /* User.m in Sources */,
 				26892C1D1AC10EBF00783172 /* NewProjectTableViewCell.m in Sources */,
