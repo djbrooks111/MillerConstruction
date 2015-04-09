@@ -10,4 +10,6 @@
 
 @interface ViewExistingProjectTableViewController : UITableViewController
 
+@property (nonatomic, retain) NSNumber *warehouseRowID;
+
 @end

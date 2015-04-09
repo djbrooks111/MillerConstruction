@@ -19,4 +19,8 @@
 -(void)initializeWarehouseArrays;
 -(void)initializeProjectStageArrays;
 
+-(NSNumber *)rowIDOfWarehouseFromFullName:(NSString *)fullName;
+-(NSNumber *)rowIDOfProjectStageFromName:(NSString *)name;
+-(NSArray *)availableProjectsForWarehouseID:(NSNumber *)warehouseID andProjectStageID:(NSNumber *)projectStageID;
+
 @end

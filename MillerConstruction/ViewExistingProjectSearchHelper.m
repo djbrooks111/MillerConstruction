@@ -88,6 +88,52 @@
     self.projectStageNameArray = [namesArray copy];
 }
 
+#pragma mark - Project Searching
 
+-(NSArray *)availableProjectsForWarehouseID:(NSNumber *)warehouseID andProjectStageID:(NSNumber *)projectStageID {
+    [database connectToDatabase];
+    NSArray *availableProjects = [database fetchProjectsWithWarehouseID:warehouseID andProjectStageID:projectStageID];
+    database.databaseConnection = nil;
+    
+    return availableProjects;
+}
+
+/**
+ *  Searches the Warehouse array from the name
+ *
+ *  @param fullName The full name of the Warehouse
+ *
+ *  @return The rowID of the Warehouse
+ */
+-(NSNumber *)rowIDOfWarehouseFromFullName:(NSString *)fullName {
+    for (int i = 0; i < [self.warehouseArray count]; i++) {
+        Warehouse *warehouse = [self.warehouseArray objectAtIndex:i];
+        if ([[warehouse fullName] isEqualToString:fullName]) {
+            
+            return [warehouse rowID];
+        }
+    }
+    
+    return nil;
+}
+
+/**
+ *  Searches the Project Stage array for the name
+ *
+ *  @param name The name of the Project Stage
+ *
+ *  @return The rowID of the Project Stage
+ */
+-(NSNumber *)rowIDOfProjectStageFromName:(NSString *)name {
+    for (int i = 0; i < [self.projectStageArray count]; i++) {
+        ProjectStage *stage = [self.projectStageArray objectAtIndex:i];
+        if ([[stage name] isEqualToString:name]) {
+            
+            return [stage rowID];
+        }
+    }
+    
+    return nil;
+}
 
 @end

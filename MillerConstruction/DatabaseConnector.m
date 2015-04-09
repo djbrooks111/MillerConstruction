@@ -339,4 +339,23 @@
     }
 }
 
+#pragma mark - View Existing Project
+
+/**
+ *  Fetches the projects matching the warehouse id and stage id
+ *
+ *  @param warehouseID    The id of the warehouse
+ *  @param projectStageID The id of the project stage
+ *
+ *  @return NSArray * of NSDictionaries with the projectitem.name and project.id
+ */
+-(NSArray *)fetchProjectsWithWarehouseID:(NSNumber *)warehouseID andProjectStageID:(NSNumber *)projectStageID {
+    NSString *fetchCommand = [NSString stringWithFormat:@"SELECT projectitem.name, project.id FROM project, projectitem WHERE project.warehouse_id = %d AND project.stage_id = %d AND project.projectItem_id = projectitem.id", [warehouseID intValue], [projectStageID intValue]];
+    NSLog(@"fetchCommand: %@", fetchCommand);
+    MysqlFetch *fetch = [self fetchWithCommand:fetchCommand];
+    NSLog(@"%@", [fetch results]);
+    
+    return [fetch results];
+}
+
 @end

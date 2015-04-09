@@ -29,4 +29,6 @@
 
 -(BOOL)addNewProject:(NSArray *)projectInformation andKeys:(NSArray *)keys;
 
+-(NSArray *)fetchProjectsWithWarehouseID:(NSNumber *)warehouseID andProjectStageID:(NSNumber *)projectStageID;
+
 @end

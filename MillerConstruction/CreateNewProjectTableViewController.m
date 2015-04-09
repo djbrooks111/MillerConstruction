@@ -482,11 +482,8 @@
  *  @return true if all Required UITextFields have been filled out, false otherwise
  */
 -(BOOL)isRequiredInformationFilled {
-    for (int i = 0; i < [self.tableView numberOfRowsInSection:0]; i++) {
-        NSIndexPath *index = [NSIndexPath indexPathForRow:i inSection:0];
-        NewProjectTableViewCell *cell = (NewProjectTableViewCell *)[self.tableView cellForRowAtIndexPath:index];
-        if ([[cell.textField text] isEqualToString:@""]) {
-            
+    for (int i = 0; i < [requiredInformation count]; i++) {
+        if ([cellArray objectAtIndex:i] == [NSNull null]) {
             return false;
         }
     }

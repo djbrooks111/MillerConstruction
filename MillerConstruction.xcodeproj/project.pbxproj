@@ -28,29 +28,9 @@
 		26773F691ABC61800075C1E7 /* LoginViewControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 26773F681ABC61800075C1E7 /* LoginViewControllerTest.m */; };
 		2688B8FA1AB67D1E0052DEDE /* MainMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2688B8F91AB67D1E0052DEDE /* MainMenuViewController.m */; };
 		2688B9001AB67E780052DEDE /* UserTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2688B8FF1AB67E780052DEDE /* UserTest.m */; };
-		26892C0B1AC0FEA300783172 /* JGProgressHUD Resources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 26892BF61AC0FEA300783172 /* JGProgressHUD Resources.bundle */; };
-		26892C0C1AC0FEA300783172 /* JGProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 26892BF81AC0FEA300783172 /* JGProgressHUD.m */; };
-		26892C0D1AC0FEA300783172 /* JGProgressHUDAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 26892BFA1AC0FEA300783172 /* JGProgressHUDAnimation.m */; };
-		26892C0E1AC0FEA300783172 /* JGProgressHUDErrorIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26892BFC1AC0FEA300783172 /* JGProgressHUDErrorIndicatorView.m */; };
-		26892C0F1AC0FEA300783172 /* JGProgressHUDFadeAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 26892BFE1AC0FEA300783172 /* JGProgressHUDFadeAnimation.m */; };
-		26892C101AC0FEA300783172 /* JGProgressHUDFadeZoomAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 26892C001AC0FEA300783172 /* JGProgressHUDFadeZoomAnimation.m */; };
-		26892C111AC0FEA300783172 /* JGProgressHUDIndeterminateIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26892C021AC0FEA300783172 /* JGProgressHUDIndeterminateIndicatorView.m */; };
-		26892C121AC0FEA300783172 /* JGProgressHUDIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26892C041AC0FEA300783172 /* JGProgressHUDIndicatorView.m */; };
-		26892C131AC0FEA300783172 /* JGProgressHUDPieIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26892C061AC0FEA300783172 /* JGProgressHUDPieIndicatorView.m */; };
-		26892C141AC0FEA300783172 /* JGProgressHUDRingIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26892C081AC0FEA300783172 /* JGProgressHUDRingIndicatorView.m */; };
-		26892C151AC0FEA300783172 /* JGProgressHUDSuccessIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26892C0A1AC0FEA300783172 /* JGProgressHUDSuccessIndicatorView.m */; };
 		26892C1D1AC10EBF00783172 /* NewProjectTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 26892C1B1AC10EBF00783172 /* NewProjectTableViewCell.m */; };
-		26892C321AC1AB9D00783172 /* AbstractActionSheetPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 26892C211AC1AB9D00783172 /* AbstractActionSheetPicker.m */; };
-		26892C331AC1AB9D00783172 /* ActionSheetCustomPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 26892C231AC1AB9D00783172 /* ActionSheetCustomPicker.m */; };
-		26892C341AC1AB9D00783172 /* ActionSheetDatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 26892C261AC1AB9D00783172 /* ActionSheetDatePicker.m */; };
-		26892C351AC1AB9D00783172 /* ActionSheetDistancePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 26892C281AC1AB9D00783172 /* ActionSheetDistancePicker.m */; };
-		26892C361AC1AB9D00783172 /* ActionSheetLocalePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 26892C2A1AC1AB9D00783172 /* ActionSheetLocalePicker.m */; };
-		26892C371AC1AB9D00783172 /* ActionSheetStringPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 26892C2D1AC1AB9D00783172 /* ActionSheetStringPicker.m */; };
-		26892C381AC1AB9D00783172 /* DistancePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26892C2F1AC1AB9D00783172 /* DistancePickerView.m */; };
-		26892C391AC1AB9D00783172 /* SWActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 26892C311AC1AB9D00783172 /* SWActionSheet.m */; };
 		2698D6211AC05B0600323046 /* NewProjectHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2698D6201AC05B0600323046 /* NewProjectHelper.m */; };
 		2698D6241AC05C7900323046 /* Warehouse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2698D6231AC05C7900323046 /* Warehouse.m */; };
-		2698D6261AC05F6100323046 /* Warehouses.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2698D6251AC05F6100323046 /* Warehouses.plist */; };
 		2698D62C1AC097D200323046 /* DatabaseConnectionTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2698D62B1AC097D200323046 /* DatabaseConnectionTest.m */; };
 		26BE55061AB66DEE00566014 /* MysqlCommitException.m in Sources */ = {isa = PBXBuildFile; fileRef = 26BE54A71AB66DEE00566014 /* MysqlCommitException.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		26BE55071AB66DEE00566014 /* MysqlException.m in Sources */ = {isa = PBXBuildFile; fileRef = 26BE54A91AB66DEE00566014 /* MysqlException.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -68,6 +48,7 @@
 		26CC734A1AD388E900516B31 /* ViewExistingProjectSearchHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 26CC73491AD388E900516B31 /* ViewExistingProjectSearchHelper.m */; };
 		26FDE10E1AC2F881008710D7 /* ProjectClassification.m in Sources */ = {isa = PBXBuildFile; fileRef = 26FDE10D1AC2F881008710D7 /* ProjectClassification.m */; };
 		26FDE1141AC2FD6A008710D7 /* ProjectItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 26FDE1131AC2FD6A008710D7 /* ProjectItem.m */; };
+		D4F45945EBF81A44ADE0AB57 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B444ED1E15ED2DFC735FFDA0 /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -118,52 +99,12 @@
 		2688B8F81AB67D1E0052DEDE /* MainMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenuViewController.h; sourceTree = "<group>"; };
 		2688B8F91AB67D1E0052DEDE /* MainMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMenuViewController.m; sourceTree = "<group>"; };
 		2688B8FF1AB67E780052DEDE /* UserTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserTest.m; sourceTree = "<group>"; };
-		26892BF61AC0FEA300783172 /* JGProgressHUD Resources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = "JGProgressHUD Resources.bundle"; sourceTree = "<group>"; };
-		26892BF71AC0FEA300783172 /* JGProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JGProgressHUD.h; sourceTree = "<group>"; };
-		26892BF81AC0FEA300783172 /* JGProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JGProgressHUD.m; sourceTree = "<group>"; };
-		26892BF91AC0FEA300783172 /* JGProgressHUDAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JGProgressHUDAnimation.h; sourceTree = "<group>"; };
-		26892BFA1AC0FEA300783172 /* JGProgressHUDAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JGProgressHUDAnimation.m; sourceTree = "<group>"; };
-		26892BFB1AC0FEA300783172 /* JGProgressHUDErrorIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JGProgressHUDErrorIndicatorView.h; sourceTree = "<group>"; };
-		26892BFC1AC0FEA300783172 /* JGProgressHUDErrorIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JGProgressHUDErrorIndicatorView.m; sourceTree = "<group>"; };
-		26892BFD1AC0FEA300783172 /* JGProgressHUDFadeAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JGProgressHUDFadeAnimation.h; sourceTree = "<group>"; };
-		26892BFE1AC0FEA300783172 /* JGProgressHUDFadeAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JGProgressHUDFadeAnimation.m; sourceTree = "<group>"; };
-		26892BFF1AC0FEA300783172 /* JGProgressHUDFadeZoomAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JGProgressHUDFadeZoomAnimation.h; sourceTree = "<group>"; };
-		26892C001AC0FEA300783172 /* JGProgressHUDFadeZoomAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JGProgressHUDFadeZoomAnimation.m; sourceTree = "<group>"; };
-		26892C011AC0FEA300783172 /* JGProgressHUDIndeterminateIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JGProgressHUDIndeterminateIndicatorView.h; sourceTree = "<group>"; };
-		26892C021AC0FEA300783172 /* JGProgressHUDIndeterminateIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JGProgressHUDIndeterminateIndicatorView.m; sourceTree = "<group>"; };
-		26892C031AC0FEA300783172 /* JGProgressHUDIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JGProgressHUDIndicatorView.h; sourceTree = "<group>"; };
-		26892C041AC0FEA300783172 /* JGProgressHUDIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JGProgressHUDIndicatorView.m; sourceTree = "<group>"; };
-		26892C051AC0FEA300783172 /* JGProgressHUDPieIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JGProgressHUDPieIndicatorView.h; sourceTree = "<group>"; };
-		26892C061AC0FEA300783172 /* JGProgressHUDPieIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JGProgressHUDPieIndicatorView.m; sourceTree = "<group>"; };
-		26892C071AC0FEA300783172 /* JGProgressHUDRingIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JGProgressHUDRingIndicatorView.h; sourceTree = "<group>"; };
-		26892C081AC0FEA300783172 /* JGProgressHUDRingIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JGProgressHUDRingIndicatorView.m; sourceTree = "<group>"; };
-		26892C091AC0FEA300783172 /* JGProgressHUDSuccessIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JGProgressHUDSuccessIndicatorView.h; sourceTree = "<group>"; };
-		26892C0A1AC0FEA300783172 /* JGProgressHUDSuccessIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JGProgressHUDSuccessIndicatorView.m; sourceTree = "<group>"; };
 		26892C1A1AC10EBF00783172 /* NewProjectTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewProjectTableViewCell.h; sourceTree = "<group>"; };
 		26892C1B1AC10EBF00783172 /* NewProjectTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewProjectTableViewCell.m; sourceTree = "<group>"; };
-		26892C201AC1AB9D00783172 /* AbstractActionSheetPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AbstractActionSheetPicker.h; sourceTree = "<group>"; };
-		26892C211AC1AB9D00783172 /* AbstractActionSheetPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AbstractActionSheetPicker.m; sourceTree = "<group>"; };
-		26892C221AC1AB9D00783172 /* ActionSheetCustomPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetCustomPicker.h; sourceTree = "<group>"; };
-		26892C231AC1AB9D00783172 /* ActionSheetCustomPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionSheetCustomPicker.m; sourceTree = "<group>"; };
-		26892C241AC1AB9D00783172 /* ActionSheetCustomPickerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetCustomPickerDelegate.h; sourceTree = "<group>"; };
-		26892C251AC1AB9D00783172 /* ActionSheetDatePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetDatePicker.h; sourceTree = "<group>"; };
-		26892C261AC1AB9D00783172 /* ActionSheetDatePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionSheetDatePicker.m; sourceTree = "<group>"; };
-		26892C271AC1AB9D00783172 /* ActionSheetDistancePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetDistancePicker.h; sourceTree = "<group>"; };
-		26892C281AC1AB9D00783172 /* ActionSheetDistancePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionSheetDistancePicker.m; sourceTree = "<group>"; };
-		26892C291AC1AB9D00783172 /* ActionSheetLocalePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetLocalePicker.h; sourceTree = "<group>"; };
-		26892C2A1AC1AB9D00783172 /* ActionSheetLocalePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionSheetLocalePicker.m; sourceTree = "<group>"; };
-		26892C2B1AC1AB9D00783172 /* ActionSheetPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetPicker.h; sourceTree = "<group>"; };
-		26892C2C1AC1AB9D00783172 /* ActionSheetStringPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetStringPicker.h; sourceTree = "<group>"; };
-		26892C2D1AC1AB9D00783172 /* ActionSheetStringPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionSheetStringPicker.m; sourceTree = "<group>"; };
-		26892C2E1AC1AB9D00783172 /* DistancePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DistancePickerView.h; sourceTree = "<group>"; };
-		26892C2F1AC1AB9D00783172 /* DistancePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DistancePickerView.m; sourceTree = "<group>"; };
-		26892C301AC1AB9D00783172 /* SWActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWActionSheet.h; sourceTree = "<group>"; };
-		26892C311AC1AB9D00783172 /* SWActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWActionSheet.m; sourceTree = "<group>"; };
 		2698D61F1AC05B0600323046 /* NewProjectHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewProjectHelper.h; sourceTree = "<group>"; };
 		2698D6201AC05B0600323046 /* NewProjectHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewProjectHelper.m; sourceTree = "<group>"; };
 		2698D6221AC05C7900323046 /* Warehouse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Warehouse.h; sourceTree = "<group>"; };
 		2698D6231AC05C7900323046 /* Warehouse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Warehouse.m; sourceTree = "<group>"; };
-		2698D6251AC05F6100323046 /* Warehouses.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Warehouses.plist; sourceTree = "<group>"; };
 		2698D62B1AC097D200323046 /* DatabaseConnectionTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DatabaseConnectionTest.m; sourceTree = "<group>"; };
 		26BE54A61AB66DEE00566014 /* MysqlCommitException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MysqlCommitException.h; sourceTree = "<group>"; };
 		26BE54A71AB66DEE00566014 /* MysqlCommitException.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MysqlCommitException.m; sourceTree = "<group>"; };
@@ -265,6 +206,9 @@
 		26FDE10D1AC2F881008710D7 /* ProjectClassification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectClassification.m; sourceTree = "<group>"; };
 		26FDE1121AC2FD6A008710D7 /* ProjectItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectItem.h; sourceTree = "<group>"; };
 		26FDE1131AC2FD6A008710D7 /* ProjectItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectItem.m; sourceTree = "<group>"; };
+		44B7F915EBEB8DCB815ABD62 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		B444ED1E15ED2DFC735FFDA0 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		EAC9D72AE6408EE54EEDC3CC /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -273,6 +217,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				26BE55091AB66DEE00566014 /* libmysqlclient.a in Frameworks */,
+				D4F45945EBF81A44ADE0AB57 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -292,6 +237,8 @@
 				262339321AB61CBF001976B8 /* MillerConstruction */,
 				2623394C1AB61CBF001976B8 /* MillerConstructionTests */,
 				262339311AB61CBF001976B8 /* Products */,
+				8A59316A7BF1BFCDB74BA8D5 /* Pods */,
+				449F21EBB7D508E709DA9621 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -315,8 +262,6 @@
 				262339401AB61CBF001976B8 /* Images.xcassets */,
 				262339421AB61CBF001976B8 /* LaunchScreen.xib */,
 				26BE54A41AB66DEE00566014 /* iPhoneMySQL */,
-				26892BF51AC0FEA300783172 /* JGProgressHUD */,
-				26892C1F1AC1AB9D00783172 /* Pickers */,
 				262339331AB61CBF001976B8 /* Supporting Files */,
 			);
 			path = MillerConstruction;
@@ -381,7 +326,6 @@
 				2698D6201AC05B0600323046 /* NewProjectHelper.m */,
 				2698D6221AC05C7900323046 /* Warehouse.h */,
 				2698D6231AC05C7900323046 /* Warehouse.m */,
-				2698D6251AC05F6100323046 /* Warehouses.plist */,
 				26892C1A1AC10EBF00783172 /* NewProjectTableViewCell.h */,
 				26892C1B1AC10EBF00783172 /* NewProjectTableViewCell.m */,
 				26FDE10C1AC2F881008710D7 /* ProjectClassification.h */,
@@ -400,59 +344,6 @@
 				26CC73491AD388E900516B31 /* ViewExistingProjectSearchHelper.m */,
 			);
 			name = Models;
-			sourceTree = "<group>";
-		};
-		26892BF51AC0FEA300783172 /* JGProgressHUD */ = {
-			isa = PBXGroup;
-			children = (
-				26892BF61AC0FEA300783172 /* JGProgressHUD Resources.bundle */,
-				26892BF71AC0FEA300783172 /* JGProgressHUD.h */,
-				26892BF81AC0FEA300783172 /* JGProgressHUD.m */,
-				26892BF91AC0FEA300783172 /* JGProgressHUDAnimation.h */,
-				26892BFA1AC0FEA300783172 /* JGProgressHUDAnimation.m */,
-				26892BFB1AC0FEA300783172 /* JGProgressHUDErrorIndicatorView.h */,
-				26892BFC1AC0FEA300783172 /* JGProgressHUDErrorIndicatorView.m */,
-				26892BFD1AC0FEA300783172 /* JGProgressHUDFadeAnimation.h */,
-				26892BFE1AC0FEA300783172 /* JGProgressHUDFadeAnimation.m */,
-				26892BFF1AC0FEA300783172 /* JGProgressHUDFadeZoomAnimation.h */,
-				26892C001AC0FEA300783172 /* JGProgressHUDFadeZoomAnimation.m */,
-				26892C011AC0FEA300783172 /* JGProgressHUDIndeterminateIndicatorView.h */,
-				26892C021AC0FEA300783172 /* JGProgressHUDIndeterminateIndicatorView.m */,
-				26892C031AC0FEA300783172 /* JGProgressHUDIndicatorView.h */,
-				26892C041AC0FEA300783172 /* JGProgressHUDIndicatorView.m */,
-				26892C051AC0FEA300783172 /* JGProgressHUDPieIndicatorView.h */,
-				26892C061AC0FEA300783172 /* JGProgressHUDPieIndicatorView.m */,
-				26892C071AC0FEA300783172 /* JGProgressHUDRingIndicatorView.h */,
-				26892C081AC0FEA300783172 /* JGProgressHUDRingIndicatorView.m */,
-				26892C091AC0FEA300783172 /* JGProgressHUDSuccessIndicatorView.h */,
-				26892C0A1AC0FEA300783172 /* JGProgressHUDSuccessIndicatorView.m */,
-			);
-			path = JGProgressHUD;
-			sourceTree = "<group>";
-		};
-		26892C1F1AC1AB9D00783172 /* Pickers */ = {
-			isa = PBXGroup;
-			children = (
-				26892C201AC1AB9D00783172 /* AbstractActionSheetPicker.h */,
-				26892C211AC1AB9D00783172 /* AbstractActionSheetPicker.m */,
-				26892C221AC1AB9D00783172 /* ActionSheetCustomPicker.h */,
-				26892C231AC1AB9D00783172 /* ActionSheetCustomPicker.m */,
-				26892C241AC1AB9D00783172 /* ActionSheetCustomPickerDelegate.h */,
-				26892C251AC1AB9D00783172 /* ActionSheetDatePicker.h */,
-				26892C261AC1AB9D00783172 /* ActionSheetDatePicker.m */,
-				26892C271AC1AB9D00783172 /* ActionSheetDistancePicker.h */,
-				26892C281AC1AB9D00783172 /* ActionSheetDistancePicker.m */,
-				26892C291AC1AB9D00783172 /* ActionSheetLocalePicker.h */,
-				26892C2A1AC1AB9D00783172 /* ActionSheetLocalePicker.m */,
-				26892C2B1AC1AB9D00783172 /* ActionSheetPicker.h */,
-				26892C2C1AC1AB9D00783172 /* ActionSheetStringPicker.h */,
-				26892C2D1AC1AB9D00783172 /* ActionSheetStringPicker.m */,
-				26892C2E1AC1AB9D00783172 /* DistancePickerView.h */,
-				26892C2F1AC1AB9D00783172 /* DistancePickerView.m */,
-				26892C301AC1AB9D00783172 /* SWActionSheet.h */,
-				26892C311AC1AB9D00783172 /* SWActionSheet.m */,
-			);
-			path = Pickers;
 			sourceTree = "<group>";
 		};
 		26BE54A41AB66DEE00566014 /* iPhoneMySQL */ = {
@@ -596,6 +487,23 @@
 			path = lib;
 			sourceTree = "<group>";
 		};
+		449F21EBB7D508E709DA9621 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B444ED1E15ED2DFC735FFDA0 /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8A59316A7BF1BFCDB74BA8D5 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				EAC9D72AE6408EE54EEDC3CC /* Pods.debug.xcconfig */,
+				44B7F915EBEB8DCB815ABD62 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -603,6 +511,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 262339531AB61CBF001976B8 /* Build configuration list for PBXNativeTarget "MillerConstruction" */;
 			buildPhases = (
+				AF118E6333443925DC0C630B /* Check Pods Manifest.lock */,
 				2623392C1AB61CBF001976B8 /* Sources */,
 				2623392D1AB61CBF001976B8 /* Frameworks */,
 				2623392E1AB61CBF001976B8 /* Resources */,
@@ -610,6 +519,7 @@
 				2613C95C1ABB36A000682181 /* Increase Build Number */,
 				2613C95D1ABB394C00682181 /* Code Coverage */,
 				OBJCLEANCUSTOMRUNSCRIPTT /* Objective-Clean Run Script */,
+				9A6972FE8323DDE0A6BE098B /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -680,8 +590,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2698D6261AC05F6100323046 /* Warehouses.plist in Resources */,
-				26892C0B1AC0FEA300783172 /* JGProgressHUD Resources.bundle in Resources */,
 				2623393F1AB61CBF001976B8 /* Main.storyboard in Resources */,
 				262339441AB61CBF001976B8 /* LaunchScreen.xib in Resources */,
 				262339411AB61CBF001976B8 /* Images.xcassets in Resources */,
@@ -740,6 +648,36 @@
 			shellPath = /bin/sh;
 			shellScript = "/bin/sh \"/Users/DJB/Library/Application Support/Developer/Shared/Xcode/Plug-ins/xcfui.xcplugin/Contents/Resources/fui_script.sh\" \"/Users/DJB/Dropbox/Development/Senior Project/MillerConstruction\"";
 		};
+		9A6972FE8323DDE0A6BE098B /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AF118E6333443925DC0C630B /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 		OBJCLEANCUSTOMRUNSCRIPTT /* Objective-Clean Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -762,54 +700,36 @@
 			buildActionMask = 2147483647;
 			files = (
 				26126B6D1AC8840800AB70B3 /* ProjectStage.m in Sources */,
-				26892C331AC1AB9D00783172 /* ActionSheetCustomPicker.m in Sources */,
-				26892C321AC1AB9D00783172 /* AbstractActionSheetPicker.m in Sources */,
 				26BE55071AB66DEE00566014 /* MysqlException.m in Sources */,
-				26892C0C1AC0FEA300783172 /* JGProgressHUD.m in Sources */,
-				26892C101AC0FEA300783172 /* JGProgressHUDFadeZoomAnimation.m in Sources */,
 				2623395E1AB620BD001976B8 /* DatabaseConnector.m in Sources */,
-				26892C341AC1AB9D00783172 /* ActionSheetDatePicker.m in Sources */,
 				26BE550F1AB66DEE00566014 /* MysqlLiteral.m in Sources */,
 				26CC73441AD3860300516B31 /* ViewExistingProjectTableViewController.m in Sources */,
 				26CC73471AD3867600516B31 /* ViewExistingProjectViewController.m in Sources */,
 				26BE550A1AB66DEE00566014 /* MysqlConnection.m in Sources */,
 				26BE550B1AB66DEE00566014 /* MysqlDelete.m in Sources */,
 				26BE550D1AB66DEE00566014 /* MysqlFetchField.m in Sources */,
-				26892C361AC1AB9D00783172 /* ActionSheetLocalePicker.m in Sources */,
 				26BE55081AB66DEE00566014 /* MysqlRollbackException.m in Sources */,
-				26892C0F1AC0FEA300783172 /* JGProgressHUDFadeAnimation.m in Sources */,
-				26892C131AC0FEA300783172 /* JGProgressHUDPieIndicatorView.m in Sources */,
 				26BE55101AB66DEE00566014 /* MysqlUpdate.m in Sources */,
 				2698D6211AC05B0600323046 /* NewProjectHelper.m in Sources */,
 				26BE55061AB66DEE00566014 /* MysqlCommitException.m in Sources */,
-				26892C351AC1AB9D00783172 /* ActionSheetDistancePicker.m in Sources */,
 				2688B8FA1AB67D1E0052DEDE /* MainMenuViewController.m in Sources */,
 				26126B701AC887F600AB70B3 /* ProjectStatus.m in Sources */,
 				26BE550E1AB66DEE00566014 /* MysqlInsert.m in Sources */,
-				26892C0D1AC0FEA300783172 /* JGProgressHUDAnimation.m in Sources */,
-				26892C111AC0FEA300783172 /* JGProgressHUDIndeterminateIndicatorView.m in Sources */,
-				26892C121AC0FEA300783172 /* JGProgressHUDIndicatorView.m in Sources */,
 				26BE550C1AB66DEE00566014 /* MysqlFetch.m in Sources */,
 				2610A0F91ACF8CF0005D3902 /* NSString+MysqlEscape.m in Sources */,
 				2698D6241AC05C7900323046 /* Warehouse.m in Sources */,
 				26CC734A1AD388E900516B31 /* ViewExistingProjectSearchHelper.m in Sources */,
-				26892C141AC0FEA300783172 /* JGProgressHUDRingIndicatorView.m in Sources */,
 				2623395B1AB61E41001976B8 /* User.m in Sources */,
 				26892C1D1AC10EBF00783172 /* NewProjectTableViewCell.m in Sources */,
 				2610A0F81ACF8CF0005D3902 /* MysqlServer.m in Sources */,
-				26892C381AC1AB9D00783172 /* DistancePickerView.m in Sources */,
 				26126B6A1AC8807400AB70B3 /* Person.m in Sources */,
 				2623393C1AB61CBF001976B8 /* LoginViewController.m in Sources */,
 				265C19931ABC8905007BCEF6 /* CreateNewProjectTableViewController.m in Sources */,
-				26892C371AC1AB9D00783172 /* ActionSheetStringPicker.m in Sources */,
 				262339391AB61CBF001976B8 /* AppDelegate.m in Sources */,
-				26892C391AC1AB9D00783172 /* SWActionSheet.m in Sources */,
 				26126B731AC8887700AB70B3 /* ProjectType.m in Sources */,
 				262339361AB61CBF001976B8 /* main.m in Sources */,
 				26FDE1141AC2FD6A008710D7 /* ProjectItem.m in Sources */,
-				26892C0E1AC0FEA300783172 /* JGProgressHUDErrorIndicatorView.m in Sources */,
 				26FDE10E1AC2F881008710D7 /* ProjectClassification.m in Sources */,
-				26892C151AC0FEA300783172 /* JGProgressHUDSuccessIndicatorView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -948,6 +868,7 @@
 		};
 		262339541AB61CBF001976B8 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EAC9D72AE6408EE54EEDC3CC /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ARCHS = (
 					armv7s,
@@ -973,6 +894,7 @@
 		};
 		262339551AB61CBF001976B8 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 44B7F915EBEB8DCB815ABD62 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ARCHS = (
 					armv7s,
