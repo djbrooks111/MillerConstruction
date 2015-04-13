@@ -450,6 +450,18 @@
         DatabaseConnector *database = [DatabaseConnector sharedDatabaseConnector];
         [database connectToDatabase];
         NSArray *keys = [newProjectHelper projectAttributesKeys];
+        if ([cellArray objectAtIndex:26] == [NSNull null]) {
+            // Salvage Value cannot be null
+            [cellArray replaceObjectAtIndex:26 withObject:[NSNumber numberWithInt:0]];
+        }
+        if ([cellArray objectAtIndex:27] == [NSNull null]) {
+            // Should invoice cannot be null
+            [cellArray replaceObjectAtIndex:27 withObject:[NSNumber numberWithInt:0]];
+        }
+        if ([cellArray objectAtIndex:28] == [NSNull null]) {
+            // Invoived cannot be null
+            [cellArray replaceObjectAtIndex:28 withObject:[NSNumber numberWithInt:0]];
+        }
         BOOL result = [database addNewProject:cellArray andKeys:keys];
         database.databaseConnection = nil;
         if (result == true) {

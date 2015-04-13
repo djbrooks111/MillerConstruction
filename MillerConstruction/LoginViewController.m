@@ -57,8 +57,9 @@
  *  @param sender The Login button
  */
 -(void)login:(UIButton *)sender {
-    [self.usernameTextField resignFirstResponder];
-    [self.passwordTextField resignFirstResponder];
+    [self.view endEditing:YES];
+    //[self.usernameTextField resignFirstResponder];
+    //[self.passwordTextField resignFirstResponder];
     JGProgressHUD *HUD = self.prototypeHUD;
     HUD.textLabel.text = @"Logging you in...";
     [HUD showInView:self.view];

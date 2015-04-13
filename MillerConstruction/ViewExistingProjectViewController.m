@@ -173,6 +173,9 @@
 
 -(void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
     warehouseRowID = [availableProjectID objectAtIndex:buttonIndex];
+    [self.warehouseTextField setText:@""];
+    [self.stageTextField setText:@""];
+    [self performSegueWithIdentifier:@"viewProject" sender:self];
 }
 
 #pragma mark - Seque

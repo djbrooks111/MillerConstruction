@@ -10,6 +10,10 @@
 #import <UIKit/UIKit.h>
 #import "LoginViewController.h"
 
+#define USERNAME @"djbrooks"
+#define PASSWORD @"ylxwpliyok"
+#define WRONG @"wrong"
+
 @interface LoginViewControllerTest : XCTestCase
 
 @end
