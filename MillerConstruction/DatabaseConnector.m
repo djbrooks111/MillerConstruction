@@ -358,4 +358,97 @@
     return [fetch results];
 }
 
+#pragma mark - View Triggers
+
+/**
+ *  Retreives all the projects with an MCS Number of -1
+ *
+ *  @return Array of Dictionaries with the project info
+ */
+-(NSArray *)fetchInfoMCSNumberTriggers {
+    NSString *fetchCommand = [NSString stringWithFormat:@"SELECT DISTINCTROW project.mcsNumber, city.name, projectitem.name, project.id FROM project, warehouse, projectitem, city WHERE project.mcsNumber = -1 AND project.warehouse_id = warehouse.id AND warehouse.city_id = city.id AND project.projectItem_id = projectitem.id"];
+    MysqlFetch *fetch = [self fetchWithCommand:fetchCommand];
+    NSLog(@"%@", [fetch results]);
+    
+    return [fetch results];
+}
+
+/**
+ *  Retreives all the projects with no assigned Costco Due Date
+ *
+ *  @return Array of Dictionaries with the project info
+ */
+-(NSArray *)fetchInfoCostcoTriggers {
+    NSString *fetchCommand = [NSString stringWithFormat:@"SELECT DISTINCTROW project.mcsNumber, city.name, projectitem.name, project.id FROM project, warehouse, projectitem, city WHERE project.costcoDueDate IS NULL AND project.mcsNumber != -1 AND project.warehouse_id = warehouse.id AND warehouse.city_id = city.id AND project.projectItem_id = projectitem.id"];
+    MysqlFetch *fetch = [self fetchWithCommand:fetchCommand];
+    NSLog(@"%@", [fetch results]);
+    
+    return [fetch results];
+}
+
+/**
+ *  Retreives all the projects with no assigned Turn Over Date
+ *
+ *  @return Array of Dictionaries with the project info
+ */
+-(NSArray *)fetchInfoTurnOverTriggers {
+    NSString *fetchCommand = [NSString stringWithFormat:@"SELECT DISTINCTROW project.mcsNumber, city.name, projectitem.name, project.id FROM project, warehouse, projectitem, city WHERE project.scheduledTurnover IS NULL AND project.mcsNumber != -1 AND project.warehouse_id = warehouse.id AND warehouse.city_id = city.id AND project.projectItem_id = projectitem.id"];
+    MysqlFetch *fetch = [self fetchWithCommand:fetchCommand];
+    NSLog(@"%@", [fetch results]);
+    
+    return [fetch results];
+}
+
+/**
+ *  Retreives all the projects with a Scheduled Start Date within the next two weeks
+ *
+ *  @return Array of Dictionaries with the project info
+ */
+-(NSArray *)fetchInfoProjectStartingSoonTriggers {
+    NSString *fetchCommand = [NSString stringWithFormat:@"SELECT DISTINCTROW project.mcsNumber, city.name, projectitem.name, project.id, project.scheduledStartDate FROM project, warehouse, projectitem, city WHERE project.scheduledStartDate >= curdate() AND project.scheduledStartDate <= date_add(curdate(), INTERVAL 14 DAY) AND project.mcsNumber != -1 AND project.warehouse_id = warehouse.id AND warehouse.city_id = city.id AND project.projectItem_id = projectitem.id"];
+    MysqlFetch *fetch = [self fetchWithCommand:fetchCommand];
+    NSLog(@"%@", [fetch results]);
+    
+    return [fetch results];
+}
+
+/**
+ *  Retreives all the projects with mismatched Invoiced amounts
+ *
+ *  @return Array of Dictionaries with the project info
+ */
+-(NSArray *)fetchWarningInvoiceTriggers {
+    NSString *fetchCommand = [NSString stringWithFormat:@"SELECT DISTINCTROW project.mcsNumber, city.name, projectitem.name, project.id FROM project, warehouse, projectitem, city WHERE project.shouldInvoice != project.invoiced AND project.warehouse_id = warehouse.id AND warehouse.city_id = city.id AND project.projectItem_id = projectitem.id"];
+    MysqlFetch *fetch = [self fetchWithCommand:fetchCommand];
+    NSLog(@"%@", [fetch results]);
+    
+    return [fetch results];
+}
+
+/**
+ *  Retreives all the projects with a Scheduled Start Date within the next one week
+ *
+ *  @return Array of Dictionaries with the project info
+ */
+-(NSArray *)fetchWarningProjectStartingSoonTriggers {
+    NSString *fetchCommand = [NSString stringWithFormat:@"SELECT DISTINCTROW project.mcsNumber, city.name, projectitem.name, project.id, project.scheduledStartDate FROM project, warehouse, projectitem, city WHERE project.scheduledStartDate >= curdate() AND project.scheduledStartDate <= date_add(curdate(), INTERVAL 7 DAY) AND project.mcsNumber != -1 AND project.warehouse_id = warehouse.id AND warehouse.city_id = city.id AND project.projectItem_id = projectitem.id"];
+    MysqlFetch *fetch = [self fetchWithCommand:fetchCommand];
+    NSLog(@"%@", [fetch results]);
+    
+    return [fetch results];
+}
+
+/**
+ *  Retreives all the projects with a Scheduled Turn Over Date within the next one day
+ *
+ *  @return Array of Dictionaries with the project info
+ */
+-(NSArray *)fetchSevereTriggers {
+    NSString *fetchCommand = [NSString stringWithFormat:@"SELECT DISTINCTROW project.mcsNumber, city.name, projectitem.name, project.id, project.scheduledStartDate FROM project, warehouse, projectitem, city WHERE project.scheduledTurnover >= curdate() AND project.scheduledTurnover <= date_add(curdate(), INTERVAL 1 DAY) AND project.mcsNumber != -1 AND project.warehouse_id = warehouse.id AND warehouse.city_id = city.id AND project.projectItem_id = projectitem.id"];
+    MysqlFetch *fetch = [self fetchWithCommand:fetchCommand];
+    NSLog(@"%@", [fetch results]);
+    
+    return [fetch results];
+}
+
 @end

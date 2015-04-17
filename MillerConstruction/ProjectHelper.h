@@ -1,5 +1,5 @@
 //
-//  NewProjectHelper.h
+//  ProjectHelper.h
 //  MillerConstruction
 //
 //  Created by David Brooks on 3/23/15.
@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NewProjectHelper : NSObject
+@interface ProjectHelper : NSObject
 
 @property (nonatomic, retain) NSArray *warehouseArray;
 @property (nonatomic, retain) NSArray *warehouseNamesArray;
@@ -37,6 +37,9 @@
 @property (nonatomic, retain) NSArray *projectAttributesNames;
 @property (nonatomic, retain) NSArray *projectAttributesKeys;
 
+@property (nonatomic, retain) NSNumber *projectID;
+@property (nonatomic, retain) NSArray *projectInformation;
+
 -(void)initializeProjectAttributesNamesArray;
 -(void)initializeProjectAttributesKeysArray;
 -(void)initializeWarehouseArrays;
@@ -56,6 +59,8 @@
 -(NSNumber *)rowIDOfProjectStageFromName:(NSString *)name;
 -(NSNumber *)rowIDOfProjectStatusFromName:(NSString *)name;
 -(NSNumber *)rowIDOfProjectTypeFromName:(NSString *)name;
+
+-(void)getProjectInformationFromDatabase;
 
 // Init used for testing only
 -(id)initForTesting;

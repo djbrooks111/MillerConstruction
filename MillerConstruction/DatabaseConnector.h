@@ -31,4 +31,14 @@
 
 -(NSArray *)fetchProjectsWithWarehouseID:(NSNumber *)warehouseID andProjectStageID:(NSNumber *)projectStageID;
 
+-(NSArray *)fetchProjectInformationForID:(NSNumber *)projectID;
+
+-(NSArray *)fetchInfoMCSNumberTriggers;
+-(NSArray *)fetchInfoCostcoTriggers;
+-(NSArray *)fetchInfoTurnOverTriggers;
+-(NSArray *)fetchInfoProjectStartingSoonTriggers;
+-(NSArray *)fetchWarningInvoiceTriggers;
+-(NSArray *)fetchWarningProjectStartingSoonTriggers;
+-(NSArray *)fetchSevereTriggers;
+
 @end

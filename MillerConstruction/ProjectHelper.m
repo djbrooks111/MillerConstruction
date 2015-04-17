@@ -1,12 +1,12 @@
 //
-//  NewProjectHelper.m
+//  ProjectHelper.m
 //  MillerConstruction
 //
 //  Created by David Brooks on 3/23/15.
 //  Copyright (c) 2015 David J Brooks. All rights reserved.
 //
 
-#import "NewProjectHelper.h"
+#import "ProjectHelper.h"
 #import "DatabaseConnector.h"
 #import "ProjectItem.h"
 #import "Warehouse.h"
@@ -16,7 +16,7 @@
 #import "ProjectStatus.h"
 #import "ProjectType.h"
 
-@implementation NewProjectHelper {
+@implementation ProjectHelper {
     DatabaseConnector *database;
 }
 
@@ -512,6 +512,12 @@
     }
     
     return nil;
+}
+
+#pragma mark - Existing Project Methods
+
+-(void)getProjectInformationFromDatabase {
+    self.projectInformation = [database fetchProjectInformationForID:self.projectID];
 }
 
 @end

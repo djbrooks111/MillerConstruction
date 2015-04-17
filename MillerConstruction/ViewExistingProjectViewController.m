@@ -25,7 +25,7 @@
     NSMutableArray *searchCriteria;
     NSArray *availableProjectItem;
     NSArray *availableProjectID;
-    NSNumber *warehouseRowID;
+    NSNumber *projectID;
 }
 
 #pragma mark - UIViewController Methods
@@ -172,18 +172,18 @@
 #pragma mark - UIAlertViewDelegate
 
 -(void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
-    warehouseRowID = [availableProjectID objectAtIndex:buttonIndex];
+    projectID = [availableProjectID objectAtIndex:buttonIndex];
     [self.warehouseTextField setText:@""];
     [self.stageTextField setText:@""];
     [self performSegueWithIdentifier:@"viewProject" sender:self];
 }
 
-#pragma mark - Seque
+#pragma mark - Navigation
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier] isEqualToString:@"viewProject"]) {
         ViewExistingProjectTableViewController *viewController = [segue destinationViewController];
-        [viewController setWarehouseRowID:warehouseRowID];
+        [viewController setProjectID:projectID];
     }
 }
 

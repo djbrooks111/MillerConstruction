@@ -1,5 +1,5 @@
 //
-//  NewProjectTableViewCell.h
+//  ProjectTableViewCell.h
 //  MillerConstruction
 //
 //  Created by David Brooks on 3/23/15.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface NewProjectTableViewCell : UITableViewCell <UITextFieldDelegate>
+@interface ProjectTableViewCell : UITableViewCell <UITextFieldDelegate>
 
 @property (nonatomic, retain) IBOutlet UILabel *label;
 @property (nonatomic, retain) IBOutlet UITextField *textField;

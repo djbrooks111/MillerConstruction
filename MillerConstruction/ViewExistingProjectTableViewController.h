@@ -8,8 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewExistingProjectTableViewController : UITableViewController
+@interface ViewExistingProjectTableViewController : UITableViewController <UITextFieldDelegate>
 
-@property (nonatomic, retain) NSNumber *warehouseRowID;
+@property (nonatomic, retain) NSNumber *projectID;
+@property (nonatomic, retain) IBOutlet UIBarButtonItem *editButton;
+
+-(IBAction)editProject:(UIBarButtonItem *)sender;
 
 @end

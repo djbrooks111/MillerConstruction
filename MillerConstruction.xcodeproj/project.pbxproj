@@ -28,8 +28,13 @@
 		26773F691ABC61800075C1E7 /* LoginViewControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 26773F681ABC61800075C1E7 /* LoginViewControllerTest.m */; };
 		2688B8FA1AB67D1E0052DEDE /* MainMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2688B8F91AB67D1E0052DEDE /* MainMenuViewController.m */; };
 		2688B9001AB67E780052DEDE /* UserTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2688B8FF1AB67E780052DEDE /* UserTest.m */; };
-		26892C1D1AC10EBF00783172 /* NewProjectTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 26892C1B1AC10EBF00783172 /* NewProjectTableViewCell.m */; };
-		2698D6211AC05B0600323046 /* NewProjectHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2698D6201AC05B0600323046 /* NewProjectHelper.m */; };
+		26892C1D1AC10EBF00783172 /* ProjectTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 26892C1B1AC10EBF00783172 /* ProjectTableViewCell.m */; };
+		26944D631AE0942E00E0160E /* GenerateReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26944D621AE0942E00E0160E /* GenerateReportViewController.m */; };
+		26944D661AE0946400E0160E /* GenerateReportCriteriaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26944D651AE0946400E0160E /* GenerateReportCriteriaViewController.m */; };
+		26944D691AE0956D00E0160E /* GenerateReportSearchHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 26944D681AE0956D00E0160E /* GenerateReportSearchHelper.m */; };
+		26944D6C1AE09C0800E0160E /* ViewTriggersTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26944D6B1AE09C0800E0160E /* ViewTriggersTableViewController.m */; };
+		26944D6F1AE09E1100E0160E /* ViewTriggersHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 26944D6E1AE09E1100E0160E /* ViewTriggersHelper.m */; };
+		2698D6211AC05B0600323046 /* ProjectHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2698D6201AC05B0600323046 /* ProjectHelper.m */; };
 		2698D6241AC05C7900323046 /* Warehouse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2698D6231AC05C7900323046 /* Warehouse.m */; };
 		2698D62C1AC097D200323046 /* DatabaseConnectionTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2698D62B1AC097D200323046 /* DatabaseConnectionTest.m */; };
 		26BE55061AB66DEE00566014 /* MysqlCommitException.m in Sources */ = {isa = PBXBuildFile; fileRef = 26BE54A71AB66DEE00566014 /* MysqlCommitException.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -100,10 +105,20 @@
 		2688B8F81AB67D1E0052DEDE /* MainMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenuViewController.h; sourceTree = "<group>"; };
 		2688B8F91AB67D1E0052DEDE /* MainMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMenuViewController.m; sourceTree = "<group>"; };
 		2688B8FF1AB67E780052DEDE /* UserTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserTest.m; sourceTree = "<group>"; };
-		26892C1A1AC10EBF00783172 /* NewProjectTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewProjectTableViewCell.h; sourceTree = "<group>"; };
-		26892C1B1AC10EBF00783172 /* NewProjectTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewProjectTableViewCell.m; sourceTree = "<group>"; };
-		2698D61F1AC05B0600323046 /* NewProjectHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewProjectHelper.h; sourceTree = "<group>"; };
-		2698D6201AC05B0600323046 /* NewProjectHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewProjectHelper.m; sourceTree = "<group>"; };
+		26892C1A1AC10EBF00783172 /* ProjectTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectTableViewCell.h; sourceTree = "<group>"; };
+		26892C1B1AC10EBF00783172 /* ProjectTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectTableViewCell.m; sourceTree = "<group>"; };
+		26944D611AE0942E00E0160E /* GenerateReportViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GenerateReportViewController.h; sourceTree = "<group>"; };
+		26944D621AE0942E00E0160E /* GenerateReportViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GenerateReportViewController.m; sourceTree = "<group>"; };
+		26944D641AE0946400E0160E /* GenerateReportCriteriaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GenerateReportCriteriaViewController.h; sourceTree = "<group>"; };
+		26944D651AE0946400E0160E /* GenerateReportCriteriaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GenerateReportCriteriaViewController.m; sourceTree = "<group>"; };
+		26944D671AE0956D00E0160E /* GenerateReportSearchHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GenerateReportSearchHelper.h; sourceTree = "<group>"; };
+		26944D681AE0956D00E0160E /* GenerateReportSearchHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GenerateReportSearchHelper.m; sourceTree = "<group>"; };
+		26944D6A1AE09C0800E0160E /* ViewTriggersTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewTriggersTableViewController.h; sourceTree = "<group>"; };
+		26944D6B1AE09C0800E0160E /* ViewTriggersTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewTriggersTableViewController.m; sourceTree = "<group>"; };
+		26944D6D1AE09E1100E0160E /* ViewTriggersHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewTriggersHelper.h; sourceTree = "<group>"; };
+		26944D6E1AE09E1100E0160E /* ViewTriggersHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewTriggersHelper.m; sourceTree = "<group>"; };
+		2698D61F1AC05B0600323046 /* ProjectHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectHelper.h; sourceTree = "<group>"; };
+		2698D6201AC05B0600323046 /* ProjectHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectHelper.m; sourceTree = "<group>"; };
 		2698D6221AC05C7900323046 /* Warehouse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Warehouse.h; sourceTree = "<group>"; };
 		2698D6231AC05C7900323046 /* Warehouse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Warehouse.m; sourceTree = "<group>"; };
 		2698D62B1AC097D200323046 /* DatabaseConnectionTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DatabaseConnectionTest.m; sourceTree = "<group>"; };
@@ -314,6 +329,12 @@
 				26CC73431AD3860300516B31 /* ViewExistingProjectTableViewController.m */,
 				26CC73451AD3867600516B31 /* ViewExistingProjectViewController.h */,
 				26CC73461AD3867600516B31 /* ViewExistingProjectViewController.m */,
+				26944D611AE0942E00E0160E /* GenerateReportViewController.h */,
+				26944D621AE0942E00E0160E /* GenerateReportViewController.m */,
+				26944D641AE0946400E0160E /* GenerateReportCriteriaViewController.h */,
+				26944D651AE0946400E0160E /* GenerateReportCriteriaViewController.m */,
+				26944D6A1AE09C0800E0160E /* ViewTriggersTableViewController.h */,
+				26944D6B1AE09C0800E0160E /* ViewTriggersTableViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -325,12 +346,12 @@
 				2623395A1AB61E41001976B8 /* User.m */,
 				2623395C1AB620BD001976B8 /* DatabaseConnector.h */,
 				2623395D1AB620BD001976B8 /* DatabaseConnector.m */,
-				2698D61F1AC05B0600323046 /* NewProjectHelper.h */,
-				2698D6201AC05B0600323046 /* NewProjectHelper.m */,
+				2698D61F1AC05B0600323046 /* ProjectHelper.h */,
+				2698D6201AC05B0600323046 /* ProjectHelper.m */,
 				2698D6221AC05C7900323046 /* Warehouse.h */,
 				2698D6231AC05C7900323046 /* Warehouse.m */,
-				26892C1A1AC10EBF00783172 /* NewProjectTableViewCell.h */,
-				26892C1B1AC10EBF00783172 /* NewProjectTableViewCell.m */,
+				26892C1A1AC10EBF00783172 /* ProjectTableViewCell.h */,
+				26892C1B1AC10EBF00783172 /* ProjectTableViewCell.m */,
 				26FDE10C1AC2F881008710D7 /* ProjectClassification.h */,
 				26FDE10D1AC2F881008710D7 /* ProjectClassification.m */,
 				26FDE1121AC2FD6A008710D7 /* ProjectItem.h */,
@@ -345,6 +366,10 @@
 				26126B721AC8887700AB70B3 /* ProjectType.m */,
 				26CC73481AD388E900516B31 /* ViewExistingProjectSearchHelper.h */,
 				26CC73491AD388E900516B31 /* ViewExistingProjectSearchHelper.m */,
+				26944D671AE0956D00E0160E /* GenerateReportSearchHelper.h */,
+				26944D681AE0956D00E0160E /* GenerateReportSearchHelper.m */,
+				26944D6D1AE09E1100E0160E /* ViewTriggersHelper.h */,
+				26944D6E1AE09E1100E0160E /* ViewTriggersHelper.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -729,20 +754,24 @@
 				26CC73471AD3867600516B31 /* ViewExistingProjectViewController.m in Sources */,
 				26BE550A1AB66DEE00566014 /* MysqlConnection.m in Sources */,
 				26BE550B1AB66DEE00566014 /* MysqlDelete.m in Sources */,
+				26944D691AE0956D00E0160E /* GenerateReportSearchHelper.m in Sources */,
 				26BE550D1AB66DEE00566014 /* MysqlFetchField.m in Sources */,
 				26BE55081AB66DEE00566014 /* MysqlRollbackException.m in Sources */,
 				26BE55101AB66DEE00566014 /* MysqlUpdate.m in Sources */,
-				2698D6211AC05B0600323046 /* NewProjectHelper.m in Sources */,
+				2698D6211AC05B0600323046 /* ProjectHelper.m in Sources */,
+				26944D6F1AE09E1100E0160E /* ViewTriggersHelper.m in Sources */,
 				26BE55061AB66DEE00566014 /* MysqlCommitException.m in Sources */,
+				26944D661AE0946400E0160E /* GenerateReportCriteriaViewController.m in Sources */,
 				2688B8FA1AB67D1E0052DEDE /* MainMenuViewController.m in Sources */,
 				26126B701AC887F600AB70B3 /* ProjectStatus.m in Sources */,
 				26BE550E1AB66DEE00566014 /* MysqlInsert.m in Sources */,
 				26BE550C1AB66DEE00566014 /* MysqlFetch.m in Sources */,
+				26944D6C1AE09C0800E0160E /* ViewTriggersTableViewController.m in Sources */,
 				2610A0F91ACF8CF0005D3902 /* NSString+MysqlEscape.m in Sources */,
 				2698D6241AC05C7900323046 /* Warehouse.m in Sources */,
 				26CC734A1AD388E900516B31 /* ViewExistingProjectSearchHelper.m in Sources */,
 				2623395B1AB61E41001976B8 /* User.m in Sources */,
-				26892C1D1AC10EBF00783172 /* NewProjectTableViewCell.m in Sources */,
+				26892C1D1AC10EBF00783172 /* ProjectTableViewCell.m in Sources */,
 				2610A0F81ACF8CF0005D3902 /* MysqlServer.m in Sources */,
 				26126B6A1AC8807400AB70B3 /* Person.m in Sources */,
 				2623393C1AB61CBF001976B8 /* LoginViewController.m in Sources */,
@@ -752,6 +781,7 @@
 				262339361AB61CBF001976B8 /* main.m in Sources */,
 				26FDE1141AC2FD6A008710D7 /* ProjectItem.m in Sources */,
 				26FDE10E1AC2F881008710D7 /* ProjectClassification.m in Sources */,
+				26944D631AE0942E00E0160E /* GenerateReportViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

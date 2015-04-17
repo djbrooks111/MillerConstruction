@@ -9,8 +9,8 @@
 #import "CreateNewProjectTableViewController.h"
 #import "ActionSheetStringPicker.h"
 #import "ActionSheetDatePicker.h"
-#import "NewProjectHelper.h"
-#import "NewProjectTableViewCell.h"
+#import "ProjectHelper.h"
+#import "ProjectTableViewCell.h"
 #import "DatabaseConnector.h"
 #import "JGProgressHUD.h"
 #import "JGProgressHUDSuccessIndicatorView.h"
@@ -29,7 +29,7 @@
 @end
 
 @implementation CreateNewProjectTableViewController {
-    NewProjectHelper *newProjectHelper;
+    ProjectHelper *projectHelper;
     NSMutableArray *cellArray;
     NSMutableArray *projectStrings;
     NSArray *projectAttributesNames;
@@ -55,8 +55,8 @@
     JGProgressHUD *HUD = self.prototypeHUD;
     HUD.textLabel.text = @"Loading data...";
     [HUD showInView:self.view];
-    newProjectHelper = [[NewProjectHelper alloc] init];
-    projectAttributesNames = [newProjectHelper projectAttributesNames];
+    projectHelper = [[ProjectHelper alloc] init];
+    projectAttributesNames = [projectHelper projectAttributesNames];
     requiredInformation = [projectAttributesNames subarrayWithRange:NSMakeRange(0, 10)];
     optionalInformation = [projectAttributesNames subarrayWithRange:NSMakeRange(10, 23)];
     
@@ -124,7 +124,7 @@
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NewProjectTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+    ProjectTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     
     // Configure the cell...
     NSArray *usedArray;
@@ -149,7 +149,7 @@
         [cell.textField setText:[projectStrings objectAtIndex:index]];
     }
     [cell.textField setDelegate:self];
-    [cell.textField setReturnKeyType:UIReturnKeyNext];
+    [cell.textField setReturnKeyType:UIReturnKeyDone];
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     if (indexPath.section == 0) {
         // Section 0 - Required Information
@@ -226,7 +226,7 @@
  */
 -(void)warehouseTextFieldActive:(UITextField *)textField {
     [textField resignFirstResponder];
-    [ActionSheetStringPicker showPickerWithTitle:@"Set Warehouse" rows:[newProjectHelper warehouseNamesArray] initialSelection:0 target:self successAction:@selector(warehousePicked:element:) cancelAction:nil origin:textField];
+    [ActionSheetStringPicker showPickerWithTitle:@"Set Warehouse" rows:[projectHelper warehouseNamesArray] initialSelection:0 target:self successAction:@selector(warehousePicked:element:) cancelAction:nil origin:textField];
 }
 
 /**
@@ -236,9 +236,9 @@
  *  @param sender        The Warehouse UITextField
  */
 -(void)warehousePicked:(NSNumber *)selectedIndex element:(UITextField *)sender {
-    NSArray *warehouseNamesArray = [newProjectHelper warehouseNamesArray];
+    NSArray *warehouseNamesArray = [projectHelper warehouseNamesArray];
     [sender setText:[warehouseNamesArray objectAtIndex:[selectedIndex integerValue]]];
-    [self insertObject:[newProjectHelper rowIDOfWarehouseFromFullName:[sender text]] intoArrayWithTag:[sender tag]];
+    [self insertObject:[projectHelper rowIDOfWarehouseFromFullName:[sender text]] intoArrayWithTag:[sender tag]];
     [self addObjectToProjectStrings:[sender text] withTag:[sender tag]];
 }
 
@@ -249,7 +249,7 @@
  */
 -(void)projectClassificationTextFieldActive:(UITextField *)textField {
     [textField resignFirstResponder];
-    [ActionSheetStringPicker showPickerWithTitle:@"Set Project Classification" rows:[newProjectHelper projectClassificationNameArray] initialSelection:0 target:self successAction:@selector(projectClassificationPicked:element:) cancelAction:nil origin:textField];
+    [ActionSheetStringPicker showPickerWithTitle:@"Set Project Classification" rows:[projectHelper projectClassificationNameArray] initialSelection:0 target:self successAction:@selector(projectClassificationPicked:element:) cancelAction:nil origin:textField];
 }
 
 /**
@@ -259,9 +259,9 @@
  *  @param sender        The Project Classification UITextField
  */
 -(void)projectClassificationPicked:(NSNumber *)selectedIndex element:(UITextField *)sender {
-    NSArray *projectClassificationNameArray = [newProjectHelper projectClassificationNameArray];
+    NSArray *projectClassificationNameArray = [projectHelper projectClassificationNameArray];
     [sender setText:[projectClassificationNameArray objectAtIndex:[selectedIndex integerValue]]];
-    [self insertObject:[newProjectHelper rowIDOfProjectClassificationFromName:[sender text]] intoArrayWithTag:[sender tag]];
+    [self insertObject:[projectHelper rowIDOfProjectClassificationFromName:[sender text]] intoArrayWithTag:[sender tag]];
     [self addObjectToProjectStrings:[sender text] withTag:[sender tag]];
 }
 
@@ -272,7 +272,7 @@
  */
 -(void)projectTextFieldActive:(UITextField *)textField {
     [textField resignFirstResponder];
-    [ActionSheetStringPicker showPickerWithTitle:@"Set Project" rows:[newProjectHelper projectNameArray] initialSelection:0 target:self successAction:@selector(projectPicked:element:) cancelAction:nil origin:textField];
+    [ActionSheetStringPicker showPickerWithTitle:@"Set Project" rows:[projectHelper projectNameArray] initialSelection:0 target:self successAction:@selector(projectPicked:element:) cancelAction:nil origin:textField];
 }
 
 /**
@@ -282,9 +282,9 @@
  *  @param sender        The Project UITextField
  */
 -(void)projectPicked:(NSNumber *)selectedIndex element:(UITextField *)sender {
-    NSArray *projectNameArray = [newProjectHelper projectNameArray];
+    NSArray *projectNameArray = [projectHelper projectNameArray];
     [sender setText:[projectNameArray objectAtIndex:[selectedIndex integerValue]]];
-    [self insertObject:[newProjectHelper rowIDOfProjectItemFromName:[sender text]] intoArrayWithTag:[sender tag]];
+    [self insertObject:[projectHelper rowIDOfProjectItemFromName:[sender text]] intoArrayWithTag:[sender tag]];
     [self addObjectToProjectStrings:[sender text] withTag:[sender tag]];
 }
 
@@ -295,7 +295,7 @@
  */
 -(void)projectManagerTextFieldActive:(UITextField *)textField {
     [textField resignFirstResponder];
-    [ActionSheetStringPicker showPickerWithTitle:@"Set Project Manager" rows:[newProjectHelper projectManagerNameArray] initialSelection:0 target:self successAction:@selector(projectManagerPicked:element:) cancelAction:nil origin:textField];
+    [ActionSheetStringPicker showPickerWithTitle:@"Set Project Manager" rows:[projectHelper projectManagerNameArray] initialSelection:0 target:self successAction:@selector(projectManagerPicked:element:) cancelAction:nil origin:textField];
 }
 
 /**
@@ -305,9 +305,9 @@
  *  @param sender        The Project Manager UITextField
  */
 -(void)projectManagerPicked:(NSNumber *)selectedIndex element:(UITextField *)sender {
-    NSArray *projectManagerNameArray = [newProjectHelper projectManagerNameArray];
+    NSArray *projectManagerNameArray = [projectHelper projectManagerNameArray];
     [sender setText:[projectManagerNameArray objectAtIndex:[selectedIndex integerValue]]];
-    [self insertObject:[newProjectHelper rowIDOfProjectManagerFromName:[sender text]] intoArrayWithTag:[sender tag]];
+    [self insertObject:[projectHelper rowIDOfProjectManagerFromName:[sender text]] intoArrayWithTag:[sender tag]];
     [self addObjectToProjectStrings:[sender text] withTag:[sender tag]];
 }
 
@@ -318,7 +318,7 @@
  */
 -(void)projectSupervisorTextFieldActive:(UITextField *)textField {
     [textField resignFirstResponder];
-    [ActionSheetStringPicker showPickerWithTitle:@"Set Project Supervisor" rows:[newProjectHelper projectSupervisorNameArray] initialSelection:0 target:self successAction:@selector(projectSupervisorPicked:element:) cancelAction:nil origin:textField];
+    [ActionSheetStringPicker showPickerWithTitle:@"Set Project Supervisor" rows:[projectHelper projectSupervisorNameArray] initialSelection:0 target:self successAction:@selector(projectSupervisorPicked:element:) cancelAction:nil origin:textField];
 }
 
 /**
@@ -328,9 +328,9 @@
  *  @param sender        The Project Supervisor UITextField
  */
 -(void)projectSupervisorPicked:(NSNumber *)selectedIndex element:(UITextField *)sender {
-    NSArray *projectSupervisorNameArray = [newProjectHelper projectSupervisorNameArray];
+    NSArray *projectSupervisorNameArray = [projectHelper projectSupervisorNameArray];
     [sender setText:[projectSupervisorNameArray objectAtIndex:[selectedIndex integerValue]]];
-    [self insertObject:[newProjectHelper rowIDOfProjectSupervisorFromName:[sender text]] intoArrayWithTag:[sender tag]];
+    [self insertObject:[projectHelper rowIDOfProjectSupervisorFromName:[sender text]] intoArrayWithTag:[sender tag]];
     [self addObjectToProjectStrings:[sender text] withTag:[sender tag]];
 }
 
@@ -341,7 +341,7 @@
  */
 -(void)projectStageTextFieldActive:(UITextField *)textField {
     [textField resignFirstResponder];
-    [ActionSheetStringPicker showPickerWithTitle:@"Set Project Stage" rows:[newProjectHelper projectStageNameArray] initialSelection:0 target:self successAction:@selector(projectStagePicked:element:) cancelAction:nil origin:textField];
+    [ActionSheetStringPicker showPickerWithTitle:@"Set Project Stage" rows:[projectHelper projectStageNameArray] initialSelection:0 target:self successAction:@selector(projectStagePicked:element:) cancelAction:nil origin:textField];
 }
 
 /**
@@ -351,9 +351,9 @@
  *  @param sender        The Project Stage UITextField
  */
 -(void)projectStagePicked:(NSNumber *)selectedIndex element:(UITextField *)sender {
-    NSArray *projectStageNameArray = [newProjectHelper projectStageNameArray];
+    NSArray *projectStageNameArray = [projectHelper projectStageNameArray];
     [sender setText:[projectStageNameArray objectAtIndex:[selectedIndex integerValue]]];
-    [self insertObject:[newProjectHelper rowIDOfProjectStageFromName:[sender text]] intoArrayWithTag:[sender tag]];
+    [self insertObject:[projectHelper rowIDOfProjectStageFromName:[sender text]] intoArrayWithTag:[sender tag]];
     [self addObjectToProjectStrings:[sender text] withTag:[sender tag]];
 }
 
@@ -364,7 +364,7 @@
  */
 -(void)projectStatusTextFieldActive:(UITextField *)textField {
     [textField resignFirstResponder];
-    [ActionSheetStringPicker showPickerWithTitle:@"Set Project Status" rows:[newProjectHelper projectStatusNameArray] initialSelection:0 target:self successAction:@selector(projectStatusPicked:element:) cancelAction:nil origin:textField];
+    [ActionSheetStringPicker showPickerWithTitle:@"Set Project Status" rows:[projectHelper projectStatusNameArray] initialSelection:0 target:self successAction:@selector(projectStatusPicked:element:) cancelAction:nil origin:textField];
 }
 
 /**
@@ -374,9 +374,9 @@
  *  @param sender        The Project Status UITextField
  */
 -(void)projectStatusPicked:(NSNumber *)selectedIndex element:(UITextField *)sender {
-    NSArray *projectStatusNameArray = [newProjectHelper projectStatusNameArray];
+    NSArray *projectStatusNameArray = [projectHelper projectStatusNameArray];
     [sender setText:[projectStatusNameArray objectAtIndex:[selectedIndex integerValue]]];
-    [self insertObject:[newProjectHelper rowIDOfProjectStatusFromName:[sender text]] intoArrayWithTag:[sender tag]];
+    [self insertObject:[projectHelper rowIDOfProjectStatusFromName:[sender text]] intoArrayWithTag:[sender tag]];
     [self addObjectToProjectStrings:[sender text] withTag:[sender tag]];
 }
 
@@ -387,7 +387,7 @@
  */
 -(void)projectTypeTextFieldActive:(UITextField *)textField {
     [textField resignFirstResponder];
-    [ActionSheetStringPicker showPickerWithTitle:@"Set Project Type" rows:[newProjectHelper projectTypeNameArray] initialSelection:0 target:self successAction:@selector(projectTypePicked:element:) cancelAction:nil origin:textField];
+    [ActionSheetStringPicker showPickerWithTitle:@"Set Project Type" rows:[projectHelper projectTypeNameArray] initialSelection:0 target:self successAction:@selector(projectTypePicked:element:) cancelAction:nil origin:textField];
 }
 
 /**
@@ -397,9 +397,9 @@
  *  @param sender        The Project Type UITextField
  */
 -(void)projectTypePicked:(NSNumber *)selectedIndex element:(UITextField *)sender {
-    NSArray *projectTypeNameArray = [newProjectHelper projectTypeNameArray];
+    NSArray *projectTypeNameArray = [projectHelper projectTypeNameArray];
     [sender setText:[projectTypeNameArray objectAtIndex:[selectedIndex integerValue]]];
-    [self insertObject:[newProjectHelper rowIDOfProjectTypeFromName:[sender text]] intoArrayWithTag:[sender tag]];
+    [self insertObject:[projectHelper rowIDOfProjectTypeFromName:[sender text]] intoArrayWithTag:[sender tag]];
     [self addObjectToProjectStrings:[sender text] withTag:[sender tag]];
 }
 
@@ -449,7 +449,7 @@
         [HUD showInView:self.view];
         DatabaseConnector *database = [DatabaseConnector sharedDatabaseConnector];
         [database connectToDatabase];
-        NSArray *keys = [newProjectHelper projectAttributesKeys];
+        NSArray *keys = [projectHelper projectAttributesKeys];
         if ([cellArray objectAtIndex:26] == [NSNull null]) {
             // Salvage Value cannot be null
             [cellArray replaceObjectAtIndex:26 withObject:[NSNumber numberWithInt:0]];
