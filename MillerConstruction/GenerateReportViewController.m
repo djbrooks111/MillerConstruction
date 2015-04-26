@@ -12,26 +12,73 @@
 
 @end
 
-@implementation GenerateReportViewController
+@implementation GenerateReportViewController {
+    GenerateReportSearchHelper *helper;
+}
 
-- (void)viewDidLoad {
+-(void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 }
 
-- (void)didReceiveMemoryWarning {
+-(void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    helper = [[GenerateReportSearchHelper alloc] init];
+    
+    int indexOfReport = [[helper reportNamesArray] indexOfObject:self.report];
+    
+    NSString *fetchCommand;
+    switch (indexOfReport) {
+        case 0:
+            // Weekly
+            fetchCommand = [NSString stringWithFormat:@"SELECT "];
+            break;
+            
+        case 1:
+            // Steve Meyer
+            break;
+            
+        case 2:
+            // South East Refrigeration
+            break;
+            
+        case 3:
+            // North East Refrigeration
+            break;
+            
+        case 4:
+            // J Dempsey
+            break;
+            
+        case 5:
+            // Invoice
+            break;
+            
+        case 6:
+            // Completed
+            break;
+            
+        case 7:
+            // Construction
+            break;
+            
+        case 8:
+            // Repair
+            break;
+            
+        case 9:
+            // HVAC
+            break;
+            
+        default:
+            break;
+    }
+}
+
+-(void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

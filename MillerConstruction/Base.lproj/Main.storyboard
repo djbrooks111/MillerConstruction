@@ -593,7 +593,60 @@
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="72f-du-iZ5" id="o0I-CK-BSj">
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gRV-Md-oN3">
+                                            <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Change Me" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CSm-3m-8oa">
+                                            <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                        </textField>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="gRV-Md-oN3" firstAttribute="width" secondItem="CSm-3m-8oa" secondAttribute="width" id="04M-yH-2R7"/>
+                                        <constraint firstAttribute="centerY" secondItem="CSm-3m-8oa" secondAttribute="centerY" constant="-0.5" id="8Qx-Tz-Gxl"/>
+                                        <constraint firstAttribute="centerY" secondItem="gRV-Md-oN3" secondAttribute="centerY" id="GH5-N2-qCA"/>
+                                        <constraint firstItem="gRV-Md-oN3" firstAttribute="leading" secondItem="o0I-CK-BSj" secondAttribute="leadingMargin" id="TAZ-iw-lrE"/>
+                                        <constraint firstItem="CSm-3m-8oa" firstAttribute="trailing" secondItem="o0I-CK-BSj" secondAttribute="trailingMargin" id="ck8-kA-ZwN"/>
+                                        <constraint firstItem="CSm-3m-8oa" firstAttribute="leading" secondItem="gRV-Md-oN3" secondAttribute="trailing" id="yIZ-pv-WeS"/>
+                                    </constraints>
+                                    <variation key="default">
+                                        <mask key="subviews">
+                                            <exclude reference="gRV-Md-oN3"/>
+                                            <exclude reference="CSm-3m-8oa"/>
+                                        </mask>
+                                        <mask key="constraints">
+                                            <exclude reference="04M-yH-2R7"/>
+                                            <exclude reference="GH5-N2-qCA"/>
+                                            <exclude reference="TAZ-iw-lrE"/>
+                                            <exclude reference="8Qx-Tz-Gxl"/>
+                                            <exclude reference="ck8-kA-ZwN"/>
+                                            <exclude reference="yIZ-pv-WeS"/>
+                                        </mask>
+                                    </variation>
+                                    <variation key="heightClass=regular">
+                                        <mask key="subviews">
+                                            <include reference="gRV-Md-oN3"/>
+                                            <include reference="CSm-3m-8oa"/>
+                                        </mask>
+                                        <mask key="constraints">
+                                            <include reference="04M-yH-2R7"/>
+                                            <include reference="GH5-N2-qCA"/>
+                                            <include reference="TAZ-iw-lrE"/>
+                                            <include reference="8Qx-Tz-Gxl"/>
+                                            <include reference="ck8-kA-ZwN"/>
+                                            <include reference="yIZ-pv-WeS"/>
+                                        </mask>
+                                    </variation>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="label" destination="gRV-Md-oN3" id="VI6-Ma-yAM"/>
+                                    <outlet property="textField" destination="CSm-3m-8oa" id="w2l-fJ-C8Z"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -601,6 +654,7 @@
                             <outlet property="delegate" destination="ep3-g6-3DH" id="FVy-Xm-hdb"/>
                         </connections>
                     </tableView>
+                    <toolbarItems/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P0h-8H-UEz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -611,6 +665,7 @@
             <objects>
                 <tableViewController id="QjJ-J0-9QW" customClass="ViewTriggersTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="FLG-KM-9cq">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>

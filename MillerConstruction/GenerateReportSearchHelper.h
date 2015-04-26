@@ -10,6 +10,16 @@
 
 @interface GenerateReportSearchHelper : NSObject
 
+#pragma mark - ReportType
+
+typedef NS_ENUM(NSInteger, ReportType) {
+    ActiveReport,
+    ProposalReport,
+    BudgetaryReport,
+    InactiveReport,
+    ClosedReport
+};
+
 @property (nonatomic, retain) NSArray *reportNamesArray;
 
 @end

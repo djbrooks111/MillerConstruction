@@ -33,6 +33,9 @@
     
     NSLog(@"id: %@", self.projectID);
     
+    UIBarButtonItem *editButton = [[UIBarButtonItem alloc] initWithTitle:@"Edit" style:UIBarButtonItemStylePlain target:self action:@selector(editProject:)];
+    [self.navigationItem setRightBarButtonItem:editButton];
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -55,12 +58,17 @@
     requiredInformation = [projectAttributesNames subarrayWithRange:NSMakeRange(0, 10)];
     optionalInformation = [projectAttributesNames subarrayWithRange:NSMakeRange(10, 23)];
     
+    cellArray = [[NSMutableArray alloc] initWithArray:[helper projectInformation]];
+    projectStrings = [[NSMutableArray alloc] initWithArray:[helper projectInformation]];
+    
+    /*
     cellArray = [[NSMutableArray alloc] initWithCapacity:NUMBER_CELLS];
     projectStrings = [[NSMutableArray alloc] initWithCapacity:NUMBER_CELLS];
     for (int i = 0; i < NUMBER_CELLS; i++) {
         [cellArray addObject:[NSNull null]];
         [projectStrings addObject:[NSNull null]];
     }
+     */
     
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
     [self.view addGestureRecognizer:tapGesture];
@@ -435,9 +443,13 @@
     if ([sender.title isEqualToString:@"Edit"]) {
         // Editing is shown
         // Enable editing
+        UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithTitle:@"Save" style:UIBarButtonItemStylePlain target:self action:@selector(editProject:)];
+        [self.navigationItem setRightBarButtonItem:saveButton];
     } else {
         // Saving is shown
         // Save project
+        UIBarButtonItem *editButton = [[UIBarButtonItem alloc] initWithTitle:@"Edit" style:UIBarButtonItemStylePlain target:self action:@selector(editProject:)];
+        [self.navigationItem setRightBarButtonItem:editButton];
     }
 }
 

@@ -26,6 +26,7 @@
 		265C19931ABC8905007BCEF6 /* CreateNewProjectTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 265C19921ABC8905007BCEF6 /* CreateNewProjectTableViewController.m */; };
 		266AE5EC1ABC64EE0073E80A /* MainMenuViewControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 266AE5EB1ABC64EE0073E80A /* MainMenuViewControllerTest.m */; };
 		26773F691ABC61800075C1E7 /* LoginViewControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 26773F681ABC61800075C1E7 /* LoginViewControllerTest.m */; };
+		26777C591AEA84A800807546 /* Project.m in Sources */ = {isa = PBXBuildFile; fileRef = 26777C581AEA84A800807546 /* Project.m */; };
 		2688B8FA1AB67D1E0052DEDE /* MainMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2688B8F91AB67D1E0052DEDE /* MainMenuViewController.m */; };
 		2688B9001AB67E780052DEDE /* UserTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2688B8FF1AB67E780052DEDE /* UserTest.m */; };
 		26892C1D1AC10EBF00783172 /* ProjectTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 26892C1B1AC10EBF00783172 /* ProjectTableViewCell.m */; };
@@ -102,6 +103,8 @@
 		265C19921ABC8905007BCEF6 /* CreateNewProjectTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateNewProjectTableViewController.m; sourceTree = "<group>"; };
 		266AE5EB1ABC64EE0073E80A /* MainMenuViewControllerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMenuViewControllerTest.m; sourceTree = "<group>"; };
 		26773F681ABC61800075C1E7 /* LoginViewControllerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewControllerTest.m; sourceTree = "<group>"; };
+		26777C571AEA84A800807546 /* Project.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Project.h; sourceTree = "<group>"; };
+		26777C581AEA84A800807546 /* Project.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Project.m; sourceTree = "<group>"; };
 		2688B8F81AB67D1E0052DEDE /* MainMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenuViewController.h; sourceTree = "<group>"; };
 		2688B8F91AB67D1E0052DEDE /* MainMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMenuViewController.m; sourceTree = "<group>"; };
 		2688B8FF1AB67E780052DEDE /* UserTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserTest.m; sourceTree = "<group>"; };
@@ -370,6 +373,8 @@
 				26944D681AE0956D00E0160E /* GenerateReportSearchHelper.m */,
 				26944D6D1AE09E1100E0160E /* ViewTriggersHelper.h */,
 				26944D6E1AE09E1100E0160E /* ViewTriggersHelper.m */,
+				26777C571AEA84A800807546 /* Project.h */,
+				26777C581AEA84A800807546 /* Project.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -765,6 +770,7 @@
 				2688B8FA1AB67D1E0052DEDE /* MainMenuViewController.m in Sources */,
 				26126B701AC887F600AB70B3 /* ProjectStatus.m in Sources */,
 				26BE550E1AB66DEE00566014 /* MysqlInsert.m in Sources */,
+				26777C591AEA84A800807546 /* Project.m in Sources */,
 				26BE550C1AB66DEE00566014 /* MysqlFetch.m in Sources */,
 				26944D6C1AE09C0800E0160E /* ViewTriggersTableViewController.m in Sources */,
 				2610A0F91ACF8CF0005D3902 /* NSString+MysqlEscape.m in Sources */,

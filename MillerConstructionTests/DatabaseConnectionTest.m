@@ -47,4 +47,9 @@
     XCTAssertNotEqualObjects(resultArray, sortedArray, @"Arrays should not be equal, i.e. unsorted vs sorted");
 }
 
+-(void)testThing {
+    NSArray *resultArray = [database fetchProjectInformationForID:[NSNumber numberWithInt:1]];
+    NSLog(@"%@", resultArray);
+}
+
 @end

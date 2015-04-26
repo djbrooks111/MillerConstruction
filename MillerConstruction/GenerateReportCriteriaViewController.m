@@ -18,6 +18,8 @@
 
 @implementation GenerateReportCriteriaViewController {
     GenerateReportSearchHelper *helper;
+    ReportType reportType;
+    NSString *report;
 }
 
 #pragma mark - UIViewController Methods
@@ -25,6 +27,12 @@
 -(void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    [self.activeButton setTag:ActiveReport];
+    [self.proposalsButton setTag:ProposalReport];
+    [self.budgetaryButton setTag:BudgetaryReport];
+    [self.inactiveButton setTag:InactiveReport];
+    [self.closedButton setTag:ClosedReport];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -68,7 +76,11 @@
 }
 
 -(void)reportPicked:(NSNumber *)selectedIndex element:(UIButton *)sender {
-    
+    report = [[helper reportNamesArray] objectAtIndex:[selectedIndex intValue]];
+}
+
+-(void)generateReport:(UIButton *)sender {
+    reportType = [sender tag];
 }
 
 #pragma mark - Navigation
@@ -76,7 +88,8 @@
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier] isEqualToString:@"generateReport"]) {
         GenerateReportViewController *viewController = [segue destinationViewController];
-        // Set information
+        [viewController setReportType:reportType];
+        [viewController setReport:report];
     }
 }
 
