@@ -365,7 +365,8 @@
     NSLog(@"requiredInfoFetch: %@", requiredInfoFetch);
     MysqlFetch *fetch = [self fetchWithCommand:requiredInfoFetch];
     NSLog(@"%@", [fetch results]);
-    NSArray *requiredInfo = [fetch results];
+    NSArray *requiredInfoArray = [fetch results];
+    NSDictionary *requiredInfo = [requiredInfoArray firstObject];
     [projectInfo addObject:[requiredInfo valueForKey:@"mcsNumber"]];
     [projectInfo addObject:[NSString stringWithFormat:@"%@, %@ -- #%@", [requiredInfo valueForKey:@"city.name"], [requiredInfo valueForKey:@"warehouse.state"], [requiredInfo valueForKey:@"warehouse.warehouseID"]]];
     [projectInfo addObject:[requiredInfo valueForKey:@"projectclass.name"]];
@@ -375,21 +376,60 @@
     NSLog(@"managerFetch: %@", managerFetch);
     fetch = [self fetchWithCommand:managerFetch];
     NSLog(@"%@", [fetch results]);
-    [projectInfo addObject:[[fetch results] valueForKey:@"name"]];
+    [projectInfo addObject:[[[fetch results] firstObject] valueForKey:@"name"]];
     
     NSString *supervisorFetch = [NSString stringWithFormat:@"SELECT person.name FROM person, project_supervisors WHERE project_supervisors.project_id = %d AND project_supervisors.id = person.id", [projectID intValue]];
     NSLog(@"supervisorFetch: %@", supervisorFetch);
     fetch = [self fetchWithCommand:supervisorFetch];
     NSLog(@"%@", [fetch results]);
-    [projectInfo addObject:[[fetch results] valueForKey:@"name"]];
+    [projectInfo addObject:[[[fetch results] firstObject] valueForKey:@"name"]];
     [projectInfo addObject:[requiredInfo valueForKey:@"projectstage.name"]];
     [projectInfo addObject:[requiredInfo valueForKey:@"projectstatus.name"]];
     [projectInfo addObject:[requiredInfo valueForKey:@"projecttype.name"]];
     [projectInfo addObject:[requiredInfo valueForKey:@"project.scope"]];
     
     // Optional Information
-    NSString *optionalInfoFetch = [NSString stringWithFormat:@"SELECT project.projectInitiatedDate, project.siteSurvey, project.costcoDueDate, project.proposalSubmitted, closeoutdetails.asBuilts, closeoutdetails.punchList, closeoutdetails.alarmHvacForm, closeoutdetails.verisaeShutdownReport, closeoutdetails.closeoutNotes, project.scheduledStartDate, project.scheduledTurnover, closeoutdetails.airGas, project.permitApplication, closeoutdetails.permitsClosed, project.shouldInvoice, project.invoiced, project.projectNotes, project.zachUpdates, project.cost, project.customerNumber FROM project, closeoutdetails WHERE project.id = %d AND project.closeoutDetails_id = closeoutdetails.id", [projectID intValue]];
-    // Does not include salvage, need to do that next
+    NSString *optionalInfoFetch = [NSString stringWithFormat:@"SELECT project.projectInitiatedDate, project.siteSurvey, project.costcoDueDate, project.proposalSubmitted, closeoutdetails.asBuilts, closeoutdetails.punchList, closeoutdetails.alarmHvacForm, closeoutdetails.verisaeShutdownReport, closeoutdetails.closeoutNotes, project.scheduledStartDate, project.scheduledTurnover, project.actualTurnover, closeoutdetails.airGas, project.permitApplication, closeoutdetails.permitsClosed, project.shouldInvoice, project.invoiced, project.projectNotes, project.zachUpdates, project.cost, project.customerNumber FROM project, closeoutdetails WHERE project.id = %d AND project.closeoutDetails_id = closeoutdetails.id", [projectID intValue]];
+    NSLog(@"optionalInfoFetch: %@", optionalInfoFetch);
+    fetch = [self fetchWithCommand:optionalInfoFetch];
+    NSLog(@"%@", [fetch results]);
+    NSArray *optionalInfoArray = [fetch results];
+    NSDictionary *optionalInfo = [optionalInfoArray firstObject];
+    [projectInfo addObject:[optionalInfo valueForKey:@"projectInitiatedDate"]];
+    [projectInfo addObject:[optionalInfo valueForKey:@"siteSurvey"]];
+    [projectInfo addObject:[optionalInfo valueForKey:@"costcoDueDate"]];
+    [projectInfo addObject:[optionalInfo valueForKey:@"proposalSubmitted"]];
+    [projectInfo addObject:[optionalInfo valueForKey:@"closeoutdetails.asBuilts"]];
+    [projectInfo addObject:[optionalInfo valueForKey:@"closeoutdetails.punchList"]];
+    [projectInfo addObject:[optionalInfo valueForKey:@"closeoutdetails.alarmHvacForm"]];
+    [projectInfo addObject:[optionalInfo valueForKey:@"closeoutdetails.verisaeShutdownReport"]];
+    [projectInfo addObject:[optionalInfo valueForKey:@"closeoutdetails.closeoutNotes"]];
+    [projectInfo addObject:[optionalInfo valueForKey:@"project.scheduledStartDate"]];
+    [projectInfo addObject:[optionalInfo valueForKey:@"project.scheduledTurnover"]];
+    [projectInfo addObject:[optionalInfo valueForKey:@"project.actualTurnover"]];
+    [projectInfo addObject:[optionalInfo valueForKey:@"closeoutdetails.airGas"]];
+    [projectInfo addObject:[optionalInfo valueForKey:@"project.permitApplication"]];
+    [projectInfo addObject:[optionalInfo valueForKey:@"closeoutdetails.permitsClosed"]];
+    
+    NSString *salvageFetch = [NSString stringWithFormat:@"SELECT salvagevalue.date, salvagevalue.value FROM salvagevalue, project, closeoutdetails WHERE project.id = %d AND project.closeoutDetails_id = closeoutdetails.id AND closeoutdetails.salvageValue_id = salvagevalue.id", [projectID intValue]];
+    NSLog(@"salvageFetch: %@", salvageFetch);
+    fetch = [self fetchWithCommand:salvageFetch];
+    NSLog(@"%@", [fetch results]);
+    NSLog(@"%lu", (unsigned long)[[fetch results] count]);
+    if ([[fetch results] count] == 0) {
+        // No salvage info
+        [projectInfo addObject:[NSNull null]];
+        [projectInfo addObject:[NSNumber numberWithInt:0]];
+    } else {
+        [projectInfo addObject:[[[fetch results] firstObject] valueForKey:@"date"]];
+        [projectInfo addObject:[[[fetch results] firstObject] valueForKey:@"value"]];
+    }
+    [projectInfo addObject:[optionalInfo valueForKey:@"project.shouldInvoice"]];
+    [projectInfo addObject:[optionalInfo valueForKey:@"project.invoiced"]];
+    [projectInfo addObject:[optionalInfo valueForKey:@"project.projectNotes"]];
+    [projectInfo addObject:[optionalInfo valueForKey:@"project.zachUpdates"]];
+    [projectInfo addObject:[optionalInfo valueForKey:@"project.cost"]];
+    [projectInfo addObject:[optionalInfo valueForKey:@"project.customerNumber"]];
     
     return projectInfo;
 }

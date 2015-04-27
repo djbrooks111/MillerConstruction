@@ -26,15 +26,22 @@
     NSArray *projectAttributesNames;
     NSArray *requiredInformation;
     NSArray *optionalInformation;
+    BOOL isEditing;
+    JGProgressHUD *HUD;
 }
 
 -(void)viewDidLoad {
     [super viewDidLoad];
     
-    NSLog(@"id: %@", self.projectID);
-    
     UIBarButtonItem *editButton = [[UIBarButtonItem alloc] initWithTitle:@"Edit" style:UIBarButtonItemStylePlain target:self action:@selector(editProject:)];
     [self.navigationItem setRightBarButtonItem:editButton];
+    
+    isEditing = FALSE;
+    
+    HUD = self.prototypeHUD;
+    HUD.textLabel.text = @"Loading data...";
+    [HUD showInView:self.view];
+    [self.view bringSubviewToFront:HUD];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -48,9 +55,9 @@
     
     self.navigationItem.title = @"View Project";
     
-    JGProgressHUD *HUD = self.prototypeHUD;
-    HUD.textLabel.text = @"Loading data...";
-    [HUD showInView:self.view];
+    //HUD = self.prototypeHUD;
+    //HUD.textLabel.text = @"Loading data...";
+    //[HUD showInView:self.view];
     helper = [[ProjectHelper alloc] init];
     [helper setProjectID:self.projectID];
     [helper getProjectInformationFromDatabase];
@@ -60,15 +67,6 @@
     
     cellArray = [[NSMutableArray alloc] initWithArray:[helper projectInformation]];
     projectStrings = [[NSMutableArray alloc] initWithArray:[helper projectInformation]];
-    
-    /*
-    cellArray = [[NSMutableArray alloc] initWithCapacity:NUMBER_CELLS];
-    projectStrings = [[NSMutableArray alloc] initWithCapacity:NUMBER_CELLS];
-    for (int i = 0; i < NUMBER_CELLS; i++) {
-        [cellArray addObject:[NSNull null]];
-        [projectStrings addObject:[NSNull null]];
-    }
-     */
     
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
     [self.view addGestureRecognizer:tapGesture];
@@ -91,15 +89,15 @@
  *  @return The new JGProgressHUD
  */
 -(JGProgressHUD *)prototypeHUD {
-    JGProgressHUD *HUD = [[JGProgressHUD alloc] initWithStyle:JGProgressHUDStyleDark];
-    HUD.interactionType = JGProgressHUDInteractionTypeBlockAllTouches;
-    HUD.backgroundColor = [UIColor colorWithWhite:0.0f alpha:0.4f];
-    HUD.HUDView.layer.shadowColor = [UIColor blackColor].CGColor;
-    HUD.HUDView.layer.shadowOffset = CGSizeZero;
-    HUD.HUDView.layer.shadowOpacity = 0.4f;
-    HUD.HUDView.layer.shadowRadius = 8.0f;
+    JGProgressHUD *HUDD = [[JGProgressHUD alloc] initWithStyle:JGProgressHUDStyleDark];
+    HUDD.interactionType = JGProgressHUDInteractionTypeBlockAllTouches;
+    HUDD.backgroundColor = [UIColor colorWithWhite:0.0f alpha:0.4f];
+    HUDD.HUDView.layer.shadowColor = [UIColor blackColor].CGColor;
+    HUDD.HUDView.layer.shadowOffset = CGSizeZero;
+    HUDD.HUDView.layer.shadowOpacity = 0.4f;
+    HUDD.HUDView.layer.shadowRadius = 8.0f;
     
-    return HUD;
+    return HUDD;
 }
 
 #pragma mark - Table view data source
@@ -149,45 +147,52 @@
     if ([projectStrings objectAtIndex:index] == [NSNull null]) {
         [cell.textField setText:@""];
     } else {
-        [cell.textField setText:[projectStrings objectAtIndex:index]];
+        [cell.textField setText:[NSString stringWithFormat:@"%@", [projectStrings objectAtIndex:index]]];
     }
     [cell.textField setDelegate:self];
     [cell.textField setReturnKeyType:UIReturnKeyDone];
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-    if (indexPath.section == 0) {
-        // Section 0 - Required Information
-        [cell.textField removeTarget:nil action:NULL forControlEvents:UIControlEventEditingDidBegin];
-        if (indexPath.row == 1) {
-            // Warehouse
-            [cell.textField addTarget:nil action:@selector(warehouseTextFieldActive:) forControlEvents:UIControlEventEditingDidBegin];
-        } else if (indexPath.row == 2) {
-            // Project Classification
-            [cell.textField addTarget:nil action:@selector(projectClassificationTextFieldActive:) forControlEvents:UIControlEventEditingDidBegin];
-        } else if (indexPath.row == 3) {
-            // Project
-            [cell.textField addTarget:nil action:@selector(projectTextFieldActive:) forControlEvents:UIControlEventEditingDidBegin];
-        } else if (indexPath.row == 4) {
-            // Project Manager
-            [cell.textField addTarget:nil action:@selector(projectManagerTextFieldActive:) forControlEvents:UIControlEventEditingDidBegin];
-        } else if (indexPath.row == 5) {
-            // Project Supervisor
-            [cell.textField addTarget:nil action:@selector(projectSupervisorTextFieldActive:) forControlEvents:UIControlEventEditingDidBegin];
-        } else if (indexPath.row == 6) {
-            // Project Stage
-            [cell.textField addTarget:nil action:@selector(projectStageTextFieldActive:) forControlEvents:UIControlEventEditingDidBegin];
-        } else if (indexPath.row == 7) {
-            // Project Status
-            [cell.textField addTarget:nil action:@selector(projectStatusTextFieldActive:) forControlEvents:UIControlEventEditingDidBegin];
-        } else if (indexPath.row == 8) {
-            // Project Type
-            [cell.textField addTarget:nil action:@selector(projectTypeTextFieldActive:) forControlEvents:UIControlEventEditingDidBegin];
+    if (isEditing) {
+        // Allow editing, add targets
+        [cell.textField setUserInteractionEnabled:TRUE];
+        if (indexPath.section == 0) {
+            // Section 0 - Required Information
+            [cell.textField removeTarget:nil action:NULL forControlEvents:UIControlEventEditingDidBegin];
+            if (indexPath.row == 1) {
+                // Warehouse
+                [cell.textField addTarget:nil action:@selector(warehouseTextFieldActive:) forControlEvents:UIControlEventEditingDidBegin];
+            } else if (indexPath.row == 2) {
+                // Project Classification
+                [cell.textField addTarget:nil action:@selector(projectClassificationTextFieldActive:) forControlEvents:UIControlEventEditingDidBegin];
+            } else if (indexPath.row == 3) {
+                // Project
+                [cell.textField addTarget:nil action:@selector(projectTextFieldActive:) forControlEvents:UIControlEventEditingDidBegin];
+            } else if (indexPath.row == 4) {
+                // Project Manager
+                [cell.textField addTarget:nil action:@selector(projectManagerTextFieldActive:) forControlEvents:UIControlEventEditingDidBegin];
+            } else if (indexPath.row == 5) {
+                // Project Supervisor
+                [cell.textField addTarget:nil action:@selector(projectSupervisorTextFieldActive:) forControlEvents:UIControlEventEditingDidBegin];
+            } else if (indexPath.row == 6) {
+                // Project Stage
+                [cell.textField addTarget:nil action:@selector(projectStageTextFieldActive:) forControlEvents:UIControlEventEditingDidBegin];
+            } else if (indexPath.row == 7) {
+                // Project Status
+                [cell.textField addTarget:nil action:@selector(projectStatusTextFieldActive:) forControlEvents:UIControlEventEditingDidBegin];
+            } else if (indexPath.row == 8) {
+                // Project Type
+                [cell.textField addTarget:nil action:@selector(projectTypeTextFieldActive:) forControlEvents:UIControlEventEditingDidBegin];
+            }
+        } else if (indexPath.section == 1) {
+            // Section 1 - Optional Information
+            [cell.textField removeTarget:nil action:NULL forControlEvents:UIControlEventEditingDidBegin];
+            if (indexPath.row <= 15) {
+                [cell.textField addTarget:nil action:@selector(dateTextFieldActive:) forControlEvents:UIControlEventEditingDidBegin];
+            }
         }
-    } else if (indexPath.section == 1) {
-        // Section 1 - Optional Information
-        [cell.textField removeTarget:nil action:NULL forControlEvents:UIControlEventEditingDidBegin];
-        if (indexPath.row <= 15) {
-            [cell.textField addTarget:nil action:@selector(dateTextFieldActive:) forControlEvents:UIControlEventEditingDidBegin];
-        }
+    } else {
+        [cell.textField removeTarget:nil action:NULL forControlEvents:UIControlEventAllEvents];
+        [cell.textField setUserInteractionEnabled:FALSE];
     }
     
     return cell;
@@ -445,12 +450,20 @@
         // Enable editing
         UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithTitle:@"Save" style:UIBarButtonItemStylePlain target:self action:@selector(editProject:)];
         [self.navigationItem setRightBarButtonItem:saveButton];
+        isEditing = TRUE;
+        [self.tableView reloadData];
     } else {
         // Saving is shown
         // Save project
         UIBarButtonItem *editButton = [[UIBarButtonItem alloc] initWithTitle:@"Edit" style:UIBarButtonItemStylePlain target:self action:@selector(editProject:)];
         [self.navigationItem setRightBarButtonItem:editButton];
+        isEditing = FALSE;
+        [self.tableView reloadData];
     }
+}
+
+-(void)save {
+    //TODO: DO THIS METHOD
 }
 
 /**

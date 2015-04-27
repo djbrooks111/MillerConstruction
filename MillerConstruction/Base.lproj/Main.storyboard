@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D131" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="eGy-Y0-VK9">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14E7f" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="eGy-Y0-VK9">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -50,6 +50,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Otb-EC-1s7">
                                         <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                         <state key="normal" title="Login">
+                                            <color key="titleColor" red="0.45882352941176469" green="0.023529411764705882" blue="0.039215686274509803" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
@@ -57,7 +58,6 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="Otb-EC-1s7" firstAttribute="bottom" secondItem="sH3-Fa-gXv" secondAttribute="bottom" multiplier="0.75" id="9us-X5-uSi"/>
                                     <constraint firstItem="Kvt-Cm-VvT" firstAttribute="width" secondItem="Foe-Md-jqs" secondAttribute="width" id="EBA-NK-CSX"/>
@@ -101,7 +101,7 @@
                                 </variation>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.83137254901960789" green="0.83137254901960789" blue="0.83137254901960789" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="sH3-Fa-gXv" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="BJT-tZ-wM9"/>
                             <constraint firstItem="sH3-Fa-gXv" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="Xlc-kz-ssM"/>
@@ -620,12 +620,12 @@
                                             <exclude reference="CSm-3m-8oa"/>
                                         </mask>
                                         <mask key="constraints">
-                                            <exclude reference="04M-yH-2R7"/>
-                                            <exclude reference="GH5-N2-qCA"/>
-                                            <exclude reference="TAZ-iw-lrE"/>
                                             <exclude reference="8Qx-Tz-Gxl"/>
                                             <exclude reference="ck8-kA-ZwN"/>
                                             <exclude reference="yIZ-pv-WeS"/>
+                                            <exclude reference="04M-yH-2R7"/>
+                                            <exclude reference="GH5-N2-qCA"/>
+                                            <exclude reference="TAZ-iw-lrE"/>
                                         </mask>
                                     </variation>
                                     <variation key="heightClass=regular">
@@ -634,12 +634,12 @@
                                             <include reference="CSm-3m-8oa"/>
                                         </mask>
                                         <mask key="constraints">
-                                            <include reference="04M-yH-2R7"/>
-                                            <include reference="GH5-N2-qCA"/>
-                                            <include reference="TAZ-iw-lrE"/>
                                             <include reference="8Qx-Tz-Gxl"/>
                                             <include reference="ck8-kA-ZwN"/>
                                             <include reference="yIZ-pv-WeS"/>
+                                            <include reference="04M-yH-2R7"/>
+                                            <include reference="GH5-N2-qCA"/>
+                                            <include reference="TAZ-iw-lrE"/>
                                         </mask>
                                     </variation>
                                 </tableViewCellContentView>

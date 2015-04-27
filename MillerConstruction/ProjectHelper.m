@@ -517,7 +517,9 @@
 #pragma mark - Existing Project Methods
 
 -(void)getProjectInformationFromDatabase {
+    [database connectToDatabase];
     self.projectInformation = [database fetchProjectInformationForID:self.projectID];
+    database.databaseConnection = nil;
 }
 
 @end
