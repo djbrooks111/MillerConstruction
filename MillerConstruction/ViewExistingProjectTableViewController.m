@@ -9,9 +9,12 @@
 #import "ViewExistingProjectTableViewController.h"
 #import "ProjectHelper.h"
 #import "JGProgressHUD.h"
+#import <JGProgressHUD/JGProgressHUDSuccessIndicatorView.h>
+#import <JGProgressHUD/JGProgressHUDErrorIndicatorView.h>
 #import "ProjectTableViewCell.h"
 #import "ActionSheetStringPicker.h"
 #import "ActionSheetDatePicker.h"
+#import "DatabaseConnector.h"
 
 #define NUMBER_CELLS 33
 
@@ -28,6 +31,7 @@
     NSArray *optionalInformation;
     BOOL isEditing;
     JGProgressHUD *HUD;
+    BOOL didHaveSalvageInDatabase;
 }
 
 -(void)viewDidLoad {
@@ -64,6 +68,12 @@
     projectAttributesNames = [helper projectAttributesNames];
     requiredInformation = [projectAttributesNames subarrayWithRange:NSMakeRange(0, 10)];
     optionalInformation = [projectAttributesNames subarrayWithRange:NSMakeRange(10, 23)];
+    if ([[helper projectInformation] objectAtIndex:25] != [NSNull null] || [[helper projectInformation] objectAtIndex:26] != [NSNull null]) {
+        // Salvage has been created already
+        didHaveSalvageInDatabase = TRUE;
+    } else {
+        didHaveSalvageInDatabase = FALSE;
+    }
     
     cellArray = [[NSMutableArray alloc] initWithArray:[helper projectInformation]];
     projectStrings = [[NSMutableArray alloc] initWithArray:[helper projectInformation]];
@@ -459,11 +469,107 @@
         [self.navigationItem setRightBarButtonItem:editButton];
         isEditing = FALSE;
         [self.tableView reloadData];
+        [self.view endEditing:YES];
+        [self save];
     }
 }
 
 -(void)save {
-    //TODO: DO THIS METHOD
+    // MCS Project #
+    if ([[cellArray objectAtIndex:0] isKindOfClass:[NSString class]]) {
+        NSNumber *number = [NSNumber numberWithInteger:[[cellArray objectAtIndex:0] integerValue]];
+        [cellArray replaceObjectAtIndex:0 withObject:number];
+    }
+    // Warehouse
+    if ([[cellArray objectAtIndex:1] isKindOfClass:[NSString class]]) {
+        [cellArray replaceObjectAtIndex:1 withObject:[helper rowIDOfWarehouseFromFullName:[cellArray objectAtIndex:1]]];
+    }
+    // Project CLassification
+    if ([[cellArray objectAtIndex:2] isKindOfClass:[NSString class]]) {
+        [cellArray replaceObjectAtIndex:2 withObject:[helper rowIDOfProjectClassificationFromName:[cellArray objectAtIndex:2]]];
+    }
+    // Project
+    if ([[cellArray objectAtIndex:3] isKindOfClass:[NSString class]]) {
+        [cellArray replaceObjectAtIndex:3 withObject:[helper rowIDOfProjectItemFromName:[cellArray objectAtIndex:3]]];
+    }
+    // Project Manager
+    if ([[cellArray objectAtIndex:4] isKindOfClass:[NSString class]]) {
+        [cellArray replaceObjectAtIndex:4 withObject:[helper rowIDOfProjectManagerFromName:[cellArray objectAtIndex:4]]];
+    }
+    // Supervisor
+    if ([[cellArray objectAtIndex:5] isKindOfClass:[NSString class]]) {
+        [cellArray replaceObjectAtIndex:5 withObject:[helper rowIDOfProjectSupervisorFromName:[cellArray objectAtIndex:5]]];
+    }
+    // Project Stage
+    if ([[cellArray objectAtIndex:6] isKindOfClass:[NSString class]]) {
+        [cellArray replaceObjectAtIndex:6 withObject:[helper rowIDOfProjectStageFromName:[cellArray objectAtIndex:6]]];
+    }
+    // Project Status
+    if ([[cellArray objectAtIndex:7] isKindOfClass:[NSString class]]) {
+        [cellArray replaceObjectAtIndex:7 withObject:[helper rowIDOfProjectStatusFromName:[cellArray objectAtIndex:7]]];
+    }
+    // Project Type
+    if ([[cellArray objectAtIndex:8] isKindOfClass:[NSString class]]) {
+        [cellArray replaceObjectAtIndex:8 withObject:[helper rowIDOfProjectTypeFromName:[cellArray objectAtIndex:8]]];
+    }
+    // Salvage Value Amount
+    if ([[cellArray objectAtIndex:26] isKindOfClass:[NSString class]]) {
+        NSNumber *number = [NSNumber numberWithInteger:[[cellArray objectAtIndex:26] integerValue]];
+        [cellArray replaceObjectAtIndex:26 withObject:number];
+    }
+    // Should invoice
+    if ([[cellArray objectAtIndex:27] isKindOfClass:[NSString class]]) {
+        NSNumber *number = [NSNumber numberWithInteger:[[cellArray objectAtIndex:27] integerValue]];
+        [cellArray replaceObjectAtIndex:27 withObject:number];
+    }
+    // Actual invoice
+    if ([[cellArray objectAtIndex:28] isKindOfClass:[NSString class]]) {
+        NSNumber *number = [NSNumber numberWithInteger:[[cellArray objectAtIndex:28] integerValue]];
+        [cellArray replaceObjectAtIndex:28 withObject:number];
+    }
+    // Project cost
+    if ([[cellArray objectAtIndex:31] isKindOfClass:[NSString class]]) {
+        NSNumber *number = [NSNumber numberWithInteger:[[cellArray objectAtIndex:31] integerValue]];
+        [cellArray replaceObjectAtIndex:31 withObject:number];
+    }
+    // Customer Number
+    if ([[cellArray objectAtIndex:32] isKindOfClass:[NSString class]]) {
+        NSNumber *number = [NSNumber numberWithInteger:[[cellArray objectAtIndex:32] integerValue]];
+        [cellArray replaceObjectAtIndex:32 withObject:number];
+    }
+    if ([self isRequiredInformationFilled]) {
+        // All Good
+        HUD = self.prototypeHUD;
+        HUD.textLabel.text = @"Saving project...";
+        [HUD showInView:self.view];
+        DatabaseConnector *database = [DatabaseConnector sharedDatabaseConnector];
+        [database connectToDatabase];
+        NSArray *keys = [helper projectAttributesKeys];
+        BOOL result = [database updateProjectWithID:self.projectID andData:cellArray andKeys:keys andSalvageExists:didHaveSalvageInDatabase];
+        database.databaseConnection = nil;
+        if (result == TRUE) {
+            // Success
+            NSLog(@"Successful save!");
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                HUD.indicatorView = [[JGProgressHUDSuccessIndicatorView alloc] init];
+                HUD.textLabel.text = @"Success!";
+            });
+            [HUD dismissAfterDelay:1.5];
+        } else {
+            // Failure
+            NSLog(@"Failed to save!");
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                HUD.indicatorView = [[JGProgressHUDErrorIndicatorView alloc] init];
+                HUD.textLabel.text = @"Failed to save, please try again!";
+            });
+            [HUD dismissAfterDelay:1.5];
+        }
+    } else {
+        // Notify user
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Required Information" message:@"You must fill out all the Required Information at a minimum" delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil, nil];
+        [alert show];
+    }
+    
 }
 
 /**

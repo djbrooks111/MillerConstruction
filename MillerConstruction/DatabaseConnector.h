@@ -17,6 +17,7 @@
 +(id)sharedDatabaseConnector;
 -(BOOL)connectToDatabase;
 
+// Login
 -(UserLoginType)loginUserToDatabase:(User *)user;
 
 -(NSArray *)fetchProjectItem;
@@ -27,18 +28,22 @@
 -(NSArray *)fetchProjectStatus;
 -(NSArray *)fetchProjectType;
 
+// Create New Project
 -(BOOL)addNewProject:(NSArray *)projectInformation andKeys:(NSArray *)keys;
 
 -(NSArray *)fetchProjectsWithWarehouseID:(NSNumber *)warehouseID andProjectStageID:(NSNumber *)projectStageID;
 
 -(NSArray *)fetchProjectInformationForID:(NSNumber *)projectID;
 
+// View Triggers
 -(NSArray *)fetchInfoMCSNumberTriggers;
--(NSArray *)fetchInfoCostcoTriggers;
--(NSArray *)fetchInfoTurnOverTriggers;
--(NSArray *)fetchInfoProjectStartingSoonTriggers;
 -(NSArray *)fetchWarningInvoiceTriggers;
--(NSArray *)fetchWarningProjectStartingSoonTriggers;
--(NSArray *)fetchSevereTriggers;
+-(NSArray *)fetchWarningCostcoDueDateTriggers;
+-(NSArray *)fetchWarningTurnOverTriggers;
+-(NSArray *)fetchSevereCostcoDueDateTriggers;
+-(NSArray *)fetchSevereInvoiceTriggers;
+
+// View Existing Rpoject
+-(BOOL)updateProjectWithID:(NSNumber *)projectID andData:(NSArray *)projectInformation andKeys:(NSArray *)keys andSalvageExists:(BOOL)salvageExists;
 
 @end

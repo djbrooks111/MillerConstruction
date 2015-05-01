@@ -8,6 +8,7 @@
 
 #import "ViewTriggersHelper.h"
 #import "DatabaseConnector.h"
+#import "Trigger.h"
 
 @implementation ViewTriggersHelper {
     DatabaseConnector *database;
@@ -23,14 +24,27 @@
 
 -(void)lookForTriggers {
     [database connectToDatabase];
-    self.infoMCSNumberProjects = [database fetchInfoMCSNumberTriggers];
-    self.infoCostcoProjects = [database fetchInfoCostcoTriggers];
-    self.infoTurnOverProjects = [database fetchInfoTurnOverTriggers];
-    self.infoProjectsStartingSoon = [database fetchInfoProjectStartingSoonTriggers];
-    self.warningInvoiceProjects = [database fetchWarningInvoiceTriggers];
-    self.warningProjectStartingSoon = [database fetchWarningProjectStartingSoonTriggers];
-    self.severeProjects = [database fetchSevereTriggers];
+    [self lookForInfoTriggers];
+    [self lookForWarningTriggers];
+    [self lookForSevereTriggers];
     database.databaseConnection = nil;
+}
+
+-(void)lookForInfoTriggers {
+    NSArray *mcsNumberTriggers = [database fetchInfoMCSNumberTriggers];
+    for (int i = 0; i < [mcsNumberTriggers count]; i++) {
+        NSDictionary *trigger = [mcsNumberTriggers objectAtIndex:i];
+        NSString *projectInfo = [NSString stringWithFormat:@"%@|%@|%@", [trigger valueForKey:@"mcsNumber"], [trigger valueForKey:@"city.name"], [trigger valueForKey:@"projectitem.name"]];
+        [self.infoTriggers addObject:[[Trigger alloc] initWithProjectID:[trigger valueForKey:@"id"] andProjectInfo:projectInfo andTriggerInfo:@"MCS Number not assigned"]];
+    }
+}
+
+-(void)lookForWarningTriggers {
+    
+}
+
+-(void)lookForSevereTriggers {
+    
 }
 
 @end

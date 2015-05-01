@@ -24,6 +24,7 @@
 		2623395B1AB61E41001976B8 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 2623395A1AB61E41001976B8 /* User.m */; };
 		2623395E1AB620BD001976B8 /* DatabaseConnector.m in Sources */ = {isa = PBXBuildFile; fileRef = 2623395D1AB620BD001976B8 /* DatabaseConnector.m */; };
 		265C19931ABC8905007BCEF6 /* CreateNewProjectTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 265C19921ABC8905007BCEF6 /* CreateNewProjectTableViewController.m */; };
+		2663B0E81AF42FA40001EC13 /* Trigger.m in Sources */ = {isa = PBXBuildFile; fileRef = 2663B0E71AF42FA40001EC13 /* Trigger.m */; };
 		266AE5EC1ABC64EE0073E80A /* MainMenuViewControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 266AE5EB1ABC64EE0073E80A /* MainMenuViewControllerTest.m */; };
 		26773F691ABC61800075C1E7 /* LoginViewControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 26773F681ABC61800075C1E7 /* LoginViewControllerTest.m */; };
 		26777C591AEA84A800807546 /* Project.m in Sources */ = {isa = PBXBuildFile; fileRef = 26777C581AEA84A800807546 /* Project.m */; };
@@ -101,6 +102,8 @@
 		2623395D1AB620BD001976B8 /* DatabaseConnector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DatabaseConnector.m; sourceTree = "<group>"; };
 		265C19911ABC8905007BCEF6 /* CreateNewProjectTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateNewProjectTableViewController.h; sourceTree = "<group>"; };
 		265C19921ABC8905007BCEF6 /* CreateNewProjectTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateNewProjectTableViewController.m; sourceTree = "<group>"; };
+		2663B0E61AF42FA40001EC13 /* Trigger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Trigger.h; sourceTree = "<group>"; };
+		2663B0E71AF42FA40001EC13 /* Trigger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Trigger.m; sourceTree = "<group>"; };
 		266AE5EB1ABC64EE0073E80A /* MainMenuViewControllerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMenuViewControllerTest.m; sourceTree = "<group>"; };
 		26773F681ABC61800075C1E7 /* LoginViewControllerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewControllerTest.m; sourceTree = "<group>"; };
 		26777C571AEA84A800807546 /* Project.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Project.h; sourceTree = "<group>"; };
@@ -375,6 +378,8 @@
 				26944D6E1AE09E1100E0160E /* ViewTriggersHelper.m */,
 				26777C571AEA84A800807546 /* Project.h */,
 				26777C581AEA84A800807546 /* Project.m */,
+				2663B0E61AF42FA40001EC13 /* Trigger.h */,
+				2663B0E71AF42FA40001EC13 /* Trigger.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -781,6 +786,7 @@
 				2610A0F81ACF8CF0005D3902 /* MysqlServer.m in Sources */,
 				26126B6A1AC8807400AB70B3 /* Person.m in Sources */,
 				2623393C1AB61CBF001976B8 /* LoginViewController.m in Sources */,
+				2663B0E81AF42FA40001EC13 /* Trigger.m in Sources */,
 				265C19931ABC8905007BCEF6 /* CreateNewProjectTableViewController.m in Sources */,
 				262339391AB61CBF001976B8 /* AppDelegate.m in Sources */,
 				26126B731AC8887700AB70B3 /* ProjectType.m in Sources */,

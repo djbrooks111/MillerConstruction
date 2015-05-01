@@ -64,7 +64,7 @@
     }
 }
 
-#pragma mark - Fetch MySQL
+#pragma mark - MySQL
 
 /**
  *  Helper method that takes care of ending and recreating a database connection. Performs the fetch of the database
@@ -361,7 +361,7 @@
 -(NSArray *)fetchProjectInformationForID:(NSNumber *)projectID {
     // Required Information
     NSMutableArray *projectInfo = [[NSMutableArray alloc] init];
-    NSString *requiredInfoFetch = [NSString stringWithFormat:@"SELECT project.mcsNumber, warehouse.state, warehouse.warehouseID, city.name, projectclass.name, projectitem.name, projectstage.name, projectstatus.name, projecttype.name, project.scope FROM project, warehouse, city, projectclass, projectitem, projectstage, projectstatus, projecttype WHERE project.id = %d AND project.id = warehouse.id AND warehouse.city_id = city.id AND project.projectClass_id = projectclass.id AND project.projectItem_id = projectitem.id AND project.stage_id = projectstage.id AND project.status_id = projectstatus.id AND project.projectType_id = projecttype.id", [projectID intValue]];
+    NSString *requiredInfoFetch = [NSString stringWithFormat:@"SELECT project.mcsNumber, warehouse.state, warehouse.warehouseID, city.name, projectclass.name, projectitem.name, projectstage.name, projectstatus.name, projecttype.name, project.scope FROM project, warehouse, city, projectclass, projectitem, projectstage, projectstatus, projecttype WHERE project.id = %d AND project.warehouse_id = warehouse.id AND warehouse.city_id = city.id AND project.projectClass_id = projectclass.id AND project.projectItem_id = projectitem.id AND project.stage_id = projectstage.id AND project.status_id = projectstatus.id AND project.projectType_id = projecttype.id", [projectID intValue]];
     NSLog(@"requiredInfoFetch: %@", requiredInfoFetch);
     MysqlFetch *fetch = [self fetchWithCommand:requiredInfoFetch];
     NSLog(@"%@", [fetch results]);
@@ -434,6 +434,94 @@
     return projectInfo;
 }
 
+-(BOOL)updateProjectWithID:(NSNumber *)projectID andData:(NSArray *)projectInformation andKeys:(NSArray *)keys andSalvageExists:(BOOL)salvageExists {
+    @try {
+        NSLog(@"projectInformation: %@", projectInformation);
+        NSLog(@"keys: %@", keys);
+        // Project Table
+        NSMutableDictionary *updateDictionary = [[NSMutableDictionary alloc] init];
+        for (int i = 0; i < [projectInformation count]; i++) {
+            NSString *value = [projectInformation objectAtIndex:i];
+            NSString *valueKey = [keys objectAtIndex:i];
+            if ([valueKey isEqualToString:@""]) {
+                // Do nothing, does not involve the project table
+            } else {
+                NSDictionary *subDictionary = [NSDictionary dictionaryWithObject:value forKey:valueKey];
+                [updateDictionary addEntriesFromDictionary:subDictionary];
+            }
+        }
+        MysqlUpdate *updateCommand = [MysqlUpdate updateWithConnection:self.databaseConnection];
+        [updateCommand setTable:@"project"];
+        [updateCommand setQualifier:[NSDictionary dictionaryWithObject:projectID forKey:@"id"]];
+        [updateCommand setRowData:updateDictionary];
+        [updateCommand execute];
+        // Manager Table
+        NSDictionary *managerDictionary = [NSDictionary dictionaryWithObject:[projectInformation objectAtIndex:4] forKey:@"id"];
+        [updateCommand setTable:@"project_managers"];
+        [updateCommand setQualifier:[NSDictionary dictionaryWithObject:projectID forKey:@"project_id"]];
+        [updateCommand setRowData:managerDictionary];
+        [updateCommand execute];
+        // Supervisor Table
+        NSDictionary *supervisorDictionary = [NSDictionary dictionaryWithObject:[projectInformation objectAtIndex:5] forKey:@"id"];
+        [updateCommand setTable:@"project_supervisors"];
+        [updateCommand setQualifier:[NSDictionary dictionaryWithObject:projectID forKey:@"project_id"]];
+        [updateCommand setRowData:supervisorDictionary];
+        [updateCommand execute];
+        // Salvage Table
+        if (salvageExists) {
+            // Update table
+            NSDictionary *salvageDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
+                                               [projectInformation objectAtIndex:25], @"date",
+                                               [projectInformation objectAtIndex:26], @"value",
+                                               nil];
+            NSString *fetchCommand = [NSString stringWithFormat:@"SELECT closeoutdetails.salvageValue_id FROM project, closeoutdetails WHERE project.id = %@ AND project.closeoutDetails_id = closeoutdetails.id", projectID];
+            MysqlFetch *fetch = [self fetchWithCommand:fetchCommand];
+            NSNumber *salvageID = [NSNumber numberWithInteger:[[[[fetch results] firstObject] objectForKey:@"salvageValue_id"] integerValue]];
+            [updateCommand setTable:@"salvagevalue"];
+            [updateCommand setQualifier:[NSDictionary dictionaryWithObject:salvageID forKey:@"id"]];
+            [updateCommand setRowData:salvageDictionary];
+            [updateCommand execute];
+        } else {
+            NSDictionary *salvageDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
+                                               [projectInformation objectAtIndex:25], @"date",
+                                               [projectInformation objectAtIndex:26], @"value",
+                                               nil];
+            MysqlInsert *insert = [self insertIntoTable:@"salvagevalue" withData:salvageDictionary];
+            NSNumber *salvageRowID = [insert rowid];
+            NSString *fetchCommand = [NSString stringWithFormat:@"SELECT closeoutDetails_id FROM project WHERE project.id = %@", projectID];
+            MysqlFetch *fetch = [self fetchWithCommand:fetchCommand];
+            NSNumber *closeoutID = [NSNumber numberWithInteger:[[[[fetch results] firstObject] objectForKey:@"closeoutDetails_id"] integerValue]];
+            [updateCommand setTable:@"closeoutdetails"];
+            [updateCommand setQualifier:[NSDictionary dictionaryWithObject:closeoutID forKey:@"id"]];
+            [updateCommand setRowData:[NSDictionary dictionaryWithObject:salvageRowID forKey:@"salvageValue_id"]];
+            [updateCommand execute];
+        }
+        // Closeoutdetails Table
+        NSDictionary *closeoutDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
+                                            [projectInformation objectAtIndex:14], @"asBuilts",
+                                            [projectInformation objectAtIndex:15], @"punchList",
+                                            [projectInformation objectAtIndex:16], @"alarmHvacForm",
+                                            [projectInformation objectAtIndex:17], @"verisaeShutdownReport",
+                                            [projectInformation objectAtIndex:18], @"closeoutNotes",
+                                            [projectInformation objectAtIndex:22], @"airGas",
+                                            [projectInformation objectAtIndex:24], @"permitsClosed",
+                                            nil];
+        NSString *fetchCommand = [NSString stringWithFormat:@"SELECT closeoutDetails_id FROM project WHERE project.id = %@", projectID];
+        MysqlFetch *fetch = [self fetchWithCommand:fetchCommand];
+        NSNumber *closeoutID = [NSNumber numberWithInteger:[[[[fetch results] firstObject] objectForKey:@"closeoutDetails_id"] integerValue]];
+        [updateCommand setTable:@"closeoutdetails"];
+        [updateCommand setQualifier:[NSDictionary dictionaryWithObject:closeoutID forKey:@"id"]];
+        [updateCommand setRowData:closeoutDictionary];
+        [updateCommand execute];
+    }
+    @catch (NSException *exception) {
+        
+        return FALSE;
+    }
+    
+    return TRUE;
+}
+
 #pragma mark - View Triggers
 
 /**
@@ -450,51 +538,12 @@
 }
 
 /**
- *  Retreives all the projects with no assigned Costco Due Date
- *
- *  @return Array of Dictionaries with the project info
- */
--(NSArray *)fetchInfoCostcoTriggers {
-    NSString *fetchCommand = [NSString stringWithFormat:@"SELECT DISTINCTROW project.mcsNumber, city.name, projectitem.name, project.id FROM project, warehouse, projectitem, city WHERE project.costcoDueDate IS NULL AND project.mcsNumber != -1 AND project.warehouse_id = warehouse.id AND warehouse.city_id = city.id AND project.projectItem_id = projectitem.id AND project.stage_id = 2"];
-    MysqlFetch *fetch = [self fetchWithCommand:fetchCommand];
-    NSLog(@"%@", [fetch results]);
-    
-    return [fetch results];
-}
-
-/**
- *  Retreives all the projects with no assigned Turn Over Date
- *
- *  @return Array of Dictionaries with the project info
- */
--(NSArray *)fetchInfoTurnOverTriggers {
-    NSString *fetchCommand = [NSString stringWithFormat:@"SELECT DISTINCTROW project.mcsNumber, city.name, projectitem.name, project.id FROM project, warehouse, projectitem, city WHERE project.scheduledTurnover IS NULL AND project.mcsNumber != -1 AND project.warehouse_id = warehouse.id AND warehouse.city_id = city.id AND project.projectItem_id = projectitem.id AND project.stage_id = 2"];
-    MysqlFetch *fetch = [self fetchWithCommand:fetchCommand];
-    NSLog(@"%@", [fetch results]);
-    
-    return [fetch results];
-}
-
-/**
- *  Retreives all the projects with a Scheduled Start Date within the next two weeks
- *
- *  @return Array of Dictionaries with the project info
- */
--(NSArray *)fetchInfoProjectStartingSoonTriggers {
-    NSString *fetchCommand = [NSString stringWithFormat:@"SELECT DISTINCTROW project.mcsNumber, city.name, projectitem.name, project.id, project.scheduledStartDate FROM project, warehouse, projectitem, city WHERE project.scheduledStartDate >= curdate() AND project.scheduledStartDate <= date_add(curdate(), INTERVAL 14 DAY) AND project.mcsNumber != -1 AND project.warehouse_id = warehouse.id AND warehouse.city_id = city.id AND project.projectItem_id = projectitem.id AND project.stage_id = 2"];
-    MysqlFetch *fetch = [self fetchWithCommand:fetchCommand];
-    NSLog(@"%@", [fetch results]);
-    
-    return [fetch results];
-}
-
-/**
- *  Retreives all the projects with mismatched Invoiced amounts
+ *  Retreives all the projects with should invoice > invoiced and should invoice < 20
  *
  *  @return Array of Dictionaries with the project info
  */
 -(NSArray *)fetchWarningInvoiceTriggers {
-    NSString *fetchCommand = [NSString stringWithFormat:@"SELECT DISTINCTROW project.mcsNumber, city.name, projectitem.name, project.id FROM project, warehouse, projectitem, city WHERE project.shouldInvoice != project.invoiced AND project.warehouse_id = warehouse.id AND warehouse.city_id = city.id AND project.projectItem_id = projectitem.id AND project.stage_id = 2"];
+    NSString *fetchCommand = [NSString stringWithFormat:@"SELECT DISTINCTROW project.mcsNumber, city.name, projectitem.name, project.id FROM project, warehouse, projectitem, city WHERE project.shouldInvoice > project.invoiced AND project.shouldInvoice < project.invoiced + 20 AND project.warehouse_id = warehouse.id AND warehouse.city_id = city.id AND project.projectItem_id = projectitem.id"];
     MysqlFetch *fetch = [self fetchWithCommand:fetchCommand];
     NSLog(@"%@", [fetch results]);
     
@@ -502,12 +551,12 @@
 }
 
 /**
- *  Retreives all the projects with a Scheduled Start Date within the next one week
+ *  Retreives all the projects with a Costco Due Date within 3 days of current date
  *
  *  @return Array of Dictionaries with the project info
  */
--(NSArray *)fetchWarningProjectStartingSoonTriggers {
-    NSString *fetchCommand = [NSString stringWithFormat:@"SELECT DISTINCTROW project.mcsNumber, city.name, projectitem.name, project.id, project.scheduledStartDate FROM project, warehouse, projectitem, city WHERE project.scheduledStartDate >= curdate() AND project.scheduledStartDate <= date_add(curdate(), INTERVAL 7 DAY) AND project.mcsNumber != -1 AND project.warehouse_id = warehouse.id AND warehouse.city_id = city.id AND project.projectItem_id = projectitem.id AND project.stage_id = 2"];
+-(NSArray *)fetchWarningCostcoDueDateTriggers {
+    NSString *fetchCommand = [NSString stringWithFormat:@"SELECT DISTINCTROW project.mcsNumber, city.name, projectitem.name, project.id, project.costcoDueDate FROM project, warehouse, projectitem, city WHERE project.costcoDueDate <= date_add(curdate(), INTERVAL 3 DAY) AND project.costcoDueDate >= curdate() AND project.mcsNumber != -1 AND project.warehouse_id = warehouse.id AND warehouse.city_id = city.id AND project.projectItem_id = projectitem.id AND project.stage_id = 2"];
     MysqlFetch *fetch = [self fetchWithCommand:fetchCommand];
     NSLog(@"%@", [fetch results]);
     
@@ -515,12 +564,38 @@
 }
 
 /**
- *  Retreives all the projects with a Scheduled Turn Over Date within the next one day
+ *  Retreives all the projects with a scheduled turn over date prior to the current date and project status not equal complete
  *
  *  @return Array of Dictionaries with the project info
  */
--(NSArray *)fetchSevereTriggers {
-    NSString *fetchCommand = [NSString stringWithFormat:@"SELECT DISTINCTROW project.mcsNumber, city.name, projectitem.name, project.id, project.scheduledStartDate FROM project, warehouse, projectitem, city WHERE project.scheduledTurnover >= curdate() AND project.scheduledTurnover <= date_add(curdate(), INTERVAL 1 DAY) AND project.mcsNumber != -1 AND project.warehouse_id = warehouse.id AND warehouse.city_id = city.id AND project.projectItem_id = projectitem.id AND project.stage_id = 2"];
+-(NSArray *)fetchWarningTurnOverTriggers {
+    NSString *fetchCommand = [NSString stringWithFormat:@"SELECT DISTINCTROW project.mcsNumber, city.name, projectitem.name, project.id FROM project, warehouse, projectitem, city WHERE project.scheduledTurnover < curdate() AND project.status_id != 28 AND project.mcsNumber != -1 AND project.warehouse_id = warehouse.id AND warehouse.city_id = city.id AND project.projectItem_id = projectitem.id"];
+    MysqlFetch *fetch = [self fetchWithCommand:fetchCommand];
+    NSLog(@"%@", [fetch results]);
+    
+    return [fetch results];
+}
+
+/**
+ *  Retreives all the projects with a Costco Due Date past the current date
+ *
+ *  @return Array of Dictionaries with the project info
+ */
+-(NSArray *)fetchSevereCostcoDueDateTriggers {
+    NSString *fetchCommand = [NSString stringWithFormat:@"SELECT DISTINCTROW project.mcsNumber, city.name, projectitem.name, project.id, project.costcoDueDate FROM project, warehouse, projectitem, city WHERE project.costcoDueDate < curdate() AND project.mcsNumber != -1 AND project.warehouse_id = warehouse.id AND warehouse.city_id = city.id AND project.projectItem_id = projectitem.id AND project.stage_id = 2"];
+    MysqlFetch *fetch = [self fetchWithCommand:fetchCommand];
+    NSLog(@"%@", [fetch results]);
+    
+    return [fetch results];
+}
+
+/**
+ *  Retreives all the project with should invoice >= invoiced + 20
+ *
+ *  @return Array of Dictionaries with the project info
+ */
+-(NSArray *)fetchSevereInvoiceTriggers {
+    NSString *fetchCommand = [NSString stringWithFormat:@"SELECT DISTINCTROW project.mcsNumber, city.name, projectitem.name, project.id FROM project, warehouse, projectitem, city WHERE project.shouldInvoice >= project.invoiced + 20 AND project.warehouse_id = warehouse.id AND warehouse.city_id = city.id AND project.projectItem_id = projectitem.id"];
     MysqlFetch *fetch = [self fetchWithCommand:fetchCommand];
     NSLog(@"%@", [fetch results]);
     

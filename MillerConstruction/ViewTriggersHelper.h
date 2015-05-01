@@ -10,13 +10,9 @@
 
 @interface ViewTriggersHelper : NSObject
 
-@property (nonatomic, retain) NSArray *infoMCSNumberProjects;
-@property (nonatomic, retain) NSArray *infoCostcoProjects;
-@property (nonatomic, retain) NSArray *infoTurnOverProjects;
-@property (nonatomic, retain) NSArray *infoProjectsStartingSoon;
-@property (nonatomic, retain) NSArray *warningInvoiceProjects;
-@property (nonatomic, retain) NSArray *warningProjectStartingSoon;
-@property (nonatomic, retain) NSArray *severeProjects;
+@property (nonatomic, retain) NSMutableArray *infoTriggers;
+@property (nonatomic, retain) NSMutableArray *warningTriggers;
+@property (nonatomic, retain) NSMutableArray *severeTriggers;
 
 -(void)lookForTriggers;
 
