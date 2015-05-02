@@ -8,6 +8,9 @@
 
 #import "ViewTriggersTableViewController.h"
 #import "ViewTriggersHelper.h"
+#import "Trigger.h"
+#import "ViewExistingProjectTableViewController.h"
+#import "JGProgressHUD.h"
 
 @interface ViewTriggersTableViewController ()
 
@@ -15,18 +18,16 @@
 
 @implementation ViewTriggersTableViewController {
     ViewTriggersHelper *helper;
-    NSMutableArray *infoProjects;
-    NSMutableArray *warningProjects;
-    NSMutableArray *severeProjects;
-    NSMutableArray *infoProjectDetail;
-    NSMutableArray *warningProjectDetail;
-    NSMutableArray *severeProjectDetail;
+    NSNumber *selectedProjectID;
+    JGProgressHUD *HUD;
 }
 
 -(void)viewDidLoad {
     [super viewDidLoad];
     
     self.navigationItem.title = @"View Triggers";
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataLoaded:) name:@"DataLoaded" object:nil];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -38,42 +39,34 @@
 -(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     helper = [[ViewTriggersHelper alloc] init];
+    HUD = self.prototypeHUD;
+    HUD.textLabel.text = @"Loading data...";
+    [HUD showInView:self.view];
     [helper lookForTriggers];
-    [infoProjects addObjectsFromArray:[helper infoMCSNumberProjects]];
-    [infoProjects addObjectsFromArray:[helper infoCostcoProjects]];
-    [infoProjects addObjectsFromArray:[helper infoTurnOverProjects]];
-    [infoProjects addObjectsFromArray:[helper infoProjectsStartingSoon]];
-    for (int i = 0; i < [infoProjects count]; i++) {
-        if (i < [[helper infoMCSNumberProjects] count]) {
-            [infoProjectDetail addObject:@"MCS Number not assigned"];
-        } else if (i < [[helper infoCostcoProjects] count] + [[helper infoMCSNumberProjects] count]) {
-            [infoProjectDetail addObject:@"Costco due date is unassigned"];
-        } else if (i < [[helper infoTurnOverProjects] count] + [[helper infoCostcoProjects] count] + [[helper infoMCSNumberProjects] count]) {
-            [infoProjectDetail addObject:@"Turn over is unassigned"];
-        } else {
-            [infoProjectDetail addObject:@"Project starting within two weeks"];
-        }
-    }
-    [warningProjects addObjectsFromArray:[helper warningInvoiceProjects]];
-    [warningProjects addObjectsFromArray:[helper warningProjectStartingSoon]];
-    for (int i = 0; i < [warningProjects count]; i++) {
-        if (i < [[helper warningInvoiceProjects] count]) {
-            [warningProjectDetail addObject:@"Should Invoice/Actual Invoice Mismatch"];
-        } else {
-            [warningProjectDetail addObject:@"Project is starting with one week"];
-        }
-    }
-    [severeProjects addObjectsFromArray:[helper severeProjects]];
-    for (int i = 0; i < [severeProjects count]; i++) {
-        [severeProjectDetail addObject:@"Turn over is within one day"];
-    }
-    
-    [self.tableView reloadData];
 }
 
 -(void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - JGProgressHUD
+
+/**
+ *  Creates a new JGProgressHUD
+ *
+ *  @return The new JGProgressHUD
+ */
+-(JGProgressHUD *)prototypeHUD {
+    JGProgressHUD *HUDD = [[JGProgressHUD alloc] initWithStyle:JGProgressHUDStyleDark];
+    HUDD.interactionType = JGProgressHUDInteractionTypeBlockAllTouches;
+    HUDD.backgroundColor = [UIColor colorWithWhite:0.0f alpha:0.4f];
+    HUDD.HUDView.layer.shadowColor = [UIColor blackColor].CGColor;
+    HUDD.HUDView.layer.shadowOffset = CGSizeZero;
+    HUDD.HUDView.layer.shadowOpacity = 0.4f;
+    HUDD.HUDView.layer.shadowRadius = 8.0f;
+    
+    return HUDD;
 }
 
 #pragma mark - Table view data source
@@ -86,11 +79,13 @@
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
     if (section == 0) {
-        return [infoProjects count];
+        NSLog(@"info count: %d", [[helper infoTriggers] count]);
+        
+        return [[helper infoTriggers] count];
     } else if (section == 1) {
-        return [warningProjects count];
+        return [[helper warningTriggers] count];
     } else {
-        return [severeProjects count];
+        return [[helper severeTriggers] count];
     }
 }
 
@@ -106,34 +101,55 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"Cell"];
+    }
     // Configure the cell...
     if (indexPath.section == 0) {
-        // Info Triggers
-        NSDictionary *info = [infoProjects objectAtIndex:indexPath.row];
-        [cell.textLabel setText:[NSString stringWithFormat:@"%@|%@|%@", [info valueForKey:@"mcsNumber"], [info valueForKey:@"city.name"], [info valueForKey:@"projectitem.name"]]];
-        [cell.detailTextLabel setText:[infoProjectDetail objectAtIndex:indexPath.row]];
+        // Info
+        [cell.textLabel setText:[[[helper infoTriggers] objectAtIndex:indexPath.row] projectInfo]];
+        [cell.detailTextLabel setText:[[[helper infoTriggers] objectAtIndex:indexPath.row] triggerInfo]];
     } else if (indexPath.section == 1) {
         // Warning
-        NSDictionary *warning = [warningProjects objectAtIndex:indexPath.row];
-        [cell.textLabel setText:[NSString stringWithFormat:@"%@|%@|%@", [warning valueForKey:@"mcsNumber"], [warning valueForKey:@"city.name"], [warning valueForKey:@"projectitem.name"]]];
-        [cell.detailTextLabel setText:[warningProjectDetail objectAtIndex:indexPath.row]];
+        [cell.textLabel setText:[[[helper warningTriggers] objectAtIndex:indexPath.row] projectInfo]];
+        [cell.detailTextLabel setText:[[[helper warningTriggers] objectAtIndex:indexPath.row] triggerInfo]];
     } else {
         // Severe
-        NSDictionary *severe = [severeProjects objectAtIndex:indexPath.row];
-        [cell.textLabel setText:[NSString stringWithFormat:@"%@|%@|%@", [severe valueForKey:@"mcsNumber"], [severe valueForKey:@"city.name"], [severe valueForKey:@"projectitem.name"]]];
-        [cell.detailTextLabel setText:[severeProjectDetail objectAtIndex:indexPath.row]];
+        [cell.textLabel setText:[[[helper severeTriggers] objectAtIndex:indexPath.row] projectInfo]];
+        [cell.detailTextLabel setText:[[[helper severeTriggers] objectAtIndex:indexPath.row] triggerInfo]];
     }
     
     return cell;
 }
-/*
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 0) {
+        // Info
+        selectedProjectID = [[[helper infoTriggers] objectAtIndex:indexPath.row] projectID];
+    } else if (indexPath.section == 1) {
+        // Warning
+        selectedProjectID = [[[helper warningTriggers] objectAtIndex:indexPath.row] projectID];
+    } else {
+        // Severe
+        selectedProjectID = [[[helper severeTriggers] objectAtIndex:indexPath.row] projectID];
+    }
+    [self performSegueWithIdentifier:@"viewProject" sender:self];
+}
+
+-(void)dataLoaded:(NSNotification *)notification {
+    [HUD dismissAfterDelay:1.5];
+    [self.tableView reloadData];
+    NSLog(@"reloaded");
+}
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([[segue identifier] isEqualToString:@"viewProject"]) {
+        ViewExistingProjectTableViewController *viewController = [segue destinationViewController];
+        [viewController setProjectID:selectedProjectID];
+    }
 }
-*/
 
 @end

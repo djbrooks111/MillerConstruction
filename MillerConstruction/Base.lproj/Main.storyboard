@@ -597,7 +597,7 @@
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gRV-Md-oN3">
                                             <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Change Me" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CSm-3m-8oa">
@@ -658,7 +658,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P0h-8H-UEz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1812" y="1899.75"/>
+            <point key="canvasLocation" x="1812" y="2018.25"/>
         </scene>
         <!--View Triggers Table View Controller-->
         <scene sceneID="9aR-0f-utv">
@@ -701,10 +701,13 @@
                             <outlet property="delegate" destination="QjJ-J0-9QW" id="cgY-da-rV8"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <segue destination="ep3-g6-3DH" kind="show" identifier="viewProject" id="PqC-mz-kda"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4RF-jf-sST" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3898" y="1194"/>
+            <point key="canvasLocation" x="3594" y="1194"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="rR4-oW-aLM">
@@ -743,4 +746,7 @@
             <point key="canvasLocation" x="1783" y="381.75"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="PqC-mz-kda"/>
+    </inferredMetricsTieBreakers>
 </document>

@@ -10,4 +10,14 @@
 
 @implementation Trigger
 
+-(id)initWithProjectID:(NSNumber *)projectID andProjectInfo:(NSString *)projectInfo andTriggerInfo:(NSString *)triggerInfo {
+    if (self = [super init]) {
+        [self setProjectID:projectID];
+        [self setProjectInfo:projectInfo];
+        [self setTriggerInfo:triggerInfo];
+    }
+    
+    return self;
+}
+
 @end
