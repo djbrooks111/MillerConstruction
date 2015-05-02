@@ -33,4 +33,8 @@
                               ];
 }
 
+-(NSArray *)projectInformationForReport:(NSString *)report andReportType:(ReportType)reportType {
+    
+}
+
 @end

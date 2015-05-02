@@ -77,10 +77,12 @@
 
 -(void)reportPicked:(NSNumber *)selectedIndex element:(UIButton *)sender {
     report = [[helper reportNamesArray] objectAtIndex:[selectedIndex intValue]];
+    [self.reportTypeTextField setText:report];
 }
 
 -(void)generateReport:(UIButton *)sender {
     reportType = [sender tag];
+    [self performSegueWithIdentifier:@"generateReport" sender:self];
 }
 
 #pragma mark - Navigation

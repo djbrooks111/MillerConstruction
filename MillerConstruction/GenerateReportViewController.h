@@ -8,9 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "GenerateReportSearchHelper.h"
-#import "MMSpreadsheetView.h"
 
-@interface GenerateReportViewController : UIViewController
+@interface GenerateReportViewController : UIViewController 
 
 @property (nonatomic, readwrite) ReportType reportType;
 @property (nonatomic, retain) NSString *report;

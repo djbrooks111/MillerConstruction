@@ -522,6 +522,36 @@
     return TRUE;
 }
 
+#pragma mark - Generate Report
+
+-(NSArray *)fetchWeeklyReportWithReport:(NSString *)report andReportType:(NSInteger)reportType {
+    NSString *fetchCommand;
+    switch (reportType) {
+        case 0:
+            // Active
+            break;
+            
+        case 1:
+            // Proposal
+            break;
+            
+        case 2:
+            // Budgetary
+            break;
+            
+        case 3:
+            // Inactive
+            break;
+            
+        case 4:
+            // Closed
+            break;
+            
+        default:
+            break;
+    }
+}
+
 #pragma mark - View Triggers
 
 /**

@@ -22,4 +22,6 @@ typedef NS_ENUM(NSInteger, ReportType) {
 
 @property (nonatomic, retain) NSArray *reportNamesArray;
 
+-(NSArray *)projectInformationForReport:(NSString *)report andReportType:(ReportType)reportType;
+
 @end

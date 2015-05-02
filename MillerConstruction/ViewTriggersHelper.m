@@ -41,7 +41,6 @@
         NSString *projectInfo = [NSString stringWithFormat:@"%@|%@|%@", [trigger valueForKey:@"mcsNumber"], [trigger valueForKey:@"city.name"], [trigger valueForKey:@"projectitem.name"]];
         [self.infoTriggers addObject:[[Trigger alloc] initWithProjectID:[trigger valueForKey:@"project.id"] andProjectInfo:projectInfo andTriggerInfo:@"MCS Number Not Assigned"]];
     }
-    NSLog(@"infoTriggers: %@", self.infoTriggers);
 }
 
 -(void)lookForWarningTriggers {

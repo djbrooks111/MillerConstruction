@@ -459,6 +459,7 @@
         // Editing is shown
         // Enable editing
         UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithTitle:@"Save" style:UIBarButtonItemStylePlain target:self action:@selector(editProject:)];
+        [saveButton setTintColor:[UIColor colorWithRed:117.0 / 255.0 green:6.0 / 255.0 blue:10.0 / 255.0 alpha:1.0]];
         [self.navigationItem setRightBarButtonItem:saveButton];
         isEditing = TRUE;
         [self.tableView reloadData];
@@ -466,6 +467,7 @@
         // Saving is shown
         // Save project
         UIBarButtonItem *editButton = [[UIBarButtonItem alloc] initWithTitle:@"Edit" style:UIBarButtonItemStylePlain target:self action:@selector(editProject:)];
+        [editButton setTintColor:[UIColor colorWithRed:117.0 / 255.0 green:6.0 / 255.0 blue:10.0 / 255.0 alpha:1.0]];
         [self.navigationItem setRightBarButtonItem:editButton];
         isEditing = FALSE;
         [self.tableView reloadData];
