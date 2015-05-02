@@ -26,9 +26,7 @@
     [super viewDidLoad];
     
     self.navigationItem.title = @"View Triggers";
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dataLoaded:) name:@"DataLoaded" object:nil];
-    
+        
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -43,6 +41,8 @@
     HUD.textLabel.text = @"Loading data...";
     [HUD showInView:self.view];
     [helper lookForTriggers];
+    [HUD dismissAfterDelay:1.5];
+    [self.tableView reloadData];
 }
 
 -(void)didReceiveMemoryWarning {
@@ -79,8 +79,6 @@
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
     if (section == 0) {
-        NSLog(@"info count: %d", [[helper infoTriggers] count]);
-        
         return [[helper infoTriggers] count];
     } else if (section == 1) {
         return [[helper warningTriggers] count];
@@ -134,12 +132,6 @@
         selectedProjectID = [[[helper severeTriggers] objectAtIndex:indexPath.row] projectID];
     }
     [self performSegueWithIdentifier:@"viewProject" sender:self];
-}
-
--(void)dataLoaded:(NSNotification *)notification {
-    [HUD dismissAfterDelay:1.5];
-    [self.tableView reloadData];
-    NSLog(@"reloaded");
 }
 
 #pragma mark - Navigation

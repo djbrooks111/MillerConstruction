@@ -30,7 +30,6 @@
     [self lookForInfoTriggers];
     [self lookForWarningTriggers];
     [self lookForSevereTriggers];
-    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"DataLoaded" object:nil]];
     database.databaseConnection = nil;
 }
 
