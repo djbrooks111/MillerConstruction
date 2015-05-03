@@ -525,10 +525,13 @@
 #pragma mark - Generate Report
 
 -(NSArray *)fetchWeeklyReportWithReport:(NSString *)report andReportType:(NSInteger)reportType {
+    NSMutableArray *projects = [[NSMutableArray alloc] init];
     NSString *fetchCommand;
+    MysqlFetch *fetch;
     switch (reportType) {
         case 0:
             // Active
+            fetchCommand = [NSString stringWithFormat:@"SELECT project.mcsNumber, projectstage.name, warehouse.warehouseID, warehouse.state, city.name, projectitem.name, project.scope, projectclass.name, warehouse.region, projectstatus.name, project.scheduledStartDate, project.scheduledTurnover, project.actualTurnover, projecttype.name, closeoutdetails.asBuilts, closeoutdetails.punchList, closeoutdetails.alarmHvacForm, closeoutdetails.airGas, closeoutdetails.permitsClosed, closeoutdetails.verisaeShutdownReport, project.invoiced, project.shouldInvoice, project.projectNotes FROM project, projectstage, warehouse, city, projectitem, projectclass, projectstatus, projecttype, closeoutdetails WHERE project.stage_id = projectstage.id AND projectstage.name = \"Active\" AND project.warehouse_id = warehouse.id AND warehouse.city_id = city.id AND project.projectItem_id = projectitem.id AND project.projectClass_id = projectclass.id AND project.status_id = projectstatus.id AND project.projectType_id = projecttype.id AND project.closeoutDetails_id = closeoutdetails.id"];
             break;
             
         case 1:
@@ -550,6 +553,42 @@
         default:
             break;
     }
+    fetch = [self fetchWithCommand:fetchCommand];
+    NSArray *results = [[fetch results] copy];
+    fetch = [self fetchWithCommand:@"SELECT person.name FROM person, project, project_managers, projectstage WHERE project.stage_id = projectstage.id AND projectstage.name = \"Active\" AND project.id = project_managers.project_id AND project_managers.id = person.id"];
+    NSArray *managers = [[fetch results] copy];
+    fetch = [self fetchWithCommand:@"SELECT person.name FROM person, project, project_supervisors, projectstage WHERE project.stage_id = projectstage.id AND projectstage.name = \"Active\" AND project.id = project_supervisors.project_id AND project_supervisors.id = person.id"];
+    NSArray *supervisors = [[fetch results] copy];
+    for (int i = 0; i < [results count]; i++) {
+        NSMutableArray *projectArray = [[NSMutableArray alloc] init];
+        NSDictionary *project = [results objectAtIndex:i];
+        [projectArray addObject:[project valueForKey:@"mcsNumber"]];
+        [projectArray addObject:[project valueForKey:@"projectstage.name"]];
+        [projectArray addObject:[NSString stringWithFormat:@"%@, %@-#%@", [project valueForKey:@"city.name"], [project valueForKey:@"warehouse.stage"], [project valueForKey:@"warehouse.warehouseID"]]];
+        [projectArray addObject:[project valueForKey:@"projectitem.name"]];
+        [projectArray addObject:[project valueForKey:@"project.scope"]];
+        [projectArray addObject:[project valueForKey:@"projectclass.name"]];
+        [projectArray addObject:[managers objectAtIndex:i]];
+        [projectArray addObject:[supervisors objectAtIndex:i]];
+        [projectArray addObject:[project valueForKey:@"warehouse.region"]];
+        [projectArray addObject:[project valueForKey:@"projectstatus.name"]];
+        [projectArray addObject:[project valueForKey:@"project.scheduledStartDate"]];
+        [projectArray addObject:[project valueForKey:@"project.scheduledTurnover"]];
+        [projectArray addObject:[project valueForKey:@"project.actualTurnover"]];
+        [projectArray addObject:[project valueForKey:@"projecttype.name"]];
+        [projectArray addObject:[project valueForKey:@"closeoutdetails.asBuilts"]];
+        [projectArray addObject:[project valueForKey:@"closeoutdetails.punchList"]];
+        [projectArray addObject:[project valueForKey:@"closeoutdetails.alarmHvacForm"]];
+        [projectArray addObject:[project valueForKey:@"closeoutdetails.airGas"]];
+        [projectArray addObject:[project valueForKey:@"closeoutdetails.permitsClosed"]];
+        [projectArray addObject:[project valueForKey:@"closeoutdetails.verisaeShutdownReport"]];
+        [projectArray addObject:[project valueForKey:@"project.invoiced"]];
+        [projectArray addObject:[project valueForKey:@"project.shouldInvoice"]];
+        [projectArray addObject:[project valueForKey:@"project.projectNotes"]];
+        [projects addObject:projectArray];
+    }
+    
+    return [projects copy];
 }
 
 #pragma mark - View Triggers

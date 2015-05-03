@@ -35,6 +35,7 @@
 
 -(NSArray *)projectInformationForReport:(NSString *)report andReportType:(ReportType)reportType {
     
+    return nil;
 }
 
 @end

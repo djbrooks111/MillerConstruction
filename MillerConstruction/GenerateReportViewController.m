@@ -138,11 +138,9 @@ static NSString * const CollectionViewHeaderIdentifier = @"Header";
         [view addSubview:label];
     }
     
-    label.text = [projectHeaders objectAtIndex:column];
-    
+    //label.text = [projectHeaders objectAtIndex:column];
     return view;
 }
-
 
 -(UICollectionReusableView *)collectionViewTableLayoutManager:(DRCollectionViewTableLayoutManager *)manager collectionView:(UICollectionView *)collectionView headerViewForRow:(NSUInteger)row indexPath:(NSIndexPath *)indexPath {
     UICollectionReusableView *view = [collectionView dequeueReusableSupplementaryViewOfKind:DRCollectionViewTableLayoutSupplementaryViewRowHeader withReuseIdentifier:CollectionViewHeaderIdentifier forIndexPath:indexPath];
