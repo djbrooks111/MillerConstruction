@@ -8,7 +8,6 @@
 
 #import "DatabaseConnector.h"
 #import "iPhoneMySQL/MysqlServer.h"
-#import "iPhoneMySQL/MysqlFetch.h"
 #import "iPhoneMySQL/MysqlInsert.h"
 #import "iPhoneMySQL/MysqlUpdate.h"
 
@@ -524,68 +523,167 @@
 
 #pragma mark - Generate Report
 
--(NSArray *)fetchWeeklyReportWithReport:(NSString *)report andReportType:(NSInteger)reportType {
+-(NSArray *)fetchWeeklyReportWithReportType:(NSInteger)reportType {
     NSMutableArray *projects = [[NSMutableArray alloc] init];
-    NSString *fetchCommand;
-    MysqlFetch *fetch;
-    switch (reportType) {
-        case 0:
-            // Active
-            fetchCommand = [NSString stringWithFormat:@"SELECT project.mcsNumber, projectstage.name, warehouse.warehouseID, warehouse.state, city.name, projectitem.name, project.scope, projectclass.name, warehouse.region, projectstatus.name, project.scheduledStartDate, project.scheduledTurnover, project.actualTurnover, projecttype.name, closeoutdetails.asBuilts, closeoutdetails.punchList, closeoutdetails.alarmHvacForm, closeoutdetails.airGas, closeoutdetails.permitsClosed, closeoutdetails.verisaeShutdownReport, project.invoiced, project.shouldInvoice, project.projectNotes FROM project, projectstage, warehouse, city, projectitem, projectclass, projectstatus, projecttype, closeoutdetails WHERE project.stage_id = projectstage.id AND projectstage.name = \"Active\" AND project.warehouse_id = warehouse.id AND warehouse.city_id = city.id AND project.projectItem_id = projectitem.id AND project.projectClass_id = projectclass.id AND project.status_id = projectstatus.id AND project.projectType_id = projecttype.id AND project.closeoutDetails_id = closeoutdetails.id"];
-            break;
-            
-        case 1:
-            // Proposal
-            break;
-            
-        case 2:
-            // Budgetary
-            break;
-            
-        case 3:
-            // Inactive
-            break;
-            
-        case 4:
-            // Closed
-            break;
-            
-        default:
-            break;
+    if (reportType == 0) {
+        // Active
+        NSString *fetchCommand = [NSString stringWithFormat:@"SELECT project.mcsNumber, projectstage.name, warehouse.warehouseID, warehouse.state, city.name, projectitem.name, project.scope, projectclass.name, warehouse.region, projectstatus.name, project.scheduledStartDate, project.scheduledTurnover, project.actualTurnover, projecttype.name, closeoutdetails.asBuilts, closeoutdetails.punchList, closeoutdetails.alarmHvacForm, closeoutdetails.airGas, closeoutdetails.permitsClosed, closeoutdetails.verisaeShutdownReport, project.invoiced, project.shouldInvoice, project.projectNotes FROM project, projectstage, warehouse, city, projectitem, projectclass, projectstatus, projecttype, closeoutdetails WHERE project.stage_id = projectstage.id AND projectstage.name = \"Active\" AND project.warehouse_id = warehouse.id AND warehouse.city_id = city.id AND project.projectItem_id = projectitem.id AND project.projectClass_id = projectclass.id AND project.status_id = projectstatus.id AND project.projectType_id = projecttype.id AND project.closeoutDetails_id = closeoutdetails.id"];
+        MysqlFetch *fetch = [self fetchWithCommand:fetchCommand];
+        NSArray *results = [[fetch results] copy];
+        fetch = [self fetchWithCommand:@"SELECT person.name FROM person, project, project_managers, projectstage WHERE project.stage_id = projectstage.id AND projectstage.name = \"Active\" AND project.id = project_managers.project_id AND project_managers.id = person.id"];
+        NSArray *managers = [[fetch results] copy];
+        fetch = [self fetchWithCommand:@"SELECT person.name FROM person, project, project_supervisors, projectstage WHERE project.stage_id = projectstage.id AND projectstage.name = \"Active\" AND project.id = project_supervisors.project_id AND project_supervisors.id = person.id"];
+        NSArray *supervisors = [[fetch results] copy];
+        for (int i = 0; i < [results count]; i++) {
+            NSMutableArray *projectArray = [[NSMutableArray alloc] init];
+            NSDictionary *project = [results objectAtIndex:i];
+            [projectArray addObject:[project valueForKey:@"mcsNumber"]];
+            [projectArray addObject:[project valueForKey:@"projectstage.name"]];
+            [projectArray addObject:[NSString stringWithFormat:@"%@, %@-#%@", [project valueForKey:@"city.name"], [project valueForKey:@"warehouse.state"], [project valueForKey:@"warehouse.warehouseID"]]];
+            [projectArray addObject:[project valueForKey:@"projectitem.name"]];
+            [projectArray addObject:[project valueForKey:@"project.scope"]];
+            [projectArray addObject:[project valueForKey:@"projectclass.name"]];
+            [projectArray addObject:[[managers objectAtIndex:i] valueForKey:@"name"]];
+            [projectArray addObject:[[supervisors objectAtIndex:i] valueForKey:@"name"]];
+            [projectArray addObject:[project valueForKey:@"warehouse.region"]];
+            [projectArray addObject:[project valueForKey:@"projectstatus.name"]];
+            [projectArray addObject:[project valueForKey:@"project.scheduledStartDate"]];
+            [projectArray addObject:[project valueForKey:@"project.scheduledTurnover"]];
+            [projectArray addObject:[project valueForKey:@"project.actualTurnover"]];
+            [projectArray addObject:[project valueForKey:@"projecttype.name"]];
+            [projectArray addObject:[project valueForKey:@"closeoutdetails.asBuilts"]];
+            [projectArray addObject:[project valueForKey:@"closeoutdetails.punchList"]];
+            [projectArray addObject:[project valueForKey:@"closeoutdetails.alarmHvacForm"]];
+            [projectArray addObject:[project valueForKey:@"closeoutdetails.airGas"]];
+            [projectArray addObject:[project valueForKey:@"closeoutdetails.permitsClosed"]];
+            [projectArray addObject:[project valueForKey:@"closeoutdetails.verisaeShutdownReport"]];
+            [projectArray addObject:[project valueForKey:@"project.invoiced"]];
+            [projectArray addObject:[project valueForKey:@"project.shouldInvoice"]];
+            [projectArray addObject:[project valueForKey:@"project.projectNotes"]];
+            [projects addObject:projectArray];
+        }
+    } else if (reportType == 1) {
+        // Proposal
+        NSString *fetchCommand = [NSString stringWithFormat:@"SELECT projectstage.name, warehouse.warehouseID, warehouse.state, city.name, projectitem.name, project.scope, projectclass.name, warehouse.region, projectstatus.name, project.projectInitiatedDate, project.siteSurvey, project.costcoDueDate, project.proposalSubmitted, projecttype.name, project.projectNotes FROM projectstage, warehouse, city, project, projectitem, projectclass, projectstatus, projecttype WHERE projectstage.name = \"Proposal\" AND projectstage.id = project.stage_id AND project.warehouse_id = warehouse.id AND warehouse.city_id = city.id AND project.projectItem_id = projectitem.id AND project.projectClass_id = projectclass.id AND project.status_id = projectstatus.id AND project.projectType_id = projecttype.id"];
+        MysqlFetch *fetch = [self fetchWithCommand:fetchCommand];
+        NSArray *results = [[fetch results] copy];
+        fetch = [self fetchWithCommand:@"SELECT person.name FROM person, project, project_managers, projectstage WHERE project.stage_id = projectstage.id AND projectstage.name = \"Proposal\" AND project.id = project_managers.project_id AND project_managers.id = person.id"];
+        NSArray *managers = [[fetch results] copy];
+        fetch = [self fetchWithCommand:@"SELECT person.name FROM person, project, project_supervisors, projectstage WHERE project.stage_id = projectstage.id AND projectstage.name = \"Proposal\" AND project.id = project_supervisors.project_id AND project_supervisors.id = person.id"];
+        NSArray *supervisors = [[fetch results] copy];
+        for (int i = 0; i < [results count]; i++) {
+            NSMutableArray *projectArray = [[NSMutableArray alloc] init];
+            NSDictionary *project = [results objectAtIndex:i];
+            [projectArray addObject:[project valueForKey:@"name"]];
+            [projectArray addObject:[NSString stringWithFormat:@"%@, %@-#%@", [project valueForKey:@"city.name"], [project valueForKey:@"warehouse.state"], [project valueForKey:@"warehouse.warehouseID"]]];
+            [projectArray addObject:[project valueForKey:@"projectitem.name"]];
+            [projectArray addObject:[project valueForKey:@"project.scope"]];
+            [projectArray addObject:[project valueForKey:@"projectclass.name"]];
+            [projectArray addObject:[[managers objectAtIndex:i] valueForKey:@"name"]];
+            [projectArray addObject:[[supervisors objectAtIndex:i] valueForKey:@"name"]];
+            [projectArray addObject:[project valueForKey:@"warehouse.region"]];
+            [projectArray addObject:[project valueForKey:@"projectstatus.name"]];
+            [projectArray addObject:[project valueForKey:@"project.projectInitiatedDate"]];
+            [projectArray addObject:[project valueForKey:@"project.siteSurvey"]];
+            [projectArray addObject:[project valueForKey:@"project.costcoDueDate"]];
+            [projectArray addObject:[project valueForKey:@"project.proposalSubmitted"]];
+            [projectArray addObject:[project valueForKey:@"projecttype.name"]];
+            [projectArray addObject:[project valueForKey:@"project.projectNotes"]];
+            [projects addObject:projectArray];
+        }
+    } else if (reportType == 2) {
+        // Budgetary
+        NSString *fetchCommand = [NSString stringWithFormat:@"SELECT projectstage.name, warehouse.warehouseID, warehouse.state, city.name, projectitem.name, project.scope, projectclass.name, warehouse.region, projectstatus.name, project.projectInitiatedDate, project.siteSurvey, project.costcoDueDate, project.proposalSubmitted, projecttype.name, project.projectNotes FROM projectstage, warehouse, city, project, projectitem, projectclass, projectstatus, projecttype WHERE projectstage.name = \"Budgetary\" AND projectstage.id = project.stage_id AND project.warehouse_id = warehouse.id AND warehouse.city_id = city.id AND project.projectItem_id = projectitem.id AND project.projectClass_id = projectclass.id AND project.status_id = projectstatus.id AND project.projectType_id = projecttype.id"];
+        MysqlFetch *fetch = [self fetchWithCommand:fetchCommand];
+        NSArray *results = [[fetch results] copy];
+        fetch = [self fetchWithCommand:@"SELECT person.name FROM person, project, project_managers, projectstage WHERE project.stage_id = projectstage.id AND projectstage.name = \"Budgetary\" AND project.id = project_managers.project_id AND project_managers.id = person.id"];
+        NSArray *managers = [[fetch results] copy];
+        fetch = [self fetchWithCommand:@"SELECT person.name FROM person, project, project_supervisors, projectstage WHERE project.stage_id = projectstage.id AND projectstage.name = \"Budgetary\" AND project.id = project_supervisors.project_id AND project_supervisors.id = person.id"];
+        NSArray *supervisors = [[fetch results] copy];
+        for (int i = 0; i < [results count]; i++) {
+            NSMutableArray *projectArray = [[NSMutableArray alloc] init];
+            NSDictionary *project = [results objectAtIndex:i];
+            [projectArray addObject:[project valueForKey:@"name"]];
+            [projectArray addObject:[NSString stringWithFormat:@"%@, %@-#%@", [project valueForKey:@"city.name"], [project valueForKey:@"warehouse.state"], [project valueForKey:@"warehouse.warehouseID"]]];
+            [projectArray addObject:[project valueForKey:@"projectitem.name"]];
+            [projectArray addObject:[project valueForKey:@"project.scope"]];
+            [projectArray addObject:[project valueForKey:@"projectclass.name"]];
+            [projectArray addObject:[[managers objectAtIndex:i] valueForKey:@"name"]];
+            [projectArray addObject:[[supervisors objectAtIndex:i] valueForKey:@"name"]];
+            [projectArray addObject:[project valueForKey:@"warehouse.region"]];
+            [projectArray addObject:[project valueForKey:@"projectstatus.name"]];
+            [projectArray addObject:[project valueForKey:@"project.projectInitiatedDate"]];
+            [projectArray addObject:[project valueForKey:@"project.siteSurvey"]];
+            [projectArray addObject:[project valueForKey:@"project.costcoDueDate"]];
+            [projectArray addObject:[project valueForKey:@"project.proposalSubmitted"]];
+            [projectArray addObject:[project valueForKey:@"projecttype.name"]];
+            [projectArray addObject:[project valueForKey:@"project.projectNotes"]];
+            [projects addObject:projectArray];
+        }
+    } else if (reportType == 3) {
+        // Inactive
+        NSString *fetchCommand = [NSString stringWithFormat:@"SELECT projectstage.name, projectitem.name, project.scope, projectstatus.name FROM projectstage, projectitem, project, projectstatus WHERE projectstage.name = \"Inactive\" AND projectstage.id = project.stage_id AND project.projectItem_id = projectitem.id AND project.status_id = projectstatus.id"];
+        MysqlFetch *fetch = [self fetchWithCommand:fetchCommand];
+        for (int i = 0; i < [[fetch results] count]; i++) {
+            NSMutableArray *projectArray = [[NSMutableArray alloc] init];
+            NSDictionary *project = [[fetch results] objectAtIndex:i];
+            [projectArray addObject:[project valueForKey:@"name"]];
+            [projectArray addObject:[project valueForKey:@"projectitem.name"]];
+            [projectArray addObject:[project valueForKey:@"project.scope"]];
+            [projectArray addObject:[project valueForKey:@"projectstatus.name"]];
+            [projects addObject:projectArray];
+        }
+    } else if (reportType == 4) {
+        // Closed
+        NSString *fetchCommand = [NSString stringWithFormat:@"SELECT project.mcsNumber, projectstage.name, warehouse.warehouseID, warehouse.state, city.name, projectitem.name, project.scope, warehouse.region, projectstatus.name, project.projectInitiatedDate, projecttype.name, project.costcoDueDate, project.proposalSubmitted, project.scheduledStartDate, project.scheduledTurnover, closeoutdetails.asBuilts, closeoutdetails.punchList, closeoutdetails.alarmHvacForm, closeoutdetails.airGas, closeoutdetails.permitsClosed, project.shouldInvoice, project.invoiced, project.projectNotes FROM project, projectstage, warehouse, city, projectitem, projectstatus, projecttype, closeoutdetails WHERE projectstage.name = \"Closed\" AND projectstage.id = project.stage_id AND project.warehouse_id = warehouse.id AND warehouse.city_id = city.id AND project.projectItem_id = projectitem.id AND project.status_id = projectstatus.id AND project.projectType_id = projecttype.id AND project.closeoutDetails_id = closeoutdetails.id"];
+        MysqlFetch *fetch = [self fetchWithCommand:fetchCommand];
+        NSArray *results = [[fetch results] copy];
+        fetch = [self fetchWithCommand:@"SELECT person.name FROM person, project, project_managers, projectstage WHERE project.stage_id = projectstage.id AND projectstage.name = \"Closed\" AND project.id = project_managers.project_id AND project_managers.id = person.id"];
+        NSArray *managers = [[fetch results] copy];
+        fetch = [self fetchWithCommand:@"SELECT person.name FROM person, project, project_supervisors, projectstage WHERE project.stage_id = projectstage.id AND projectstage.name = \"Closed\" AND project.id = project_supervisors.project_id AND project_supervisors.id = person.id"];
+        NSArray *supervisors = [[fetch results] copy];
+        for (int i = 0; i < [results count]; i++) {
+            NSMutableArray *projectArray = [[NSMutableArray alloc] init];
+            NSDictionary *project = [results objectAtIndex:i];
+            [projectArray addObject:[project valueForKey:@"mcsNumber"]];
+            [projectArray addObject:[project valueForKey:@"projectstage.name"]];
+            [projectArray addObject:[NSString stringWithFormat:@"%@, %@-#%@", [project valueForKey:@"city.name"], [project valueForKey:@"warehouse.state"], [project valueForKey:@"warehouse.warehouseID"]]];
+            [projectArray addObject:[project valueForKey:@"projectitem.name"]];
+            [projectArray addObject:[project valueForKey:@"project.scope"]];
+            [projectArray addObject:[[managers objectAtIndex:i] valueForKey:@"name"]];
+            [projectArray addObject:[[supervisors objectAtIndex:i] valueForKey:@"name"]];
+            [projectArray addObject:[project valueForKey:@"warehouse.region"]];
+            [projectArray addObject:[project valueForKey:@"projectstatus.name"]];
+            [projectArray addObject:[project valueForKey:@"project.projectInitiatedDate"]];
+            [projectArray addObject:[project valueForKey:@"projecttype.name"]];
+            [projectArray addObject:[project valueForKey:@"project.costcoDueDate"]];
+            [projectArray addObject:[project valueForKey:@"project.proposalSubmitted"]];
+            [projectArray addObject:[project valueForKey:@"project.scheduledStartDate"]];
+            [projectArray addObject:[project valueForKey:@"project.scheduledTurnover"]];
+            [projectArray addObject:[project valueForKey:@"closeoutdetails.asBuilts"]];
+            [projectArray addObject:[project valueForKey:@"closeoutdetails.punchList"]];
+            [projectArray addObject:[project valueForKey:@"closeoutdetails.alarmHvacForm"]];
+            [projectArray addObject:[project valueForKey:@"closeoutdetails.airGas"]];
+            [projectArray addObject:[project valueForKey:@"closeoutdetails.permitsClosed"]];
+            [projectArray addObject:[project valueForKey:@"project.shouldInvoice"]];
+            [projectArray addObject:[project valueForKey:@"project.invoiced"]];
+            [projectArray addObject:[project valueForKey:@"project.projectNotes"]];
+            [projects addObject:projectArray];
+        }
     }
-    fetch = [self fetchWithCommand:fetchCommand];
-    NSArray *results = [[fetch results] copy];
-    fetch = [self fetchWithCommand:@"SELECT person.name FROM person, project, project_managers, projectstage WHERE project.stage_id = projectstage.id AND projectstage.name = \"Active\" AND project.id = project_managers.project_id AND project_managers.id = person.id"];
-    NSArray *managers = [[fetch results] copy];
-    fetch = [self fetchWithCommand:@"SELECT person.name FROM person, project, project_supervisors, projectstage WHERE project.stage_id = projectstage.id AND projectstage.name = \"Active\" AND project.id = project_supervisors.project_id AND project_supervisors.id = person.id"];
-    NSArray *supervisors = [[fetch results] copy];
-    for (int i = 0; i < [results count]; i++) {
-        NSMutableArray *projectArray = [[NSMutableArray alloc] init];
-        NSDictionary *project = [results objectAtIndex:i];
-        [projectArray addObject:[project valueForKey:@"mcsNumber"]];
-        [projectArray addObject:[project valueForKey:@"projectstage.name"]];
-        [projectArray addObject:[NSString stringWithFormat:@"%@, %@-#%@", [project valueForKey:@"city.name"], [project valueForKey:@"warehouse.stage"], [project valueForKey:@"warehouse.warehouseID"]]];
-        [projectArray addObject:[project valueForKey:@"projectitem.name"]];
-        [projectArray addObject:[project valueForKey:@"project.scope"]];
-        [projectArray addObject:[project valueForKey:@"projectclass.name"]];
-        [projectArray addObject:[managers objectAtIndex:i]];
-        [projectArray addObject:[supervisors objectAtIndex:i]];
-        [projectArray addObject:[project valueForKey:@"warehouse.region"]];
-        [projectArray addObject:[project valueForKey:@"projectstatus.name"]];
-        [projectArray addObject:[project valueForKey:@"project.scheduledStartDate"]];
-        [projectArray addObject:[project valueForKey:@"project.scheduledTurnover"]];
-        [projectArray addObject:[project valueForKey:@"project.actualTurnover"]];
-        [projectArray addObject:[project valueForKey:@"projecttype.name"]];
-        [projectArray addObject:[project valueForKey:@"closeoutdetails.asBuilts"]];
-        [projectArray addObject:[project valueForKey:@"closeoutdetails.punchList"]];
-        [projectArray addObject:[project valueForKey:@"closeoutdetails.alarmHvacForm"]];
-        [projectArray addObject:[project valueForKey:@"closeoutdetails.airGas"]];
-        [projectArray addObject:[project valueForKey:@"closeoutdetails.permitsClosed"]];
-        [projectArray addObject:[project valueForKey:@"closeoutdetails.verisaeShutdownReport"]];
-        [projectArray addObject:[project valueForKey:@"project.invoiced"]];
-        [projectArray addObject:[project valueForKey:@"project.shouldInvoice"]];
-        [projectArray addObject:[project valueForKey:@"project.projectNotes"]];
-        [projects addObject:projectArray];
+    
+    return [projects copy];
+}
+
+-(NSArray *)fetchSteveMeyerReportWithReportType:(NSInteger)reportType {
+    NSMutableArray *projects = [[NSMutableArray alloc] init];
+    if (reportType == 0) {
+        // Active
+        NSString *fetchCommand = [NSString stringWithFormat:@"SELECT project.mcsNumber, warehouse.warehouseID, warehouse.state, city.name, projectitem.name, project.scope, projectclass.name, warehouse.region, projectstatus.name, project.scheduledStartDate, project.scheduledTurnover FROM project, warehouse, city, projectitem, projectclass, projectstatus, projectstage WHERE project.warehouse_id = warehouse.id AND warehouse.city_id = city.id AND project.projectItem_id = projectitem.id AND project.projectClass_id = projectclass.id AND project.status_id = projectstatus.id AND projectstage.name = \"Active\" AND projectstage.id = project.stage_id AND (project.status_id = 26 OR project.status_id = 29 OR project.status_id = 27 OR project.status_id = 31 OR project.status_id = 30) AND (project.projectType_id = 1 OR project.projectType_id = 5 OR project.projectType_id = 6)"];
+        MysqlFetch *fetch = [self fetchWithCommand:fetchCommand];
+        NSArray *results = [[fetch results] copy];
+    } else {
+        // Proposal
     }
     
     return [projects copy];

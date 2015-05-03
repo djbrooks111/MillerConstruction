@@ -23,6 +23,7 @@
 		262339441AB61CBF001976B8 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 262339421AB61CBF001976B8 /* LaunchScreen.xib */; };
 		2623395B1AB61E41001976B8 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 2623395A1AB61E41001976B8 /* User.m */; };
 		2623395E1AB620BD001976B8 /* DatabaseConnector.m in Sources */ = {isa = PBXBuildFile; fileRef = 2623395D1AB620BD001976B8 /* DatabaseConnector.m */; };
+		262754881AF6B2E200840673 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 262754871AF6B2E200840673 /* CoreGraphics.framework */; };
 		265C19931ABC8905007BCEF6 /* CreateNewProjectTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 265C19921ABC8905007BCEF6 /* CreateNewProjectTableViewController.m */; };
 		2663B0E81AF42FA40001EC13 /* Trigger.m in Sources */ = {isa = PBXBuildFile; fileRef = 2663B0E71AF42FA40001EC13 /* Trigger.m */; };
 		266AE5EC1ABC64EE0073E80A /* MainMenuViewControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 266AE5EB1ABC64EE0073E80A /* MainMenuViewControllerTest.m */; };
@@ -100,6 +101,7 @@
 		2623395A1AB61E41001976B8 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		2623395C1AB620BD001976B8 /* DatabaseConnector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DatabaseConnector.h; sourceTree = "<group>"; };
 		2623395D1AB620BD001976B8 /* DatabaseConnector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DatabaseConnector.m; sourceTree = "<group>"; };
+		262754871AF6B2E200840673 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		265C19911ABC8905007BCEF6 /* CreateNewProjectTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateNewProjectTableViewController.h; sourceTree = "<group>"; };
 		265C19921ABC8905007BCEF6 /* CreateNewProjectTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateNewProjectTableViewController.m; sourceTree = "<group>"; };
 		2663B0E61AF42FA40001EC13 /* Trigger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Trigger.h; sourceTree = "<group>"; };
@@ -240,6 +242,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				262754881AF6B2E200840673 /* CoreGraphics.framework in Frameworks */,
 				26BE55091AB66DEE00566014 /* libmysqlclient.a in Frameworks */,
 				354AD96D0A9566B6729E1DD3 /* libPods.a in Frameworks */,
 			);
@@ -528,6 +531,7 @@
 		449F21EBB7D508E709DA9621 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				262754871AF6B2E200840673 /* CoreGraphics.framework */,
 				B444ED1E15ED2DFC735FFDA0 /* libPods.a */,
 				1B173080B9E3FBE1238D44A9 /* libPods-MillerConstructionTests.a */,
 			);
@@ -601,6 +605,7 @@
 				TargetAttributes = {
 					2623392F1AB61CBF001976B8 = {
 						CreatedOnToolsVersion = 6.2;
+						DevelopmentTeam = ENJN7KKMH6;
 					};
 					262339481AB61CBF001976B8 = {
 						CreatedOnToolsVersion = 6.2;
@@ -933,6 +938,8 @@
 			baseConfigurationReference = EAC9D72AE6408EE54EEDC3CC /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
 				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
 				INFOPLIST_FILE = MillerConstruction/Info.plist;
@@ -945,6 +952,7 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				VALID_ARCHS = "armv7 armv7s";
 			};
 			name = Debug;
@@ -954,6 +962,8 @@
 			baseConfigurationReference = 44B7F915EBEB8DCB815ABD62 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_GENERATE_TEST_COVERAGE_FILES = NO;
 				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = NO;
 				INFOPLIST_FILE = MillerConstruction/Info.plist;
@@ -966,6 +976,7 @@
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				VALID_ARCHS = "armv7 armv7s";
 			};
 			name = Release;

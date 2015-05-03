@@ -52,4 +52,11 @@
     NSLog(@"%@", resultArray);
 }
 
+-(void)testSQL {
+    [database connectToDatabase];
+    MysqlFetch *fetch = [database fetchWithCommand:@"SELECT project.mcsNumber, projectstage.name, warehouse.warehouseID, warehouse.state, city.name, projectitem.name, project.scope, warehouse.region, projectstatus.name, project.projectInitiatedDate, projecttype.name, project.costcoDueDate, project.proposalSubmitted, project.scheduledStartDate, project.scheduledTurnover, closeoutdetails.asBuilts, closeoutdetails.punchList, closeoutdetails.alarmHvacForm, closeoutdetails.airGas, closeoutdetails.permitsClosed, project.shouldInvoice, project.invoiced, project.projectNotes FROM project, projectstage, warehouse, city, projectitem, projectstatus, projecttype, closeoutdetails WHERE projectstage.name = \"Closed\" AND projectstage.id = project.stage_id AND project.warehouse_id = warehouse.id AND warehouse.city_id = city.id AND project.projectItem_id = projectitem.id AND project.status_id = projectstatus.id AND project.projectType_id = projecttype.id AND project.closeoutDetails_id = closeoutdetails.id"];
+    database.databaseConnection = nil;
+    NSLog(@"%@", [fetch results]);
+}
+
 @end

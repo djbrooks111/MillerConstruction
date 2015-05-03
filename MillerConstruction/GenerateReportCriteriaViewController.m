@@ -44,7 +44,7 @@
     HUD.textLabel.text = @"Loading data...";
     [HUD showInView:self.view];
     helper = [[GenerateReportSearchHelper alloc] init];
-    [HUD dismissAfterDelay:1.5];
+    [HUD dismiss];
 }
 
 -(void)didReceiveMemoryWarning {
@@ -82,7 +82,49 @@
 
 -(void)generateReport:(UIButton *)sender {
     reportType = [sender tag];
-    [self performSegueWithIdentifier:@"generateReport" sender:self];
+    if ([report isEqualToString:@""] || [self.reportTypeTextField.text isEqualToString:@""]) {
+        // Invalid Criteria
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Invalid Criteria" message:@"You must select a report type first" delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil, nil];
+        [alert show];
+    } else if ([report isEqualToString:@"Steve Meyer"] && (reportType == ClosedReport || reportType == InactiveReport || reportType == BudgetaryReport)) {
+        // Invalid Report
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Invalid report" message:@"That is not a valid report, choose again" delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil, nil];
+        [alert show];
+    } else if ([report isEqualToString:@"South East Refrigeration"] && (reportType == ClosedReport || reportType == InactiveReport || reportType == BudgetaryReport)) {
+        // Invalid Report
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Invalid report" message:@"That is not a valid report, choose again" delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil, nil];
+        [alert show];
+    } else if ([report isEqualToString:@"North East Refrigeration"] && (reportType == ClosedReport || reportType == InactiveReport || reportType == BudgetaryReport)) {
+        // Invalid Report
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Invalid report" message:@"That is not a valid report, choose again" delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil, nil];
+        [alert show];
+    } else if ([report isEqualToString:@"J Dempsey"] && (reportType == ClosedReport || reportType == InactiveReport || reportType == BudgetaryReport)) {
+        // Invalid Report
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Invalid report" message:@"That is not a valid report, choose again" delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil, nil];
+        [alert show];
+    } else if ([report isEqualToString:@"Invoice"] && (reportType == ClosedReport || reportType == InactiveReport || reportType == BudgetaryReport)) {
+        // Invalid Report
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Invalid report" message:@"That is not a valid report, choose again" delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil, nil];
+        [alert show];
+    } else if ([report isEqualToString:@"Completed"] && reportType != ActiveReport) {
+        // Invalid Report
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Invalid report" message:@"That is not a valid report, choose again" delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil, nil];
+        [alert show];
+    } else if ([report isEqualToString:@"Construction"] && reportType != ActiveReport) {
+        // Invalid Report
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Invalid report" message:@"That is not a valid report, choose again" delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil, nil];
+        [alert show];
+    } else if ([report isEqualToString:@"Repair"] && reportType != ActiveReport) {
+        // Invalid Report
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Invalid report" message:@"That is not a valid report, choose again" delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil, nil];
+        [alert show];
+    } else if ([report isEqualToString:@"HVAC"] && (reportType == ClosedReport || reportType == InactiveReport || reportType == BudgetaryReport)) {
+        // Invalid Report
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Invalid report" message:@"That is not a valid report, choose again" delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil, nil];
+        [alert show];
+    } else {
+        [self performSegueWithIdentifier:@"generateReport" sender:self];
+    }
 }
 
 #pragma mark - Navigation

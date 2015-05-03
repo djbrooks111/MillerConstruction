@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "MysqlConnection.h"
 #import "User.h"
+#import "iPhoneMySQL/MysqlFetch.h"
 
 @interface DatabaseConnector : NSObject
 
@@ -35,6 +36,18 @@
 
 -(NSArray *)fetchProjectInformationForID:(NSNumber *)projectID;
 
+// Generate Report
+-(NSArray *)fetchWeeklyReportWithReportType:(NSInteger)reportType;
+-(NSArray *)fetchSteveMeyerReportWithReportType:(NSInteger)reportType;
+-(NSArray *)fetchSouthEastReportWithReportType:(NSInteger)reportType;
+-(NSArray *)fetchNorthEastReportWithReportType:(NSInteger)reportType;
+-(NSArray *)fetchJDempseyReportWithReportType:(NSInteger)reportType;
+-(NSArray *)fetchInvoiceReportWithReportType:(NSInteger)reportType;
+-(NSArray *)fetchCompletedReportWithReportType:(NSInteger)reportType;
+-(NSArray *)fetchConstructionReportWithReportType:(NSInteger)reportType;
+-(NSArray *)fetchRepairReportWithReportType:(NSInteger)reportType;
+-(NSArray *)fetchHVACReportWithReportType:(NSInteger)reportType;
+
 // View Triggers
 -(NSArray *)fetchInfoMCSNumberTriggers;
 -(NSArray *)fetchWarningInvoiceTriggers;
@@ -45,5 +58,8 @@
 
 // View Existing Rpoject
 -(BOOL)updateProjectWithID:(NSNumber *)projectID andData:(NSArray *)projectInformation andKeys:(NSArray *)keys andSalvageExists:(BOOL)salvageExists;
+
+// MySQL
+-(MysqlFetch *)fetchWithCommand:(NSString *)command;
 
 @end

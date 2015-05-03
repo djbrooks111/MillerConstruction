@@ -70,7 +70,7 @@
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
     [self.view addGestureRecognizer:tapGesture];
     
-    [HUD dismissAfterDelay:1.5];
+    [HUD dismiss];
     
     [self.tableView reloadData];
 }
@@ -471,7 +471,7 @@
                 HUD.indicatorView = [[JGProgressHUDSuccessIndicatorView alloc] init];
                 HUD.textLabel.text = @"Success!";
             });
-            [HUD dismissAfterDelay:1.5];
+            [HUD dismissAfterDelay:1];
         } else {
             // Failure
             NSLog(@"Failed to save!");
@@ -479,7 +479,7 @@
                 HUD.indicatorView = [[JGProgressHUDErrorIndicatorView alloc] init];
                 HUD.textLabel.text = @"Failed to save, please try again!";
             });
-            [HUD dismissAfterDelay:1.5];
+            [HUD dismissAfterDelay:1];
         }
     } else {
         // Notify User

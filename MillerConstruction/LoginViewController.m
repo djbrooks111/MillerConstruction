@@ -73,14 +73,14 @@
             HUD.indicatorView = [[JGProgressHUDSuccessIndicatorView alloc] init];
             HUD.textLabel.text = @"Success!";
         });
-        [HUD dismissAfterDelay:1.5];
+        [HUD dismissAfterDelay:1];
         [self performSelector:@selector(goToMainMenu) withObject:nil afterDelay:2];
     } else {
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             HUD.indicatorView = [[JGProgressHUDErrorIndicatorView alloc] init];
             HUD.textLabel.text = @"Error!";
         });
-        [HUD dismissAfterDelay:1.5];
+        [HUD dismissAfterDelay:1];
         if (loginResult == IncorrectPassword) {
             alert = [[UIAlertView alloc] initWithTitle:@"Incorrect Password" message:@"The password you entered is incorrect. Please try again." delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil, nil];
             [alert performSelector:@selector(show) withObject:nil afterDelay:2];

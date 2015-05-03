@@ -49,7 +49,7 @@
         [searchCriteria addObject:[NSNull null]];
     }
     
-    [HUD dismissAfterDelay:1.5];
+    [HUD dismiss];
 }
 
 -(void)didReceiveMemoryWarning {

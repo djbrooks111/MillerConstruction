@@ -41,7 +41,7 @@
     HUD.textLabel.text = @"Loading data...";
     [HUD showInView:self.view];
     [helper lookForTriggers];
-    [HUD dismissAfterDelay:1.5];
+    [HUD dismiss];
     [self.tableView reloadData];
 }
 
