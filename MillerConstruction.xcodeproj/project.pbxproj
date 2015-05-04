@@ -14,7 +14,6 @@
 		26126B701AC887F600AB70B3 /* ProjectStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 26126B6F1AC887F600AB70B3 /* ProjectStatus.m */; };
 		26126B731AC8887700AB70B3 /* ProjectType.m in Sources */ = {isa = PBXBuildFile; fileRef = 26126B721AC8887700AB70B3 /* ProjectType.m */; };
 		26126B751AC899E500AB70B3 /* NewProjectHelperTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 26126B741AC899E500AB70B3 /* NewProjectHelperTest.m */; };
-		26126B771AC89C8000AB70B3 /* WarehouseTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 26126B761AC89C8000AB70B3 /* WarehouseTest.m */; };
 		262339361AB61CBF001976B8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 262339351AB61CBF001976B8 /* main.m */; };
 		262339391AB61CBF001976B8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 262339381AB61CBF001976B8 /* AppDelegate.m */; };
 		2623393C1AB61CBF001976B8 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2623393B1AB61CBF001976B8 /* LoginViewController.m */; };
@@ -28,7 +27,6 @@
 		2663B0E81AF42FA40001EC13 /* Trigger.m in Sources */ = {isa = PBXBuildFile; fileRef = 2663B0E71AF42FA40001EC13 /* Trigger.m */; };
 		266AE5EC1ABC64EE0073E80A /* MainMenuViewControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 266AE5EB1ABC64EE0073E80A /* MainMenuViewControllerTest.m */; };
 		26773F691ABC61800075C1E7 /* LoginViewControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 26773F681ABC61800075C1E7 /* LoginViewControllerTest.m */; };
-		26777C591AEA84A800807546 /* Project.m in Sources */ = {isa = PBXBuildFile; fileRef = 26777C581AEA84A800807546 /* Project.m */; };
 		2688B8FA1AB67D1E0052DEDE /* MainMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2688B8F91AB67D1E0052DEDE /* MainMenuViewController.m */; };
 		2688B9001AB67E780052DEDE /* UserTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2688B8FF1AB67E780052DEDE /* UserTest.m */; };
 		26892C1D1AC10EBF00783172 /* ProjectTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 26892C1B1AC10EBF00783172 /* ProjectTableViewCell.m */; };
@@ -40,6 +38,14 @@
 		2698D6211AC05B0600323046 /* ProjectHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2698D6201AC05B0600323046 /* ProjectHelper.m */; };
 		2698D6241AC05C7900323046 /* Warehouse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2698D6231AC05C7900323046 /* Warehouse.m */; };
 		2698D62C1AC097D200323046 /* DatabaseConnectionTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2698D62B1AC097D200323046 /* DatabaseConnectionTest.m */; };
+		26AA88E31AF715C60016A6F9 /* GenerateReportHelperTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 26AA88E21AF715C60016A6F9 /* GenerateReportHelperTest.m */; };
+		26AA88E51AF718260016A6F9 /* CreateNewProjectViewControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 26AA88E41AF718260016A6F9 /* CreateNewProjectViewControllerTest.m */; };
+		26AA88E71AF719350016A6F9 /* ViewExistingProjectTableViewControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 26AA88E61AF719350016A6F9 /* ViewExistingProjectTableViewControllerTest.m */; };
+		26AA88E91AF719C70016A6F9 /* ViewExistingProjectViewControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 26AA88E81AF719C70016A6F9 /* ViewExistingProjectViewControllerTest.m */; };
+		26AA88EB1AF71A370016A6F9 /* GenerateReportViewControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 26AA88EA1AF71A370016A6F9 /* GenerateReportViewControllerTest.m */; };
+		26AA88ED1AF71A8C0016A6F9 /* GenerateReportCriteriaViewControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 26AA88EC1AF71A8C0016A6F9 /* GenerateReportCriteriaViewControllerTest.m */; };
+		26AA88EF1AF71AD10016A6F9 /* ViewTriggersTableViewControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 26AA88EE1AF71AD10016A6F9 /* ViewTriggersTableViewControllerTest.m */; };
+		26AA88F11AF71B5C0016A6F9 /* ViewTriggersHelperTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 26AA88F01AF71B5C0016A6F9 /* ViewTriggersHelperTest.m */; };
 		26BE55061AB66DEE00566014 /* MysqlCommitException.m in Sources */ = {isa = PBXBuildFile; fileRef = 26BE54A71AB66DEE00566014 /* MysqlCommitException.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		26BE55071AB66DEE00566014 /* MysqlException.m in Sources */ = {isa = PBXBuildFile; fileRef = 26BE54A91AB66DEE00566014 /* MysqlException.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		26BE55081AB66DEE00566014 /* MysqlRollbackException.m in Sources */ = {isa = PBXBuildFile; fileRef = 26BE54AB1AB66DEE00566014 /* MysqlRollbackException.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -84,7 +90,6 @@
 		26126B711AC8887700AB70B3 /* ProjectType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectType.h; sourceTree = "<group>"; };
 		26126B721AC8887700AB70B3 /* ProjectType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectType.m; sourceTree = "<group>"; };
 		26126B741AC899E500AB70B3 /* NewProjectHelperTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewProjectHelperTest.m; sourceTree = "<group>"; };
-		26126B761AC89C8000AB70B3 /* WarehouseTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WarehouseTest.m; sourceTree = "<group>"; };
 		262339301AB61CBF001976B8 /* MillerConstruction.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MillerConstruction.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		262339341AB61CBF001976B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		262339351AB61CBF001976B8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -108,8 +113,6 @@
 		2663B0E71AF42FA40001EC13 /* Trigger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Trigger.m; sourceTree = "<group>"; };
 		266AE5EB1ABC64EE0073E80A /* MainMenuViewControllerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMenuViewControllerTest.m; sourceTree = "<group>"; };
 		26773F681ABC61800075C1E7 /* LoginViewControllerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewControllerTest.m; sourceTree = "<group>"; };
-		26777C571AEA84A800807546 /* Project.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Project.h; sourceTree = "<group>"; };
-		26777C581AEA84A800807546 /* Project.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Project.m; sourceTree = "<group>"; };
 		2688B8F81AB67D1E0052DEDE /* MainMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenuViewController.h; sourceTree = "<group>"; };
 		2688B8F91AB67D1E0052DEDE /* MainMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMenuViewController.m; sourceTree = "<group>"; };
 		2688B8FF1AB67E780052DEDE /* UserTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserTest.m; sourceTree = "<group>"; };
@@ -130,6 +133,14 @@
 		2698D6221AC05C7900323046 /* Warehouse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Warehouse.h; sourceTree = "<group>"; };
 		2698D6231AC05C7900323046 /* Warehouse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Warehouse.m; sourceTree = "<group>"; };
 		2698D62B1AC097D200323046 /* DatabaseConnectionTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DatabaseConnectionTest.m; sourceTree = "<group>"; };
+		26AA88E21AF715C60016A6F9 /* GenerateReportHelperTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GenerateReportHelperTest.m; sourceTree = "<group>"; };
+		26AA88E41AF718260016A6F9 /* CreateNewProjectViewControllerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateNewProjectViewControllerTest.m; sourceTree = "<group>"; };
+		26AA88E61AF719350016A6F9 /* ViewExistingProjectTableViewControllerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewExistingProjectTableViewControllerTest.m; sourceTree = "<group>"; };
+		26AA88E81AF719C70016A6F9 /* ViewExistingProjectViewControllerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewExistingProjectViewControllerTest.m; sourceTree = "<group>"; };
+		26AA88EA1AF71A370016A6F9 /* GenerateReportViewControllerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GenerateReportViewControllerTest.m; sourceTree = "<group>"; };
+		26AA88EC1AF71A8C0016A6F9 /* GenerateReportCriteriaViewControllerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GenerateReportCriteriaViewControllerTest.m; sourceTree = "<group>"; };
+		26AA88EE1AF71AD10016A6F9 /* ViewTriggersTableViewControllerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewTriggersTableViewControllerTest.m; sourceTree = "<group>"; };
+		26AA88F01AF71B5C0016A6F9 /* ViewTriggersHelperTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewTriggersHelperTest.m; sourceTree = "<group>"; };
 		26BE54A61AB66DEE00566014 /* MysqlCommitException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MysqlCommitException.h; sourceTree = "<group>"; };
 		26BE54A71AB66DEE00566014 /* MysqlCommitException.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MysqlCommitException.m; sourceTree = "<group>"; };
 		26BE54A81AB66DEE00566014 /* MysqlException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MysqlException.h; sourceTree = "<group>"; };
@@ -311,7 +322,14 @@
 				2688B8FF1AB67E780052DEDE /* UserTest.m */,
 				2698D62B1AC097D200323046 /* DatabaseConnectionTest.m */,
 				26126B741AC899E500AB70B3 /* NewProjectHelperTest.m */,
-				26126B761AC89C8000AB70B3 /* WarehouseTest.m */,
+				26AA88E21AF715C60016A6F9 /* GenerateReportHelperTest.m */,
+				26AA88E41AF718260016A6F9 /* CreateNewProjectViewControllerTest.m */,
+				26AA88E61AF719350016A6F9 /* ViewExistingProjectTableViewControllerTest.m */,
+				26AA88E81AF719C70016A6F9 /* ViewExistingProjectViewControllerTest.m */,
+				26AA88EA1AF71A370016A6F9 /* GenerateReportViewControllerTest.m */,
+				26AA88EC1AF71A8C0016A6F9 /* GenerateReportCriteriaViewControllerTest.m */,
+				26AA88EE1AF71AD10016A6F9 /* ViewTriggersTableViewControllerTest.m */,
+				26AA88F01AF71B5C0016A6F9 /* ViewTriggersHelperTest.m */,
 				2623394D1AB61CBF001976B8 /* Supporting Files */,
 			);
 			path = MillerConstructionTests;
@@ -379,8 +397,6 @@
 				26944D681AE0956D00E0160E /* GenerateReportSearchHelper.m */,
 				26944D6D1AE09E1100E0160E /* ViewTriggersHelper.h */,
 				26944D6E1AE09E1100E0160E /* ViewTriggersHelper.m */,
-				26777C571AEA84A800807546 /* Project.h */,
-				26777C581AEA84A800807546 /* Project.m */,
 				2663B0E61AF42FA40001EC13 /* Trigger.h */,
 				2663B0E71AF42FA40001EC13 /* Trigger.m */,
 			);
@@ -780,7 +796,6 @@
 				2688B8FA1AB67D1E0052DEDE /* MainMenuViewController.m in Sources */,
 				26126B701AC887F600AB70B3 /* ProjectStatus.m in Sources */,
 				26BE550E1AB66DEE00566014 /* MysqlInsert.m in Sources */,
-				26777C591AEA84A800807546 /* Project.m in Sources */,
 				26BE550C1AB66DEE00566014 /* MysqlFetch.m in Sources */,
 				26944D6C1AE09C0800E0160E /* ViewTriggersTableViewController.m in Sources */,
 				2610A0F91ACF8CF0005D3902 /* NSString+MysqlEscape.m in Sources */,
@@ -806,11 +821,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				26AA88E51AF718260016A6F9 /* CreateNewProjectViewControllerTest.m in Sources */,
+				26AA88EB1AF71A370016A6F9 /* GenerateReportViewControllerTest.m in Sources */,
 				2698D62C1AC097D200323046 /* DatabaseConnectionTest.m in Sources */,
-				26126B771AC89C8000AB70B3 /* WarehouseTest.m in Sources */,
 				26126B751AC899E500AB70B3 /* NewProjectHelperTest.m in Sources */,
+				26AA88E91AF719C70016A6F9 /* ViewExistingProjectViewControllerTest.m in Sources */,
+				26AA88F11AF71B5C0016A6F9 /* ViewTriggersHelperTest.m in Sources */,
+				26AA88ED1AF71A8C0016A6F9 /* GenerateReportCriteriaViewControllerTest.m in Sources */,
+				26AA88E71AF719350016A6F9 /* ViewExistingProjectTableViewControllerTest.m in Sources */,
 				266AE5EC1ABC64EE0073E80A /* MainMenuViewControllerTest.m in Sources */,
 				2688B9001AB67E780052DEDE /* UserTest.m in Sources */,
+				26AA88EF1AF71AD10016A6F9 /* ViewTriggersTableViewControllerTest.m in Sources */,
+				26AA88E31AF715C60016A6F9 /* GenerateReportHelperTest.m in Sources */,
 				26773F691ABC61800075C1E7 /* LoginViewControllerTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

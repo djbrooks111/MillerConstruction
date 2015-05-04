@@ -49,19 +49,16 @@
             
         case ViewExistingProjectTag:
             // View Existing Project
-            //TODO: Put Segue with ID = goToViewExistingProject
             [self performSegueWithIdentifier:@"goToViewExistingProject" sender:self];
             break;
             
         case GenerateReportTag:
             // Generate Report
-            //TODO: Put Segue with ID = goToGenerateReport
             [self performSegueWithIdentifier:@"goToGenerateReport" sender:self];
             break;
             
         case ViewTriggersTag:
             // View Triggers
-            //TODO: Put Segue with ID = goToViewTriggers
             [self performSegueWithIdentifier:@"goToViewTriggers" sender:self];
             break;
             

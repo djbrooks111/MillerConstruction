@@ -112,11 +112,26 @@
 
 #pragma mark - Table view data source
 
+/**
+ *  Sets the number of sections in the UITableView
+ *
+ *  @param tableView The UITableView
+ *
+ *  @return The number of sections
+ */
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
     return 2;
 }
 
+/**
+ *  Sets the number of rows in each section in the UITableView
+ *
+ *  @param tableView The UITableView
+ *  @param section   The section of the UITableView
+ *
+ *  @return The number of rows in the section
+ */
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
     if (section == 0) {
@@ -126,6 +141,14 @@
     }
 }
 
+/**
+ *  Sets the section header title of the UITableView
+ *
+ *  @param tableView The UITableView
+ *  @param section   The section of the UITableView
+ *
+ *  @return The title for the header section
+ */
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     if (section == 0) {
         return @"Required Information";
@@ -134,6 +157,14 @@
     }
 }
 
+/**
+ *  Configures the cell of the UITableView
+ *
+ *  @param tableView The UITableView the cell is in
+ *  @param indexPath The indexPath of the cell (section/row)
+ *
+ *  @return The configured cell
+ */
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     ProjectTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     
@@ -210,6 +241,11 @@
 
 #pragma mark - UITextFieldDelegate
 
+/**
+ *  Called when a user clicks outside the UITextField
+ *
+ *  @param textField The UITextField that was just clicked out of
+ */
 -(void)textFieldDidEndEditing:(UITextField *)textField {
     NSLog(@"textFieldDidEndEditing: %d", [textField tag]);
     if ([textField tag] == 50) {
@@ -228,6 +264,13 @@
     }
 }
 
+/**
+ *  Called when a user presses the return key
+ *
+ *  @param textField The UITextField the user pressed the return key of
+ *
+ *  @return YES always
+ */
 -(BOOL)textFieldShouldReturn:(UITextField *)textField {
     NSLog(@"textFieldShouldReturn: %d", [textField tag]);
     [textField resignFirstResponder];
@@ -454,6 +497,11 @@
 
 #pragma mark - Editing and Saving
 
+/**
+ *  Either allows editing of the project or saves the edited project
+ *
+ *  @param sender The UIBarButtonItem that was pressed
+ */
 -(void)editProject:(UIBarButtonItem *)sender {
     if ([sender.title isEqualToString:@"Edit"]) {
         // Editing is shown
@@ -476,6 +524,9 @@
     }
 }
 
+/**
+ *  Saves the information entered into the UITextFields
+ */
 -(void)save {
     // MCS Project #
     if ([[cellArray objectAtIndex:0] isKindOfClass:[NSString class]]) {
@@ -589,6 +640,12 @@
     return true;
 }
 
+/**
+ *  Inserts an object into the cellArray
+ *
+ *  @param anObject The object to be inserted, is either NSDate or NSString
+ *  @param theTag   The index to be inserted into
+ */
 -(void)insertObject:(id)anObject intoArrayWithTag:(int)theTag {
     if ([[[NSString stringWithFormat:@"%d", theTag] substringWithRange:NSMakeRange(0, 1)] isEqualToString:@"5"]) {
         // Section 0
@@ -601,6 +658,12 @@
     }
 }
 
+/**
+ *  Inserts an object into the projectStrings
+ *
+ *  @param anObject The object to be inserted, is NSString
+ *  @param theTag   The index to be inserted into
+ */
 -(void)addObjectToProjectStrings:(id)anObject withTag:(int)theTag {
     if ([[[NSString stringWithFormat:@"%d", theTag] substringWithRange:NSMakeRange(0, 1)] isEqualToString:@"5"]) {
         // Section 0
@@ -613,17 +676,11 @@
     }
 }
 
+/**
+ *  Hides the keyboard when the user presses the Save button
+ */
 -(void)hideKeyboard {
     [self.view endEditing:YES];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 @end

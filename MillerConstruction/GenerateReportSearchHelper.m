@@ -25,13 +25,15 @@
         [self initializeCompletedReportHeaders];
         [self initializeConstructionReportHeaders];
         [self initializeRepairReportHeaders];
-        [self initializeHVACReportHeaders];
         database = [DatabaseConnector sharedDatabaseConnector];
     }
     
     return self;
 }
 
+/**
+ *  Initializes the different types of reports
+ */
 -(void)initializeReportNamesArray {
     self.reportNamesArray = @[
                               @"Weekly",
@@ -42,10 +44,12 @@
                               @"Invoice",
                               @"Completed",
                               @"Construction",
-                              @"Repair",
-                              @"HVAC"];
+                              @"Repair"];
 }
 
+/**
+ *  Used in the Report view, are the headers for the different reports
+ */
 -(void)initializeWeeklyReportHeaders {
     self.weeklyActiveReportHeaders = @[
                                  @"MCS Number",
@@ -138,6 +142,9 @@
                                        @"Project and Financial Notes"];
 }
 
+/**
+ *  Used in the Report view, are the headers for the different reports
+ */
 -(void)initializeSteveMeyerReportHeaders {
     self.steveMeyerActiveReportHeaders = @[
                                            @"MCS Number",
@@ -152,7 +159,7 @@
                                            @"Scheduled Start Date",
                                            @"Scheduled Turn Over"];
     
-    self.southEastProposalReportHeaders = @[
+    self.steveMeyerProposalReportHeaders = @[
                                             @"Region",
                                             @"Item",
                                             @"Warehouse",
@@ -165,6 +172,9 @@
                                             @"Proposal Submitted"];
 }
 
+/**
+ *  Used in the Report view, are the headers for the different reports
+ */
 -(void)initializeSouthEastRefrigerationReportHeaders {
     self.southEastActiveReportHeaders = @[
                                           @"Warehouse",
@@ -177,7 +187,7 @@
                                           @"Scheduled Turn Over",
                                           @"As-Builts",
                                           @"Alarm/HVAC Form",
-                                          @"Regrigeration Notes"];
+                                          @"Refrigeration Notes"];
     
     self.southEastProposalReportHeaders = @[
                                             @"Warehouse",
@@ -192,6 +202,9 @@
                                             @"Refrigeration Notes"];
 }
 
+/**
+ *  Used in the Report view, are the headers for the different reports
+ */
 -(void)initializeNorthEastRefrigerationReportHeaders {
     self.northEastActiveReportHeaders = @[
                                           @"Warehouse",
@@ -220,6 +233,9 @@
                                             @"Regrigeration Notes"];
 }
 
+/**
+ *  Used in the Report view, are the headers for the different reports
+ */
 -(void)initializeJDempseyReportHeaders {
     self.jDempseyActiveReportHeaders = @[
                                          @"MCS Number",
@@ -247,6 +263,9 @@
                                            @"Proposal Submitted"];
 }
 
+/**
+ *  Used in the Report view, are the headers for the different reports
+ */
 -(void)initializeInvoiceReportHeaders {
     self.invoiceActiveReportHeaders = @[
                                         @"MCS Number",
@@ -271,6 +290,9 @@
                                           @"Project and Financial Notes"];
 }
 
+/**
+ *  Used in the Report view, are the headers for the different reports
+ */
 -(void)initializeCompletedReportHeaders {
     self.completedActiveReportHeaders = @[
                                           @"MCS Number",
@@ -289,6 +311,9 @@
                                           @"Project and Financial Notes"];
 }
 
+/**
+ *  Used in the Report view, are the headers for the different reports
+ */
 -(void)initializeConstructionReportHeaders {
     self.constructionActiveReportHeaders = @[
                                              @"MCS Number",
@@ -316,6 +341,9 @@
                                              @"Project and Financial Notes"];
 }
 
+/**
+ *  Used in the Report view, are the headers for the different reports
+ */
 -(void)initializeRepairReportHeaders {
     self.repairActiveReportHeaders = @[
                                        @"MCS Number",
@@ -342,28 +370,14 @@
                                        @"Project and Financial Notes"];
 }
 
--(void)initializeHVACReportHeaders {
-    self.hvacActiveReportHeaders = @[
-                                     @"Warehouse",
-                                     @"Item",
-                                     @"Project Scope",
-                                     @"Region",
-                                     @"Project Status",
-                                     @"Scheduled Start Date",
-                                     @"Project and Financial Notes"];
-    
-    self.hvacProposalReportHeaders = @[
-                                       @"Warehouse",
-                                       @"Item",
-                                       @"Project Scope",
-                                       @"Region",
-                                       @"Project Status",
-                                       @"Initiated Date",
-                                       @"Site Survey",
-                                       @"Costco Due Date",
-                                       @"Proposal Submitted"];
-}
-
+/**
+ *  Gets projects for the reports into a 2D array to use in the report grid
+ *
+ *  @param report     NSString of the report like "Weekly"
+ *  @param reportType Report type like "Active"
+ *
+ *  @return 2D array of projects, where each index of the outer array is a project
+ */
 -(NSArray *)projectInformationForReport:(NSString *)report andReportType:(ReportType)reportType {
     NSArray *returnArray;
     [database connectToDatabase];
@@ -385,8 +399,6 @@
         returnArray = [database fetchConstructionReportWithReportType:reportType];
     } else if ([report isEqualToString:@"Repair"]) {
         returnArray = [database fetchRepairReportWithReportType:reportType];
-    } else {
-        returnArray = [database fetchHVACReportWithReportType:reportType];
     }
     database.databaseConnection = nil;
     

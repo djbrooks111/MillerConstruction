@@ -25,6 +25,9 @@
     return self;
 }
 
+/**
+ *  Outer method that looks for projects that violate triggers
+ */
 -(void)lookForTriggers {
     [database connectToDatabase];
     [self lookForInfoTriggers];
@@ -33,6 +36,9 @@
     database.databaseConnection = nil;
 }
 
+/**
+ *  Inner method that looks for all the info triggers *green triggers*
+ */
 -(void)lookForInfoTriggers {
     // MCS Number Not Assigned
     NSArray *mcsNumberTriggers = [database fetchInfoMCSNumberTriggers];
@@ -43,6 +49,9 @@
     }
 }
 
+/**
+ *  Inner method that looks for all the warning triggers *yellow triggers*
+ */
 -(void)lookForWarningTriggers {
     // Should Invoice/Acutal Invoice Difference Less Than 20%
     NSArray *invoiceTriggers = [database fetchWarningInvoiceTriggers];
@@ -67,6 +76,9 @@
     }
 }
 
+/**
+ *  Inner method that looks for all the severe triggers *red triggers*
+ */
 -(void)lookForSevereTriggers {
     // Costco Due Date Has Passed
     NSArray *costcoDueDateTriggers = [database fetchSevereCostcoDueDateTriggers];

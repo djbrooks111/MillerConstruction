@@ -171,6 +171,12 @@
 
 #pragma mark - UIAlertViewDelegate
 
+/**
+ *  UIAlertView Delegate Callback
+ *
+ *  @param alertView   The UIAlertView
+ *  @param buttonIndex The index of the button clicked to dismiss the alert
+ */
 -(void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
     projectID = [availableProjectID objectAtIndex:buttonIndex];
     [self.warehouseTextField setText:@""];
@@ -180,6 +186,12 @@
 
 #pragma mark - Navigation
 
+/**
+ *  Called right before this view segues to another view
+ *
+ *  @param segue  The Storyboard segue
+ *  @param sender This view controller
+ */
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier] isEqualToString:@"viewProject"]) {
         ViewExistingProjectTableViewController *viewController = [segue destinationViewController];

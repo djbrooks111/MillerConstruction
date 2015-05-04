@@ -198,41 +198,116 @@ static NSString * const CollectionViewHeaderIdentifier = @"Header";
 
 #pragma mark - DRCollectionViewTableLayoutManagerDelegate
 
+/**
+ *  Return number of sections in given collection view
+ *
+ *  @param manager        Collection View Table Layout Manager
+ *  @param collectionView Collection View
+ *
+ *  @return Number of sections
+ */
 -(NSUInteger)collectionViewTableLayoutManager:(DRCollectionViewTableLayoutManager *)manager numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     
     return 1;
 }
 
+/**
+ *  Return number of layout's rows in given collection view section
+ *
+ *  @param manager        Collection View Table Layout Manager
+ *  @param collectionView Collection View
+ *  @param section        Collection View section
+ *
+ *  @return Number of layout's rows
+ */
 -(NSUInteger)collectionViewTableLayoutManager:(DRCollectionViewTableLayoutManager *)manager collectionView:(UICollectionView *)collectionView numberOfRowsInSection:(NSUInteger)section {
     
     return [projects count];
 }
 
+/**
+ *  Return number of layout's columns in given collection view section
+ *
+ *  @param manager        Collection View Table Layout Manager
+ *  @param collectionView Collection View
+ *  @param section        Collection View section
+ *
+ *  @return Number of layout's columns
+ */
 -(NSUInteger)collectionViewTableLayoutManager:(DRCollectionViewTableLayoutManager *)manager collectionView:(UICollectionView *)collectionView numberOfColumnsInSection:(NSUInteger)section {
     
     return [headers count];
 }
 
+/**
+ *  Return width for layout's column in given collection view section
+ *
+ *  @param manager        Collection View Table Layout Manager
+ *  @param collectionView Collection View
+ *  @param column         Layout's column index
+ *  @param section        Collection View section
+ *
+ *  @return Column width
+ */
 -(CGFloat)collectionViewTableLayoutManager:(DRCollectionViewTableLayoutManager *)manager collectionView:(UICollectionView *)collectionView widthForColumn:(NSUInteger)column inSection:(NSUInteger)section {
     
     return 200.f;
 }
 
+/**
+ *  Return height for layout's row in given collection view section
+ *
+ *  @param manager        Collection View Table Layout Manager
+ *  @param collectionView Collection View
+ *  @param row            Layout's row index
+ *  @param section        Collection View section
+ *
+ *  @return Row height
+ */
 -(CGFloat)collectionViewTableLayoutManager:(DRCollectionViewTableLayoutManager *)manager collectionView:(UICollectionView *)collectionView heightForRow:(NSUInteger)row inSection:(NSUInteger)section {
     
     return 100.f;
 }
 
+/**
+ *  Return width for row headers. Return 0 to disable row headers.
+ *
+ *  @param manager        Collection View Table Layout Manager
+ *  @param collectionView Collection View
+ *  @param section        Collection View section
+ *
+ *  @return Row headers width
+ */
 -(CGFloat)collectionViewTableLayoutManager:(DRCollectionViewTableLayoutManager *)manager collectionView:(UICollectionView *)collectionView widthForRowHeaderInSection:(NSUInteger)section {
     
     return 80.f;
 }
 
+/**
+ *  Return height for column headers. Return 0 to disable column headers.
+ *
+ *  @param manager        Collection View Table Layout Manager
+ *  @param collectionView Collection View
+ *  @param section        Collection View section
+ *
+ *  @return Column headers height
+ */
 -(CGFloat)collectionViewTableLayoutManager:(DRCollectionViewTableLayoutManager *)manager collectionView:(UICollectionView *)collectionView heightForColumnHeaderInSection:(NSUInteger)section {
     
     return 80.f;
 }
 
+/**
+ *  Return cell for given row and column in collection view
+ *
+ *  @param manager        Collection View Table Layout Manager
+ *  @param collectionView Collection View
+ *  @param row            Layout's row
+ *  @param column         Layout's column
+ *  @param indexPath      Collection View Cell index path
+ *
+ *  @return Collection View Cell
+ */
 -(UICollectionViewCell *)collectionViewTableLayoutManager:(DRCollectionViewTableLayoutManager *)manager collectionView:(UICollectionView *)collectionView cellForRow:(NSUInteger)row column:(NSUInteger)column indexPath:(NSIndexPath *)indexPath {
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CollectionViewCellIdentifier forIndexPath:indexPath];
     
@@ -264,6 +339,16 @@ static NSString * const CollectionViewHeaderIdentifier = @"Header";
     return cell;
 }
 
+/**
+ *  Return view for column header
+ *
+ *  @param manager        Collection View Table Layout Manager
+ *  @param collectionView Collection View
+ *  @param column         Layout's column
+ *  @param indexPath      Collection View Supplementary View index path
+ *
+ *  @return Collection Reusable View
+ */
 -(UICollectionReusableView *)collectionViewTableLayoutManager:(DRCollectionViewTableLayoutManager *)manager collectionView:(UICollectionView *)collectionView headerViewForColumn:(NSUInteger)column indexPath:(NSIndexPath *)indexPath {
     UICollectionReusableView *view = [collectionView dequeueReusableSupplementaryViewOfKind:DRCollectionViewTableLayoutSupplementaryViewColumnHeader withReuseIdentifier:CollectionViewHeaderIdentifier forIndexPath:indexPath];
     
@@ -289,6 +374,16 @@ static NSString * const CollectionViewHeaderIdentifier = @"Header";
     return view;
 }
 
+/**
+ *  Return view for row header
+ *
+ *  @param manager        Collection View Table Layout Manager
+ *  @param collectionView Collection View
+ *  @param row            Layout's row
+ *  @param indexPath      Collection View Supplementary View index path
+ *
+ *  @return Collection Reusable View
+ */
 -(UICollectionReusableView *)collectionViewTableLayoutManager:(DRCollectionViewTableLayoutManager *)manager collectionView:(UICollectionView *)collectionView headerViewForRow:(NSUInteger)row indexPath:(NSIndexPath *)indexPath {
     UICollectionReusableView *view = [collectionView dequeueReusableSupplementaryViewOfKind:DRCollectionViewTableLayoutSupplementaryViewRowHeader withReuseIdentifier:CollectionViewHeaderIdentifier forIndexPath:indexPath];
     
@@ -314,11 +409,29 @@ static NSString * const CollectionViewHeaderIdentifier = @"Header";
     return view;
 }
 
+/**
+ *  Return YES if column headers in given section should stick to top edge
+ *
+ *  @param manager        Collection View Table Layout Manager
+ *  @param collectionView Collection View
+ *  @param section        Collection View section
+ *
+ *  @return Boolean value
+ */
 -(BOOL)collectionViewTableLayoutManager:(DRCollectionViewTableLayoutManager *)manager collectionView:(UICollectionView *)collectionView stickyColumnHeadersForSection:(NSUInteger)section {
     
     return YES;
 }
 
+/**
+ *  Return YES if row headers in given section should stick to left edge
+ *
+ *  @param manager        Collection View Table Layout Manager
+ *  @param collectionView Collection View
+ *  @param section        Collection View section
+ *
+ *  @return Boolean value
+ */
 -(BOOL)collectionViewTableLayoutManager:(DRCollectionViewTableLayoutManager *)manager collectionView:(UICollectionView *)collectionView stickyRowHeadersForSection:(NSUInteger)section {
     
     return YES;

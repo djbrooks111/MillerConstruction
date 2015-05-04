@@ -10,6 +10,15 @@
 
 @implementation Trigger
 
+/**
+ *  Custom initializer
+ *
+ *  @param projectID   Trigger's projectID
+ *  @param projectInfo Trigger's projectInfo
+ *  @param triggerInfo Trigger's triggerInfo
+ *
+ *  @return Initialized Trigger
+ */
 -(id)initWithProjectID:(NSNumber *)projectID andProjectInfo:(NSString *)projectInfo andTriggerInfo:(NSString *)triggerInfo {
     if (self = [super init]) {
         [self setProjectID:projectID];

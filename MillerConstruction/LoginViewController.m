@@ -86,8 +86,7 @@
             [alert performSelector:@selector(show) withObject:nil afterDelay:2];
             [self.passwordTextField setText:@""];
         } else {
-            //TODO: Change TECHNOLOGY SUPPORT in the alert message
-            alert = [[UIAlertView alloc] initWithTitle:@"Username Not Recognized" message:@"The username you entered was not recognized. The username might not be registered. Please contact TECHNOLOGY SUPPORT." delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil, nil];
+            alert = [[UIAlertView alloc] initWithTitle:@"Username Not Recognized" message:@"The username you entered was not recognized. The username might not be registered. Please contact Andy Miller." delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil, nil];
             [alert performSelector:@selector(show) withObject:nil afterDelay:2];
             [self.passwordTextField setText:@""];
         }

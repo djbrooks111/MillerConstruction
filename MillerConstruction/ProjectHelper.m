@@ -278,6 +278,9 @@
     self.projectTypeNameArray = [namesArray copy];
 }
 
+/**
+ *  The titles of each UITableView row, the labels that tell the user what the row is for
+ */
 -(void)initializeProjectAttributesNamesArray {
     self.projectAttributesNames = @[
                                     @"MCS Project#:",
@@ -315,6 +318,9 @@
                                     @"Customer Number:"];
 }
 
+/**
+ *  Used when saving a project into the database, only contains attributes of the Project table
+ */
 -(void)initializeProjectAttributesKeysArray {
     self.projectAttributesKeys = @[
                                    @"mcsNumber",
@@ -516,6 +522,9 @@
 
 #pragma mark - Existing Project Methods
 
+/**
+ *  Given a projectID, get the information of a project to show for a user to view/edit
+ */
 -(void)getProjectInformationFromDatabase {
     [database connectToDatabase];
     self.projectInformation = [database fetchProjectInformationForID:self.projectID];

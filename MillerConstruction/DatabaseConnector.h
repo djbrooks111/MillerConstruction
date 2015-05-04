@@ -46,7 +46,6 @@
 -(NSArray *)fetchCompletedReportWithReportType:(NSInteger)reportType;
 -(NSArray *)fetchConstructionReportWithReportType:(NSInteger)reportType;
 -(NSArray *)fetchRepairReportWithReportType:(NSInteger)reportType;
--(NSArray *)fetchHVACReportWithReportType:(NSInteger)reportType;
 
 // View Triggers
 -(NSArray *)fetchInfoMCSNumberTriggers;

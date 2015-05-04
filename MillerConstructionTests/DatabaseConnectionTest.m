@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
 #import "DatabaseConnector.h"
-#import "ProjectItem.h"
 
 @interface DatabaseConnectionTest : XCTestCase
 
@@ -23,11 +22,13 @@
     [super setUp];
     // Put setup code here. This method is called before the invocation of each test method in the class.
     database = [DatabaseConnector sharedDatabaseConnector];
+    [database connectToDatabase];
 }
 
 -(void)tearDown {
     // Put teardown code here. This method is called after the invocation of each test method in the class.
     [super tearDown];
+    database.databaseConnection = nil;
 }
 
 -(void)testImplementation {
@@ -35,28 +36,92 @@
 }
 
 -(void)testFetchProjectItem {
-    NSArray *resultArray = [database fetchProjectItem];
-    NSMutableArray *unsortedArray = [[NSMutableArray alloc] init];
-    for (NSDictionary *projectTypeRow in resultArray) {
-        NSNumber *projectTypeNumber = [projectTypeRow objectForKey:@"id"];
-        NSString *projectTypeName = [projectTypeRow objectForKey:@"name"];
-        [unsortedArray addObject:[[ProjectItem alloc] initWithRowID:projectTypeNumber andName:projectTypeName]];
-    }
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
-    NSArray *sortedArray = [unsortedArray sortedArrayUsingDescriptors:@[sortDescriptor]];
-    XCTAssertNotEqualObjects(resultArray, sortedArray, @"Arrays should not be equal, i.e. unsorted vs sorted");
+    XCTAssertNotNil([database fetchProjectItem]);
 }
 
--(void)testThing {
-    NSArray *resultArray = [database fetchProjectInformationForID:[NSNumber numberWithInt:1]];
-    NSLog(@"%@", resultArray);
+-(void)testFetchWarehouses {
+    XCTAssertNotNil([database fetchWarehouses]);
 }
 
--(void)testSQL {
-    [database connectToDatabase];
-    MysqlFetch *fetch = [database fetchWithCommand:@"SELECT project.mcsNumber, projectstage.name, warehouse.warehouseID, warehouse.state, city.name, projectitem.name, project.scope, warehouse.region, projectstatus.name, project.projectInitiatedDate, projecttype.name, project.costcoDueDate, project.proposalSubmitted, project.scheduledStartDate, project.scheduledTurnover, closeoutdetails.asBuilts, closeoutdetails.punchList, closeoutdetails.alarmHvacForm, closeoutdetails.airGas, closeoutdetails.permitsClosed, project.shouldInvoice, project.invoiced, project.projectNotes FROM project, projectstage, warehouse, city, projectitem, projectstatus, projecttype, closeoutdetails WHERE projectstage.name = \"Closed\" AND projectstage.id = project.stage_id AND project.warehouse_id = warehouse.id AND warehouse.city_id = city.id AND project.projectItem_id = projectitem.id AND project.status_id = projectstatus.id AND project.projectType_id = projecttype.id AND project.closeoutDetails_id = closeoutdetails.id"];
-    database.databaseConnection = nil;
-    NSLog(@"%@", [fetch results]);
+-(void)testFetchProjectClassifications {
+    XCTAssertNotNil([database fetchProjectClassifications]);
+}
+
+-(void)testFetchProjectPeople {
+    XCTAssertNotNil([database fetchProjectPeople]);
+}
+
+-(void)testFetchProjectStage {
+    XCTAssertNotNil([database fetchProjectStage]);
+}
+
+-(void)testFetchProjectStatus {
+    XCTAssertNotNil([database fetchProjectStatus]);
+}
+
+-(void)testFetchProjectType {
+    XCTAssertNotNil([database fetchProjectType]);
+}
+
+-(void)testFetchWeeklyReport {
+    XCTAssertNotNil([database fetchWeeklyReportWithReportType:0]);
+    XCTAssertNotNil([database fetchWeeklyReportWithReportType:1]);
+    XCTAssertNotNil([database fetchWeeklyReportWithReportType:2]);
+    XCTAssertNotNil([database fetchWeeklyReportWithReportType:3]);
+    XCTAssertNotNil([database fetchWeeklyReportWithReportType:4]);
+    
+}
+
+-(void)testFetchSteveMeyerReport {
+    XCTAssertNotNil([database fetchSteveMeyerReportWithReportType:0]);
+    XCTAssertNotNil([database fetchSteveMeyerReportWithReportType:1]);
+}
+
+-(void)testFetchSouthEastReport {
+    XCTAssertNotNil([database fetchSouthEastReportWithReportType:0]);
+    XCTAssertNotNil([database fetchSouthEastReportWithReportType:1]);
+}
+
+-(void)testFetchNorthEastReport {
+    XCTAssertNotNil([database fetchNorthEastReportWithReportType:0]);
+    XCTAssertNotNil([database fetchNorthEastReportWithReportType:1]);
+}
+
+-(void)testFetchJDempseyReport {
+    XCTAssertNotNil([database fetchJDempseyReportWithReportType:0]);
+    XCTAssertNotNil([database fetchJDempseyReportWithReportType:1]);
+}
+
+-(void)testFetchInvoiceReport {
+    XCTAssertNotNil([database fetchInvoiceReportWithReportType:0]);
+    XCTAssertNotNil([database fetchInvoiceReportWithReportType:1]);
+}
+
+-(void)testFetchCompletedReport {
+    XCTAssertNotNil([database fetchCompletedReportWithReportType:0]);
+}
+
+-(void)testFetchConstructionReport {
+    XCTAssertNotNil([database fetchConstructionReportWithReportType:0]);
+}
+
+-(void)testFetchRepairReport {
+    XCTAssertNotNil([database fetchRepairReportWithReportType:0]);
+}
+
+-(void)testFetchInfoTriggers {
+    XCTAssertNotNil([database fetchInfoMCSNumberTriggers]);
+}
+
+-(void)testFetchWarningTriggers {
+    XCTAssertNotNil([database fetchWarningInvoiceTriggers]);
+    XCTAssertNotNil([database fetchWarningCostcoDueDateTriggers]);
+    XCTAssertNotNil([database fetchWarningTurnOverTriggers]);
+}
+
+-(void)testFetchSevereTriggers {
+    XCTAssertNotNil([database fetchSevereCostcoDueDateTriggers]);
+    XCTAssertNotNil([database fetchSevereInvoiceTriggers]);
 }
 
 @end

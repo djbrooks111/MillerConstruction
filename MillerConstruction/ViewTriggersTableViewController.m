@@ -71,11 +71,26 @@
 
 #pragma mark - Table view data source
 
+/**
+ *  Sets the number of sections in the UITableView
+ *
+ *  @param tableView The UITableView
+ *
+ *  @return The number of sections
+ */
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
     return 3;
 }
 
+/**
+ *  Sets the number of rows in each section in the UITableView
+ *
+ *  @param tableView The UITableView
+ *  @param section   The section of the UITableView
+ *
+ *  @return The number of rows in the section
+ */
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
     if (section == 0) {
@@ -87,6 +102,14 @@
     }
 }
 
+/**
+ *  Sets the section header title of the UITableView
+ *
+ *  @param tableView The UITableView
+ *  @param section   The section of the UITableView
+ *
+ *  @return The title for the header section
+ */
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     if (section == 0) {
         return @"Info";
@@ -97,13 +120,17 @@
     }
 }
 
+/**
+ *  Configures the cell of the UITableView
+ *
+ *  @param tableView The UITableView the cell is in
+ *  @param indexPath The indexPath of the cell (section/row)
+ *
+ *  @return The configured cell
+ */
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
-    /*
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"Cell"];
-    }
-     */
+
     // Configure the cell...
     if (indexPath.section == 0) {
         // Info
@@ -122,6 +149,12 @@
     return cell;
 }
 
+/**
+ *  Called when a user selects a row in the UITableView
+ *
+ *  @param tableView The UITableView
+ *  @param indexPath The indexPath of the selected row (section/row)
+ */
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
         // Info
@@ -138,7 +171,12 @@
 
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
+/**
+ *  Called right before this view segues to another view
+ *
+ *  @param segue  The Storyboard segue
+ *  @param sender This view controller
+ */
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier] isEqualToString:@"viewProject"]) {
         ViewExistingProjectTableViewController *viewController = [segue destinationViewController];

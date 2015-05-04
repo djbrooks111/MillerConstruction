@@ -10,6 +10,7 @@
 
 @interface ProjectTableViewCell : UITableViewCell <UITextFieldDelegate>
 
+// These two properties are the only thing this class does
 @property (nonatomic, retain) IBOutlet UILabel *label;
 @property (nonatomic, retain) IBOutlet UITextField *textField;
 

@@ -30,7 +30,6 @@
         [self setWarehouseID:warehouseID];
         [self setCity:city];
         [self setFullName:[[NSString alloc] initWithFormat:@"%@, %@ -- #%@", city, state, warehouseID]];
-        //[self setFullName:[NSString stringWithFormat:@"%@, %@ -- #%@", city, state, warehouseID]];
     }
     
     return self;

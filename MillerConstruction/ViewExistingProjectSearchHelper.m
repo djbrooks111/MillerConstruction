@@ -90,6 +90,14 @@
 
 #pragma mark - Project Searching
 
+/**
+ *  Used when finding existing projects, searches for projects matching the selected warehouse and stage
+ *
+ *  @param warehouseID    The id of the warehouse
+ *  @param projectStageID The id of the stage
+ *
+ *  @return Array of project information
+ */
 -(NSArray *)availableProjectsForWarehouseID:(NSNumber *)warehouseID andProjectStageID:(NSNumber *)projectStageID {
     [database connectToDatabase];
     NSArray *availableProjects = [database fetchProjectsWithWarehouseID:warehouseID andProjectStageID:projectStageID];
