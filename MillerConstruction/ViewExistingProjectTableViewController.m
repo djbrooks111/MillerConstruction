@@ -59,9 +59,6 @@
     
     self.navigationItem.title = @"View Project";
     
-    //HUD = self.prototypeHUD;
-    //HUD.textLabel.text = @"Loading data...";
-    //[HUD showInView:self.view];
     helper = [[ProjectHelper alloc] init];
     [helper setProjectID:self.projectID];
     [helper getProjectInformationFromDatabase];
@@ -77,6 +74,21 @@
     
     cellArray = [[NSMutableArray alloc] initWithArray:[helper projectInformation]];
     projectStrings = [[NSMutableArray alloc] initWithArray:[helper projectInformation]];
+    
+    for (int i = 0; i < [cellArray count]; i++) {
+        if (i >= 10 && i <= 25) {
+            if ([cellArray objectAtIndex:i] != [NSNull null]) {
+                NSLog(@"%d - %@", i, [cellArray objectAtIndex:i]);
+                NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+                [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss ZZZ"];
+                NSDate *dateFromString = [dateFormatter dateFromString:[[cellArray objectAtIndex:i] description]];
+                NSDateFormatter *stringFormatter = [[NSDateFormatter alloc] init];
+                [stringFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+                [cellArray replaceObjectAtIndex:i withObject:[stringFormatter stringFromDate:dateFromString]];
+                [projectStrings replaceObjectAtIndex:i withObject:[stringFormatter stringFromDate:dateFromString]];
+            }
+        }
+    }
     
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
     [self.view addGestureRecognizer:tapGesture];
