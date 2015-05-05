@@ -578,8 +578,6 @@
 				2623392E1AB61CBF001976B8 /* Resources */,
 				485DBC3546E808AB139FAB6E /* Find unused imports */,
 				2613C95C1ABB36A000682181 /* Increase Build Number */,
-				2613C95D1ABB394C00682181 /* Code Coverage */,
-				OBJCLEANCUSTOMRUNSCRIPTT /* Objective-Clean Run Script */,
 				9A6972FE8323DDE0A6BE098B /* Copy Pods Resources */,
 			);
 			buildRules = (
@@ -683,20 +681,6 @@
 			shellPath = /bin/sh;
 			shellScript = "#!/bin/bash\nbuildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$INFOPLIST_FILE\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"$INFOPLIST_FILE\"";
 		};
-		2613C95D1ABB394C00682181 /* Code Coverage */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Code Coverage";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = XcodeCoverage/exportenv.sh;
-		};
 		485DBC3546E808AB139FAB6E /* Find unused imports */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -755,20 +739,6 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
-		};
-		OBJCLEANCUSTOMRUNSCRIPTT /* Objective-Clean Run Script */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Objective-Clean Run Script";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/bash;
-			shellScript = "if [[ -z ${SKIP_OBJCLEAN} || ${SKIP_OBJCLEAN} != 1 ]]; then\nif [[ -d \"${LOCAL_APPS_DIR}/Objective-Clean.app\" ]]; then \n\"${LOCAL_APPS_DIR}\"/Objective-Clean.app/Contents/Resources/ObjClean.app/Contents/MacOS/ObjClean \"${SRCROOT}\"?!Pickers,!iPhoneMySQL,!JGProgressHUD \nelse\necho \"warning: You have to install and set up Objective-Clean to use its features!\" \nfi\nfi";
 		};
 /* End PBXShellScriptBuildPhase section */
 
