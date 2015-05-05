@@ -15,7 +15,6 @@
 #define DB_USERNAME @"appconnection"
 #define DB_PASSWORD @"shouldchangethis"
 #define DB_SCHEMA @"testdb"
-//TODO: REMOVE DB_TEST_SCHEMA
 #define DB_TEST_SCHEMA @"ipadtestdatabase"
 
 @implementation DatabaseConnector
@@ -49,8 +48,7 @@
  *  @return true if the connection was successful, false otherwise
  */
 -(BOOL)connectToDatabase {
-    //TODO: SET SCHEMA BACK TO PRODUCTION
-    MysqlServer *server = [[MysqlServer alloc] initWithHost:DB_HOST andUser:DB_USERNAME andPassword:DB_PASSWORD andSchema:DB_TEST_SCHEMA];
+    MysqlServer *server = [[MysqlServer alloc] initWithHost:DB_HOST andUser:DB_USERNAME andPassword:DB_PASSWORD andSchema:DB_SCHEMA];
     self.databaseConnection = [MysqlConnection connectToServer:server];
     if (self.databaseConnection == nil) {
         NSLog(@"Failed to connect to the database");
