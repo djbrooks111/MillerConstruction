@@ -1,0 +1,25 @@
+PODS:
+  - ActionSheetPicker-3.0 (1.6.1)
+  - DRCollectionViewTableLayout (1.0.2)
+  - JGProgressHUD (1.2.5)
+
+DEPENDENCIES:
+  - ActionSheetPicker-3.0 (~> 1.6.1)
+  - DRCollectionViewTableLayout (from `https://github.com/darrarski/DRCollectionViewTableLayout-iOS`)
+  - JGProgressHUD
+
+EXTERNAL SOURCES:
+  DRCollectionViewTableLayout:
+    :git: https://github.com/darrarski/DRCollectionViewTableLayout-iOS
+
+CHECKOUT OPTIONS:
+  DRCollectionViewTableLayout:
+    :commit: 3a22257f2731368a2e9638dc2bb85a6ae6ee4716
+    :git: https://github.com/darrarski/DRCollectionViewTableLayout-iOS
+
+SPEC CHECKSUMS:
+  ActionSheetPicker-3.0: f8da36f51ba109882a7cfa5979a4856b4e26fa37
+  DRCollectionViewTableLayout: 6de47d7bda786ace929ae64f46434b4860e76439
+  JGProgressHUD: 4d709935604cdf671b3039a95bbcb6960b19b885
+
+COCOAPODS: 0.36.3

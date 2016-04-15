@@ -576,7 +576,6 @@
 				2623392C1AB61CBF001976B8 /* Sources */,
 				2623392D1AB61CBF001976B8 /* Frameworks */,
 				2623392E1AB61CBF001976B8 /* Resources */,
-				485DBC3546E808AB139FAB6E /* Find unused imports */,
 				2613C95C1ABB36A000682181 /* Increase Build Number */,
 				9A6972FE8323DDE0A6BE098B /* Copy Pods Resources */,
 			);
@@ -614,7 +613,7 @@
 		262339281AB61CBF001976B8 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0630;
+				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = "David J Brooks";
 				TargetAttributes = {
 					2623392F1AB61CBF001976B8 = {
@@ -680,20 +679,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "#!/bin/bash\nbuildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$INFOPLIST_FILE\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"$INFOPLIST_FILE\"";
-		};
-		485DBC3546E808AB139FAB6E /* Find unused imports */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Find unused imports";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/bin/sh \"/Users/DJB/Library/Application Support/Developer/Shared/Xcode/Plug-ins/xcfui.xcplugin/Contents/Resources/fui_script.sh\" \"/Users/DJB/Dropbox/Development/Senior Project/MillerConstruction\"";
 		};
 		7B61BD72A37CD403090BB1B0 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -841,10 +826,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = (
-					armv7s,
-					armv7,
-				);
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -861,6 +842,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -888,10 +870,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = (
-					armv7s,
-					armv7,
-				);
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -943,6 +921,7 @@
 					"$(PROJECT_DIR)/MillerConstruction/iPhoneMySQL/lib",
 				);
 				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.davidjbrooks.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				VALID_ARCHS = "armv7 armv7s";
@@ -967,6 +946,7 @@
 					"$(PROJECT_DIR)/MillerConstruction/iPhoneMySQL/lib",
 				);
 				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.davidjbrooks.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				VALID_ARCHS = "armv7 armv7s";
@@ -988,6 +968,7 @@
 				);
 				INFOPLIST_FILE = MillerConstructionTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.davidjbrooks.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MillerConstruction.app/MillerConstruction";
 			};
@@ -1004,6 +985,7 @@
 				);
 				INFOPLIST_FILE = MillerConstructionTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.davidjbrooks.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MillerConstruction.app/MillerConstruction";
 			};
